@@ -1,4 +1,6 @@
 <?php
+  ob_start();
+  include_once "needed.php";
   define('LOGIN','admin');
   define('PASSWORD','root');
   $errorMessage = '';
@@ -21,7 +23,8 @@
       {
 		session_start();
         $_SESSION['login'] = true;
-        header('Location: http://tavg2website.000webhostapp.com');
+        ob_end_clean();
+        header('Location: '.$url);
         exit();
       }
     }
@@ -30,7 +33,7 @@
       $errorMessage = 'Veuillez inscrire vos identifiants';
     }
   }
-  include_once "needed.php";
+
 	drawHeader('connexion');
 ?>
     <form action="/identification.php" method="post" style="padding-top:20px">
