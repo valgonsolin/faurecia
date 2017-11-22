@@ -2,7 +2,7 @@
 session_start();
 global $domain_name;
 $url = "http://localhost";
-$bdd = new PDO('mysql:host=localhost;dbname=id3602053_tavg2website;charset=utf8', 'id3602053_tavg2website', 'lacolloc');
+$bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'tavg', 'lacolloc');
 
 ?>
 
