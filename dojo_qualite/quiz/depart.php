@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 
 
 include_once "../../needed.php";
@@ -19,11 +19,12 @@ if ($mo == "MOD"){
 $Query = $bdd->prepare('SELECT * FROM qualite_quiz_session WHERE personne = ? and fin is NULL');
 $Query->execute(array($_GET["id_personne"]));
 if ($Data = $Query->fetch()) {
-
+    ob_end_clean();
     header('Location: '.$url."/dojo_qualite/quiz/question.php?id=".$Data['id']);
 }else{
     $Query = $bdd->prepare('INSERT INTO qualite_quiz_session SET personne = ?, qualite_quiz_session.type = ?');
     $Query->execute(array($_GET["id_personne"],$type));
-
+    ob_end_clean();
     header('Location: '.$url."/dojo_qualite/quiz/question.php?id=".$bdd->lastInsertId());
 }
+ob_end_flush();

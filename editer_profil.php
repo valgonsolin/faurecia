@@ -1,7 +1,7 @@
 <?php
 include_once "needed.php";
 
-drawheader();
+drawheader('codir');
 
 if (isset($_POST['submit'])){
     if (isset($_GET['id'])){

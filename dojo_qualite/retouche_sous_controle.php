@@ -3,7 +3,7 @@ include_once "../needed.php";
 
 include_once "needed.php";
 
-drawHeader();
+drawHeader('dojo_qualite');
 drawMenu('retouche_sous_controle');
 ?>
 
@@ -21,8 +21,8 @@ drawMenu('retouche_sous_controle');
 
     <h4>Moyen : La défauthèque et les instructions de travail</h4>
     <p>Tous les types de défauts sont spécifiés dans les instructions de travail, précisant le genre d'intervention à réaliser sur les produis à retoucher.</p>
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/RUC_01.PNG"></div>
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/RUC_02.PNG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/RUC_01.png"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/RUC_02.png"></div>
     <h4>Le poste de retouche</h4>
     <p>La retouche hors ligne s'effectue sur un poste de retouche où tous les outils nécessaires à cette opération sont présent.</p>
     <p>→ Les retoucheurs sont des opérateurs formés et qualifiés (polyvalence).</p>
@@ -33,7 +33,7 @@ drawMenu('retouche_sous_controle');
     <p>La pièce retouchée est enregistrée sur le suivi de production, et est réinjectée dans le flux de production au poste où elle à été extraite.</p>
 
     <h4>Eleménts clés des retouches sous contrôles</h4>
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/RUC_03.PNG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/RUC_03.png"></div>
 
 <?php
 drawFooter();

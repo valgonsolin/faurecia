@@ -3,7 +3,7 @@ include_once "../../needed.php";
 
 include_once "../needed.php";
 
-drawheader();
+drawheader('codir');
 drawMenu("kamishibai");
 
 $recherche = "";

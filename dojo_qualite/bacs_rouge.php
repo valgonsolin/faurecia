@@ -3,7 +3,7 @@ include_once "../needed.php";
 
 include_once "needed.php";
 
-drawHeader();
+drawHeader('dojo_qualite');
 drawMenu('bacs_rouge');
 ?>
 
@@ -23,24 +23,24 @@ drawMenu('bacs_rouge');
         <li>GAP Leader de la tournée</li>
         <li>La date</li>
     </ul>
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/RB_01.PNG">Exemple d'identification d'un défaut sur un produit</div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/RB_01.png">Exemple d'identification d'un défaut sur un produit</div>
 
     <h4>La séparation Rebut / Retouche</h4>
     <p>Après analyse du défaut, chaque pièce défectueuse est placée dans le bac correspondant:</p>
     <p><b>→ BAC JAUNE</b> : dédié aux pièces à Retoucher</p>
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/yellowbin.JPG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/yellowbin.jpg"></div>
     <p><b>→ BAC ROUGE</b> : dédié aux pièces à Rebuter</p>
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/redbin.JPG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/redbin.jpg"></div>
 
     <h4>Les règles de réaction</h4>
     <p>Toute pièce <b>DEFECTUEUSE</b> doit être identifiée avec l'étiquette <b>REBUT</b></p>
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/RB_04.PNG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/RB_04.png"></div>
     <p>Toute pièce <b>RETOUCHEE</b> doit être identifiée avec avec l'étiquette <b>RETOUCHE</b> et réinsérée dans la ligne par le GAP LEADER (ou le retoucheur) <b>AU POSTE OU ELLE A ETE EXTRAITE</b> afin d'être recontrôlée, s'il existe un contrôle final ou un contrôle d'etanchéité sur la ligne, la pièce doit être recontrôlée.</p>
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/RB_05.PNG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/RB_05.png"></div>
     <p><b>→ LES BACS ROUGES DOIVENT ETRE VIDES A LA FIN DE CHAQUE TOURNEE</b></p>
 
     <h4>Eleménts clés des bacs rouges</h4>
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/RB_06.PNG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/RB_06.png"></div>
 
 
 <?php

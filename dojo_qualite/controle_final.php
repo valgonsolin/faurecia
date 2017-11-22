@@ -3,7 +3,7 @@ include_once "../needed.php";
 
 include_once "needed.php";
 
-drawHeader();
+drawHeader('dojo_qualite');
 drawMenu('controle_final');
 ?>
 
@@ -22,7 +22,7 @@ drawMenu('controle_final');
     audit coup de poing.</p>
 
 
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/FC_05.PNG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/FC_05.png"></div>
 
     <p>Sur un <b>chemin de contrôle final</b> situé en face de l'opérateur éffectuant cette manipulation, on précise:</p>
     <ul>
@@ -33,7 +33,7 @@ drawMenu('controle_final');
     </ul>
 
 
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/FC_02.PNG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/FC_02.png"></div>
 
 
     <h4>Polyvalence</h4>
@@ -57,10 +57,10 @@ drawMenu('controle_final');
     <p><b>L'opérateur du contrôle final informe également l'opérateur qui n'a pas détecté le défaut en amont.</b></p>
 
 
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/SI_04.PNG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/SI_04.png"></div>
 
     <h4>Eleménts clés du Contrôle final</h4>
 
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/FC_03.PNG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/FC_03.png"></div>
 <?php
 drawFooter();

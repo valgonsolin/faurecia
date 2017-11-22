@@ -3,7 +3,7 @@ include_once "../needed.php";
 
 include_once "needed.php";
 
-drawHeader();
+drawHeader('presentation_usine');
 drawMenu('historique');
 ?>
 <h2>Historique</h2>

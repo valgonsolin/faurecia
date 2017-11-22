@@ -3,7 +3,7 @@ include_once "../needed.php";
 
 include_once "needed.php";
 
-drawHeader();
+drawHeader('dojo_qualite');
 drawMenu('poka_yoke');
 ?>
 

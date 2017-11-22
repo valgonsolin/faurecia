@@ -3,7 +3,7 @@ include_once "../needed.php";
 
 include_once "needed.php";
 
-drawHeader();
+drawHeader('presentation_usine');
 drawMenu('organigramme');
 ?>
 <h2>Organigramme</h2>

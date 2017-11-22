@@ -3,7 +3,7 @@ include_once "../../needed.php";
 
 include_once "../needed.php";
 
-drawHeader();
+drawHeader('dojo_qualite');
 drawMenu('quiz');
 
 $recherche = "";
@@ -18,16 +18,17 @@ if (isset($_GET["recherche"])){
 
 
 <form class="form-inline">
-    <div class="form-group">
-        <label for="recherche">Recherche :</label>
-        <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="Nom, Prénom" value="<?php echo $recherche;?>">
-    </div>
-    <button type="submit" class="btn btn-default">Rechercher</button>
+  <div class="form-group">
+    <label for="recherche">Recherche :</label>
+    <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="Nom, Prénom" value="<?php echo $recherche;?>">
+  </div>
+  <button type="submit" class="btn btn-default">Rechercher</button>
+  <a href="modification.php" class="btn btn-default pull-right">Espace administration</a>
 </form>
 
 <p style="margin-top: 20px;margin-bottom: 20px;">Choisissez votre profil ou <a href="/editer_profil.php">ajoutez un nouveau profil</a>.</p>
 
-<table class="table"
+<table class="table">
 <thead class="thead">
 <tr>
     <th>Nom</th>
@@ -44,8 +45,8 @@ if (isset($_GET["recherche"])){
 <?php
 
 $Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN
-                        (SELECT id as id_session, valide, personne, type FROM 
-                            (SELECT MAX(fin) as last_fin FROM qualite_quiz_session WHERE fin IS NOT NULL GROUP BY personne ) as t_fin 
+                        (SELECT id as id_session, valide, personne, type FROM
+                            (SELECT MAX(fin) as last_fin FROM qualite_quiz_session WHERE fin IS NOT NULL GROUP BY personne ) as t_fin
                             LEFT JOIN qualite_quiz_session ON qualite_quiz_session.fin = last_fin) as result
                         ON result.personne = profil.id
                         WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0');

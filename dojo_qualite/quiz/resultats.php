@@ -15,7 +15,7 @@ function int_to_vrai_faux($int){
 
 
 
-drawHeader();
+drawHeader('dojo_qualite');
 drawMenu('quiz');
 
 
@@ -30,7 +30,7 @@ $Query->execute(array($_GET["id"]));
 <a href="resultats_complet.php?id=<?php echo $_GET['id']?>">Voir les réponses détaillés</a>
 <div style="height: 30px"></div>
 
-<table class="table"
+<table class="table">
 <thead class="thead">
 <tr>
     <th style="width: 150px;">Categorie</th>
@@ -49,7 +49,7 @@ $bonne_reponse_cat = 0;
 $bonne_reponse = 0;
 $proportion_bonne_reponse_cat = [];
 
-$Query = $bdd->prepare('SELECT * FROM qualite_quiz_reponse 
+$Query = $bdd->prepare('SELECT * FROM qualite_quiz_reponse
   LEFT JOIN qualite_quiz_question ON qualite_quiz_question.id = qualite_quiz_reponse.question
   WHERE qualite_quiz_reponse.session = ? ORDER BY qualite_quiz_question.id ASC');
 $Query->execute(array($_GET["id"]));

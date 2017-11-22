@@ -1,12 +1,12 @@
 <?php
-
+ob_start();
 
 
 include_once "../../needed.php";
 
 include_once "../needed.php";
 
-drawHeader();
+drawHeader('dojo_qualite');
 drawMenu('quiz');
 
 
@@ -14,6 +14,7 @@ if (! isset($_GET["id"])){
     ?>
     <h2>Quiz</h2>
     <h4>OUPS... Votre identité est inconnu.</h4>
+    <a href="index.php"> Retourner au quizz</a>
     <?php
 }else {
     $Query = $bdd->prepare('SELECT * FROM qualite_quiz_session WHERE personne = ? and fin is NULL');
@@ -29,7 +30,7 @@ if (! isset($_GET["id"])){
             <h2>Quiz</h2>
             <p>Bonjour !<br>
                 Le quiz sera composé de 20 questions, il faut avoir 14 bonnes réponses ce qui est équivalent à 70% pour valider votre formation.<br>
-                Pour répondre cohez la ou les bonne(s) réponse(s).</p>
+                Pour répondre cochez la ou les bonne(s) réponse(s).</p>
             <?php
         }else{
             ?>
@@ -38,7 +39,7 @@ if (! isset($_GET["id"])){
             <h2>Quiz</h2>
             <p>Bonjour !<br>
                 Le quiz sera composé de 39 questions, il faut avoir 24 bonnes réponses ce qui est équivalent à 60% pour valider votre formation. <br>
-                Pour répondre cohez la ou les bonne(s) réponse(s).</p>
+                Pour répondre cochez la ou les bonne(s) réponse(s).</p>
 
 
             <?php
@@ -46,11 +47,13 @@ if (! isset($_GET["id"])){
         ?>
 
         <div class="col-md text-center" style="margin: 50px;">
-            <a href="depart.php?id_personne=<?php echo $_GET["id"]; ?>" class="btn btn-default">Démarer le test</a>
+            <a href="depart.php?id_personne=<?php echo $_GET["id"]; ?>" class="btn btn-default">Démarrer le test</a>
         </div>
         <?php
     }else{
+        ob_end_clean();
         header('Location: '.$url."/dojo_qualite/quiz/depart.php?id_personne=".$_GET['id']);
     }
 }
 drawFooter();
+ob_end_flush();

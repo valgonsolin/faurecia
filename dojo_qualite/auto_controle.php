@@ -3,7 +3,7 @@ include_once "../needed.php";
 
 include_once "needed.php";
 
-drawHeader();
+drawHeader('dojo_qualite');
 drawMenu('auto_controle');
 ?>
 
@@ -39,7 +39,7 @@ drawMenu('auto_controle');
     <div class="center_illustration"><img class="illustration center-block" src="ressources/SI_04.PNG"></div>
 
     <h4>Elements clés de l'auto-contrôle</h4>
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/SI_05.png"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/SI_05.PNG"></div>
 
 
 

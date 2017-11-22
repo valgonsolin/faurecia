@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 
 
 include_once "../../needed.php";
@@ -31,6 +31,7 @@ if (! isset($_GET["id"])){
     ?>
     <h2>Quiz</h2>
     <h4>OUPS... Votre session est inconnu.</h4>
+    <a href="index.php"> Retourner au quizz</a>
     <?php
 }else {
 
@@ -38,7 +39,7 @@ if (! isset($_GET["id"])){
     $Query->execute(array($_GET["id"]));
     $type = $Query->fetch()['type'];
 
-    $Query = $bdd->prepare('SELECT * FROM qualite_quiz_question WHERE id NOT IN 
+    $Query = $bdd->prepare('SELECT * FROM qualite_quiz_question WHERE id NOT IN
       (SELECT question FROM qualite_quiz_reponse WHERE qualite_quiz_reponse.session = ?) and type = ?');
     $Query->execute(array($_GET["id"],$type));
     if($Data = $Query->fetch()) {
@@ -67,14 +68,15 @@ if (! isset($_GET["id"])){
 
             <input type="text" name="question" value="<?php echo $Data["id"] ?>" style="display: none;">
 
-            <button type="submit" name="submit" id="submit_alerte" class="btn btn-default">Passer aux questions
-                suivantes
+            <button type="submit" name="submit" id="submit_alerte" class="btn btn-default">Passer à la question suivante
             </button>
 
         </form>
         <?php
     }else{
+        ob_end_clean();
         header('Location: '.$url."/dojo_qualite/quiz/resultats.php?id=".$_GET['id']);
     }
 }
 drawFooter();
+ob_end_flush();
