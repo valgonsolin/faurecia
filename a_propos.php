@@ -12,4 +12,3 @@ Pour tout bug ou modification merci de contacter <a href="http://juniorcs.fr">Ju
 </p>
 <?php
 drawFooter();
-//salut abega
