@@ -1,7 +1,7 @@
 <?php
 session_start();
 global $domain_name;
-$url = "http://tavg2website.000webhostapp.com";
+$url = "http://localhost";
 $bdd = new PDO('mysql:host=localhost;dbname=id3602053_tavg2website;charset=utf8', 'id3602053_tavg2website', 'lacolloc');
 
 ?>
