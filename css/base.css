@@ -1,0 +1,216 @@
+@font-face {
+  font-family: 'clio';
+  src: url('http://tavg2website.000webhostapp.com/css/ClioRegular.otf');
+}
+
+body {
+  background-color: #efefef;
+  font-family: 'clio', helvetica, sans-serif;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+#page {
+  width: 90%;
+  margin: auto;
+  background-color: white;
+  box-shadow: 0 8px 10px -5px gray;
+}
+
+#header_banner {
+  width: 100%;
+  box-shadow: 0 5px 10px -5px gray;
+  position: relative;
+  z-index: 2;
+}
+
+#header_banner .lien_accueil {
+  margin-left: 20px;
+  height: 100%;
+}
+
+#header_banner img {
+  height: 30px;
+  margin-top: 10px;
+  margin-left: 150px;
+}
+
+#menu {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.bouton_menu {
+  font-weight: 600;
+  height: 100%;
+  color: #5f5f69;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.bouton_menu:before {
+  content: "/";
+  font-family: serif;
+  font-size: 25px;
+  color: #d0c8b4;
+  padding-right: 10px;
+}
+
+.bouton_menu:hover {
+  color: #ff8900;
+  text-decoration: none;
+}
+
+.bouton_menu_selected {
+  color: #ff8900;
+}
+
+#design {
+  background-color: #FFF;
+  position: relative;
+  width: 100%;
+}
+
+#content {
+  margin: 0 auto;
+  width: 80%;
+  padding-bottom: 10px;
+}
+
+#footer {
+  position: relative;
+  bottom: 0px;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: #aaaaaa;
+  text-shadow: 1px 1px #dcdcdc;
+}
+
+#footer a {
+  color: #aaaaaa;
+}
+
+#footer img {
+  margin: 20px;
+  width: 40%;
+  border-width: 1px;
+  border-style: solid;
+  box-shadow: 1px 4px 10px gray;
+}
+
+#boutons_nav {
+  padding-top: 20px;
+  background-color: #FFF;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border-bottom: solid;
+  border-bottom-color: #bababa;
+  border-bottom-width: 1px;
+  margin-bottom: 50px;
+}
+
+.bouton_nav {
+  font-weight: 600;
+  height: 100%;
+  color: #5f5f69;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.bouton_nav:hover {
+  color: #ff8900;
+  text-decoration: none;
+}
+
+.bouton_nav:before {
+  content: "/";
+  font-family: serif;
+  font-size: 20px;
+  color: #d0c8b4;
+  padding-right: 10px;
+}
+
+.bouton_nav_selected {
+  border-style: solid;
+  border-bottom: hidden;
+  border-radius: 4px 4px 0 0;
+  border-width: 0px;
+  border-color: grey;
+  color: #ff8900;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 500;
+  border-bottom-style: solid !important;
+  border-bottom: 3px;
+  margin-bottom: 40px;
+}
+
+h3 {
+  font-size: 25px;
+  font-weight: 400;
+  border-bottom-style: solid !important;
+  border-bottom: 1px;
+  margin-bottom: 40px;
+}
+
+h4 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.center_illustration {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.center_illustration img {
+  width: 100%;
+}
+
+#menu_principal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 125%;
+  transform: translatex(-10%);
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.bouton_principal {
+  background-color: grey;
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  box-shadow: 1px 2px 8px grey;
+}
+
+.bouton_principal img {
+  width: 200px;
+  height: 200px;
+}
+
+.bouton_principal figcaption {
+  text-align: center;
+  font-size: 20px;
+  font-style: italic;
+}
