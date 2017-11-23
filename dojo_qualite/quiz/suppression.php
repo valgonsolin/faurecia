@@ -23,7 +23,7 @@ else
         <strong>Supprimé</strong>  -  La question a bien été supprimée.
     </div>
   <?php
-}elsif(isset($_POST['modifier'])){
+}elseif(isset($_POST['modifier'])){
   $vrai1=0;
   $vrai2=0;
   $vrai3=0;
@@ -63,9 +63,8 @@ else
       <strong>Modifié</strong>  -  La question a bien été mise à jour.
   </div>
   <?php
-}else{
+}}else{
   $recherche = "";
-
   if (isset($_GET["recherche"])){
       $recherche = $_GET["recherche"];
   }
@@ -119,15 +118,15 @@ $query -> execute(array('%'.$recherche.'%','%'.$recherche.'%'));
 
 </table>
 <?php
-if($maxi > 20){?>
+if($maxi > 20){
+  ?>
   <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;max=<?php echo $maxi-20;?>" class="btn btn-default">Elements précédents</a>
 <?php
 }
-if(($i == $maxi) && ($query -> fetch())){?>
+if(($i == $maxi) && ($query -> fetch())){ ?>
   <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;max=<?php echo $maxi+20;?>" class="btn btn-default">Elements suivants</a>
 <?php
 }
-}
+}}
 
 drawFooter();
- ?>
