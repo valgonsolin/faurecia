@@ -80,6 +80,7 @@ global $url;
 				<div class="dropdown-content">
                     <a href="<?php echo $url; ?>/logistique/index.php" class="bouton_dropdown" >Alerte composant</a>
                     <a href="<?php echo $url; ?>/logistique/pieces.php" class="bouton_dropdown">Pièces</a>
+                    <a href="<?php echo $url; ?>/logistique/update_pieces.php" class="bouton_dropdown">Mise à jour</a>
                 </div>
 			</div>
 			<a href="/codir/kamishibai/index.php" class="bouton_menu <?php if($selected=='codir'){echo ' bouton_menu_selected';} ?>">Codir</a>
