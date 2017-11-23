@@ -16,7 +16,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'ta
         <meta name="viewport" content="width=device-width, initial-scale=0.635, user-scalable=yes"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name="robots" content="noindex, nofollow, noarchive"/>
-        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png"/>
+        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png"/>
 
 
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.css"/>
@@ -130,7 +130,7 @@ function upload($bdd,$index,$category,$maxsize=FALSE,$extensions=FALSE)
      $ext = substr(strrchr($_FILES[$index]['name'],'.'),1);
      if ($extensions !== FALSE AND !in_array($ext,$extensions)) return 0;
      $nom = md5(uniqid(rand(), true));
-     $chemin= "/storage/ssd3/053/3602053/public_html/ressources/$nom.$ext";
+     $chemin= "/ressources/$nom.$ext";
      if(!move_uploaded_file($_FILES[$index]['tmp_name'],$chemin)) return 0;
      $query= $bdd -> prepare('INSERT INTO files(chemin, categorie, taille, date_ajout) VALUES (:chemin, :categorie, :taille, NOW())');
      $query -> execute(array(

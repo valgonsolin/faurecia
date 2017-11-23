@@ -64,7 +64,7 @@ else
       <strong>Modifié</strong>  -  La question a bien été mise à jour.
   </div>
   <?php
-}}else{
+}}
   $recherche = "";
   if (isset($_GET["recherche"])){
       $recherche = $_GET["recherche"];
@@ -128,6 +128,6 @@ if(($i == $maxi) && ($query -> fetch())){ ?>
   <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;max=<?php echo $maxi+20;?>" class="btn btn-default">Elements suivants</a>
 <?php
 }
-}}
+}
 
 drawFooter();
