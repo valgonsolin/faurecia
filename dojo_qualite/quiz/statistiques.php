@@ -7,6 +7,9 @@ drawMenu('quiz');
 
 <h2> Statistiques </h2>
 
+<p>Cliquez sur l'identifiant d'une question pour accéder aux statistiques qui lui sont associés  </p>
+<br/>
+
 <table class="table">
 <thead class="thead">
 <tr>
@@ -32,7 +35,7 @@ while ($Data = $Query->fetch()) {
   $bonne_reponse_id = 0;
 
   $Query2 = $bdd->prepare('SELECT * FROM qualite_quiz_reponse
-  LEFT JOIN qualite_quiz_question ON qualite_quiz_question.id = qualite_quiz_reponse.question
+  JOIN qualite_quiz_question ON qualite_quiz_question.id = qualite_quiz_reponse.question
   WHERE qualite_quiz_question.id = ? ');
   $Query2->execute(array($identifiant));
 
@@ -52,12 +55,13 @@ while ($Data = $Query->fetch()) {
 }
 ?>
 
+
 <?php
 foreach ($proportion_bonne_reponse_id as $element){
 ?>
 
 <tr>
-    <td><?php echo $element[0];?></td>
+    <td><a href="statistiques_details.php?id=<?php echo $element[0]; ?>"><?php echo $element[0];?></a></td>
     <td><?php echo $element[1];?></td>
     <td><?php echo $element[2];?></td>
     <td><?php echo $element[4];?></td>
