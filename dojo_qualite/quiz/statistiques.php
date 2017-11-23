@@ -11,8 +11,8 @@ drawMenu('quiz');
 <thead class="thead">
 <tr>
     <th style="width: 150px;">Categorie</th>
-    <th>Bonne réréponses</th>
-    <th>Total réréponses</th>
+    <th>Bonne réponses</th>
+    <th>Total réponses</th>
     <th>Taux de réussite</th>
 </tr>
 </thead>
