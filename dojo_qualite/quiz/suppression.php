@@ -40,7 +40,7 @@ else
   if(isset($_POST['vrai4'])){
     $vrai1=$_POST['vrai4'];
   }
-  $query = $bdd -> prepare('INSERT INTO qualite_quiz_question(type,titre,question,reponse_1,reponse_2,reponse_3,reponse_4,corrige_1,corrige_2,corrige_3,corrige_4) VALUES (:type,:titre,:question,:reponse_1,:reponse_2,:reponse_3,:reponse_4,:corrige_1,:corrige_2,:corrige_3,:corrige_4)');
+  $query = $bdd -> prepare('UPDATE qualite_quiz_question SET type = :type,titre= :titre,question = :question,reponse_1 = :reponse_1,reponse_2 = :reponse_2,reponse_3 = :reponse_3,reponse_4 = :reponse_4,corrige_1 = :corrige_1,corrige_2 = :corrige_2,corrige_3 = :corrige_3,corrige_4 = :corrige_4 WHERE id = :id');
   $query -> execute(array(
     'type' => $_POST['type'],
     'titre' => $_POST['titre'],
@@ -53,6 +53,7 @@ else
     'corrige_2' => $vrai2,
     'corrige_3' => $vrai3,
     'corrige_4' => $vrai4,
+    'id' => $_POST['id']
   ));
   if($query ==false){ ?>
     <div class="alert alert-danger">
