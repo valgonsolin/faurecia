@@ -23,6 +23,7 @@ if (isset($_GET["recherche"])){
     <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="Nom, Prénom" value="<?php echo $recherche;?>">
   </div>
   <button type="submit" class="btn btn-default">Rechercher</button>
+  <a href="statistiques.php" class="btn btn-default pull-right">statistiques</a>
   <a href="modification.php" class="btn btn-default pull-right">Espace administration</a>
 </form>
 
