@@ -56,7 +56,7 @@ foreach ($proportion_bonne_reponse_cat as $categorie){
 ?>
 
 <tr>
-    <td><?php echo $categorie[0];?></td>
+    <td><a href="statistiques_details.php?type=<?php echo $categorie[0]; ?>">  <?php echo $categorie[0];  ?> </a></td>
     <td><?php echo $categorie[1];?></td>
     <td><?php echo $categorie[2];?></td>
     <td><?php echo (floatval($categorie[1])/$categorie[2])*100; echo "%"; ?></td>
