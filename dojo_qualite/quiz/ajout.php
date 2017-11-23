@@ -14,11 +14,53 @@ if(empty($_SESSION['login']))
 <?php
 }
 else
-{?>
-  <h2>Quiz</h2>
+{
+  echo "<h2>Quiz</h2>";
+  if(!empty($_POST)){
+    $vrai1=0;
+    $vrai2=0;
+    $vrai3=0;
+    $vrai4=0;
+    if(isset($_POST['vrai1'])){
+      $vrai1=$_POST['vrai1'];
+    }
+    if(isset($_POST['vrai2'])){
+      $vrai1=$_POST['vrai2'];
+    }
+    if(isset($_POST['vrai3'])){
+      $vrai1=$_POST['vrai3'];
+    }
+    if(isset($_POST['vrai4'])){
+      $vrai1=$_POST['vrai4'];
+    }
+    $query = $bdd -> prepare('INSERT INTO qualite_quiz_question(type,titre,question,reponse_1,reponse_2,reponse_3,reponse_4,corrige_1,corrige_2,corrige_3,corrige_4) VALUES (:type,:titre,:question,:reponse_1,:reponse_2,:reponse_3,:reponse_4,:corrige_1,:corrige_2,:corrige_3,:corrige_4)');
+    $query -> execute(array(
+      'type' => $_POST['type'],
+      'titre' => $_POST['titre'],
+      'question' => $_POST['question'],
+      'reponse_1' => $_POST['reponse1'],
+      'reponse_2' => $_POST['reponse2'],
+      'reponse_3' => $_POST['reponse3'],
+      'reponse_4' => $_POST['reponse4'],
+      'corrige_1' => $vrai1,
+      'corrige_2' => $vrai2,
+      'corrige_3' => $vrai3,
+      'corrige_4' => $vrai4,
+    ));
+    if($query ==false){ ?>
+      <div class="alert alert-danger">
+          <strong>Erreur</strong>  -  Les données entrées ne sont pas conformes.
+      </div>
+    <?php }else{ ?>
+          <div class="alert alert-success">
+        <strong>Ajouté</strong>  -  La question a bien été ajoutée.
+    </div>
+    <?php
+  }}
+  ?>
   <div class="boutons_nav" style="display: flex; justify-content: center;">
     <a href="ajout.php" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Ajout</a>
-    <a href="suppression.php" class="bouton_menu">Suppression</a>
+    <a href="suppression.php" class="bouton_menu">Modification/Suppression</a>
   </div>
 
   <form method="post" style="margin-top:20px;">
