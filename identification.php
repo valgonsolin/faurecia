@@ -24,7 +24,11 @@
 		session_start();
         $_SESSION['login'] = true;
         ob_end_clean();
-        header('Location: '.$url);
+        if(isset($_GET['redirection'])){
+          header('Location: '.$url."/".$_GET['redirection']);
+        }else{
+          header('Location: '.$url);
+        }
         exit();
       }
     }
@@ -35,8 +39,13 @@
   }
 
 	drawHeader('connexion');
+  if(isset($_GET['redirection'])){
+    $direction="/identification.php?redirection=".$_GET['redirection'];
+  }else{
+    $direction="/identification.php";
+  }
 ?>
-    <form action="/identification.php" method="post" style="padding-top:20px">
+    <form action=<?php echo $direction?> method="post" style="padding-top:20px">
       <fieldset>
         <legend>Identifiez-vous</legend>
         <?php
