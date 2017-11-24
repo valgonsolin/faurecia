@@ -42,7 +42,14 @@ if ( isset($_GET['recherche'])) {
 <?php
 $Query = $bdd->prepare('SELECT logistique_pieces.*, ligne FROM logistique_pieces LEFT JOIN logistique_e_kanban ON logistique_e_kanban.piece=logistique_pieces.id WHERE reference LIKE ? or description LIKE ? or ligne LIKE ? GROUP BY id');
 $Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%', '%'.$recherche.'%'));
-while ($Data = $Query->fetch()) {
+$maxi=50;
+if(isset($_GET['max'])){
+  $maxi=$_GET['max'];
+}
+$i=0;
+while (($i < $maxi) && ($Data = $Query->fetch())) {
+  $i=$i+1;
+  if($i > $maxi-50){
     ?>
 
     <tr>
@@ -53,10 +60,20 @@ while ($Data = $Query->fetch()) {
 
 
     <?php
-}
+}}
 ?>
 </tbody>
 </table>
 
+
 <?php
+if($maxi > 50){
+  ?>
+  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;max=<?php echo $maxi-50;?>" class="btn btn-default">Elements précédents</a>
+<?php
+}
+if(($i == $maxi) && ($Query -> fetch())){ ?>
+  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;max=<?php echo $maxi+50;?>" class="btn btn-default">Elements suivants</a>
+<?php
+}
 drawFooter();
