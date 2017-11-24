@@ -40,8 +40,16 @@ if ( isset($_GET['recherche'])) {
 <tbody>
 
 <?php
-$Query = $bdd->prepare('SELECT logistique_pieces.*, ligne FROM logistique_pieces LEFT JOIN logistique_e_kanban ON logistique_e_kanban.piece=logistique_pieces.id WHERE reference LIKE ? or description LIKE ? or ligne LIKE ? GROUP BY id');
-$Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%', '%'.$recherche.'%'));
+$debut=0;
+if(isset($_GET['nb'])){
+  $debut=$_GET['nb'];
+}
+$Query = $bdd->prepare('SELECT logistique_pieces.*, ligne FROM logistique_pieces LEFT JOIN logistique_e_kanban ON logistique_e_kanban.piece=logistique_pieces.id WHERE reference LIKE :reference or description LIKE :description or ligne LIKE :ligne GROUP BY id LIMIT 50 OFFSET :nb');
+$Query ->bindValue(':reference','%'.$recherche.'%');
+$Query ->bindValue(':description','%'.$recherche.'%');
+$Query ->bindValue(':ligne','%'.$recherche.'%');
+$Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
+$Query->execute();
 while ($Data = $Query->fetch()) {
     ?>
 
@@ -58,5 +66,21 @@ while ($Data = $Query->fetch()) {
 </tbody>
 </table>
 
+
 <?php
+if($debut > 49){
+  ?>
+  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-50;?>" class="btn btn-default">Elements précédents</a>
+<?php
+}
+$test = $bdd->prepare('SELECT logistique_pieces.*, ligne FROM logistique_pieces LEFT JOIN logistique_e_kanban ON logistique_e_kanban.piece=logistique_pieces.id WHERE reference LIKE :reference or description LIKE :description or ligne LIKE :ligne GROUP BY id LIMIT 1 OFFSET :nb');
+$test ->bindValue(':reference','%'.$recherche.'%');
+$test ->bindValue(':description','%'.$recherche.'%');
+$test ->bindValue(':ligne','%'.$recherche.'%');
+$test ->bindValue(':nb',(int) $debut+50, PDO::PARAM_INT);
+$test->execute();
+if($test -> fetch()){ ?>
+  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+50;?>" class="btn btn-default">Elements suivants</a>
+<?php
+}
 drawFooter();

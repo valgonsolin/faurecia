@@ -95,17 +95,17 @@ else
   <tbody>
 
 <?php
-$query = $bdd -> prepare('SELECT * FROM qualite_quiz_question WHERE (question LIKE ? or titre LIKE ?)');
-$query -> execute(array('%'.$recherche.'%','%'.$recherche.'%'));
-  $maxi=20;
-  if(isset($_GET['max'])){
-    $maxi=$_GET['max'];
-  }
-  $i=0;
+$nb=0;
+if(isset($_GET['nb'])){
+$nb=$_GET['nb'];
+}
+  $query=$bdd -> prepare('SELECT * FROM qualite_quiz_question WHERE (question LIKE :question or titre LIKE :titre) LIMIT 20 OFFSET :nb');
+  $query ->bindValue(':question','%'.$recherche.'%');
+  $query ->bindValue(':titre','%'.$recherche.'%');
+  $query ->bindValue(':nb',(int) $nb, PDO::PARAM_INT);
+  $query ->execute();
+  while($Data = $query->fetch()){
 
-  while(($i < $maxi) && ($Data = $query->fetch())){
-    $i=$i+1;
-    if($i > $maxi-20){
   ?>
     <tr>
       <td><?php echo $Data['titre']; ?></td>
@@ -114,18 +114,23 @@ $query -> execute(array('%'.$recherche.'%','%'.$recherche.'%'));
       <td><a href="supprimer_question.php?id=<?php echo $Data['id']?>" class="btn btn-default">Voir</a></td>
     </tr>
   <?php
-}} ?>
+} ?>
 </tbody>
 
 </table>
 <?php
-if($maxi > 20){
+if($nb > 19){
   ?>
-  <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;max=<?php echo $maxi-20;?>" class="btn btn-default">Elements précédents</a>
+  <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb-20;?>" class="btn btn-default">Elements précédents</a>
 <?php
 }
-if(($i == $maxi) && ($query -> fetch())){ ?>
-  <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;max=<?php echo $maxi+20;?>" class="btn btn-default">Elements suivants</a>
+$test = $bdd->prepare('SELECT * FROM qualite_quiz_question WHERE (question LIKE :question or titre LIKE :titre) LIMIT 1 OFFSET :nb');
+$test ->bindValue(':question','%'.$recherche.'%');
+$test ->bindValue(':titre','%'.$recherche.'%');
+$test ->bindValue(':nb',(int) $nb+20, PDO::PARAM_INT);
+$test->execute();
+if($test -> fetch()){ ?>
+  <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb+20;?>" class="btn btn-default">Elements suivants</a>
 <?php
 }
 }

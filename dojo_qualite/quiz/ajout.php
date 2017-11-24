@@ -10,7 +10,7 @@ if(empty($_SESSION['login']))
   <h2>Quiz</h2>
   <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
   <a href="/identification.php?redirection=dojo_qualite/quiz/ajout.php"><button class="btn btn-default">Se connecter</button></a>
-  <a href="index.php"> Retourner au quizz</a>
+  <a href="index.php" class="btn btn-default">Quiz</a>
 <?php
 }
 else
