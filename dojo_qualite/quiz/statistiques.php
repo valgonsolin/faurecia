@@ -6,8 +6,21 @@ drawMenu('quiz');
 ?>
 
 <h2> Statistiques </h2>
+<?php
+$Qy = $bdd->query('SELECT COUNT(*) as nombre_total FROM profil ');
+$n=$Qy->fetch();
+?>
 
-<p>Cliquez sur l'identifiant d'une question pour accéder aux statistiques qui lui sont associés  </p>
+<?php
+$Qy2 = $bdd->query('SELECT DISTINCT personne FROM qualite_quiz_session WHERE valide=1 ');
+$nombre_valide=0;
+while($n2 = $Qy2->fetch()){
+  $nombre_valide+=1; }
+?>
+<h3>Sur un total de <?php echo $n['nombre_total']; ?> personnes <?php echo $nombre_valide; ?> ont validé le quiz, soit <?php echo(floatval($nombre_valide)/$n['nombre_total'])*100; echo "%"; ?> de taux de réussite </h3>
+
+
+<h5>Cliquez sur l'identifiant d'une question pour accéder aux statistiques qui lui sont associés  </h5>
 <br/>
 
 <table class="table">
@@ -45,9 +58,7 @@ while ($Data = $Query->fetch()) {
         $Data2['vrai_3']==$Data2['corrige_3'] &&
         $Data2['vrai_4']==$Data2['corrige_4'];
 
-      if ($valide){
-        $bonne_reponse_id += 1;
-      }
+      if ($valide){ $bonne_reponse_id =$bonne_reponse_id + 1; }
       $tot_reponse_id +=1;
     }
 

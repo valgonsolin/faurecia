@@ -63,20 +63,17 @@ while ($Data2 = $Query2->fetch()) {
 while ($Data = $Query->fetch()) {
   if ($Data['vrai_1']==1) {
     $rep1=$rep1 + 1;
-    $total_rep=$total_rep +1;
   }
   if ($Data['vrai_2']==1) {
     $rep2=$rep2 + 1;
-    $total_rep=$total_rep +1;
   }
   if ($Data['vrai_3']==1) {
     $rep3=$rep3 + 1;
-    $total_rep=$total_rep +1;
   }
   if ($Data['vrai_4']==1) {
     $rep4=$rep4 + 1;
-    $total_rep=$total_rep +1;
   }
+  $total_rep=$total_rep +1;
 
 }
 
@@ -126,8 +123,7 @@ while ($Data = $Query->fetch()) {
 </tbody>
 </table>
 
-
-
+<a href="statistiques.php"><p> Retour au Statistiques générales </p></a>
 
 <?php
 drawFooter();
