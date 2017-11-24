@@ -15,7 +15,7 @@ function drawMenu($selected){
             <a href="<?php echo $url; ?>/dojo_qualite/retouche_sous_controle.php"><div class="bouton_menu <?php if($selected=='retouche_sous_controle'){echo ' bouton_nav_selected';} ?>">Retouche sous contrôle</div></a>
             <a href="<?php echo $url; ?>/dojo_qualite/qrci.php"><div class="bouton_menu <?php if($selected=='qrci'){echo ' bouton_nav_selected';} ?>">QRCI</div></a>
             <a href="<?php echo $url; ?>/dojo_qualite/quiz/index.php"><div class="bouton_menu <?php if($selected=='quiz'){echo ' bouton_nav_selected';} ?>">Quiz</div></a>
-
+            <a href="<?php echo $url; ?>/dojo_qualite/RR/index.php"><div class="bouton_menu <?php if($selected=='RR'){echo ' bouton_nav_selected';} ?>">RR</div></a>
         </div>
     </div>
 <?php
