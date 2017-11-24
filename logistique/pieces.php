@@ -40,16 +40,17 @@ if ( isset($_GET['recherche'])) {
 <tbody>
 
 <?php
-$Query = $bdd->prepare('SELECT logistique_pieces.*, ligne FROM logistique_pieces LEFT JOIN logistique_e_kanban ON logistique_e_kanban.piece=logistique_pieces.id WHERE reference LIKE ? or description LIKE ? or ligne LIKE ? GROUP BY id');
-$Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%', '%'.$recherche.'%'));
-$maxi=50;
-if(isset($_GET['max'])){
-  $maxi=$_GET['max'];
+$debut=0;
+if(isset($_GET['nb'])){
+  $debut=$_GET['nb'];
 }
-$i=0;
-while (($i < $maxi) && ($Data = $Query->fetch())) {
-  $i=$i+1;
-  if($i > $maxi-50){
+$Query = $bdd->prepare('SELECT logistique_pieces.*, ligne FROM logistique_pieces LEFT JOIN logistique_e_kanban ON logistique_e_kanban.piece=logistique_pieces.id WHERE reference LIKE :reference or description LIKE :description or ligne LIKE :ligne GROUP BY id LIMIT 50 OFFSET :nb');
+$Query ->bindValue(':reference','%'.$recherche.'%');
+$Query ->bindValue(':description','%'.$recherche.'%');
+$Query ->bindValue(':ligne','%'.$recherche.'%');
+$Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
+$Query->execute();
+while ($Data = $Query->fetch()) {
     ?>
 
     <tr>
@@ -60,20 +61,26 @@ while (($i < $maxi) && ($Data = $Query->fetch())) {
 
 
     <?php
-}}
+}
 ?>
 </tbody>
 </table>
 
 
 <?php
-if($maxi > 50){
+if($debut > 49){
   ?>
-  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;max=<?php echo $maxi-50;?>" class="btn btn-default">Elements précédents</a>
+  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-50;?>" class="btn btn-default">Elements précédents</a>
 <?php
 }
-if(($i == $maxi) && ($Query -> fetch())){ ?>
-  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;max=<?php echo $maxi+50;?>" class="btn btn-default">Elements suivants</a>
+$test = $bdd->prepare('SELECT logistique_pieces.*, ligne FROM logistique_pieces LEFT JOIN logistique_e_kanban ON logistique_e_kanban.piece=logistique_pieces.id WHERE reference LIKE :reference or description LIKE :description or ligne LIKE :ligne GROUP BY id LIMIT 1 OFFSET :nb');
+$test ->bindValue(':reference','%'.$recherche.'%');
+$test ->bindValue(':description','%'.$recherche.'%');
+$test ->bindValue(':ligne','%'.$recherche.'%');
+$test ->bindValue(':nb',(int) $debut+50, PDO::PARAM_INT);
+$test->execute();
+if($test -> fetch()){ ?>
+  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+50;?>" class="btn btn-default">Elements suivants</a>
 <?php
 }
 drawFooter();
