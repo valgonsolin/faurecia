@@ -15,6 +15,7 @@ drawMenu('quiz');
     <th>Reponse2 </th>
     <th>Reponse3 </th>
     <th>Reponse4 </th>
+
 </tr>
 </thead>
 
@@ -123,6 +124,9 @@ while ($Data = $Query->fetch()) {
 </tbody>
 </table>
 
+<h3> Total Reponses: <?php echo $total_rep ?> <h3>
+
+<br/><br/>
 <a href="statistiques.php"><p> Retour au Statistiques générales </p></a>
 
 <?php

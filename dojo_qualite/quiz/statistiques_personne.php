@@ -5,59 +5,42 @@ drawheader('dojo_qualite');
 drawMenu('quiz');
 ?>
 
-<h2> Statistiques </h2>
-
 <div id="lien_page">
 <div class="boutons_nav" style="display: flex; justify-content: center;">
-  <a href="#lien_page" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Statistiques par questions</a>
+  <a href="statistiques.php" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Statistiques par questions</a>
   <a href="statistiques_personne.php" class="bouton_menu">Statistiques par personnes</a>
 </div>
 </div>
 
-<?php
-$Qy = $bdd->query('SELECT COUNT(*) as nombre_total FROM profil ');
-$n=$Qy->fetch();
-?>
-
-<?php
-$Qy2 = $bdd->query('SELECT DISTINCT personne FROM qualite_quiz_session WHERE valide=1 ');
-$nombre_valide=0;
-while($n2 = $Qy2->fetch()){
-  $nombre_valide+=1; }
-?>
-<h3>Sur un total de <?php echo $n['nombre_total']; ?> personnes <?php echo $nombre_valide; ?> ont validé le quiz, soit <?php echo(floatval($nombre_valide)/$n['nombre_total'])*100; echo "%"; ?> de taux de réussite </h3>
-
-
-<h5>Cliquez sur l'identifiant d'une question pour accéder aux statistiques qui lui sont associés  </h5>
-<br/>
-
 <table class="table">
 <thead class="thead">
 <tr>
-    <th style="width: 150px;">Numéro de question</th>
-    <th>Titre</th>
-    <th>Question</th>
-    <th>Total réponses</th>
-    <th>Taux de réussite</th>
+    <th style="width: 150px;">Idnetifiant</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Total questions traitées</th>
+    <th>Taux de bonne reponses</th>
+    <th>quiz valide</th>
 </tr>
 </thead>
-<tbody>
-
 
 <?php
-
-$Query = $bdd->query('SELECT id,titre,question FROM qualite_quiz_question ');
+$Query = $bdd->query('SELECT id,nom,prenom FROM profil ');
 $proportion_bonne_reponse_id = [];
 while ($Data = $Query->fetch()) {
   $identifiant = $Data['id'];
-  $ancien_titre = $Data['titre'];
-  $question=$Data['question'];
+  $nom = $Data['nom'];
+  $prenom=$Data['prenom'];
   $tot_reponse_id = 0;
   $bonne_reponse_id = 0;
+  $validation=false;
 
   $Query2 = $bdd->prepare('SELECT * FROM qualite_quiz_reponse
   JOIN qualite_quiz_question ON qualite_quiz_question.id = qualite_quiz_reponse.question
-  WHERE qualite_quiz_question.id = ? ');
+  JOIN qualite_quiz_session ON qualite_quiz_reponse.session = qualite_quiz_session.id
+  JOIN profil ON qualite_quiz_session.personne = profil.id
+  WHERE profil.id = ? ');
+
   $Query2->execute(array($identifiant));
 
   while ($Data2 = $Query2->fetch()) {
@@ -69,22 +52,31 @@ while ($Data = $Query->fetch()) {
       if ($valide){ $bonne_reponse_id =$bonne_reponse_id + 1; }
       $tot_reponse_id +=1;
     }
+    $Query3 = $bdd->prepare('SELECT * FROM qualite_quiz_session WHERE qualite_quiz_session.personne = ? ');
+    $Query3->execute(array($identifiant));
+    while ($Data3 = $Query3->fetch()) {
+      $validation= $validation || ($Data3['valide']==1);
+    }
 
-  array_push($proportion_bonne_reponse_id, array ($identifiant, $ancien_titre, $question, $bonne_reponse_id, $tot_reponse_id));
+    array_push($proportion_bonne_reponse_id, array ($identifiant, $nom, $prenom, $bonne_reponse_id, $tot_reponse_id, $validation));
 }
 ?>
-
 
 <?php
 foreach ($proportion_bonne_reponse_id as $element){
 ?>
 
 <tr>
-    <td><a href="statistiques_details.php?id=<?php echo $element[0]; ?>"><?php echo $element[0];?></a></td>
+    <td><?php echo $element[0];?></a></td>
     <td><?php echo $element[1];?></td>
     <td><?php echo $element[2];?></td>
     <td><?php echo $element[4];?></td>
     <td><?php echo (floatval($element[3])/$element[4])*100; echo "%"; ?></td>
+    <td> <?php  if ($validation){?>
+                  <img src="ressources/checked.png" style="height: 30px; margin: 20px auto;" class="center-block">
+        <?php    }else{?> <img src="ressources/cancel.png" style="height: 30px; margin: 20px auto;" class="center-block"> <?php } ?>
+
+    </td>
 </tr>
 <?php
 }
@@ -92,6 +84,4 @@ foreach ($proportion_bonne_reponse_id as $element){
 </tbody>
 </table>
 
-
-<?php
-drawFooter(); ?>
+<?php drawFooter() ?>
