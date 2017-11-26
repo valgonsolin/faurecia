@@ -15,7 +15,7 @@ drawMenu('quiz');
 </div>
 
 <?php
-$Qy = $bdd->query('SELECT COUNT(*) as nombre_total FROM profil ');
+$Qy = $bdd->query('SELECT COUNT(*) as nombre_total FROM profil WHERE supprime = 0');
 $n=$Qy->fetch();
 ?>
 
