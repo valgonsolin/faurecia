@@ -57,7 +57,10 @@ while ($Data = $Query->fetch()) {
 
   $Query2 = $bdd->prepare('SELECT * FROM qualite_quiz_reponse
   JOIN qualite_quiz_question ON qualite_quiz_question.id = qualite_quiz_reponse.question
-  WHERE qualite_quiz_question.id = ? ');
+  JOIN qualite_quiz_session ON qualite_quiz_reponse.session=qualite_quiz_session.id
+  JOIN profil ON qualite_quiz_session.personne=profil.id
+  WHERE profil.supprime = 0 AND qualite_quiz_reponse.question = ? ');
+
   $Query2->execute(array($identifiant));
 
   while ($Data2 = $Query2->fetch()) {
@@ -84,7 +87,8 @@ foreach ($proportion_bonne_reponse_id as $element){
     <td><?php echo $element[1];?></td>
     <td><?php echo $element[2];?></td>
     <td><?php echo $element[4];?></td>
-    <td><?php echo (floatval($element[3])/$element[4])*100; echo "%"; ?></td>
+    <td><?php if ($element[4]>0) { echo (floatval($element[3])/$element[4])*100; echo "%"; }
+              else { echo "0%" ; }  ?> </td>
 </tr>
 <?php
 }

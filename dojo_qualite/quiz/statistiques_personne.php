@@ -7,8 +7,8 @@ drawMenu('quiz');
 
 <div id="lien_page">
 <div class="boutons_nav" style="display: flex; justify-content: center;">
-  <a href="statistiques.php" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Statistiques par questions</a>
-  <a href="statistiques_personne.php" class="bouton_menu">Statistiques par personnes</a>
+  <a href="statistiques.php" class="bouton_menu " style="margin-right:20%">Statistiques par questions</a>
+  <a href="statistiques_personne.php" class="bouton_menu bouton_nav_selected">Statistiques par personnes</a>
 </div>
 </div>
 
@@ -71,7 +71,8 @@ foreach ($proportion_bonne_reponse_id as $element){
     <td><?php echo $element[1];?></td>
     <td><?php echo $element[2];?></td>
     <td><?php echo $element[4];?></td>
-    <td><?php echo (floatval($element[3])/$element[4])*100; echo "%"; ?></td>
+    <td><?php if ($element[4]>0) { echo (floatval($element[3])/$element[4])*100; echo "%"; }
+              else { echo "0%" ; }  ?> </td>
     <td> <?php  if ($validation){?>
                   <img src="ressources/checked.png" style="height: 30px; margin: 20px auto;" class="center-block">
         <?php    }else{?> <img src="ressources/cancel.png" style="height: 30px; margin: 20px auto;" class="center-block"> <?php } ?>

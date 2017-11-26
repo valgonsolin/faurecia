@@ -24,7 +24,9 @@ drawMenu('quiz');
 <?php
 
 $Query = $bdd->prepare('SELECT * FROM qualite_quiz_reponse
-    WHERE qualite_quiz_reponse.question = ? ');
+    JOIN qualite_quiz_session ON qualite_quiz_reponse.session=qualite_quiz_session.id
+    JOIN profil ON qualite_quiz_session.personne=profil.id
+    WHERE profil.supprime = 0 AND qualite_quiz_reponse.question = ? ');
 $Query->execute(array($_GET["id"]));
 
 $Query2 = $bdd->prepare('SELECT * FROM qualite_quiz_question
