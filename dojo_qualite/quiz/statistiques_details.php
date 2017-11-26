@@ -92,10 +92,14 @@ while ($Data = $Query->fetch()) {
 
 <tr>
   <td> Pourcentage des participants qui ont choisi cette reponse:  </td>
-  <td> <?php echo (floatval($rep1)/$total_rep)*100; echo "%"; ?> </td>
-  <td> <?php echo (floatval($rep2)/$total_rep)*100; echo "%"; ?> </td>
-  <td><?php echo (floatval($rep3)/$total_rep)*100; echo "%"; ?> </td>
-  <td> <?php echo (floatval($rep4)/$total_rep)*100; echo "%"; ?></td>
+  <td><?php if ($total_rep>0) { echo (floatval($rep1)/$total_rep)*100; echo "%"; }
+            else { echo "0%" ; }  ?> </td>
+  <td><?php if ($total_rep>0) { echo (floatval($rep2)/$total_rep)*100; echo "%"; }
+            else { echo "0%" ; }  ?> </td>
+  <td><?php if ($total_rep>0) { echo (floatval($rep3)/$total_rep)*100; echo "%"; }
+            else { echo "0%" ; }  ?> </td>
+  <td><?php if ($total_rep>0) { echo (floatval($rep4)/$total_rep)*100; echo "%"; }
+            else { echo "0%" ; }  ?> </td>
 </tr>
 
 
