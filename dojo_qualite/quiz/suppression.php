@@ -18,7 +18,9 @@ else
   if(isset($_POST['supprimer'])){
 
     $query = $bdd -> prepare('DELETE FROM qualite_quiz_question WHERE id=?');
-    $query -> execute(array($_POST['id'])); ?>
+    $query -> execute(array($_POST['id']));
+    $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre-1 WHERE ordre > ?');
+    $query -> execute(array($_POST['ordre1'])); ?>
     <div class="alert alert-success">
         <strong>Supprimé</strong>  -  La question a bien été supprimée.
     </div>
@@ -40,7 +42,7 @@ else
   if(isset($_POST['vrai4'])){
     $vrai1=$_POST['vrai4'];
   }
-  $query = $bdd -> prepare('UPDATE qualite_quiz_question SET type = :type,titre= :titre,question = :question,reponse_1 = :reponse_1,reponse_2 = :reponse_2,reponse_3 = :reponse_3,reponse_4 = :reponse_4,corrige_1 = :corrige_1,corrige_2 = :corrige_2,corrige_3 = :corrige_3,corrige_4 = :corrige_4 WHERE id = :id');
+  $query = $bdd -> prepare('UPDATE qualite_quiz_question SET type = :type,titre= :titre,question = :question,reponse_1 = :reponse_1,reponse_2 = :reponse_2,reponse_3 = :reponse_3,reponse_4 = :reponse_4,corrige_1 = :corrige_1,corrige_2 = :corrige_2,corrige_3 = :corrige_3,corrige_4 = :corrige_4, ordre= :ordre WHERE id = :id');
   $query -> execute(array(
     'type' => $_POST['type'],
     'titre' => $_POST['titre'],
@@ -53,8 +55,17 @@ else
     'corrige_2' => $vrai2,
     'corrige_3' => $vrai3,
     'corrige_4' => $vrai4,
+    'ordre' => $_POST['ordre2'],
     'id' => $_POST['id']
   ));
+  if($_POST['ordre1'] > $_POST['ordre2']){
+    $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre+1 WHERE ordre >= ?  AND id <> ?');
+    $query -> execute(array($_POST['ordre2'],$_POST['id']));
+  }
+  if($_POST['ordre1'] < $_POST['ordre2']){
+    $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre-1 WHERE ordre > ? AND ordre <= ? AND id <> ?');
+    $query -> execute(array($_POST['ordre1'],$_POST['ordre2'],$_POST['id']));
+  }
   if($query ==false){ ?>
     <div class="alert alert-danger">
         <strong>Erreur</strong>  -  Les données entrées ne sont pas conformes.
@@ -65,6 +76,9 @@ else
   </div>
   <?php
 }}
+
+
+
   $recherche = "";
   if (isset($_GET["recherche"])){
       $recherche = $_GET["recherche"];
@@ -86,6 +100,7 @@ else
   <table class="table">
   <thead class="thead">
   <tr>
+      <th>N°</th>
       <th>Titre</th>
       <th>Type</th>
       <th>Question</th>
@@ -99,7 +114,7 @@ $nb=0;
 if(isset($_GET['nb'])){
 $nb=$_GET['nb'];
 }
-  $query=$bdd -> prepare('SELECT * FROM qualite_quiz_question WHERE (question LIKE :question or titre LIKE :titre) LIMIT 20 OFFSET :nb');
+  $query=$bdd -> prepare('SELECT * FROM qualite_quiz_question WHERE (question LIKE :question or titre LIKE :titre) ORDER BY ordre LIMIT 20 OFFSET :nb');
   $query ->bindValue(':question','%'.$recherche.'%');
   $query ->bindValue(':titre','%'.$recherche.'%');
   $query ->bindValue(':nb',(int) $nb, PDO::PARAM_INT);
@@ -108,10 +123,11 @@ $nb=$_GET['nb'];
 
   ?>
     <tr>
+      <td><?php echo $Data['ordre']; ?></td>
       <td><?php echo $Data['titre']; ?></td>
       <td><?php if($Data['type']){echo "Autre";}else{echo "MOD";} ?></td>
       <td><?php echo $Data['question'];?></td>
-      <td><a href="supprimer_question.php?id=<?php echo $Data['id']?>" class="btn btn-default">Voir</a></td>
+      <td><a href="supprimer_question.php?id=<?php echo $Data['id']?>" class="btn btn-default">Modifier</a></td>
     </tr>
   <?php
 } ?>

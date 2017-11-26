@@ -40,7 +40,7 @@ if (! isset($_GET["id"])){
     $type = $Query->fetch()['type'];
 
     $Query = $bdd->prepare('SELECT * FROM qualite_quiz_question WHERE id NOT IN
-      (SELECT question FROM qualite_quiz_reponse WHERE qualite_quiz_reponse.session = ?) and type = ?');
+      (SELECT question FROM qualite_quiz_reponse WHERE qualite_quiz_reponse.session = ?) and type = ? ORDER BY ordre');
     $Query->execute(array($_GET["id"],$type));
     if($Data = $Query->fetch()) {
         ?>
@@ -51,6 +51,7 @@ if (! isset($_GET["id"])){
 
         <form class="form-horizontal" method="post">
             <div class="form-group" style="margin: 10px;" >
+                <label> Question n°<?php echo $Data['ordre'] ?></label><br/>
                 <label for="code_bar"><?php echo $Data['question']; ?></label>
                 <div class="checkbox">
                     <label><input type="checkbox" name="rep_1"><?php echo $Data['reponse_1']; ?></label>
