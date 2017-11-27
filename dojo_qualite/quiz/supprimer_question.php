@@ -66,8 +66,8 @@ else
     		<input name="reponse4" class="form-control" type="text" value="<?php echo $Data['reponse_4']; ?>">
     	</div>
       <input type="hidden" name="id" value="<?php echo $Data["id"] ?>" >
-      <button type="submit" name="modifier" class="btn btn-default">Modifier</button>
-      <button type="submit" name="supprimer" class="btn btn-default">Supprimer</button>
+      <button type="submit" name="modifier" class="btn btn-default" onclick="return confirm('Modifier la question ?');">Modifier</button>
+      <button type="submit" name="supprimer" class="btn btn-default" onclick="return confirm('Supprimer la question ?');">Supprimer</button>
 
 
     </form>
