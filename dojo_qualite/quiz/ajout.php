@@ -16,9 +16,11 @@ if(empty($_SESSION['login']))
 else
 {
   echo "<h2>Quiz</h2>";
+  $lastOrdre=0;
   $query= $bdd -> query('SELECT * FROM qualite_quiz_question ORDER BY ordre DESC LIMIT 1');
-  $Data = $query -> fetch();
+  while ($Data = $query->fetch()) {
   $lastOrdre= $Data['ordre'];
+  }
 
   if(!empty($_POST)){
     $vrai1=0;
