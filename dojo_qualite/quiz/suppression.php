@@ -59,8 +59,8 @@ else
     'id' => $_POST['id']
   ));
   if($_POST['ordre1'] > $_POST['ordre2']){
-    $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre+1 WHERE ordre >= ?  AND id <> ?');
-    $query -> execute(array($_POST['ordre2'],$_POST['id']));
+    $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre+1 WHERE ordre >= ? AND ordre < ? AND id <> ?');
+    $query -> execute(array($_POST['ordre2'],$_POST['ordre1'],$_POST['id']));
   }
   if($_POST['ordre1'] < $_POST['ordre2']){
     $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre-1 WHERE ordre > ? AND ordre <= ? AND id <> ?');
