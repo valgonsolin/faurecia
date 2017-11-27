@@ -1,5 +1,6 @@
 <?php
 include_once "needed.php";
+ob_start();
 
 drawheader('codir');
 if(empty($_SESSION['login'])){ ?>
@@ -26,6 +27,7 @@ if (isset($_POST['supprimer'])){
         $Query = $bdd->prepare('UPDATE profil SET supprime = 1 WHERE id = ?');
         $Query->execute(array($_GET["id"]));
     }
+    ob_end_clean();
     header('Location: '.$url."/index.php");
 
 
@@ -120,3 +122,4 @@ if (isset($_GET['id'])){
     </form>
 <?php }
 drawFooter();
+ob_end_flush();
