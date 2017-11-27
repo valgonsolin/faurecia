@@ -15,6 +15,19 @@ if(empty($_SESSION['login']))
 }
 else
 {
+  if(isset($_POST['reset'])){
+    $query= $bdd -> query('SELECT * FROM qualite_quiz_question');
+    $i=0;
+    while($Data = $query -> fetch()){
+      $update=$bdd -> prepare('UPDATE qualite_quiz_question SET ordre=? WHERE id=?');
+      $update -> execute(array($i,$Data['id']));
+      $i=$i+1;
+    } ?>
+    <div class="alert alert-success">
+        <strong>Ordre réinitialisé</strong>  -  L'ordre des questions a été remis à zéro.
+    </div>
+  <?php
+  }
   if(isset($_POST['supprimer'])){
 
     $query = $bdd -> prepare('DELETE FROM qualite_quiz_question WHERE id=?');
@@ -135,20 +148,23 @@ $nb=$_GET['nb'];
 
 </table>
 <?php
-if($nb > 19){
-  ?>
-  <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb-20;?>" class="btn btn-default">Elements précédents</a>
-<?php
-}
+
 $test = $bdd->prepare('SELECT * FROM qualite_quiz_question WHERE (question LIKE :question or titre LIKE :titre) LIMIT 1 OFFSET :nb');
 $test ->bindValue(':question','%'.$recherche.'%');
 $test ->bindValue(':titre','%'.$recherche.'%');
 $test ->bindValue(':nb',(int) $nb+20, PDO::PARAM_INT);
-$test->execute();
-if($test -> fetch()){ ?>
-  <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb+20;?>" class="btn btn-default">Elements suivants</a>
+$test->execute(); ?>
+<form method="post" class="inline-form"> <?php
+  if($nb > 19){    ?>
+      <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb-20;?>" class="btn btn-default">Elements précédents</a>
+    <?php
+    }
+    if($test -> fetch()){ ?>
+    <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb+20;?>" class="btn btn-default">Elements suivants</a>
+  <?php } ?>
+    <button type="submit" onclick="return confirm('Voulez-vous reinitialiser l\'ordre des questions ?');" class="btn btn-default pull-right" name="reset">Réinitialiser l'ordre des questions</button>
+  </form>
 <?php
-}
 }
 
 drawFooter();
