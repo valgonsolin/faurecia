@@ -48,7 +48,8 @@ if (! isset($_GET["id"])){
         <h2>Quiz</h2>
 
         <h4><?php echo $Data['titre']; ?></h4>
-
+        <div class="row">
+          <div class="col-md-8">
         <form class="form-horizontal" method="post">
             <div class="form-group" style="margin: 10px;" >
                 <label> Question n°<?php echo $Data['ordre'] ?></label><br/>
@@ -73,6 +74,14 @@ if (! isset($_GET["id"])){
             </button>
 
         </form>
+      </div>
+      <?php
+      if($Data['file']){ ?>
+        <div class="col-md-4">
+          <img src="#" style="max-height:200px; max-width:100%; display:block; margin:auto">
+        </div><?php
+      } ?>
+      </div>
         <?php
     }else{
         ob_end_clean();
