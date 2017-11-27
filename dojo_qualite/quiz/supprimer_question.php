@@ -31,12 +31,17 @@ else
     $Data=$query -> fetch(); ?>
 
     <form action="suppression.php" method="post" style="margin-top:20px;">
+      <div class="form-group">
+        <label>Question n°</label>
+        <input class="form-control" type="number" name="ordre2" value="<?php echo $Data['ordre']; ?>">
+        <input type="hidden" name="ordre1" value="<?php echo $Data['ordre']; ?>" >
+      </div>
     	<div class="form-group">
-    	<label>Type</label>
-    	<select name="type" class="form-control" value="<?php echo $Data['type']; ?>">
-    		<option value="0" selected="selected">MOD</option>
-    		<option value="1">Autre</option>
-    	</select>
+      <label>Type</label>
+  	  <select name="type" class="form-control" value="<?php echo $Data['type']; ?>">
+      <option value="0" selected="selected">MOD</option>
+      <option value="1">Autre</option>
+      </select>
     	<label>Titre</label>
     	<input class="form-control" name="titre" type="text" value="<?php echo $Data['titre']; ?>">
     	</div>

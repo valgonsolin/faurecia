@@ -16,6 +16,10 @@ if(empty($_SESSION['login']))
 else
 {
   echo "<h2>Quiz</h2>";
+  $query= $bdd -> query('SELECT * FROM qualite_quiz_question ORDER BY ordre DESC LIMIT 1');
+  $Data = $query -> fetch();
+  $lastOrdre= $Data['ordre'];
+
   if(!empty($_POST)){
     $vrai1=0;
     $vrai2=0;
@@ -33,7 +37,12 @@ else
     if(isset($_POST['vrai4'])){
       $vrai1=$_POST['vrai4'];
     }
-    $query = $bdd -> prepare('INSERT INTO qualite_quiz_question(type,titre,question,reponse_1,reponse_2,reponse_3,reponse_4,corrige_1,corrige_2,corrige_3,corrige_4) VALUES (:type,:titre,:question,:reponse_1,:reponse_2,:reponse_3,:reponse_4,:corrige_1,:corrige_2,:corrige_3,:corrige_4)');
+    if($lastOrdre >= $_POST['ordre']){
+      $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre+1 WHERE ordre >= ? ');
+      $query -> execute(array($_POST['ordre']));
+    }
+    $query = $bdd -> prepare('INSERT INTO qualite_quiz_question(type,titre,question,reponse_1,reponse_2,reponse_3,reponse_4,corrige_1,corrige_2,corrige_3,corrige_4,ordre) VALUES (:type,:titre,:question,:reponse_1,:reponse_2,:reponse_3,:reponse_4,:corrige_1,:corrige_2,:corrige_3,:corrige_4,:ordre)');
+    $id= $bdd -> lastInsertId();
     $query -> execute(array(
       'type' => $_POST['type'],
       'titre' => $_POST['titre'],
@@ -46,7 +55,9 @@ else
       'corrige_2' => $vrai2,
       'corrige_3' => $vrai3,
       'corrige_4' => $vrai4,
+      'ordre' => $_POST['ordre']
     ));
+
     if($query ==false){ ?>
       <div class="alert alert-danger">
           <strong>Erreur</strong>  -  Les données entrées ne sont pas conformes.
@@ -64,6 +75,10 @@ else
   </div>
 
   <form method="post" style="margin-top:20px;">
+    <div class="form-group">
+      <label>Question n°</label>
+      <input type="number" class="form-control" name="ordre" value="<?php echo $lastOrdre+1 ?>">
+    </div>
   	<div class="form-group">
   	<label>Type</label>
   	<select name="type" class="form-control">
