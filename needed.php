@@ -69,9 +69,10 @@ global $url;
                     <a href="<?php echo $url; ?>/dojo_qualite/controle_final.php" class="bouton_dropdown">Contrôle final</a>
                     <a href="<?php echo $url; ?>/dojo_qualite/bacs_rouge.php" class="bouton_dropdown">Bacs rouge</a>
                     <a href="<?php echo $url; ?>/dojo_qualite/retouche_sous_controle.php" class="bouton_dropdown">Retouche sous contrôle</a>
-					<a href="<?php echo $url; ?>/dojo_qualite/qrci.php" class="bouton_dropdown">QRCI</a>
-					<a href="<?php echo $url; ?>/dojo_qualite/quiz/index.php" class="bouton_dropdown">Quiz</a>
-                </div>
+					          <a href="<?php echo $url; ?>/dojo_qualite/qrci.php" class="bouton_dropdown">QRCI</a>
+					          <a href="<?php echo $url; ?>/dojo_qualite/quiz/index.php" class="bouton_dropdown">Quiz</a>
+                    <a href="<?php echo $url; ?>/dojo_qualite/RR/index.php" class="bouton_dropdown"> <?php echo "R&R" ; ?></a>
+                  </div>
 			</div>
             <a class="bouton_menu <?php if($selected=='dojo_hse'){echo ' bouton_menu_selected';} ?>">Dojo HSE </a>
 

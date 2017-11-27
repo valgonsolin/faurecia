@@ -26,7 +26,7 @@ if (isset($_GET["recherche"])){
   <a href="ajout.php" class="btn btn-default pull-right">Espace administration</a>
 </form>
 
-<p style="margin-top: 20px;margin-bottom: 20px;">Choisissez votre profil ou <a href="#">ajoutez un nouveau profil</a>.</p>
+<p style="margin-top: 20px;margin-bottom: 20px;">Choisissez votre profil ou <a href="/editer_profil.php">ajoutez un nouveau profil</a>.</p>
 
 <table class="table">
 <thead class="thead">
