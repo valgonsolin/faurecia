@@ -94,7 +94,7 @@ while ($Data = $Query->fetch()) {
     <span class="close<?php echo $i; ?>">&times;</span>
     <p>Some text in the Modal..</p>
     </div>
-    <script>
+    <script type="text/javascript">
     $("#modal<?php echo $i; ?>").click{
       $("#contenu<?php echo $i; ?>").show();
     };
