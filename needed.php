@@ -142,3 +142,11 @@ function upload($bdd,$index,$category,$maxsize=FALSE,$extensions=FALSE)
      ));
      return $bdd ->lastInsertId();
 }
+function remove_file($bdd,$id){
+  $query = $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+  $query -> execute(array($id));
+  $Data = $query -> fetch();
+  unlink($Data['chemin']);
+  $query = $bdd -> prepare('DELETE FROM files WHERE id=?');
+  $query -> execute(array($id));
+}
