@@ -24,7 +24,11 @@ $Query = $bdd->prepare('UPDATE qualite_quiz_session SET fin = NOW() WHERE id = ?
 $Query->execute(array($_GET["id"]));
 
 ?>
-
+<style>
+.modal{
+  display:none;
+}
+</style>
 <h2>Résultats Quiz</h2>
 <h4>Réponse aux questions</h4>
 <a href="resultats_complet.php?id=<?php echo $_GET['id']?>">Voir les réponses détaillés</a>
@@ -53,14 +57,9 @@ $Query = $bdd->prepare('SELECT * FROM qualite_quiz_reponse
   LEFT JOIN qualite_quiz_question ON qualite_quiz_question.id = qualite_quiz_reponse.question
   WHERE qualite_quiz_reponse.session = ? ORDER BY qualite_quiz_question.id ASC');
 $Query->execute(array($_GET["id"]));
+$i=0;
 while ($Data = $Query->fetch()) {
-
-
-
     ?>
-
-
-
     <tr>
         <td>
         <?php
@@ -88,11 +87,21 @@ while ($Data = $Query->fetch()) {
 
         ?></td>
 
-        <td><?php echo $Data['question']; ?></td>
+        <td><div id="modal<?php echo $i; ?>"><?php echo $Data['question']; ?></div></td>
         <td><?php echo int_to_vrai_faux($valide); ?></td>
     </tr>
+    <div id="contenu<?php echo $i; ?>" class="modal">
+    <span class="close<?php echo $i; ?>">&times;</span>
+    <p>Some text in the Modal..</p>
+    </div>
+    <script>
+    $("#modal<?php echo $i; ?>").click{
+      $("#contenu<?php echo $i; ?>").show();
+    };
+    </script>
 
     <?php
+    $i++;
 }
 
 array_push($proportion_bonne_reponse_cat, array($ancien_titre, $bonne_reponse_cat, $tot_reponse_cat));

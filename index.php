@@ -7,11 +7,7 @@ include_once "needed.php";
 
 drawheader();
 
-
 ?>
-
-
-
 <img src="/images/background-3.png" style="width:125%; transform:translateX(-10%);" >
 <div id="menu_principal">
 	<a href="/presentation_usine/chiffres_cle.php" class="bouton_principal"><img src="/presentation_usine/ressources/beaulieupicture.jpg"><figcaption>L'usine</figcaption></a>

@@ -76,7 +76,7 @@ else
     <a href="suppression.php" class="bouton_menu">Modification/Suppression</a>
   </div>
 
-  <form method="post" style="margin-top:20px;">
+  <form method="post" style="margin-top:20px;" enctype="multipart/form-data">
     <div class="form-group">
       <label>Question n°</label>
       <input type="number" class="form-control" name="ordre" value="<?php echo $lastOrdre+1 ?>">
