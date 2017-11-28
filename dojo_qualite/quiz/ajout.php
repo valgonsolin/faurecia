@@ -110,6 +110,14 @@ else
   		<label>Réponse 4 :     </label><label style="margin-left:20px"><input name="vrai4" type="checkbox"> Vrai</label>
   		<input name="reponse4" class="form-control" type="text">
   	</div>
+    <div class="form-group">
+  		<label>Image de Correction :     </label>
+  		<input name="file" type="file">
+  	</div>
+    <div class="form-group">
+  		<label>Commentaire de correction :     </label>
+  		<input name="reponse4" class="form-control" type="text">
+  	</div>
   	<input value="Ajouter" class="btn btn-default" type="submit">
 
 
