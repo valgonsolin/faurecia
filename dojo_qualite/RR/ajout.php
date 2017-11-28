@@ -21,7 +21,7 @@ if(empty($_SESSION['login']))
 }
 else
 {
-  echo "<h2>Quiz</h2>";
+  echo "<h2>R&R</h2>";
 
   if(!empty($_POST)){
   $id1=upload($bdd,'file_1',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' ));
