@@ -24,25 +24,22 @@ else
   echo "<h2>R&R</h2>";
 
   if(!empty($_POST)){
-  $id1=upload($bdd,'file_1',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' ));
-  $id2=upload($bdd,'file_2',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' ));
-  $id3=upload($bdd,'file_3',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' ));
-  $id4=upload($bdd,'file_4',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' ));
+  $id1=upload($bdd,'file_1',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
   if($id1==-1){ echo "le fichier 1 n'a pas pu etre téléversé" ; }
   elseif ($id1==-2){echo "la taille du fichier 1 est trop grande";}
-  elseif ($id1==-3){echo "le fichier doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ;}
-  else { $id2=upload($bdd,'file_2',"R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' ));
+  elseif ($id1==-3){echo "le fichier 1 doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ;}
+  else { $id2=upload($bdd,'file_2',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
     if($id2==-1){ echo "le fichier 2 n'a pas pu etre téléversé" ; remove_file($bdd,$id1);}
     elseif ($id2==-2){echo "la taille du fichier 1 est trop grande"; remove_file($bdd,$id1); }
-    elseif ($id2==-3){echo "le fichier doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ; remove_file($bdd,$id1);}
-    else { $id3=upload($bdd,'file_2',"R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' ));
+    elseif ($id2==-3){echo "le fichier 2 doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ; remove_file($bdd,$id1);}
+    else { $id3=upload($bdd,'file_3',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
       if($id3==-1){ echo "le fichier 3 n'a pas pu etre téléversé" ; remove_file($bdd,$id1); remove_file($bdd,$id2);}
       elseif ($id3==-2){echo "la taille du fichier 1 est trop grande"; remove_file($bdd,$id1); remove_file($bdd,$id2);}
-      elseif ($id3==-3){echo "le fichier doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ; remove_file($bdd,$id1); remove_file($bdd,$id2);}
-      else {$id4=upload($bdd,'file_4',"R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' ));
+      elseif ($id3==-3){echo "le fichier  3doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ; remove_file($bdd,$id1); remove_file($bdd,$id2);}
+      else {$id4=upload($bdd,'file_4',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
         if($id3==-1){ echo "le fichier 4 n'a pas pu etre téléversé" ; remove_file($bdd,$id1); remove_file($bdd,$id2); remove_file($bdd,$id3);}
         elseif ($id3==-2){echo "la taille du fichier 1 est trop grande"; remove_file($bdd,$id1); remove_file($bdd,$id2); remove_file($bdd,$id3); }
-        elseif ($id3==-3){echo "le fichier doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ; remove_file($bdd,$id1); remove_file($bdd,$id2); remove_file($bdd,$id3);}
+        elseif ($id3==-3){echo "le fichier 4 doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ; remove_file($bdd,$id1); remove_file($bdd,$id2); remove_file($bdd,$id3);}
         else {
 
           $vrai1=0;
