@@ -24,6 +24,7 @@ if (isset($_GET["recherche"])){
   </div>
   <button type="submit" class="btn btn-default">Rechercher</button>
   <a href="ajout.php" class="btn btn-default pull-right">Espace administration</a>
+  <a href="statistiques.php" class="btn btn-default pull-right">Statistiques Génénérales</a>
 </form>
 
 <p style="margin-top: 20px;margin-bottom: 20px;">Choisissez votre profil ou <a href="/editer_profil.php">ajoutez un nouveau profil</a>.</p>
