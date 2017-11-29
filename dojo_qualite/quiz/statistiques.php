@@ -15,13 +15,7 @@ if(empty($_SESSION['login']))
 }
 else
 { ?>
-<style>
-.stats:hover{
-    background-color: #efefef;
-}
-</style>
 <h2> Statistiques </h2>
-
 <div id="lien_page">
 <div class="boutons_nav" style="display: flex; justify-content: center;">
   <a href="#lien_page" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Statistiques par questions</a>
@@ -93,7 +87,7 @@ while ($Data = $Query->fetch()) {
 foreach ($proportion_bonne_reponse_id as $element){
 ?>
 
-  <tr class="stats" onclick="window.location='statistiques_details.php?id=<?php echo $element[0]; ?>';" title="Cliquez ici pour accéder aux statistiques de la question">
+  <tr class="clickable" onclick="window.location='statistiques_details.php?id=<?php echo $element[0]; ?>';" title="Cliquez ici pour accéder aux statistiques de la question">
     <td><?php echo $element[0];?></td>
     <td><?php echo $element[1];?></td>
     <td><?php echo $element[2];?></td>

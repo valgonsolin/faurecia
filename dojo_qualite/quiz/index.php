@@ -15,8 +15,6 @@ if (isset($_GET["recherche"])){
 ?>
 
 <h2>Quiz</h2>
-
-
 <form class="form-inline">
   <div class="form-group">
     <label for="recherche">Recherche :</label>
@@ -56,19 +54,19 @@ while ($Data = $Query->fetch()) {
     ?>
 
     <tr>
-        <td><a href="/editer_profil.php?id=<?php echo $Data['id']; ?>"> <?php echo $Data['nom']; ?> </a> </td>
+        <td class="clickable" title="Cliquez pour voir le profil" onclick="window.location='/editer_profil.php?id=<?php echo $Data['id']; ?>'"> <?php echo $Data['nom']; ?> </td>
         <td><?php echo $Data['prenom']; ?></td>
         <td><?php echo $Data['tournee']; ?></td>
         <td><?php echo $Data['uap']; ?></td>
         <td><?php echo $Data['mo']; ?></td>
-        <td><a href="explication.php?id=<?php echo $Data['id']; ?>">Accéder au quiz</a></td>
+        <td class="clickable" title="Cliquez pour accéder au quizz" onclick="window.location=explication.php?id=<?php echo $Data['id']; ?>">Accéder au quiz</td>
         <?php
 
         if (($Data["mo"] == 'MOD' and $Data['type'] == 0 )or
             ($Data["mo"] != 'MOD' and $Data['type'] == 1 )){
             if ($Data['valide'] > 0){
                 ?>
-                <td><a href="resultats.php?id=<?php echo $Data['id_session']; ?>"><img src="ressources/checked.png" style="
+                <td class="clickable"><a href="resultats.php?id=<?php echo $Data['id_session']; ?>"><img src="ressources/checked.png" style="
             height: 24px;
             border-style: solid;
             border-color: #BBB;
@@ -80,7 +78,7 @@ while ($Data = $Query->fetch()) {
                 <?php
             }else{
                 ?>
-                <td><a href="resultats.php?id=<?php echo $Data['id_session']; ?>"><img src="ressources/cancel.png" style="
+                <td class="clickable"><a href="resultats.php?id=<?php echo $Data['id_session']; ?>"><img src="ressources/cancel.png" style="
             height: 24px;
             border-style: solid;
             border-color: #BBB;
@@ -92,7 +90,7 @@ while ($Data = $Query->fetch()) {
                 <?php
             }
         }else{?>
-            <td><a href="resultats.php?id=<?php echo $Data['id_session']; ?>"><img src="ressources/cancel.png" style="
+            <td class="clickable"><a hr ef="resultats.php?id=<?php echo $Data['id_session']; ?>"><img src="ressources/cancel.png" style="
                 height: 24px;
                 border-style: solid;
                 border-color: #BBB;
