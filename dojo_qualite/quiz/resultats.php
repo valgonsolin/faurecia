@@ -25,34 +25,13 @@ $Query->execute(array($_GET["id"]));
 
 ?>
 <style>
-.modal{
-  font-family: 'clio';
-  display:none;
-  z-index:1001;
-  width: 70%;
-  height:60%;
-  margin:auto;
+.commentaire:hover{
   background-color: #efefef;
-  border-radius: 1px;
-  box-shadow: 5px 5px 10px grey;
-}
-.close{
-  float:right;
-  color: #000;
-  font-size: 28px;
-  font-weight: bold;
-}
-.close:hover{
-  color: #c00;
-}
-hr{
-  width:98%;
-  margin-left:auto;
-  border-color: grey;
-
+  legend
 }
 </style>
 <h2>Résultats Quiz</h2>
+<table class="table">
 <h4>Réponse aux questions</h4>
 <a href="resultats_complet.php?id=<?php echo $_GET['id']?>">Voir les réponses détaillés</a>
 <div style="height: 30px"></div>
@@ -77,12 +56,12 @@ $proportion_bonne_reponse_cat = [];
 
 $Query = $bdd->prepare('SELECT * FROM qualite_quiz_reponse
   LEFT JOIN qualite_quiz_question ON qualite_quiz_question.id = qualite_quiz_reponse.question
-  WHERE qualite_quiz_reponse.session = ? ORDER BY qualite_quiz_question.id ASC');
+  WHERE qualite_quiz_reponse.session = ? ORDER BY qualite_quiz_question.ordre ASC');
 $Query->execute(array($_GET["id"]));
 $i=0;
 while ($Data = $Query->fetch()) {
     ?>
-    <tr>
+    <tr class="commentaire" data-toggle="modal" data-target="#modal<?php echo $i; ?>" title="Cliquez pour voir le commentaire">
         <td>
         <?php
         if ($ancien_titre != $Data['titre']){
@@ -106,32 +85,42 @@ while ($Data = $Query->fetch()) {
         }
         $tot_reponse_cat +=1;
         $tot_reponse +=1;
-        
+
+        $query= $bdd -> prepare('SELECT * FROM files WHERE id=?');
+        $query -> execute(array($Data['image_correction']));
+        $img= $query -> fetch();
+
         ?></td>
 
-        <td><div id="modal<?php echo $i; ?>"><?php echo $Data['question']; ?></div></td>
+        <td><?php echo $Data['question']; ?></td>
         <td><?php echo int_to_vrai_faux($valide); ?></td>
     </tr>
-    <div id="contenu<?php echo $i; ?>" class="modal">
-      Commentaire<span class="close" id="close<?php echo $i; ?>">&times; </span>
-      <hr/>
-      <div class="row" style="margin:2px;">
-        <div class="col-sm-6">
-          <p><?php echo $Data['commentaire']; ?></p>
+    <div id="modal<?php echo $i; ?>" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Commentaire</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row" style="margin:2px;">
+              <div class="col-sm-6">
+                <p><?php echo $Data['commentaire']; ?></p>
+              </div>
+              <div class="col-sm-6">
+              <?php
+              if($img){ ?>
+                <img class="pull-right" src="../../images/<?php echo $img['chemin']; ?>" style="max-height:400px; max-width:100%;"> <?php } ?>
+              </div>
+          </div>
+          </div>
         </div>
-        <div class="col-sm-6">
-          <img class="pull-right" src="../../images/background-3.png" style="max-height:400px; max-width:100%;">
-        </div>
+
+      </div>
     </div>
 
-    <script type="text/javascript">
-    $("#modal<?php echo $i; ?>").click(function(){
-      $("#contenu<?php echo $i; ?>").show();
-    });
-    $("#close<?php echo $i; ?>").click(function(){
-      $("#contenu<?php echo $i; ?>").hide();
-    });
-    </script>
+
+
 
     <?php
     $i++;
@@ -146,8 +135,6 @@ array_push($proportion_bonne_reponse_cat, array($ancien_titre, $bonne_reponse_ca
 
 
 <h4>Statistique</h4>
-
-<table class="table"
     <thead class="thead">
         <tr>
             <th >Categorie</th>
@@ -157,6 +144,7 @@ array_push($proportion_bonne_reponse_cat, array($ancien_titre, $bonne_reponse_ca
             <th style="width: 300px;">Pourcentage de bonne réponse</th>
         </tr>
     </thead>
+
     <tbody>
         <?php
 
