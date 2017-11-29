@@ -114,7 +114,7 @@ while ($Data = $Query->fetch()) {
 
 
 <tr>
-  <td> Reponse atendue:  </td>
+  <td> Reponse attendue:  </td>
   <td> <?php  if ($v1==1){?>
                 <img src="ressources/checked.png" style="height: 40px; margin: 20px auto;" class="center-block">
       <?php    }else{?> <img src="ressources/cancel.png" style="height: 40px; margin: 20px auto;" class="center-block"> <?php } ?>
@@ -140,7 +140,7 @@ while ($Data = $Query->fetch()) {
 </tbody>
 </table>
 
-<h4> Total Reponses: <?php echo $total_rep ?></h4>
+<h4> Total Reponses: <?php echo $total_rep ?></h4><br/>
 <a href="statistiques.php" class="btn btn-default">Retour</a>
 
 <?php
