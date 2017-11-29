@@ -163,6 +163,7 @@ $test->execute(); ?>
     <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb+20;?>" class="btn btn-default">Elements suivants</a>
   <?php } ?>
     <button type="submit" onclick="return confirm('Voulez-vous reinitialiser l\'ordre des questions ?');" class="btn btn-default pull-right" name="reset">Réinitialiser l'ordre des questions</button>
+    <span class="clear" style="clear: both; display: block;"></span>
   </form>
 <?php
 }
