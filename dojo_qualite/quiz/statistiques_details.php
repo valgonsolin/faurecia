@@ -3,7 +3,17 @@ include_once "../needed.php";
 include_once "../../needed.php";
 drawheader('dojo_qualite');
 drawMenu('quiz');
-?>
+
+if(empty($_SESSION['login']))
+{ ?>
+  <h2>Statistiques</h2>
+  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
+  <a href="/identification.php?redirection=dojo_qualite/quiz/statistiques.php"><button class="btn btn-default">Se connecter</button></a>
+  <a href="index.php" class="btn btn-default">Quiz</a>
+<?php
+}
+else
+{ ?>
 
 <h2> Statistiques liés à la question <?php echo $_GET['id'] ?> </h2>
 
@@ -130,11 +140,10 @@ while ($Data = $Query->fetch()) {
 </tbody>
 </table>
 
-<h3> Total Reponses: <?php echo $total_rep ?> <h3>
-
-<br/><br/>
-<a href="statistiques.php"><p> Retour au Statistiques générales </p></a>
+<h4> Total Reponses: <?php echo $total_rep ?></h4>
+<a href="statistiques.php" class="btn btn-default">Retour</a>
 
 <?php
+}
 drawFooter();
 ?>

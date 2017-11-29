@@ -3,8 +3,23 @@ include_once "../needed.php";
 include_once "../../needed.php";
 drawheader('dojo_qualite');
 drawMenu('quiz');
-?>
 
+
+if(empty($_SESSION['login']))
+{ ?>
+  <h2>Statistiques</h2>
+  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
+  <a href="/identification.php?redirection=dojo_qualite/quiz/statistiques.php"><button class="btn btn-default">Se connecter</button></a>
+  <a href="index.php" class="btn btn-default">Quiz</a>
+<?php
+}
+else
+{ ?>
+<style>
+.stats:hover{
+    background-color: #efefef;
+}
+</style>
 <h2> Statistiques </h2>
 
 <div id="lien_page">
@@ -26,10 +41,6 @@ while($n2 = $Qy2->fetch()){
   $nombre_valide+=1; }
 ?>
 <h3>Sur un total de <?php echo $n['nombre_total']; ?> personnes <?php echo $nombre_valide; ?> ont validé le quiz, soit <?php echo(floatval($nombre_valide)/$n['nombre_total'])*100; echo "%"; ?> de taux de réussite </h3>
-
-
-<h5>Cliquez sur l'identifiant d'une question pour accéder aux statistiques qui lui sont associés  </h5>
-<br/>
 
 <table class="table">
 <thead class="thead">
@@ -82,8 +93,8 @@ while ($Data = $Query->fetch()) {
 foreach ($proportion_bonne_reponse_id as $element){
 ?>
 
-<tr>
-    <td><a href="statistiques_details.php?id=<?php echo $element[0]; ?>"><?php echo $element[0];?></a></td>
+  <tr class="stats" onclick="window.location='statistiques_details.php?id=<?php echo $element[0]; ?>';" title="Cliquez ici pour accéder aux statistiques de la question">
+    <td><?php echo $element[0];?></td>
     <td><?php echo $element[1];?></td>
     <td><?php echo $element[2];?></td>
     <td><?php echo $element[4];?></td>
@@ -98,4 +109,5 @@ foreach ($proportion_bonne_reponse_id as $element){
 
 
 <?php
+}
 drawFooter(); ?>

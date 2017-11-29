@@ -27,7 +27,6 @@ $Query->execute(array($_GET["id"]));
 <style>
 .commentaire:hover{
   background-color: #efefef;
-  legend
 }
 </style>
 <h2>Résultats Quiz</h2>

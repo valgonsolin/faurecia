@@ -3,8 +3,18 @@ include_once "../needed.php";
 include_once "../../needed.php";
 drawheader('dojo_qualite');
 drawMenu('quiz');
-?>
 
+if(empty($_SESSION['login']))
+{ ?>
+  <h2>Statistiques</h2>
+  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
+  <a href="/identification.php?redirection=dojo_qualite/quiz/statistiques.php"><button class="btn btn-default">Se connecter</button></a>
+  <a href="index.php" class="btn btn-default">Quiz</a>
+<?php
+}
+else
+{ ?>
+<h2>Statistiques</h2>
 <div id="lien_page">
 <div class="boutons_nav" style="display: flex; justify-content: center;">
   <a href="statistiques.php" class="bouton_menu " style="margin-right:20%">Statistiques par questions</a>
@@ -85,4 +95,6 @@ foreach ($proportion_bonne_reponse_id as $element){
 </tbody>
 </table>
 
-<?php drawFooter() ?>
+<?php
+}
+drawFooter() ?>
