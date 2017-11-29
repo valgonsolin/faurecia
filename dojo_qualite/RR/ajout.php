@@ -123,19 +123,19 @@ else
   	</div>
   	<div class="form-group">
   		<label>Réponse 1 :     </label><label style="margin-left:20px"><input name="vrai1" type="checkbox"> Vrai</label>
-  		<input type="file" name="file_1" class="form-control" />
+  		<input type="file" name="file_1" />
   	</div>
   	<div class="form-group">
   		<label>Réponse 2 :     </label><label style="margin-left:20px"><input name="vrai2" type="checkbox"> Vrai</label>
-  		<input type="file" name="file_2" class="form-control" />
+  		<input type="file" name="file_2" />
   	</div>
   	<div class="form-group">
   		<label>Réponse 3 :     </label><label style="margin-left:20px"><input name="vrai3" type="checkbox"> Vrai</label>
-  		<input type="file" name="file_3" class="form-control" />
+  		<input type="file" name="file_3" />
   	</div>
   	<div class="form-group">
   		<label>Réponse 4 :     </label><label style="margin-left:20px"><input name="vrai4" type="checkbox"> Vrai</label>
-  		<input type="file" name="file_4" class="form-control" />
+  		<input type="file" name="file_4" />
   	</div>
   	<input value="Ajouter" class="btn btn-default" type="submit">
 

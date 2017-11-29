@@ -3,7 +3,7 @@ include_once "../needed.php";
 include_once "../../needed.php";
 
 drawHeader('dojo_qualite');
-drawMenu('R&R');
+drawMenu('RR');
 
 if(empty($_SESSION['login']))
 { ?>
@@ -29,7 +29,21 @@ else
   <?php
   }
   if(isset($_POST['supprimer'])){
-
+    $query= $bdd -> prepare('SELECT * FROM qualite_RR_question WHERE id=?');
+    $query -> execute(array($_POST['id']));
+    $Data= $query -> fetch();
+    if($Data['reponse_1'] >= 0){
+      remove_file($bdd,$Data['reponse_1']);
+    }
+    if($Data['reponse_2'] >= 0){
+      remove_file($bdd,$Data['reponse_2']);
+    }
+    if($Data['reponse_3'] >= 0){
+      remove_file($bdd,$Data['reponse_3']);
+    }
+    if($Data['reponse_4'] >= 0){
+      remove_file($bdd,$Data['reponse_4']);
+    }
     $query = $bdd -> prepare('DELETE FROM qualite_RR_question WHERE id=?');
     $query -> execute(array($_POST['id']));
     $query = $bdd -> prepare('UPDATE qualite_RR_question SET ordre=ordre-1 WHERE ordre > ?');
@@ -39,6 +53,23 @@ else
     </div>
   <?php
 }elseif(isset($_POST['modifier'])){
+  $id1=upload($bdd,'file_1',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+  if($id1==-1){ echo "le fichier 1 n'a pas pu etre téléversé" ; }
+  elseif ($id1==-2){echo "la taille du fichier 1 est trop grande";}
+  elseif ($id1==-3){echo "le fichier 1 doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ;}
+  else { $id2=upload($bdd,'file_2',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    if($id2==-1){ echo "le fichier 2 n'a pas pu etre téléversé" ; remove_file($bdd,$id1);}
+    elseif ($id2==-2){echo "la taille du fichier 1 est trop grande"; remove_file($bdd,$id1); }
+    elseif ($id2==-3){echo "le fichier 2 doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ; remove_file($bdd,$id1);}
+    else { $id3=upload($bdd,'file_3',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+      if($id3==-1){ echo "le fichier 3 n'a pas pu etre téléversé" ; remove_file($bdd,$id1); remove_file($bdd,$id2);}
+      elseif ($id3==-2){echo "la taille du fichier 1 est trop grande"; remove_file($bdd,$id1); remove_file($bdd,$id2);}
+      elseif ($id3==-3){echo "le fichier  3 doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ; remove_file($bdd,$id1); remove_file($bdd,$id2);}
+      else {$id4=upload($bdd,'file_4',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+        if($id3==-1){ echo "le fichier 4 n'a pas pu etre téléversé" ; remove_file($bdd,$id1); remove_file($bdd,$id2); remove_file($bdd,$id3);}
+        elseif ($id3==-2){echo "la taille du fichier 1 est trop grande"; remove_file($bdd,$id1); remove_file($bdd,$id2); remove_file($bdd,$id3); }
+        elseif ($id3==-3){echo "le fichier 4 doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ; remove_file($bdd,$id1); remove_file($bdd,$id2); remove_file($bdd,$id3);}
+        else {
   $vrai1=0;
   $vrai2=0;
   $vrai3=0;
@@ -60,10 +91,10 @@ else
     'type' => $_POST['type'],
     'titre' => $_POST['titre'],
     'question' => $_POST['question'],
-    'reponse_1' => $_POST['reponse1'],
-    'reponse_2' => $_POST['reponse2'],
-    'reponse_3' => $_POST['reponse3'],
-    'reponse_4' => $_POST['reponse4'],
+    'reponse_1' => $id1,
+    'reponse_2' => $id2,
+    'reponse_3' => $id3,
+    'reponse_4' => $id4,
     'corrige_1' => $vrai1,
     'corrige_2' => $vrai2,
     'corrige_3' => $vrai3,
@@ -88,7 +119,7 @@ else
       <strong>Modifié</strong>  -  La question a bien été mise à jour.
   </div>
   <?php
-}}
+}}}}}}
 
 
 
@@ -140,7 +171,7 @@ $nb=$_GET['nb'];
       <td><?php echo $Data['titre']; ?></td>
       <td><?php if($Data['type']){echo "Autre";}else{echo "MOD";} ?></td>
       <td><?php echo $Data['question'];?></td>
-      <td><!--<a href="supprimer_question.php?id=<?php echo $Data['id']?>" class="btn btn-default">-->Modifier</a></td>
+      <td><a href="supprimer_question.php?id=<?php echo $Data['id']?>" class="btn btn-default pull-right">Modifier</a></td>
     </tr>
   <?php
 } ?>
