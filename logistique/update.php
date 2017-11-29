@@ -5,13 +5,15 @@ include_once "needed.php";
 drawHeader('logistique');
 drawMenu('update');
 
-echo "<h2>Mise à jour</h2>";
+echo "<h2>Mise à jour de la base de données des pièces</h2>";
 if(empty($_SESSION['login'])){ ?>
   <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
   <a href="/identification.php?redirection=logistique/update.php"><button class="btn btn-default">Se connecter</button></a>
   <a href="/index.php" class="btn btn-default">Accueil</a>
 <?php }else{
 function drawform(){ ?>
+  <div class="row">
+    <div class="col-md-6">
   <form method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label >Fichier CSV de mise à jour</label>
@@ -21,6 +23,14 @@ function drawform(){ ?>
   </div>
     <button type="submit" class="btn btn-default">Valider</button>
   </form>
+</div>
+<div class="col-md-6">
+  <figure>
+  <img src="../images/example.png" title="Format du fichier CSV" alt="Exemple de fichier" style="width:100%;">
+  <figcaption style="font-size:25px; text-align:center; margin:5px;">Format du fichier, sans accents</figcaption>
+  </figure>
+</div>
+</div>
 <?php }
 
 if(empty($_FILES)){
