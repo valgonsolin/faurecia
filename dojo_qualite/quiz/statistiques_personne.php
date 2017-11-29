@@ -21,6 +21,7 @@ else
   <a href="statistiques_personne.php" class="bouton_menu bouton_nav_selected">Statistiques par personnes</a>
 </div>
 </div>
+<br/>
 
 <table class="table">
 <thead class="thead">

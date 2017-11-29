@@ -28,6 +28,7 @@ else
   <a href="statistiques_personne.php" class="bouton_menu">Statistiques par personnes</a>
 </div>
 </div>
+<br/>
 
 <?php
 $Qy = $bdd->query('SELECT COUNT(*) as nombre_total FROM profil WHERE supprime = 0');
