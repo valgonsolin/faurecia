@@ -24,7 +24,7 @@ else
       $i=$i+1;
     } ?>
     <div class="alert alert-success">
-        <strong>Ordre réinitialisé</strong>  -  L'ordre des questions a été reinitialisé.
+        <strong>Ordre réinitialisé</strong>  -  L'ordre des questions a été réinitialisé.
     </div>
   <?php
   }
@@ -97,7 +97,7 @@ else
       $recherche = $_GET["recherche"];
   }
   ?>
-  <h2>Quiz</h2>
+  <h2><?php echo "R&R" ; ?></h2>
   <div class="boutons_nav" style="display: flex; justify-content: center;">
     <a href="ajout.php" class="bouton_menu" style="margin-right:20%">Ajout</a>
     <a href="suppression.php" class="bouton_menu bouton_nav_selected">Modification/Suppression</a>
