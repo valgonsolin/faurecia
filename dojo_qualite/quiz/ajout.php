@@ -43,7 +43,9 @@ else
       $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre+1 WHERE ordre >= ? ');
       $query -> execute(array($_POST['ordre']));
     }
-    $query = $bdd -> prepare('INSERT INTO qualite_quiz_question(type,titre,question,reponse_1,reponse_2,reponse_3,reponse_4,corrige_1,corrige_2,corrige_3,corrige_4,ordre) VALUES (:type,:titre,:question,:reponse_1,:reponse_2,:reponse_3,:reponse_4,:corrige_1,:corrige_2,:corrige_3,:corrige_4,:ordre)');
+    $file=upload($bdd,'file',"../../ressources","Quiz",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    if($file < 0){$file=NULL;}
+    $query = $bdd -> prepare('INSERT INTO qualite_quiz_question(type,titre,question,reponse_1,reponse_2,reponse_3,reponse_4,corrige_1,corrige_2,corrige_3,corrige_4,ordre,image_correction,commentaire) VALUES (:type,:titre,:question,:reponse_1,:reponse_2,:reponse_3,:reponse_4,:corrige_1,:corrige_2,:corrige_3,:corrige_4,:ordre,:file,:commentaire)');
     $id= $bdd -> lastInsertId();
     $query -> execute(array(
       'type' => $_POST['type'],
@@ -57,7 +59,9 @@ else
       'corrige_2' => $vrai2,
       'corrige_3' => $vrai3,
       'corrige_4' => $vrai4,
-      'ordre' => $_POST['ordre']
+      'ordre' => $_POST['ordre'],
+      'file' => $file,
+      'commentaire' => $_POST['commentaire']
     ));
 
     if($query ==false){ ?>
@@ -85,7 +89,7 @@ else
   	<label>Type</label>
   	<select name="type" class="form-control">
   		<option value="0" selected="selected">MOD</option>
-  		<option value="1">Autre</option>
+  		<option value="1">MOI</option>
   	</select>
   	<label>Titre</label>
   	<input class="form-control" name="titre" type="text">
@@ -116,7 +120,7 @@ else
   	</div>
     <div class="form-group">
   		<label>Commentaire de correction :     </label>
-  		<input name="reponse4" class="form-control" type="text">
+  		<input name="commentaire" class="form-control" type="text">
   	</div>
   	<input value="Ajouter" class="btn btn-default" type="submit">
 

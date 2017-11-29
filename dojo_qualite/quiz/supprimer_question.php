@@ -30,7 +30,7 @@ else
     $query -> execute(array($_GET['id']));
     $Data=$query -> fetch(); ?>
 
-    <form action="suppression.php" method="post" style="margin-top:20px;">
+    <form action="suppression.php" method="post" style="margin-top:20px;" enctype="multipart/form-data">
       <div class="form-group">
         <label>Question n°</label>
         <input class="form-control" type="number" name="ordre2" value="<?php echo $Data['ordre']; ?>">
@@ -40,7 +40,7 @@ else
       <label>Type</label>
   	  <select name="type" class="form-control" value="<?php echo $Data['type']; ?>">
       <option value="0" selected="selected">MOD</option>
-      <option value="1">Autre</option>
+      <option value="1">MOI</option>
       </select>
     	<label>Titre</label>
     	<input class="form-control" name="titre" type="text" value="<?php echo $Data['titre']; ?>">
@@ -65,6 +65,27 @@ else
     		<label>Réponse 4 :     </label><label style="margin-left:20px"><input name="vrai4" type="checkbox" <?php if($Data['corrige_4']){echo "checked" ;}?>> Vrai</label>
     		<input name="reponse4" class="form-control" type="text" value="<?php echo $Data['reponse_4']; ?>">
     	</div>
+      <div class"form-group">
+        <div class="row">
+          <div class="col-md-7">
+            <label>Image de correction</label>
+            <input type="file" name="fichier">
+          </div>
+          <div class="col-md-5">
+        <?php
+          if($Data['image_correction'] != NULL){
+            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+            $query -> execute(array($Data['image_correction']));
+            $img= $query -> fetch(); ?>
+            <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; " alt="Image de correction">
+          <?php } ?>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Commentaire</label>
+        <input type="text" name="commentaire" class="form-control" value="<?php echo $Data['commentaire']; ?>">
+      </div>
       <input type="hidden" name="id" value="<?php echo $Data["id"] ?>" >
       <button type="submit" name="modifier" class="btn btn-default" onclick="return confirm('Modifier la question ?');">Modifier</button>
       <button type="submit" name="supprimer" class="btn btn-default" onclick="return confirm('Supprimer la question ?');">Supprimer</button>

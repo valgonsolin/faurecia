@@ -106,7 +106,7 @@ while ($Data = $Query->fetch()) {
         }
         $tot_reponse_cat +=1;
         $tot_reponse +=1;
-
+        
         ?></td>
 
         <td><div id="modal<?php echo $i; ?>"><?php echo $Data['question']; ?></div></td>

@@ -29,7 +29,12 @@ else
   <?php
   }
   if(isset($_POST['supprimer'])){
-
+    $query= $bdd -> prepare('SELECT * FROM qualite_quiz_question WHERE id=?');
+    $query -> execute(array($_POST['id']));
+    $Data= $query -> fetch();
+    if($Data['image_correction'] >= 0){
+      remove_file($bdd,$Data['image_correction']);
+    }
     $query = $bdd -> prepare('DELETE FROM qualite_quiz_question WHERE id=?');
     $query -> execute(array($_POST['id']));
     $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre-1 WHERE ordre > ?');
@@ -55,7 +60,18 @@ else
   if(isset($_POST['vrai4'])){
     $vrai1=$_POST['vrai4'];
   }
-  $query = $bdd -> prepare('UPDATE qualite_quiz_question SET type = :type,titre= :titre,question = :question,reponse_1 = :reponse_1,reponse_2 = :reponse_2,reponse_3 = :reponse_3,reponse_4 = :reponse_4,corrige_1 = :corrige_1,corrige_2 = :corrige_2,corrige_3 = :corrige_3,corrige_4 = :corrige_4, ordre= :ordre WHERE id = :id');
+
+  $query= $bdd -> prepare('SELECT * FROM qualite_quiz_question WHERE id=?');
+  $query -> execute(array($_POST['id']));
+  $Data= $query -> fetch();
+  $file=$Data['image_correction'];
+  if(isset($_FILES['fichier'])){
+    if($Data['image_correction'] != NULL ){remove_file($bdd,$Data['image_correction']); }
+    $file=upload($bdd,'fichier',"../../ressources","quiz",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    if($file <0 ){ $file= $Data['image_correction'];}
+  }
+
+  $query = $bdd -> prepare('UPDATE qualite_quiz_question SET type = :type,titre= :titre,question = :question,reponse_1 = :reponse_1,reponse_2 = :reponse_2,reponse_3 = :reponse_3,reponse_4 = :reponse_4,corrige_1 = :corrige_1,corrige_2 = :corrige_2,corrige_3 = :corrige_3,corrige_4 = :corrige_4, ordre= :ordre, image_correction= :image_correction, commentaire= :commentaire WHERE id = :id');
   $query -> execute(array(
     'type' => $_POST['type'],
     'titre' => $_POST['titre'],
@@ -69,6 +85,8 @@ else
     'corrige_3' => $vrai3,
     'corrige_4' => $vrai4,
     'ordre' => $_POST['ordre2'],
+    'image_correction' => $file,
+    'commentaire' => $_POST['commentaire'],
     'id' => $_POST['id']
   ));
   if($_POST['ordre1'] > $_POST['ordre2']){
@@ -138,7 +156,7 @@ $nb=$_GET['nb'];
     <tr>
       <td><?php echo $Data['ordre']; ?></td>
       <td><?php echo $Data['titre']; ?></td>
-      <td><?php if($Data['type']){echo "Autre";}else{echo "MOD";} ?></td>
+      <td><?php if($Data['type']){echo "MOI";}else{echo "MOD";} ?></td>
       <td><?php echo $Data['question'];?></td>
       <td><a href="supprimer_question.php?id=<?php echo $Data['id']?>" class="btn btn-default">Modifier</a></td>
     </tr>
@@ -163,6 +181,7 @@ $test->execute(); ?>
     <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb+20;?>" class="btn btn-default">Elements suivants</a>
   <?php } ?>
     <button type="submit" onclick="return confirm('Voulez-vous reinitialiser l\'ordre des questions ?');" class="btn btn-default pull-right" name="reset">Réinitialiser l'ordre des questions</button>
+    <span class="clear" style="clear: both; display: block;"></span>
   </form>
 <?php
 }
