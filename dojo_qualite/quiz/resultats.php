@@ -26,14 +26,36 @@ $Query->execute(array($_GET["id"]));
 ?>
 <style>
 .modal{
+  font-family: 'clio';
   display:none;
+  z-index:1001;
+  width: 70%;
+  height:60%;
+  margin:auto;
+  background-color: #efefef;
+  border-radius: 1px;
+  box-shadow: 5px 5px 10px grey;
+}
+.close{
+  float:right;
+  color: #000;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover{
+  color: #c00;
+}
+hr{
+  width:98%;
+  margin-left:auto;
+  border-color: grey;
+
 }
 </style>
 <h2>Résultats Quiz</h2>
 <h4>Réponse aux questions</h4>
 <a href="resultats_complet.php?id=<?php echo $_GET['id']?>">Voir les réponses détaillés</a>
 <div style="height: 30px"></div>
-
 <table class="table">
 <thead class="thead">
 <tr>
@@ -91,13 +113,24 @@ while ($Data = $Query->fetch()) {
         <td><?php echo int_to_vrai_faux($valide); ?></td>
     </tr>
     <div id="contenu<?php echo $i; ?>" class="modal">
-    <span class="close<?php echo $i; ?>">&times;</span>
-    <p>Some text in the Modal..</p>
+      Commentaire<span class="close" id="close<?php echo $i; ?>">&times; </span>
+      <hr/>
+      <div class="row" style="margin:2px;">
+        <div class="col-sm-6">
+          <p><?php echo $Data['commentaire']; ?></p>
+        </div>
+        <div class="col-sm-6">
+          <img class="pull-right" src="../../images/background-3.png" style="max-height:400px; max-width:100%;">
+        </div>
     </div>
+
     <script type="text/javascript">
-    $("#modal<?php echo $i; ?>").click{
+    $("#modal<?php echo $i; ?>").click(function(){
       $("#contenu<?php echo $i; ?>").show();
-    };
+    });
+    $("#close<?php echo $i; ?>").click(function(){
+      $("#contenu<?php echo $i; ?>").hide();
+    });
     </script>
 
     <?php
