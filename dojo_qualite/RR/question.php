@@ -19,33 +19,33 @@ if(isset($_POST['question'])){
         $rep_3 = 1;}
     if (isset($_POST['rep_4'])){
         $rep_4 = 1;}
-    $Query = $bdd->prepare('INSERT INTO qualite_quiz_reponse SET vrai_1 = ?, vrai_2 = ?, vrai_3 = ?, vrai_4 = ?, question = ?, session = ?');
+    $Query = $bdd->prepare('INSERT INTO qualite_RR_reponse SET vrai_1 = ?, vrai_2 = ?, vrai_3 = ?, vrai_4 = ?, question = ?, session = ?');
     $Query->execute(array($rep_1, $rep_2, $rep_3, $rep_4, $_POST['question'], $_GET["id"]));
 }
 
 
 drawHeader();
-drawMenu('quiz');
+drawMenu('RR');
 
 if (! isset($_GET["id"])){
     ?>
     <h2>Quiz</h2>
     <h4>OUPS... Votre session est inconnu.</h4>
-    <a href="index.php"> Retourner au quiz</a>
+    <a href="index.php"> Retourner au R&amp;R</a>
     <?php
 }else {
 
-    $Query = $bdd->prepare('SELECT * FROM qualite_quiz_session WHERE id = ?');
+    $Query = $bdd->prepare('SELECT * FROM qualite_RR_session WHERE id = ?');
     $Query->execute(array($_GET["id"]));
     $type = $Query->fetch()['type'];
 
-    $Query = $bdd->prepare('SELECT * FROM qualite_quiz_question WHERE id NOT IN
-      (SELECT question FROM qualite_quiz_reponse WHERE qualite_quiz_reponse.session = ?) and type = ? ORDER BY ordre');
+    $Query = $bdd->prepare('SELECT * FROM qualite_RR_question WHERE id NOT IN
+      (SELECT question FROM qualite_RR_reponse WHERE qualite_RR_reponse.session = ?) and type = ? ORDER BY ordre');
     $Query->execute(array($_GET["id"],$type));
     if($Data = $Query->fetch()) {
         ?>
 
-        <h2>Quiz</h2>
+        <h2>R&amp;R</h2>
 
         <h4><?php echo $Data['titre']; ?></h4>
         <div class="row">
@@ -74,11 +74,10 @@ if (! isset($_GET["id"])){
             </button>
 
         </form>
-      </div>
-      <?php
+      </div> <?php
     }else{
         ob_end_clean();
-        header('Location: '.$url."/dojo_qualite/quiz/resultats.php?id=".$_GET['id']);
+        header('Location: '.$url."/dojo_qualite/RR/resultats.php?id=".$_GET['id']);
     }
 }
 drawFooter();
