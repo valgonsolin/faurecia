@@ -149,3 +149,13 @@ function remove_file($bdd,$id){
   $query = $bdd -> prepare('DELETE FROM files WHERE id=?');
   $query -> execute(array($id));
 }
+function warning($titre,$texte){ ?>
+  <div class="alert alert-danger">
+      <strong><?php echo $titre;?></strong>  -  <?php echo $texte; ?>
+  </div> <?php
+}
+function success($titre,$texte){ ?>
+  <div class="alert alert-success">
+      <strong><?php echo $titre;?></strong>  -  <?php echo $texte; ?>
+  </div> <?php
+}
