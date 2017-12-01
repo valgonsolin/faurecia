@@ -59,7 +59,7 @@ while ($Data = $Query->fetch()) {
         <td><?php echo $Data['tournee']; ?></td>
         <td><?php echo $Data['uap']; ?></td>
         <td><?php echo $Data['mo']; ?></td>
-        <td class="clickable" title="Cliquez pour accéder au quizz" onclick="window.location=explication.php?id=<?php echo $Data['id']; ?>">Accéder au quiz</td>
+        <td class="clickable" title="Cliquez pour accéder au quizz" onclick="window.location='explication.php?id=<?php echo $Data['id']; ?>'">Accéder au quiz</td>
         <?php
 
         if (($Data["mo"] == 'MOD' and $Data['type'] == 0 )or

@@ -47,10 +47,26 @@ else
     $query -> execute(array($_POST['ordre1']));
     success('Supprimé','La question a bien été supprimée.');
 }elseif(isset($_POST['modifier'])){
-  $id1=upload($bdd,'file_1',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
-  $id2=upload($bdd,'file_2',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
-  $id3=upload($bdd,'file_3',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
-  $id4=upload($bdd,'file_4',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+  if($_FILES['file_1']['name'] != ""){
+    $id1=upload($bdd,'file_1',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+  }else{
+    $id1=-4;
+  }
+  if($_FILES['file_2']['name'] != ""){
+    $id2=upload($bdd,'file_2',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+  }else{
+    $id2=-4;
+  }
+  if($_FILES['file_3']['name'] != ""){
+    $id3=upload($bdd,'file_3',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+  }else{
+    $id3=-4;
+  }
+  if($_FILES['file_4']['name'] != ""){
+    $id4=upload($bdd,'file_4',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+  }else{
+    $id4=-4;
+  }
   if($id1 < 0){
     switch($id1){
       case -1:
@@ -62,6 +78,8 @@ else
       case -3:
         warning('Erreur extension','L\'extension doit être l\'une des extensions suivantes: jpg, jpeg, gif, png.');
         break;
+      case -4:
+        break;
       default:
         warning('Erreur','Le fichier 1 n\'a pas pu etre téléversé.');
     }
@@ -71,23 +89,25 @@ else
       'reponse_1' => $id1,
       'id' => $_POST['id']
     ));
-    if($_POST['old_file_1'] == ""){
+    if($_POST['old_file_1'] != ""){
       remove_file($bdd,$_POST['old_file_1']);
     }
   }
   if($id2 < 0){
     switch($id2){
       case -1:
-        warning('Erreur','Le fichier 1 n\'a pas pu etre téléversé.');
+        warning('Erreur','Le fichier 2 n\'a pas pu etre téléversé.');
         break;
       case -2:
-        warning('Erreur taille','La taille du fichier 1 est trop grande.');
+        warning('Erreur taille','La taille du fichier 2 est trop grande.');
         break;
       case -3:
         warning('Erreur extension','L\'extension doit être l\'une des extensions suivantes: jpg, jpeg, gif, png.');
         break;
+      case -4:
+        break;
       default:
-        warning('Erreur','Le fichier 1 n\'a pas pu etre téléversé.');
+        warning('Erreur','Le fichier 2 n\'a pas pu etre téléversé.');
     }
   }else{
     $query = $bdd -> prepare('UPDATE qualite_RR_question SET reponse_2= :reponse_2 WHERE id = :id');
@@ -95,23 +115,25 @@ else
       'reponse_2' => $id2,
       'id' => $_POST['id']
     ));
-    if($_POST['old_file_2'] == ""){
+    if($_POST['old_file_2'] != ""){
       remove_file($bdd,$_POST['old_file_2']);
     }
   }
   if($id3 < 0){
     switch($id3){
       case -1:
-        warning('Erreur','Le fichier 1 n\'a pas pu etre téléversé.');
+        warning('Erreur','Le fichier 3 n\'a pas pu etre téléversé.');
         break;
       case -2:
-        warning('Erreur taille','La taille du fichier 1 est trop grande.');
+        warning('Erreur taille','La taille du fichier 3 est trop grande.');
         break;
       case -3:
         warning('Erreur extension','L\'extension doit être l\'une des extensions suivantes: jpg, jpeg, gif, png.');
         break;
+      case -4:
+        break;
       default:
-        warning('Erreur','Le fichier 1 n\'a pas pu etre téléversé.');
+        warning('Erreur','Le fichier 3 n\'a pas pu etre téléversé.');
     }
   }else{
     $query = $bdd -> prepare('UPDATE qualite_RR_question SET reponse_3= :reponse_3 WHERE id = :id');
@@ -119,23 +141,25 @@ else
       'reponse_3' => $id3,
       'id' => $_POST['id']
     ));
-    if($_POST['old_file_3'] == ""){
+    if($_POST['old_file_3'] != ""){
       remove_file($bdd,$_POST['old_file_3']);
     }
   }
   if($id4 < 0){
     switch($id4){
       case -1:
-        warning('Erreur','Le fichier 1 n\'a pas pu etre téléversé.');
+        warning('Erreur','Le fichier 4 n\'a pas pu etre téléversé.');
         break;
       case -2:
-        warning('Erreur taille','La taille du fichier 1 est trop grande.');
+        warning('Erreur taille','La taille du fichier 4 est trop grande.');
         break;
       case -3:
         warning('Erreur extension','L\'extension doit être l\'une des extensions suivantes: jpg, jpeg, gif, png.');
         break;
+      case -4:
+        break;
       default:
-        warning('Erreur','Le fichier 1 n\'a pas pu etre téléversé.');
+        warning('Erreur','Le fichier 4 n\'a pas pu etre téléversé.');
     }
   }else{
     $query = $bdd -> prepare('UPDATE qualite_RR_question SET reponse_4= :reponse_4 WHERE id = :id');
@@ -143,49 +167,19 @@ else
       'reponse_4' => $id4,
       'id' => $_POST['id']
     ));
-    if($_POST['old_file_4'] == ""){
+    if($_POST['old_file_4'] != ""){
       remove_file($bdd,$_POST['old_file_4']);
     }
-  }
-  if($id1 < 0  || $id2 < 0 || $id3 < 0 || $id4 <0){
-    if($id1>=0){
-      remove_file($bdd,$id1);
-    }
-    if($id2>=0){
-      remove_file($bdd,$id2);
-    }
-    if($id3>=0){
-      remove_file($bdd,$id3);
-    }
-    if($id4>=0){
-      remove_file($bdd,$id4);
-    }
-  }
-  $vrai1=0;
-  $vrai2=0;
-  $vrai3=0;
-  $vrai4=0;
-  if(isset($_POST['vrai1'])){
-    $vrai1=$_POST['vrai1'];
-  }
-  if(isset($_POST['vrai2'])){
-    $vrai1=$_POST['vrai2'];
-  }
-  if(isset($_POST['vrai3'])){
-    $vrai1=$_POST['vrai3'];
-  }
-  if(isset($_POST['vrai4'])){
-    $vrai1=$_POST['vrai4'];
   }
   $query = $bdd -> prepare('UPDATE qualite_RR_question SET type = :type,titre= :titre,question = :question,corrige_1 = :corrige_1,corrige_2 = :corrige_2,corrige_3 = :corrige_3,corrige_4 = :corrige_4, ordre= :ordre WHERE id = :id');
   $query -> execute(array(
     'type' => $_POST['type'],
     'titre' => $_POST['titre'],
     'question' => $_POST['question'],
-    'corrige_1' => $vrai1,
-    'corrige_2' => $vrai2,
-    'corrige_3' => $vrai3,
-    'corrige_4' => $vrai4,
+    'corrige_1' => $_POST['vrai1'],
+    'corrige_2' => $_POST['vrai2'],
+    'corrige_3' => $_POST['vrai3'],
+    'corrige_4' => $_POST['vrai4'],
     'ordre' => $_POST['ordre2'],
     'id' => $_POST['id']
   ));

@@ -38,15 +38,11 @@ drawform();
 }
 else{
   $ext = substr(strrchr($_FILES['fichier']['name'],'.'),1);
-  if($ext != "csv"){ ?>
-    <div class="alert alert-danger">
-      <strong>Mauvais fichier</strong> - Le fichier doit être un fichier CSV.
-    </div> <?php
+  if($ext != "csv"){
+    warning('Mauvais fichier','Le fichier doit être un fichier CSV.');
     drawform();
-  }elseif($_FILES['fichier']['size'] >15700000){ ?>
-    <div class="alert alert-danger">
-      <strong>Fichier trop gros</strong> - Le fichier doit être un fichier CSV.
-    </div> <?php
+  }elseif($_FILES['fichier']['size'] >15700000){
+    warning('Fichier trop gros',' Le fichier doit faire moins de 15 Mo.');
     drawform();
   }else{
     $fichier= fopen($_FILES['fichier']['tmp_name'],'r');
@@ -69,10 +65,9 @@ else{
 
     }
 
-    fclose($fichier); ?>
-    <div class="alert alert-success">
-        <strong>Modification effectuée</strong>  -  La base de données a bien été mise à jour.
-    </div>
+    fclose($fichier);
+    success('Modification effectuée','La base de données des pièces a bien été mise à jour.');
+    ?>  
     <a href="/index.php" class="btn btn-default">Accueil</a>
     <a href="/deconnexion.php" class="btn btn-default">Déconnexion</a>
     <?php

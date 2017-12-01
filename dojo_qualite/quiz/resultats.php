@@ -24,11 +24,6 @@ $Query = $bdd->prepare('UPDATE qualite_quiz_session SET fin = NOW() WHERE id = ?
 $Query->execute(array($_GET["id"]));
 
 ?>
-<style>
-.commentaire:hover{
-  background-color: #efefef;
-}
-</style>
 <h2>Résultats Quiz</h2>
 <table class="table">
 <h4>Réponse aux questions</h4>
@@ -60,7 +55,7 @@ $Query->execute(array($_GET["id"]));
 $i=0;
 while ($Data = $Query->fetch()) {
     ?>
-    <tr class="commentaire" data-toggle="modal" data-target="#modal<?php echo $i; ?>" title="Cliquez pour voir le commentaire">
+    <tr class="clickable" data-toggle="modal" data-target="#modal<?php echo $i; ?>" title="Cliquez pour voir le commentaire">
         <td>
         <?php
         if ($ancien_titre != $Data['titre']){

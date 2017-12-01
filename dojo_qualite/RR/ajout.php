@@ -41,30 +41,12 @@ else
         elseif ($id3==-2){echo "la taille du fichier 1 est trop grande"; remove_file($bdd,$id1); remove_file($bdd,$id2); remove_file($bdd,$id3); }
         elseif ($id3==-3){echo "le fichier 4 doit posséder l'une des extensions suivantes: jpg, jpeg, gif, png " ; remove_file($bdd,$id1); remove_file($bdd,$id2); remove_file($bdd,$id3);}
         else {
-
-          $vrai1=0;
-          $vrai2=0;
-          $vrai3=0;
-          $vrai4=0;
-          if(isset($_POST['vrai1'])){
-            $vrai1=$_POST['vrai1'];
-          }
-          if(isset($_POST['vrai2'])){
-            $vrai2=$_POST['vrai2'];
-          }
-          if(isset($_POST['vrai3'])){
-            $vrai3=$_POST['vrai3'];
-          }
-          if(isset($_POST['vrai4'])){
-            $vrai4=$_POST['vrai4'];
-          }
           if(isset($_POST['ordre'])){
             if($lastOrdre >= $_POST['ordre']){
               $query = $bdd -> prepare('UPDATE qualite_RR_question SET ordre=ordre+1 WHERE ordre >= ? ');
               $query -> execute(array($_POST['ordre']));
             }
           }
-
             $query = $bdd -> prepare('INSERT INTO qualite_RR_question(type,titre,question,reponse_1,reponse_2,reponse_3,reponse_4,corrige_1,corrige_2,corrige_3,corrige_4,ordre) VALUES (:type,:titre,:question,:reponse_1,:reponse_2,:reponse_3,:reponse_4,:corrige_1,:corrige_2,:corrige_3,:corrige_4,:ordre)');
             $id= $bdd -> lastInsertId();
             $query -> execute(array(
@@ -75,27 +57,21 @@ else
             'reponse_2' => $id2,
             'reponse_3' => $id3,
             'reponse_4' => $id4,
-            'corrige_1' => $vrai1,
-            'corrige_2' => $vrai2,
-            'corrige_3' => $vrai3,
-            'corrige_4' => $vrai4,
+            'corrige_1' => $_POST['vrai1'],
+            'corrige_2' => $_POST['vrai2'],
+            'corrige_3' => $_POST['vrai3'],
+            'corrige_4' => $_POST['vrai4'],
             'ordre' => $_POST['ordre']
           ));
 
-          if($query ==false){ ?>
-            <div class="alert alert-danger">
-              <strong>Erreur</strong>  -  Les données entrées ne sont pas conformes.
-            </div>
-          <?php }else{ ?>
-                  <div class="alert alert-success">
-                    <strong>Ajouté</strong>  -  La question a bien été ajoutée.
-                  </div>
-                  <?php
-                }
-              }
-            }
-
+          if($query ==false){
+            warning('Erreur','Les données entrées ne sont pas conformes.');
+          }else{
+            success('Ajouté','La question a bien été ajoutée.');
           }
+        }
+      }
+    }
   }}
   ?>
   <div class="boutons_nav" style="display: flex; justify-content: center;">
@@ -122,19 +98,27 @@ else
   	<input class="form-control" name="question" type="text">
   	</div>
   	<div class="form-group">
-  		<label>Réponse 1 :     </label><label style="margin-left:20px"><input name="vrai1" type="checkbox"> Vrai</label>
+  		<label>Réponse 1 :     </label><label style="margin-left:20px">
+        <input type="hidden" name="vrai1" value="0">
+        <input name="vrai1" type="checkbox" value="1"> Vrai</label>
   		<input type="file" name="file_1" />
   	</div>
   	<div class="form-group">
-  		<label>Réponse 2 :     </label><label style="margin-left:20px"><input name="vrai2" type="checkbox"> Vrai</label>
+  		<label>Réponse 2 :     </label><label style="margin-left:20px">
+        <input type="hidden" name="vrai2" value="0">
+        <input name="vrai2" type="checkbox" value="1"> Vrai</label>
   		<input type="file" name="file_2" />
   	</div>
   	<div class="form-group">
-  		<label>Réponse 3 :     </label><label style="margin-left:20px"><input name="vrai3" type="checkbox"> Vrai</label>
+  		<label>Réponse 3 :     </label><label style="margin-left:20px">
+        <input type="hidden" name="vrai3" value="0">
+        <input name="vrai3" type="checkbox" value="1"> Vrai</label>
   		<input type="file" name="file_3" />
   	</div>
   	<div class="form-group">
-  		<label>Réponse 4 :     </label><label style="margin-left:20px"><input name="vrai4" type="checkbox"> Vrai</label>
+  		<label>Réponse 4 :     </label><label style="margin-left:20px">
+        <input type="hidden" name="vrai4" value="0">
+        <input name="vrai4" type="checkbox" value="1"> Vrai</label>
   		<input type="file" name="file_4" />
   	</div>
   	<input value="Ajouter" class="btn btn-default" type="submit">

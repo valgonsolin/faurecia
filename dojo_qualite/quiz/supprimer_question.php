@@ -50,26 +50,37 @@ else
     	<input class="form-control" name="question" type="text" value="<?php echo $Data['question']; ?>">
     	</div>
     	<div class="form-group">
-    		<label>Réponse 1 :     </label><label style="margin-left:20px"><input name="vrai1" type="checkbox" <?php if($Data['corrige_1']){echo "checked" ;}?>> Vrai</label>
+    		<label>Réponse 1 :     </label><label style="margin-left:20px">
+          <input type="hidden" name="vrai1" value="0">
+          <input name="vrai1" type="checkbox" value="1" <?php if($Data['corrige_1']){echo "checked" ;}?>> Vrai</label>
     		<input name="reponse1" class="form-control" type="text" value="<?php echo $Data['reponse_1']; ?>">
     	</div>
     	<div class="form-group">
-    		<label>Réponse 2 :     </label><label style="margin-left:20px"><input name="vrai2" type="checkbox" <?php if($Data['corrige_2']){echo "checked" ;}?>> Vrai</label>
+    		<label>Réponse 2 :     </label><label style="margin-left:20px">
+          <input type="hidden" name="vrai2" value="0">
+          <input name="vrai2" type="checkbox" value="1" <?php if($Data['corrige_2']){echo "checked" ;}?>> Vrai</label>
     		<input name="reponse2" class="form-control" type="text" value="<?php echo $Data['reponse_2']; ?>">
     	</div>
     	<div class="form-group">
-    		<label>Réponse 3 :     </label><label style="margin-left:20px"><input name="vrai3" type="checkbox" <?php if($Data['corrige_3']){echo "checked" ;}?>> Vrai</label>
+    		<label>Réponse 3 :     </label><label style="margin-left:20px">
+          <input type="hidden" name="vrai3" value="0">
+          <input name="vrai3" type="checkbox" value="1" <?php if($Data['corrige_3']){echo "checked" ;}?>> Vrai</label>
     		<input name="reponse3" class="form-control" type="text" value="<?php echo $Data['reponse_3']; ?>">
     	</div>
     	<div class="form-group">
-    		<label>Réponse 4 :     </label><label style="margin-left:20px"><input name="vrai4" type="checkbox" <?php if($Data['corrige_4']){echo "checked" ;}?>> Vrai</label>
+    		<label>Réponse 4 :     </label><label style="margin-left:20px">
+          <input type="hidden" name="vrai4" value="0">
+          <input name="vrai4" type="checkbox"value="1" <?php if($Data['corrige_4']){echo "checked" ;}?>> Vrai</label>
     		<input name="reponse4" class="form-control" type="text" value="<?php echo $Data['reponse_4']; ?>">
     	</div>
       <div class"form-group">
         <div class="row">
           <div class="col-md-7">
             <label>Image de correction</label>
-            <input type="file" name="fichier">
+            <input type="file" name="fichier"><br/><br/>
+            <?php if($Data['image_correction'] != NULL){ ?>
+            <input type="submit" name="img-reset" value="Supprimer l'image" class="btn btn-default">
+          <?php } ?>
           </div>
           <div class="col-md-5">
         <?php

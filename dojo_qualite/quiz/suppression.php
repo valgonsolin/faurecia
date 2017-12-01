@@ -32,40 +32,27 @@ else
     $query= $bdd -> prepare('SELECT * FROM qualite_quiz_question WHERE id=?');
     $query -> execute(array($_POST['id']));
     $Data= $query -> fetch();
-    if($Data['image_correction'] >= 0){
+    if($Data['image_correction'] != NULL){
       remove_file($bdd,$Data['image_correction']);
     }
     $query = $bdd -> prepare('DELETE FROM qualite_quiz_question WHERE id=?');
     $query -> execute(array($_POST['id']));
     $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre-1 WHERE ordre > ?');
-    $query -> execute(array($_POST['ordre1'])); ?>
-    <div class="alert alert-success">
-        <strong>Supprimé</strong>  -  La question a bien été supprimée.
-    </div>
-  <?php
+    $query -> execute(array($_POST['ordre1']));
+    success('Supprimé','La question a bien été supprimée.');
+}elseif(isset($_POST['img-reset'])){
+  $query= $bdd -> prepare('SELECT * FROM qualite_quiz_question WHERE id=?');
+  $query -> execute(array($_POST['id']));
+  $Data= $query -> fetch();
+  remove_file($bdd,$Data['image_correction']);
+  $bdd -> query('UPDATE qualite_quiz_question SET image_correction = NULL');
+  success('Supprimé','L\'image a été supprimée.');
 }elseif(isset($_POST['modifier'])){
-  $vrai1=0;
-  $vrai2=0;
-  $vrai3=0;
-  $vrai4=0;
-  if(isset($_POST['vrai1'])){
-    $vrai1=$_POST['vrai1'];
-  }
-  if(isset($_POST['vrai2'])){
-    $vrai1=$_POST['vrai2'];
-  }
-  if(isset($_POST['vrai3'])){
-    $vrai1=$_POST['vrai3'];
-  }
-  if(isset($_POST['vrai4'])){
-    $vrai1=$_POST['vrai4'];
-  }
-
   $query= $bdd -> prepare('SELECT * FROM qualite_quiz_question WHERE id=?');
   $query -> execute(array($_POST['id']));
   $Data= $query -> fetch();
   $file=$Data['image_correction'];
-  if(isset($_FILES['fichier'])){
+  if($_FILES['fichier']['name'] != ""){
     if($Data['image_correction'] != NULL ){remove_file($bdd,$Data['image_correction']); }
     $file=upload($bdd,'fichier',"../../ressources","quiz",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
     if($file <0 ){ $file= $Data['image_correction'];}
@@ -80,10 +67,10 @@ else
     'reponse_2' => $_POST['reponse2'],
     'reponse_3' => $_POST['reponse3'],
     'reponse_4' => $_POST['reponse4'],
-    'corrige_1' => $vrai1,
-    'corrige_2' => $vrai2,
-    'corrige_3' => $vrai3,
-    'corrige_4' => $vrai4,
+    'corrige_1' => $_POST['vrai1'],
+    'corrige_2' => $_POST['vrai2'],
+    'corrige_3' => $_POST['vrai3'],
+    'corrige_4' => $_POST['vrai4'],
     'ordre' => $_POST['ordre2'],
     'image_correction' => $file,
     'commentaire' => $_POST['commentaire'],
@@ -97,16 +84,12 @@ else
     $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre-1 WHERE ordre > ? AND ordre <= ? AND id <> ?');
     $query -> execute(array($_POST['ordre1'],$_POST['ordre2'],$_POST['id']));
   }
-  if($query ==false){ ?>
-    <div class="alert alert-danger">
-        <strong>Erreur</strong>  -  Les données entrées ne sont pas conformes.
-    </div>
-  <?php }else{ ?>
-        <div class="alert alert-success">
-      <strong>Modifié</strong>  -  La question a bien été mise à jour.
-  </div>
-  <?php
-}}
+  if($query ==false){
+    warning('Erreur','Les données entrées ne sont pas conformes.');
+  }else{
+    success('Modifié','La question a bien été mise à jour.');
+  }
+}
 
 
 

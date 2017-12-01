@@ -62,7 +62,9 @@ else
       <div class"form-group">
         <div class="row entree">
           <div class="col-md-7">
-            <label>Réponse 1 :     </label><label style="margin-left:20px"><input name="vrai4" type="checkbox" <?php if($Data['corrige_1']){echo "checked" ;}?>> Vrai</label>
+            <label>Réponse 1 :     </label><label style="margin-left:20px">
+              <input type="hidden" value="0" name="vrai1">
+              <input name="vrai4" type="checkbox" value="1" <?php if($Data['corrige_1']){echo "checked" ;}?>> Vrai</label>
             <input type="file" name="file_1">
             <input type="hidden" name="old_file_1" value="<?php echo $Data['reponse_1']; ?>">
           </div>
@@ -80,7 +82,9 @@ else
       <div class"form-group">
         <div class="row entree">
           <div class="col-md-7">
-            <label>Réponse 2 :     </label><label style="margin-left:20px"><input name="vrai4" type="checkbox" <?php if($Data['corrige_2']){echo "checked" ;}?>> Vrai</label>
+            <label>Réponse 2 :     </label><label style="margin-left:20px">
+              <input type="hidden" value="0" name="vrai2">
+              <input name="vrai2" type="checkbox" value="1" <?php if($Data['corrige_2']){echo "checked" ;}?>> Vrai</label>
             <input type="file" name="file_2">
             <input type="hidden" name="old_file_2" value="<?php echo $Data['reponse_2']; ?>">
           </div>
@@ -98,7 +102,9 @@ else
       <div class"form-group">
         <div class="row entree">
           <div class="col-md-7">
-            <label>Réponse 3 :     </label><label style="margin-left:20px"><input name="vrai4" type="checkbox" <?php if($Data['corrige_3']){echo "checked" ;}?>> Vrai</label>
+            <label>Réponse 3 :     </label><label style="margin-left:20px">
+              <input type="hidden" value="0" name="vrai3">
+              <input name="vrai3" type="checkbox" value="1" <?php if($Data['corrige_3']){echo "checked" ;}?>> Vrai</label>
             <input type="file" name="file_3">
             <input type="hidden" name="old_file_3" value="<?php echo $Data['reponse_3']; ?>">
           </div>
@@ -116,7 +122,9 @@ else
       <div class"form-group">
         <div class="row entree">
           <div class="col-md-7">
-            <label>Réponse 4 :     </label><label style="margin-left:20px"><input name="vrai4" type="checkbox" <?php if($Data['corrige_4']){echo "checked" ;}?>> Vrai</label>
+            <label>Réponse 4 :     </label><label style="margin-left:20px">
+              <input type="hidden" value="0" name="vrai4">
+              <input name="vrai4" type="checkbox" value="1" <?php if($Data['corrige_4']){echo "checked" ;}?>> Vrai</label>
             <input type="file" name="file_4">
             <input type="hidden" name="old_file_4" value="<?php echo $Data['reponse_4']; ?>">
           </div>

@@ -14,7 +14,7 @@ if (isset($_GET["recherche"])){
 
 ?>
 
-<h2><?php echo "R&R" ?></h2>
+<h2>R&amp;R</h2>
 
 
 <form class="form-inline">
@@ -56,19 +56,19 @@ while ($Data = $Query->fetch()) {
     ?>
 
     <tr>
-        <td><a href="/editer_profil.php?id=<?php echo $Data['id']; ?>"> <?php echo $Data['nom']; ?> </a> </td>
+        <td class="clickable" onclick="window.location='/editer_profil.php?id=<?php echo $Data['id']; ?>'"> <?php echo $Data['nom']; ?></td>
         <td><?php echo $Data['prenom']; ?></td>
         <td><?php echo $Data['tournee']; ?></td>
         <td><?php echo $Data['uap']; ?></td>
         <td><?php echo $Data['mo']; ?></td>
-        <td><a href="explication.php?id=<?php echo $Data['id']; ?>">Accéder au <?php echo "R&R"?> </a></td>
+        <td class="clickable" onclick="window.location='explication.php?id=<?php echo $Data['id']; ?>'">Accéder au R&amp;R</td>
         <?php
 
         if (($Data["mo"] == 'MOD' and $Data['type'] == 0 )or
             ($Data["mo"] != 'MOD' and $Data['type'] == 1 )){
             if ($Data['valide'] > 0){
                 ?>
-                <td><a href="#"><img src="ressources/checked.png" style="
+                <td class="clickable" onclick="window.location='#'"><img src="ressources/checked.png" style="
             height: 24px;
             border-style: solid;
             border-color: #BBB;
@@ -76,11 +76,11 @@ while ($Data = $Query->fetch()) {
             border-width: 1px;
             padding: 2px;
 
-            " class="center-block"></a></td>
+            " class="center-block"></td>
                 <?php
             }else{
                 ?>
-                <td><a href="#"><img src="ressources/cancel.png" style="
+                <td class="clickable" onclick="window.location='#'"><img src="ressources/cancel.png" style="
             height: 24px;
             border-style: solid;
             border-color: #BBB;
@@ -88,11 +88,11 @@ while ($Data = $Query->fetch()) {
             border-width: 1px;
             padding: 2px;
 
-            " class="center-block"></a></td>
+            " class="center-block"></td>
                 <?php
             }
         }else{?>
-            <td><a href="#"><img src="ressources/cancel.png" style="
+            <td class="clickable" onclick="window.location=''"><img src="ressources/cancel.png" style="
                 height: 24px;
                 border-style: solid;
                 border-color: #BBB;
@@ -100,7 +100,7 @@ while ($Data = $Query->fetch()) {
                 border-width: 1px;
                 padding: 2px;
 
-                " class="center-block"></a></td>
+                " class="center-block"></td>
             <?php
         }
 

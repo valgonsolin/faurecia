@@ -23,22 +23,6 @@ else
   }
 
   if(!empty($_POST)){
-    $vrai1=0;
-    $vrai2=0;
-    $vrai3=0;
-    $vrai4=0;
-    if(isset($_POST['vrai1'])){
-      $vrai1=$_POST['vrai1'];
-    }
-    if(isset($_POST['vrai2'])){
-      $vrai1=$_POST['vrai2'];
-    }
-    if(isset($_POST['vrai3'])){
-      $vrai1=$_POST['vrai3'];
-    }
-    if(isset($_POST['vrai4'])){
-      $vrai1=$_POST['vrai4'];
-    }
     if($lastOrdre >= $_POST['ordre']){
       $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre+1 WHERE ordre >= ? ');
       $query -> execute(array($_POST['ordre']));
@@ -55,25 +39,21 @@ else
       'reponse_2' => $_POST['reponse2'],
       'reponse_3' => $_POST['reponse3'],
       'reponse_4' => $_POST['reponse4'],
-      'corrige_1' => $vrai1,
-      'corrige_2' => $vrai2,
-      'corrige_3' => $vrai3,
-      'corrige_4' => $vrai4,
+      'corrige_1' => $_POST['vrai1'],
+      'corrige_2' => $_POST['vrai2'],
+      'corrige_3' => $_POST['vrai3'],
+      'corrige_4' => $_POST['vrai4'],
       'ordre' => $_POST['ordre'],
       'file' => $file,
       'commentaire' => $_POST['commentaire']
     ));
 
-    if($query ==false){ ?>
-      <div class="alert alert-danger">
-          <strong>Erreur</strong>  -  Les données entrées ne sont pas conformes.
-      </div>
-    <?php }else{ ?>
-          <div class="alert alert-success">
-        <strong>Ajouté</strong>  -  La question a bien été ajoutée.
-    </div>
-    <?php
-  }}
+    if($query ==false){
+      warning('Erreur','Les données entrées ne sont pas conformes.');
+    }else{
+      success('Ajouté','La question a bien été ajoutée.');
+    }
+  }
   ?>
   <div class="boutons_nav" style="display: flex; justify-content: center;">
     <a href="ajout.php" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Ajout</a>
@@ -99,19 +79,27 @@ else
   	<input class="form-control" name="question" type="text">
   	</div>
   	<div class="form-group">
-  		<label>Réponse 1 :     </label><label style="margin-left:20px"><input name="vrai1" type="checkbox"> Vrai</label>
+  		<label>Réponse 1 :     </label><label style="margin-left:20px">
+        <input type="hidden" value="0" name="vrai1">
+        <input name="vrai1" type="checkbox" value="1"> Vrai</label>
   		<input name="reponse1" class="form-control" type="text">
   	</div>
   	<div class="form-group">
-  		<label>Réponse 2 :     </label><label style="margin-left:20px"><input name="vrai2" type="checkbox"> Vrai</label>
+  		<label>Réponse 2 :     </label><label style="margin-left:20px">
+        <input type="hidden" value="0" name="vrai2">
+        <input name="vrai2" type="checkbox" value="1"> Vrai</label>
   		<input name="reponse2" class="form-control" type="text">
   	</div>
   	<div class="form-group">
-  		<label>Réponse 3 :     </label><label style="margin-left:20px"><input name="vrai3" type="checkbox"> Vrai</label>
+  		<label>Réponse 3 :     </label><label style="margin-left:20px">
+        <input type="hidden" value="0" name="vrai3">
+        <input name="vrai3" type="checkbox" value="1"> Vrai</label>
   		<input name="reponse3" class="form-control" type="text">
   	</div>
   	<div class="form-group">
-  		<label>Réponse 4 :     </label><label style="margin-left:20px"><input name="vrai4" type="checkbox"> Vrai</label>
+  		<label>Réponse 4 :     </label><label style="margin-left:20px">
+        <input type="hidden" value="0" name="vrai4">
+        <input name="vrai4" type="checkbox" value="1"> Vrai</label>
   		<input name="reponse4" class="form-control" type="text">
   	</div>
     <div class="form-group">
