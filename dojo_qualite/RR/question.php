@@ -46,35 +46,92 @@ if (! isset($_GET["id"])){
         ?>
 
         <h2>R&amp;R</h2>
+        <style>
+          .img-check{
+            box-shadow: 2px 2px 4px grey;
+            border-radius: 6px;
+            max-width:100%;
+            max-height:200px;
+          }
+          .checked{
+              opacity:0.5;
+          }
+        </style>
+        <script>
+        $(document).ready(function(e){
+          $(".img-check").click(function(){
+            $(this).toggleClass("checked");
+          });
+        });
+        </script>
 
         <h4><?php echo $Data['titre']; ?></h4>
+        <form class="" method="post">
         <div class="row">
-          <div class="col-md-8">
-        <form class="form-horizontal" method="post">
-            <div class="form-group" style="margin: 10px;" >
-                <label> Question n°<?php echo $Data['ordre'] ?></label><br/>
-                <label for="code_bar"><?php echo $Data['question']; ?></label>
-                <div class="checkbox">
-                    <label><input type="checkbox" name="rep_1"><?php echo $Data['reponse_1']; ?></label>
+          <div class="form-group">
+              <label> Question n°<?php echo $Data['ordre'] ?></label><br/>
+              <?php echo $Data['question']; ?>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <label>
+                    <?php
+                      if($Data['reponse_1'] != NULL){
+                        $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+                        $query -> execute(array($Data['reponse_1']));
+                        $img= $query -> fetch(); ?>
+                        <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image1">
+                      <?php } ?>
+                  <input type="checkbox" name="rep_1" class="hidden">
+              </label>
+            </div>
+            <div class="col-md-3">
+              <label>
+                      <?php
+                        if($Data['reponse_2'] != NULL){
+                          $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+                          $query -> execute(array($Data['reponse_2']));
+                          $img= $query -> fetch(); ?>
+                          <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image2">
+                        <?php } ?>
+                    <input type="checkbox" name="rep_2" class="hidden">
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label>
+                        <?php
+                          if($Data['reponse_3'] != NULL){
+                            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+                            $query -> execute(array($Data['reponse_3']));
+                            $img= $query -> fetch(); ?>
+                            <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image3">
+                          <?php } ?>
+                      <input type="checkbox" class="hidden" name="rep_3">
+                  </label>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" name="rep_2"><?php echo $Data['reponse_2']; ?></label>
-                </div>
-                <div class="checkbox disabled">
-                    <label><input type="checkbox" name="rep_3"><?php echo $Data['reponse_3']; ?></label>
-                </div>
-                <div class="checkbox disabled">
-                    <label><input type="checkbox" name="rep_4"><?php echo $Data['reponse_4']; ?></label>
-                </div>
+                <div class="col-md-3">
+                  <label>
+                          <?php
+                            if($Data['reponse_4'] != NULL){
+                              $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+                              $query -> execute(array($Data['reponse_4']));
+                              $img= $query -> fetch(); ?>
+                              <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image4">
+                            <?php } ?>
+                        <input class="hidden" type="checkbox" name="rep_4">
+                    </label>
+                  </div>
+
             </div>
 
-            <input type="text" name="question" value="<?php echo $Data["id"] ?>" style="display: none;">
+            <input type="hidden" name="question" value="<?php echo $Data["id"] ?>">
 
             <button type="submit" name="submit" id="submit_alerte" class="btn btn-default">Passer à la question suivante
             </button>
 
-        </form>
-      </div> <?php
+
+          </div>
+      </form> <?php
     }else{
         ob_end_clean();
         header('Location: '.$url."/dojo_qualite/RR/resultats.php?id=".$_GET['id']);
