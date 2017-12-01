@@ -29,7 +29,7 @@ drawMenu('RR');
 
 if (! isset($_GET["id"])){
     ?>
-    <h2>Quiz</h2>
+    <h2>R&amp;R</h2>
     <h4>OUPS... Votre session est inconnu.</h4>
     <a href="index.php"> Retourner au R&amp;R</a>
     <?php
