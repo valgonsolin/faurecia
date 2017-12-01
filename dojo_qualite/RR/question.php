@@ -52,9 +52,31 @@ if (! isset($_GET["id"])){
             border-radius: 6px;
             max-width:100%;
             max-height:200px;
+            border-style:solid;
+            border-width:4px;
+            border-color: black;
           }
           .checked{
-              opacity:0.5;
+              border-color: green;
+              filter: brightness(120%);
+          }
+
+          .img-hover{
+            visibility: hidden;
+            position:fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index:1000;
+            max-width: 80%;
+            max-height:80%;
+            border-radius: 4px;
+            box-shadow: 2px 2px 4px grey;
+            transition-delay:0.1s;
+          }
+          .col-md-3:hover .img-hover{
+            visibility: visible;
+            transition-delay: 1.5s;
           }
         </style>
         <script>
@@ -80,7 +102,8 @@ if (! isset($_GET["id"])){
                         $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
                         $query -> execute(array($Data['reponse_1']));
                         $img= $query -> fetch(); ?>
-                        <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image1">
+                        <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image1" title="Rester pour agrandir">
+                        <img class="img-hover" src="<?php echo $img['chemin']; ?>" alt="Image1">
                       <?php } ?>
                   <input type="checkbox" name="rep_1" class="hidden">
               </label>
@@ -92,7 +115,8 @@ if (! isset($_GET["id"])){
                           $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
                           $query -> execute(array($Data['reponse_2']));
                           $img= $query -> fetch(); ?>
-                          <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image2">
+                          <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image2" title="Rester pour agrandir">
+                          <img class="img-hover" src="<?php echo $img['chemin']; ?>" alt="Image2">
                         <?php } ?>
                     <input type="checkbox" name="rep_2" class="hidden">
                 </label>
@@ -104,7 +128,8 @@ if (! isset($_GET["id"])){
                             $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
                             $query -> execute(array($Data['reponse_3']));
                             $img= $query -> fetch(); ?>
-                            <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image3">
+                            <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image3" title="Rester pour agrandir">
+                            <img class="img-hover" src="<?php echo $img['chemin']; ?>" alt="Image3">
                           <?php } ?>
                       <input type="checkbox" class="hidden" name="rep_3">
                   </label>
@@ -116,7 +141,8 @@ if (! isset($_GET["id"])){
                               $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
                               $query -> execute(array($Data['reponse_4']));
                               $img= $query -> fetch(); ?>
-                              <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image4">
+                              <img class="img-check" src="<?php echo $img['chemin']; ?>" alt="Image4" title="Rester pour agrandir">
+                              <img class="img-hover" src="<?php echo $img['chemin']; ?>" alt="Image4">
                             <?php } ?>
                         <input class="hidden" type="checkbox" name="rep_4">
                     </label>
