@@ -10,7 +10,7 @@ if(empty($_SESSION['login']))
   <h2>Quiz</h2>
   <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
   <a href="/identification.php?redirection=dojo_qualite/quiz/ajout.php"><button class="btn btn-default">Se connecter</button></a>
-  <a href="index.php"> Retourner au quizz</a>
+  <a href="index.php"> Retourner au quiz</a>
 <?php
 }
 else
@@ -38,9 +38,9 @@ else
       </div>
     	<div class="form-group">
       <label>Type</label>
-  	  <select name="type" class="form-control" value="<?php echo $Data['type']; ?>">
-      <option value="0" selected="selected">MOD</option>
-      <option value="1">MOI</option>
+      <select name="type" class="form-control" >
+      <option value="0" <?php if(!$Data['type']){echo "selected";} ?>>MOD</option>
+      <option value="1" <?php if($Data['type']){echo "selected";} ?>>MOI</option>
       </select>
     	<label>Titre</label>
     	<input class="form-control" name="titre" type="text" value="<?php echo $Data['titre']; ?>">
@@ -100,7 +100,7 @@ else
       <input type="hidden" name="id" value="<?php echo $Data["id"] ?>" >
       <button type="submit" name="modifier" class="btn btn-default" onclick="return confirm('Modifier la question ?');">Modifier</button>
       <button type="submit" name="supprimer" class="btn btn-default" onclick="return confirm('Supprimer la question ?');">Supprimer</button>
-
+      <a href="suppression.php" class="btn btn-default pull-right" >Retour</a>
 
     </form>
 

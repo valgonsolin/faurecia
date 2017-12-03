@@ -29,6 +29,7 @@ else
         margin-top: 5px;
         margin-bottom: 5px;
         border-radius: 6px;
+        position:relative;
       }
       </style>
       <div class="boutons_nav" style="display: flex; justify-content: center;">
@@ -41,6 +42,7 @@ else
     $Data=$query -> fetch(); ?>
 
     <form action="suppression.php" method="post" style="margin-top:20px;" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="<?php echo $Data["id"] ?>" >
       <div class="form-group">
         <label>Question n°</label>
         <input class="form-control" type="number" name="ordre2" value="<?php echo $Data['ordre']; ?>">
@@ -48,9 +50,9 @@ else
       </div>
     	<div class="form-group">
       <label>Type</label>
-  	  <select name="type" class="form-control" value="<?php echo $Data['type']; ?>">
-      <option value="0" selected="selected">MOD</option>
-      <option value="1">MOI</option>
+  	  <select name="type" class="form-control" >
+      <option value="0" <?php if(!$Data['type']){echo "selected";} ?>>MOD</option>
+      <option value="1" <?php if($Data['type']){echo "selected";} ?>>MOI</option>
       </select>
     	<label>Titre</label>
     	<input class="form-control" name="titre" type="text" value="<?php echo $Data['titre']; ?>">
@@ -61,13 +63,16 @@ else
     	</div>
       <div class"form-group">
         <div class="row entree">
-          <div class="col-md-7">
+          <div class="col-md-7" >
             <label>Réponse 1 :     </label><label style="margin-left:20px">
               <input type="hidden" value="0" name="vrai1">
               <input name="vrai4" type="checkbox" value="1" <?php if($Data['corrige_1']){echo "checked" ;}?>> Vrai</label>
             <input type="file" name="file_1">
             <input type="hidden" name="old_file_1" value="<?php echo $Data['reponse_1']; ?>">
           </div>
+          <?php if($Data['reponse_1'] != NULL){ ?>
+            <input type="submit" name="img-reset1" value="Supprimer l'image" class="btn btn-default" style="position: absolute; left:5px; bottom:5px;">
+          <?php } ?>
           <div class="col-md-5">
         <?php
           if($Data['reponse_1'] != NULL){
@@ -88,6 +93,9 @@ else
             <input type="file" name="file_2">
             <input type="hidden" name="old_file_2" value="<?php echo $Data['reponse_2']; ?>">
           </div>
+          <?php if($Data['reponse_2'] != NULL){ ?>
+            <input type="submit" name="img-reset2" value="Supprimer l'image" class="btn btn-default" style="position: absolute; left:5px; bottom:5px;">
+          <?php } ?>
           <div class="col-md-5">
         <?php
           if($Data['reponse_2'] != NULL){
@@ -108,6 +116,9 @@ else
             <input type="file" name="file_3">
             <input type="hidden" name="old_file_3" value="<?php echo $Data['reponse_3']; ?>">
           </div>
+          <?php if($Data['reponse_3'] != NULL){ ?>
+            <input type="submit" name="img-reset3" value="Supprimer l'image" class="btn btn-default" style="position: absolute; left:5px; bottom:5px;">
+          <?php } ?>
           <div class="col-md-5">
         <?php
           if($Data['reponse_3'] != NULL){
@@ -128,6 +139,9 @@ else
             <input type="file" name="file_4">
             <input type="hidden" name="old_file_4" value="<?php echo $Data['reponse_4']; ?>">
           </div>
+          <?php if($Data['reponse_4'] != NULL){ ?>
+            <input type="submit" name="img-reset4" value="Supprimer l'image" class="btn btn-default"  style="position: absolute; left:5px; bottom:5px;">
+          <?php } ?>
           <div class="col-md-5">
         <?php
           if($Data['reponse_4'] != NULL){
@@ -139,9 +153,9 @@ else
           </div>
         </div>
       </div>
-      <input type="hidden" name="id" value="<?php echo $Data["id"] ?>" >
       <button type="submit" name="modifier" class="btn btn-default" onclick="return confirm('Modifier la question ?');">Modifier</button>
       <button type="submit" name="supprimer" class="btn btn-default" onclick="return confirm('Supprimer la question ?');">Supprimer</button>
+      <a href="suppression.php" class="btn btn-default pull-right" >Retour</a>
 
 
     </form>

@@ -52,6 +52,7 @@ else
       warning('Erreur','Les données entrées ne sont pas conformes.');
     }else{
       success('Ajouté','La question a bien été ajoutée.');
+      $lastOrdre++;
     }
   }
   ?>

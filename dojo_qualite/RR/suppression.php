@@ -24,21 +24,20 @@ else
       $i=$i+1;
     }
     success('Ordre réréinitialisé','L\'ordre des questions a été réinitialisé.');
-  }
-  if(isset($_POST['supprimer'])){
+  }elseif(isset($_POST['supprimer'])){
     $query= $bdd -> prepare('SELECT * FROM qualite_RR_question WHERE id=?');
     $query -> execute(array($_POST['id']));
     $Data= $query -> fetch();
-    if($Data['reponse_1'] >= 0){
+    if($Data['reponse_1'] != NULL){
       remove_file($bdd,$Data['reponse_1']);
     }
-    if($Data['reponse_2'] >= 0){
+    if($Data['reponse_2'] != NULL){
       remove_file($bdd,$Data['reponse_2']);
     }
-    if($Data['reponse_3'] >= 0){
+    if($Data['reponse_3'] != NULL){
       remove_file($bdd,$Data['reponse_3']);
     }
-    if($Data['reponse_4'] >= 0){
+    if($Data['reponse_4'] != NULL){
       remove_file($bdd,$Data['reponse_4']);
     }
     $query = $bdd -> prepare('DELETE FROM qualite_RR_question WHERE id=?');
@@ -46,6 +45,38 @@ else
     $query = $bdd -> prepare('UPDATE qualite_RR_question SET ordre=ordre-1 WHERE ordre > ?');
     $query -> execute(array($_POST['ordre1']));
     success('Supprimé','La question a bien été supprimée.');
+}elseif(isset($_POST['img-reset1'])){
+  $query= $bdd -> prepare('SELECT * FROM qualite_RR_question WHERE id=?');
+  $query -> execute(array($_POST['id']));
+  $Data= $query -> fetch();
+  remove_file($bdd,$Data['reponse_1']);
+  $query = $bdd -> prepare('UPDATE qualite_RR_question SET reponse_1 = NULL WHERE id= ?');
+  $query -> execute(array($_POST['id']));
+  success('Supprimé','L\'image 1 a été supprimée.');
+}elseif(isset($_POST['img-reset2'])){
+  $query= $bdd -> prepare('SELECT * FROM qualite_RR_question WHERE id=?');
+  $query -> execute(array($_POST['id']));
+  $Data= $query -> fetch();
+  remove_file($bdd,$Data['reponse_2']);
+  $query = $bdd -> prepare('UPDATE qualite_RR_question SET reponse_2 = NULL WHERE id= ?');
+  $query -> execute(array($_POST['id']));
+  success('Supprimé','L\'image 2 a été supprimée.');
+}elseif(isset($_POST['img-reset3'])){
+  $query= $bdd -> prepare('SELECT * FROM qualite_RR_question WHERE id=?');
+  $query -> execute(array($_POST['id']));
+  $Data= $query -> fetch();
+  remove_file($bdd,$Data['reponse_3']);
+  $query = $bdd -> prepare('UPDATE qualite_RR_question SET reponse_3 = NULL WHERE id= ?');
+  $query -> execute(array($_POST['id']));
+  success('Supprimé','L\'image 3 a été supprimée.');
+}elseif(isset($_POST['img-reset4'])){
+  $query= $bdd -> prepare('SELECT * FROM qualite_RR_question WHERE id=?');
+  $query -> execute(array($_POST['id']));
+  $Data= $query -> fetch();
+  remove_file($bdd,$Data['reponse_4']);
+  $query = $bdd -> prepare('UPDATE qualite_RR_question SET reponse_4 = NULL WHERE id= ?');
+  $query -> execute(array($_POST['id']));
+  success('Supprimé','L\'image 4 a été supprimée.');
 }elseif(isset($_POST['modifier'])){
   if($_FILES['file_1']['name'] != ""){
     $id1=upload($bdd,'file_1',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
@@ -245,7 +276,7 @@ $nb=$_GET['nb'];
     <tr>
       <td><?php echo $Data['ordre']; ?></td>
       <td><?php echo $Data['titre']; ?></td>
-      <td><?php if($Data['type']){echo "Autre";}else{echo "MOD";} ?></td>
+      <td><?php if($Data['type']){echo "MOI";}else{echo "MOD";} ?></td>
       <td><?php echo $Data['question'];?></td>
       <td><a href="supprimer_question.php?id=<?php echo $Data['id']?>" class="btn btn-default pull-right">Modifier</a></td>
     </tr>
