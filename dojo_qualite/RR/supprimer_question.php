@@ -64,91 +64,19 @@ else
       <div class"form-group">
         <div class="row entree">
           <div class="col-md-7" >
-            <label>Réponse 1 :     </label><label style="margin-left:20px">
+            <label>Image :     </label><label style="margin-left:20px">
               <input type="hidden" value="0" name="vrai1">
-              <input name="vrai4" type="checkbox" value="1" <?php if($Data['corrige_1']){echo "checked" ;}?>> Vrai</label>
+              <input name="vrai1" type="checkbox" value="1" <?php if($Data['valide']){echo "checked" ;}?>> Valide</label>
             <input type="file" name="file_1">
-            <input type="hidden" name="old_file_1" value="<?php echo $Data['reponse_1']; ?>">
+            <input type="hidden" name="old_file_1" value="<?php echo $Data['image']; ?>">
           </div>
-          <?php if($Data['reponse_1'] != NULL){ ?>
-            <input type="submit" name="img-reset1" value="Supprimer l'image" class="btn btn-default" style="position: absolute; left:5px; bottom:5px;">
-          <?php } ?>
           <div class="col-md-5">
         <?php
-          if($Data['reponse_1'] != NULL){
+          if($Data['image'] != NULL){
             $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
-            $query -> execute(array($Data['reponse_1']));
+            $query -> execute(array($Data['image']));
             $img= $query -> fetch(); ?>
             <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px;  margin:5px;" alt="Image de correction">
-          <?php } ?>
-          </div>
-        </div>
-      </div>
-      <div class"form-group">
-        <div class="row entree">
-          <div class="col-md-7">
-            <label>Réponse 2 :     </label><label style="margin-left:20px">
-              <input type="hidden" value="0" name="vrai2">
-              <input name="vrai2" type="checkbox" value="1" <?php if($Data['corrige_2']){echo "checked" ;}?>> Vrai</label>
-            <input type="file" name="file_2">
-            <input type="hidden" name="old_file_2" value="<?php echo $Data['reponse_2']; ?>">
-          </div>
-          <?php if($Data['reponse_2'] != NULL){ ?>
-            <input type="submit" name="img-reset2" value="Supprimer l'image" class="btn btn-default" style="position: absolute; left:5px; bottom:5px;">
-          <?php } ?>
-          <div class="col-md-5">
-        <?php
-          if($Data['reponse_2'] != NULL){
-            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
-            $query -> execute(array($Data['reponse_2']));
-            $img= $query -> fetch(); ?>
-            <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; margin:5px;" alt="Image de correction">
-          <?php } ?>
-          </div>
-        </div>
-      </div>
-      <div class"form-group">
-        <div class="row entree">
-          <div class="col-md-7">
-            <label>Réponse 3 :     </label><label style="margin-left:20px">
-              <input type="hidden" value="0" name="vrai3">
-              <input name="vrai3" type="checkbox" value="1" <?php if($Data['corrige_3']){echo "checked" ;}?>> Vrai</label>
-            <input type="file" name="file_3">
-            <input type="hidden" name="old_file_3" value="<?php echo $Data['reponse_3']; ?>">
-          </div>
-          <?php if($Data['reponse_3'] != NULL){ ?>
-            <input type="submit" name="img-reset3" value="Supprimer l'image" class="btn btn-default" style="position: absolute; left:5px; bottom:5px;">
-          <?php } ?>
-          <div class="col-md-5">
-        <?php
-          if($Data['reponse_3'] != NULL){
-            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
-            $query -> execute(array($Data['reponse_3']));
-            $img= $query -> fetch(); ?>
-            <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; margin:5px; " alt="Image de correction">
-          <?php } ?>
-          </div>
-        </div>
-      </div>
-      <div class"form-group">
-        <div class="row entree">
-          <div class="col-md-7">
-            <label>Réponse 4 :     </label><label style="margin-left:20px">
-              <input type="hidden" value="0" name="vrai4">
-              <input name="vrai4" type="checkbox" value="1" <?php if($Data['corrige_4']){echo "checked" ;}?>> Vrai</label>
-            <input type="file" name="file_4">
-            <input type="hidden" name="old_file_4" value="<?php echo $Data['reponse_4']; ?>">
-          </div>
-          <?php if($Data['reponse_4'] != NULL){ ?>
-            <input type="submit" name="img-reset4" value="Supprimer l'image" class="btn btn-default"  style="position: absolute; left:5px; bottom:5px;">
-          <?php } ?>
-          <div class="col-md-5">
-        <?php
-          if($Data['reponse_4'] != NULL){
-            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
-            $query -> execute(array($Data['reponse_4']));
-            $img= $query -> fetch(); ?>
-            <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; margin:5px;" alt="Image de correction">
           <?php } ?>
           </div>
         </div>

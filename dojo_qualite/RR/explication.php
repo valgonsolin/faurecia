@@ -30,7 +30,7 @@ if (! isset($_GET["id"])){
             <h2>R&amp;R</h2>
             <p>Bonjour !<br>
                 Le R&amp;R sera composé de 20 questions, il faut avoir 14 bonnes réponses ce qui est équivalent à 70% pour valider votre formation.<br>
-                Pour répondre cochez la ou les bonne(s) réponse(s).</p>
+                Pour répondre cliquez sur l'image pour choisir si elle est valide ou non.</p>
             <?php
         }else{
             ?>
@@ -38,9 +38,9 @@ if (! isset($_GET["id"])){
 
             <h2>R&amp;R</h2>
             <p>Bonjour !<br>
-                Le quiz sera composé de 39 questions, il faut avoir 24 bonnes réponses ce qui est équivalent à 60% pour valider votre formation. <br>
-                Pour répondre cochez la ou les bonne(s) réponse(s).</p>
-
+                Le R&amp;R sera composé de 39 questions, il faut avoir 24 bonnes réponses ce qui est équivalent à 60% pour valider votre formation. <br>
+                Pour répondre cliquez sur l'image pour choisir si elle est valide ou non.</p>
+                
 
             <?php
         }

@@ -24,143 +24,52 @@ else
   echo "<h2>R&R</h2>";
 
   if(!empty($_POST)){
+    $erreur=false;
+    if($_FILES['file_1']['name'] != ""){
+      $id1=upload($bdd,'file_1',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    } else{
+      $erreur=true;
+      warning('Erreur','Vous n\'avez pas choisi de fichier');
+    }
 
-    if(isset($_POST['ordre'])){
+    if(!$erreur && ($id1 < 0)){
+      $erreur=true;
+      switch($id1){
+        case -1:
+          warning('Erreur','Le fichier n\'a pas pu etre téléversé.');
+          break;
+        case -2:
+          warning('Erreur taille','La taille du fichier est trop grande.');
+          break;
+        case -3:
+          warning('Erreur extension','L\'extension doit être l\'une des extensions suivantes: jpg, jpeg, gif, png.');
+          break;
+        default:
+          warning('Erreur','Le fichier n\'a pas pu etre téléversé.');
+      }
+    }
+    if(isset($_POST['ordre']) && !$erreur){
       if($lastOrdre >= $_POST['ordre']){
         $query = $bdd -> prepare('UPDATE qualite_RR_question SET ordre=ordre+1 WHERE ordre >= ? ');
         $query -> execute(array($_POST['ordre']));
       }
     }
-    $query = $bdd -> prepare('INSERT INTO qualite_RR_question(type,titre,question,corrige_1,corrige_2,corrige_3,corrige_4,ordre) VALUES (:type,:titre,:question,:corrige_1,:corrige_2,:corrige_3,:corrige_4,:ordre)');
-    $query -> execute(array(
-      'type' => $_POST['type'],
-      'titre' => $_POST['titre'],
-      'question' => $_POST['question'],
-      'corrige_1' => $_POST['vrai1'],
-      'corrige_2' => $_POST['vrai2'],
-      'corrige_3' => $_POST['vrai3'],
-      'corrige_4' => $_POST['vrai4'],
-      'ordre' => $_POST['ordre']
-    ));
-    $id= $bdd -> lastInsertId();
-    if($query ==false){
-      warning('Erreur','Les données entrées ne sont pas conformes.');
-    }else{
-      success('Ajouté','La question a bien été ajoutée.');
-      $lastOrdre++;
-    }
-
-    if($_FILES['file_1']['name'] != ""){
-      $id1=upload($bdd,'file_1',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
-    }else{
-      $id1=-4;
-    }
-    if($_FILES['file_2']['name'] != ""){
-      $id2=upload($bdd,'file_2',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
-    }else{
-      $id2=-4;
-    }
-    if($_FILES['file_3']['name'] != ""){
-      $id3=upload($bdd,'file_3',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
-    }else{
-      $id3=-4;
-    }
-    if($_FILES['file_4']['name'] != ""){
-      $id4=upload($bdd,'file_4',"../../ressources","R&R",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
-    }else{
-      $id4=-4;
-    }
-    if($id1 < 0){
-      switch($id1){
-        case -1:
-          warning('Erreur','Le fichier 1 n\'a pas pu etre téléversé.');
-          break;
-        case -2:
-          warning('Erreur taille','La taille du fichier 1 est trop grande.');
-          break;
-        case -3:
-          warning('Erreur extension','L\'extension doit être l\'une des extensions suivantes: jpg, jpeg, gif, png.');
-          break;
-        case -4:
-          break;
-        default:
-          warning('Erreur','Le fichier 1 n\'a pas pu etre téléversé.');
-      }
-    }else{
-      $query = $bdd -> prepare('UPDATE qualite_RR_question SET reponse_1= :reponse_1 WHERE id = :id');
+    if(!$erreur){
+      $query = $bdd -> prepare('INSERT INTO qualite_RR_question(type,titre,question,image,valide,ordre) VALUES (:type,:titre,:question,:image,:valide,:ordre)');
       $query -> execute(array(
-        'reponse_1' => $id1,
-        'id' => $id
+        'type' => $_POST['type'],
+        'titre' => $_POST['titre'],
+        'question' => $_POST['question'],
+        'image' => $id1,
+        'valide' => $_POST['vrai1'],
+        'ordre' => $_POST['ordre']
       ));
-    }
-    if($id2 < 0){
-      switch($id2){
-        case -1:
-          warning('Erreur','Le fichier 2 n\'a pas pu etre téléversé.');
-          break;
-        case -2:
-          warning('Erreur taille','La taille du fichier 2 est trop grande.');
-          break;
-        case -3:
-          warning('Erreur extension','L\'extension doit être l\'une des extensions suivantes: jpg, jpeg, gif, png.');
-          break;
-        case -4:
-          break;
-        default:
-          warning('Erreur','Le fichier 2 n\'a pas pu etre téléversé.');
+      if($query ==false){
+        warning('Erreur','Les données entrées ne sont pas conformes.');
+      }else{
+        success('Ajouté','La question a bien été ajoutée.');
+        $lastOrdre++;
       }
-    }else{
-      $query = $bdd -> prepare('UPDATE qualite_RR_question SET reponse_2= :reponse_2 WHERE id = :id');
-      $query -> execute(array(
-        'reponse_2' => $id2,
-        'id' => $id
-      ));
-    }
-    if($id3 < 0){
-      switch($id3){
-        case -1:
-          warning('Erreur','Le fichier 3 n\'a pas pu etre téléversé.');
-          break;
-        case -2:
-          warning('Erreur taille','La taille du fichier 3 est trop grande.');
-          break;
-        case -3:
-          warning('Erreur extension','L\'extension doit être l\'une des extensions suivantes: jpg, jpeg, gif, png.');
-          break;
-        case -4:
-          break;
-        default:
-          warning('Erreur','Le fichier 3 n\'a pas pu etre téléversé.');
-      }
-    }else{
-      $query = $bdd -> prepare('UPDATE qualite_RR_question SET reponse_3= :reponse_3 WHERE id = :id');
-      $query -> execute(array(
-        'reponse_3' => $id3,
-        'id' => $id
-      ));
-    }
-    if($id4 < 0){
-      switch($id4){
-        case -1:
-          warning('Erreur','Le fichier 4 n\'a pas pu etre téléversé.');
-          break;
-        case -2:
-          warning('Erreur taille','La taille du fichier 4 est trop grande.');
-          break;
-        case -3:
-          warning('Erreur extension','L\'extension doit être l\'une des extensions suivantes: jpg, jpeg, gif, png.');
-          break;
-        case -4:
-          break;
-        default:
-          warning('Erreur','Le fichier 4 n\'a pas pu etre téléversé.');
-      }
-    }else{
-      $query = $bdd -> prepare('UPDATE qualite_RR_question SET reponse_4= :reponse_4 WHERE id = :id');
-      $query -> execute(array(
-        'reponse_4' => $id4,
-        'id' => $id
-      ));
     }
   }
 
@@ -186,31 +95,13 @@ else
   	</div>
   	<div class="form-group">
   	<label>Question</label>
-  	<input class="form-control" name="question" type="text">
+  	<input class="form-control" name="question" type="text" value="Cette image est-elle valide ?">
   	</div>
   	<div class="form-group">
-  		<label>Réponse 1 :     </label><label style="margin-left:20px">
+  		<label>Image :     </label><label style="margin-left:20px">
         <input type="hidden" name="vrai1" value="0">
-        <input name="vrai1" type="checkbox" value="1"> Vrai</label>
+        <input name="vrai1" type="checkbox" value="1">Valide</label>
   		<input type="file" name="file_1" />
-  	</div>
-  	<div class="form-group">
-  		<label>Réponse 2 :     </label><label style="margin-left:20px">
-        <input type="hidden" name="vrai2" value="0">
-        <input name="vrai2" type="checkbox" value="1"> Vrai</label>
-  		<input type="file" name="file_2" />
-  	</div>
-  	<div class="form-group">
-  		<label>Réponse 3 :     </label><label style="margin-left:20px">
-        <input type="hidden" name="vrai3" value="0">
-        <input name="vrai3" type="checkbox" value="1"> Vrai</label>
-  		<input type="file" name="file_3" />
-  	</div>
-  	<div class="form-group">
-  		<label>Réponse 4 :     </label><label style="margin-left:20px">
-        <input type="hidden" name="vrai4" value="0">
-        <input name="vrai4" type="checkbox" value="1"> Vrai</label>
-  		<input type="file" name="file_4" />
   	</div>
   	<input value="Ajouter" class="btn btn-default" type="submit">
 
