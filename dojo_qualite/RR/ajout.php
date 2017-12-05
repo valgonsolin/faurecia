@@ -100,7 +100,8 @@ else
   	<div class="form-group">
   		<label>Image :     </label><label style="margin-left:20px">
         <input type="hidden" name="vrai1" value="0">
-        <input name="vrai1" type="checkbox" value="1">Valide</label>
+        <input name="vrai1" type="checkbox" value="1">Valide
+      </label>
   		<input type="file" name="file_1" />
   	</div>
   	<input value="Ajouter" class="btn btn-default" type="submit">

@@ -53,26 +53,63 @@ else
     		<label>Réponse 1 :     </label><label style="margin-left:20px">
           <input type="hidden" name="vrai1" value="0">
           <input name="vrai1" type="checkbox" value="1" <?php if($Data['corrige_1']){echo "checked" ;}?>> Vrai</label>
-    		<input name="reponse1" class="form-control" type="text" value="<?php echo $Data['reponse_1']; ?>">
+        <?php
+        if(preg_match('#^img=#',$Data['reponse_1'])){
+          $id=substr($Data['reponse_1'],4);
+          $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+          $query -> execute(array($id));
+          $img= $query -> fetch(); ?>
+          <img src="<?php echo $img['chemin']; ?>" style="max-width:60%; max-height: 300px;">
+           <?php
+        }else{ ?>
+          <input name="reponse1" class="form-control" type="text" value="<?php echo $Data['reponse_1']; ?>" >
+      <?php  } ?>
     	</div>
     	<div class="form-group">
     		<label>Réponse 2 :     </label><label style="margin-left:20px">
           <input type="hidden" name="vrai2" value="0">
           <input name="vrai2" type="checkbox" value="1" <?php if($Data['corrige_2']){echo "checked" ;}?>> Vrai</label>
-    		<input name="reponse2" class="form-control" type="text" value="<?php echo $Data['reponse_2']; ?>">
-    	</div>
+          <?php
+          if(preg_match('#^img=#',$Data['reponse_2'])){
+            $id=substr($Data['reponse_2'],4);
+            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+            $query -> execute(array($id));
+            $img= $query -> fetch(); ?>
+            <img src="<?php echo $img['chemin']; ?>" style="max-width:60%; max-height: 300px;">
+             <?php
+          }else{ ?>
+            <input name="reponse2" class="form-control" type="text" value="<?php echo $Data['reponse_2']; ?>" >
+          <?php  } ?>    	</div>
     	<div class="form-group">
     		<label>Réponse 3 :     </label><label style="margin-left:20px">
           <input type="hidden" name="vrai3" value="0">
           <input name="vrai3" type="checkbox" value="1" <?php if($Data['corrige_3']){echo "checked" ;}?>> Vrai</label>
-    		<input name="reponse3" class="form-control" type="text" value="<?php echo $Data['reponse_3']; ?>">
-    	</div>
+          <?php
+          if(preg_match('#^img=#',$Data['reponse_3'])){
+            $id=substr($Data['reponse_3'],4);
+            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+            $query -> execute(array($id));
+            $img= $query -> fetch(); ?>
+            <img src="<?php echo $img['chemin']; ?>" style="max-width:60%; max-height: 300px;">
+             <?php
+          }else{ ?>
+            <input name="reponse3" class="form-control" type="text" value="<?php echo $Data['reponse_3']; ?>" >
+          <?php  } ?>    	</div>
     	<div class="form-group">
     		<label>Réponse 4 :     </label><label style="margin-left:20px">
           <input type="hidden" name="vrai4" value="0">
           <input name="vrai4" type="checkbox"value="1" <?php if($Data['corrige_4']){echo "checked" ;}?>> Vrai</label>
-    		<input name="reponse4" class="form-control" type="text" value="<?php echo $Data['reponse_4']; ?>">
-    	</div>
+          <?php
+          if(preg_match('#^img=#',$Data['reponse_4'])){
+            $id=substr($Data['reponse_4'],4);
+            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+            $query -> execute(array($id));
+            $img= $query -> fetch(); ?>
+            <img src="<?php echo $img['chemin']; ?>" style="max-width:60%; max-height: 300px;">
+             <?php
+          }else{ ?>
+            <input name="reponse4" class="form-control" type="text" value="<?php echo $Data['reponse_4']; ?>" >
+          <?php  } ?>    	</div>
       <div class"form-group">
         <div class="row">
           <div class="col-md-7">

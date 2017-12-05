@@ -35,6 +35,22 @@ else
     if($Data['image_correction'] != NULL){
       remove_file($bdd,$Data['image_correction']);
     }
+    if(preg_match('#^img=#',$Data['reponse_1'])){
+      $id1=substr($Data['reponse_1'],4);
+      remove_file($bdd,$id1);
+    }
+    if(preg_match('#^img=#',$Data['reponse_2'])){
+      $id2=substr($Data['reponse_2'],4);
+      remove_file($bdd,$id2);
+    }
+    if(preg_match('#^img=#',$Data['reponse_3'])){
+      $id3=substr($Data['reponse_3'],4);
+      remove_file($bdd,$id3);
+    }
+    if(preg_match('#^img=#',$Data['reponse_4'])){
+      $id4=substr($Data['reponse_4'],4);
+      remove_file($bdd,$id4);
+    }
     $query = $bdd -> prepare('DELETE FROM qualite_quiz_question WHERE id=?');
     $query -> execute(array($_POST['id']));
     $query = $bdd -> prepare('UPDATE qualite_quiz_question SET ordre=ordre-1 WHERE ordre > ?');

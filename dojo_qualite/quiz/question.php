@@ -55,16 +55,52 @@ if (! isset($_GET["id"])){
                 <label> Question n°<?php echo $Data['ordre'] ?></label><br/>
                 <label for="code_bar"><?php echo $Data['question']; ?></label>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="rep_1"><?php echo $Data['reponse_1']; ?></label>
+                    <label><input type="checkbox" name="rep_1"><?php
+                      if(preg_match('#^img=#',$Data['reponse_1'])){
+                        $id=substr($Data['reponse_1'],4);
+                        $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+                        $query -> execute(array($id));
+                        $img= $query -> fetch(); ?>
+                        <img src="<?php echo $img['chemin']; ?>" style="max-width:60%; max-height: 300px;">
+                         <?php
+                      }else{
+                        echo $Data['reponse_1']; }?></label>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="rep_2"><?php echo $Data['reponse_2']; ?></label>
+                    <label><input type="checkbox" name="rep_2"><?php
+                      if(preg_match('#^img=#',$Data['reponse_2'])){
+                        $id=substr($Data['reponse_2'],4);
+                        $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+                        $query -> execute(array($id));
+                        $img= $query -> fetch(); ?>
+                        <img src="<?php echo $img['chemin']; ?>" style="max-width:60%; max-height: 300px;">
+                         <?php
+                      }else{
+                        echo $Data['reponse_2']; }?></label>
                 </div>
                 <div class="checkbox disabled">
-                    <label><input type="checkbox" name="rep_3"><?php echo $Data['reponse_3']; ?></label>
+                    <label><input type="checkbox" name="rep_3"><?php
+                      if(preg_match('#^img=#',$Data['reponse_3'])){
+                        $id=substr($Data['reponse_3'],4);
+                        $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+                        $query -> execute(array($id));
+                        $img= $query -> fetch(); ?>
+                        <img src="<?php echo $img['chemin']; ?>" style="max-width:60%; max-height: 300px;">
+                         <?php
+                      }else{
+                        echo $Data['reponse_3']; }?></label>
                 </div>
                 <div class="checkbox disabled">
-                    <label><input type="checkbox" name="rep_4"><?php echo $Data['reponse_4']; ?></label>
+                    <label><input type="checkbox" name="rep_4"><?php
+                      if(preg_match('#^img=#',$Data['reponse_4'])){
+                        $id=substr($Data['reponse_4'],4);
+                        $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+                        $query -> execute(array($id));
+                        $img= $query -> fetch(); ?>
+                        <img src="<?php echo $img['chemin']; ?>" style="max-width:60%; max-height: 300px;">
+                         <?php
+                      }else{
+                        echo $Data['reponse_4']; }?></label>
                 </div>
             </div>
 

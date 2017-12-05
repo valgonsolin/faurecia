@@ -29,16 +29,41 @@ else
     }
     $file=upload($bdd,'file',"../../ressources","Quiz",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
     if($file < 0){$file=NULL;}
+    $reponse1=$_POST['reponse1'];
+    $reponse2=$_POST['reponse2'];
+    $reponse3=$_POST['reponse3'];
+    $reponse4=$_POST['reponse4'];
+    if($_FILES['file_1']['name'] != ""){
+      $id1=upload($bdd,'file_1',"../../ressources","Quiz",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+      if($id1>=0){
+        $reponse1="img=".$id1;
+      }
+    }
+    if($_FILES['file_2']['name'] != ""){
+      $id2=upload($bdd,'file_2',"../../ressources","Quiz",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+      if($id2>=0){
+        $reponse2="img=".$id2;
+      }    }
+    if($_FILES['file_3']['name'] != ""){
+      $id3=upload($bdd,'file_3',"../../ressources","Quiz",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+      if($id3>=0){
+        $reponse3="img=".$id3;
+      }    }  
+    if($_FILES['file_4']['name'] != ""){
+      $id4=upload($bdd,'file_4',"../../ressources","Quiz",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+      if($id4>=0){
+        $reponse4="img=".$id4;
+      }    }
     $query = $bdd -> prepare('INSERT INTO qualite_quiz_question(type,titre,question,reponse_1,reponse_2,reponse_3,reponse_4,corrige_1,corrige_2,corrige_3,corrige_4,ordre,image_correction,commentaire) VALUES (:type,:titre,:question,:reponse_1,:reponse_2,:reponse_3,:reponse_4,:corrige_1,:corrige_2,:corrige_3,:corrige_4,:ordre,:file,:commentaire)');
     $id= $bdd -> lastInsertId();
     $query -> execute(array(
       'type' => $_POST['type'],
       'titre' => $_POST['titre'],
       'question' => $_POST['question'],
-      'reponse_1' => $_POST['reponse1'],
-      'reponse_2' => $_POST['reponse2'],
-      'reponse_3' => $_POST['reponse3'],
-      'reponse_4' => $_POST['reponse4'],
+      'reponse_1' => $reponse1,
+      'reponse_2' => $reponse2,
+      'reponse_3' => $reponse3,
+      'reponse_4' => $reponse4,
       'corrige_1' => $_POST['vrai1'],
       'corrige_2' => $_POST['vrai2'],
       'corrige_3' => $_POST['vrai3'],
@@ -84,24 +109,28 @@ else
         <input type="hidden" value="0" name="vrai1">
         <input name="vrai1" type="checkbox" value="1"> Vrai</label>
   		<input name="reponse1" class="form-control" type="text">
+      <input type="file" name="file_1">
   	</div>
   	<div class="form-group">
   		<label>Réponse 2 :     </label><label style="margin-left:20px">
         <input type="hidden" value="0" name="vrai2">
         <input name="vrai2" type="checkbox" value="1"> Vrai</label>
   		<input name="reponse2" class="form-control" type="text">
+      <input type="file" name="file_2">
   	</div>
   	<div class="form-group">
   		<label>Réponse 3 :     </label><label style="margin-left:20px">
         <input type="hidden" value="0" name="vrai3">
         <input name="vrai3" type="checkbox" value="1"> Vrai</label>
   		<input name="reponse3" class="form-control" type="text">
+      <input type="file" name="file_3">
   	</div>
   	<div class="form-group">
   		<label>Réponse 4 :     </label><label style="margin-left:20px">
         <input type="hidden" value="0" name="vrai4">
         <input name="vrai4" type="checkbox" value="1"> Vrai</label>
   		<input name="reponse4" class="form-control" type="text">
+      <input type="file" name="file_4">
   	</div>
     <div class="form-group">
   		<label>Image de Correction :     </label>
