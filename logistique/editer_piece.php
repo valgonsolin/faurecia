@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include_once "../needed.php";
 
 drawheader();
@@ -11,6 +12,7 @@ if (isset($_POST['submit'])){
         $Query = $bdd->prepare('INSERT INTO logistique_pieces SET code_barres=?, sebango =?, reference=?, description=?, ligne =?, emplacement=?, quantite=?');
         $Query->execute(array($_POST['code_barres'],$_POST['sebango'],$_POST['reference'],$_POST['description'],$_POST['ligne'],$_POST['emplacement'],$emplacement['quantite'],$_GET["id"]));
     }
+    ob_end_clean();
     header('Location: '.$url."/logistique/pieces.php");
 
 }
@@ -61,3 +63,4 @@ if (isset($_GET['id'])){
     </form>
 <?php
 drawFooter();
+ob_end_flush();

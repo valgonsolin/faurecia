@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include_once "../needed.php";
 
 include_once "needed.php";
@@ -29,8 +30,8 @@ if (isset($_POST['supprimer'])){
     $Query = $bdd->prepare('UPDATE logistique_alerte SET state = ? WHERE logistique_alerte.id = ?');
     $Query->execute(array($state ,$_GET['id']));
     $Data = $Query->fetch();
-
-    header('Location: '.$url."logistique/index.php");
+    ob_end_clean();
+    header('Location: '.$url."/logistique/index.php");
 }
 
 $Query = $bdd->prepare('SELECT logistique_alerte.id as id_alerte , state, e_kanban, train, uc_restant_en_ligne, logistique_alerte.date , logistique_pieces.*  FROM logistique_alerte LEFT JOIN logistique_pieces on logistique_alerte.piece=logistique_pieces.id WHERE logistique_alerte.id = ?');
@@ -326,3 +327,4 @@ if ($Data = $Query->fetch()){
 
 
 drawFooter();
+ob_end_flush();

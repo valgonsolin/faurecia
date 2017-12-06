@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include_once "../needed.php";
 
 include_once "needed.php";
@@ -10,13 +11,14 @@ drawMenu("alerte");
 if (isset($_GET['supprime'])){
     $Query = $bdd->prepare('DELETE FROM logistique_reponse_jaune WHERE alerte=? ');
     $Query->execute(array($_GET['alerte']));
+    ob_end_clean();
     header('Location: '.$url."/logistique/alerte.php?id=".$_GET['alerte']);
 }else {
 
     if (isset($_POST['submit'])) {
         $Query = $bdd->prepare('UPDATE logistique_reponse_jaune SET commentaire = ?, piece_masse_storage=?, quantite_SAP=?, fournisseur=?, prochaine_livraison=?, couverture_ligne=?   WHERE alerte=? ');
         $Query->execute(array($_POST['commentaire'], $_POST['piece_masse_storage'], $_POST['quantite_SAP'], $_POST['fournisseur'], $_POST['prochaine_livraison'], $_POST['couverture_ligne'], $_GET['alerte']));
-
+        ob_end_clean();
         header('Location: ' . $url . "/logistique/alerte.php?id=" . $_GET['alerte']);
     }
 
@@ -131,3 +133,4 @@ if (isset($_GET['supprime'])){
     <?php
 }
 drawFooter();
+ob_end_flush();

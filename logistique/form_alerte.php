@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include_once "../needed.php";
 
 include_once "needed.php";
@@ -31,13 +32,13 @@ if (isset($_POST['submit'])){
             if (isset($_GET['id'])) {
                 $Query = $bdd->prepare('UPDATE logistique_alerte SET piece=?, e_kanban=?,  train=?, uc_restant_en_ligne=? WHERE id = ?');
                 $Query->execute(array($piece, $e_kanban, $_POST['train'], $_POST['uc_en_ligne'], $_GET["id"]));
-
+                ob_end_clean();
                 header('Location: ' . $url . "/logistique/alerte.php?id=" . $_GET['id']);
 
             } else {
                 $Query = $bdd->prepare('INSERT INTO logistique_alerte SET piece=?, e_kanban=?,  train=?, uc_restant_en_ligne=?');
                 $Query->execute(array($piece, $e_kanban, $_POST['train'], $_POST['uc_en_ligne']));
-
+                ob_end_clean();
                 header('Location: ' . $url . "/logistique/index.php");
             }
 
@@ -167,3 +168,4 @@ if (isset($_GET['id'])){
 
 <?php
 drawFooter();
+ob_end_flush();

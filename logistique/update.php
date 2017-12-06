@@ -67,7 +67,7 @@ else{
 
     fclose($fichier);
     success('Modification effectuée','La base de données des pièces a bien été mise à jour.');
-    ?>  
+    ?>
     <a href="/index.php" class="btn btn-default">Accueil</a>
     <a href="/deconnexion.php" class="btn btn-default">Déconnexion</a>
     <?php
