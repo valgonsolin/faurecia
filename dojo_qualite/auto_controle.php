@@ -39,7 +39,7 @@ drawMenu('auto_controle');
     <div class="center_illustration"><img class="illustration center-block" src="ressources/SI_04.PNG"></div>
 
     <h4>Elements clés de l'auto-contrôle</h4>
-    <div class="center_illustration"><img class="illustration center-block" src="ressources/SI_05.PNG"></div>
+    <div class="center_illustration"><img class="illustration center-block" src="ressources/SI_05.png"></div>
 
 
 

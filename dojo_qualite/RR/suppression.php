@@ -148,17 +148,17 @@ $nb=$_GET['nb'];
   $query ->bindValue(':titre','%'.$recherche.'%');
   $query ->bindValue(':nb',(int) $nb, PDO::PARAM_INT);
   $query ->execute();
-  while($Data = $query->fetch()){ ?>
+  while($Data = $query->fetch()){
+    $query2=$bdd -> prepare('SELECT * FROM files WHere id = ?');
+    $query2 -> execute(array($Data['image']));
+    $img=$query2 -> fetch(); ?>
     <tr class="hov">
       <td><?php echo $Data['ordre']; ?></td>
       <td><?php echo $Data['titre']; ?></td>
       <td><?php if($Data['type']){echo "MOI";}else{echo "MOD";} ?></td>
       <td><?php echo $Data['question'];?></td>
       <td><img class="img-hover" src="<?php echo $img['chemin']; ?>" alt="Image"><td>
-      <td><a href="supprimer_question.php?id=<?php echo $Data['id']?>" class="btn btn-default pull-right">Modifier</a></td><?php
-      $query2=$bdd -> prepare('SELECT * FROM files WHere id = ?');
-      $query2 -> execute(array($Data['image']));
-      $img=$query2 -> fetch(); ?>
+      <td><a href="supprimer_question.php?id=<?php echo $Data['id']?>" class="btn btn-default pull-right">Modifier</a></td>
     </tr>
   <?php
 } ?>
