@@ -3,7 +3,7 @@ include_once "../needed.php";
 
 include_once "needed.php";
 
-drawHeader('presentation_usine');
+drawHeader('RH');
 drawMenu('chiffres_cle');
 ?>
     <h2>Chiffres clés</h2>

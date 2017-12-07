@@ -47,8 +47,8 @@ if (isset($_GET["recherche"])){
 
 $Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN
                         (SELECT id as id_session, valide, personne, type FROM
-                            (SELECT MAX(fin) as last_fin FROM qualite_quiz_session WHERE fin IS NOT NULL GROUP BY personne ) as t_fin
-                            LEFT JOIN qualite_quiz_session ON qualite_quiz_session.fin = last_fin) as result
+                            (SELECT MAX(fin) as last_fin FROM qualite_RR_session WHERE fin IS NOT NULL GROUP BY personne ) as t_fin
+                            LEFT JOIN qualite_RR_session ON qualite_RR_session.fin = last_fin) as result
                         ON result.personne = profil.id
                         WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0');
 $Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%'));
@@ -63,12 +63,12 @@ while ($Data = $Query->fetch()) {
         <td><?php echo $Data['mo']; ?></td>
         <td class="clickable" onclick="window.location='explication.php?id=<?php echo $Data['id']; ?>'">Accéder au R&amp;R</td>
         <?php
-
+        if($Data['id_session'] != NULL){
         if (($Data["mo"] == 'MOD' and $Data['type'] == 0 )or
             ($Data["mo"] != 'MOD' and $Data['type'] == 1 )){
             if ($Data['valide'] > 0){
                 ?>
-                <td class="clickable" onclick="window.location='#'"><img src="ressources/checked.png" style="
+                <td class="clickable" onclick="window.location='resultats.php?id=<?php echo $Data['id_session']; ?>'"><img src="ressources/checked.png" style="
             height: 24px;
             border-style: solid;
             border-color: #BBB;
@@ -80,7 +80,7 @@ while ($Data = $Query->fetch()) {
                 <?php
             }else{
                 ?>
-                <td class="clickable" onclick="window.location='#'"><img src="ressources/cancel.png" style="
+                <td class="clickable" onclick="window.location='resultats.php?id=<?php echo $Data['id_session']; ?>'"><img src="ressources/cancel.png" style="
             height: 24px;
             border-style: solid;
             border-color: #BBB;
@@ -92,7 +92,7 @@ while ($Data = $Query->fetch()) {
                 <?php
             }
         }else{?>
-            <td class="clickable" onclick="window.location=''"><img src="ressources/cancel.png" style="
+            <td class="clickable" onclick="window.location='resultats.php?id=<?php echo $Data['id_session']; ?>'"><img src="ressources/cancel.png" style="
                 height: 24px;
                 border-style: solid;
                 border-color: #BBB;
@@ -103,6 +103,9 @@ while ($Data = $Query->fetch()) {
                 " class="center-block"></td>
             <?php
         }
+      }else{
+        echo "<td></td>";
+      }
 
 
         ?>

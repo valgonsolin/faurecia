@@ -90,7 +90,7 @@ if (! isset($_GET["id"])){
                         $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
                         $query -> execute(array($Data['image']));
                         $img= $query -> fetch(); ?>
-                        <img class="img-check checked" src="<?php echo $img['chemin']; ?>" alt="Image1" title="Rester pour agrandir"><figcaption id="legend">Valide</figcaption>
+                        <img class="img-check checked" src="<?php echo $img['chemin']; ?>" alt="Image"><figcaption id="legend">Valide</figcaption>
                       <?php } ?>
                   <input type="checkbox" name="rep_1" class="hidden">
 
@@ -101,7 +101,7 @@ if (! isset($_GET["id"])){
 
           <input type="hidden" name="question" value="<?php echo $Data["id"] ?>">
 
-          <button type="submit" name="submit" id="submit_alerte" class="btn btn-default">Passer à la question suivante
+          <button type="submit" name="submit" id="submit_alerte" class="btn btn-default">Valider
           </button>
 
 

@@ -49,14 +49,14 @@ global $url;
         <div id="menu">
 
             <div class="dropdown">
-            <a href="/presentation_usine/chiffres_cle.php" class="bouton_menu  <?php if($selected=='presentation_usine'){echo ' bouton_menu_selected';} ?> dropbtn" >Présentation de l'usine</a>
+            <a href="<?php echo $url; ?>" class="bouton_menu  <?php if($selected=='RH'){echo ' bouton_menu_selected';} ?> dropbtn" >RH</a>
                 <div class="dropdown-content">
-                    <a href="/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Chiffres clés</a>
-                    <a href="/presentation_usine/historique.php" class="bouton_dropdown">L'historique</a>
-                    <a href="/presentation_usine/organigramme.php" class="bouton_dropdown">Organigramme</a>
-                    <a href="/presentation_usine/moyen_production.php" class="bouton_dropdown">Les moyens de production</a>
-                    <a href="/presentation_usine/nouveaux_projets.php" class="bouton_dropdown">Les nouveaux projets</a>
-                    <a href="/presentation_usine/being_faurecia.php" class="bouton_dropdown">Being Faurecia</a>
+                    <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Présentation Usine</a>
+                    <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Idées améliorations</a>
+                    <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Formations</a>
+                    <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Plan de rotation</a>
+                    <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Profils</a>
+
                 </div>
             </div>
             <div class="dropdown">
@@ -81,6 +81,14 @@ global $url;
                     <a href="<?php echo $url; ?>/logistique/index.php" class="bouton_dropdown" >Alerte composant</a>
                     <a href="<?php echo $url; ?>/logistique/pieces.php" class="bouton_dropdown">Pièces</a>
                     <a href="<?php echo $url; ?>/logistique/update.php" class="bouton_dropdown">Mise à jour</a>
+                </div>
+			</div>
+      <div class="dropdown">
+			<a href="<?php echo $url; ?>" class="bouton_menu <?php if($selected=='methode'){echo ' bouton_menu_selected';} ?>">Méthode</a>
+				<div class="dropdown-content">
+                    <a href="<?php echo $url; ?>" class="bouton_dropdown" >LaunchBoard</a>
+                    <a href="<?php echo $url; ?>" class="bouton_dropdown">Formation PPTL</a>
+                    <a href="<?php echo $url; ?>" class="bouton_dropdown">Charge</a>
                 </div>
 			</div>
 			<a href="/codir/kamishibai/index.php" class="bouton_menu <?php if($selected=='codir'){echo ' bouton_menu_selected';} ?>">Codir</a>

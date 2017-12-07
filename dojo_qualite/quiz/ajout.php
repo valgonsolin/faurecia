@@ -48,7 +48,7 @@ else
       $id3=upload($bdd,'file_3',"../../ressources","Quiz",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
       if($id3>=0){
         $reponse3="img=".$id3;
-      }    }  
+      }    }
     if($_FILES['file_4']['name'] != ""){
       $id4=upload($bdd,'file_4',"../../ressources","Quiz",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
       if($id4>=0){

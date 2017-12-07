@@ -42,16 +42,16 @@ else
     if($id1 < 0){
       switch($id1){
         case -1:
-          warning('Erreur','Le fichier 1 n\'a pas pu etre téléversé.');
+          warning('Erreur','Le fichier n\'a pas pu etre téléversé.');
           break;
         case -2:
-          warning('Erreur taille','La taille du fichier 1 est trop grande.');
+          warning('Erreur taille','La taille du fichier est trop grande.');
           break;
         case -3:
           warning('Erreur extension','L\'extension doit être l\'une des extensions suivantes: jpg, jpeg, gif, png.');
           break;
         default:
-          warning('Erreur','Le fichier 1 n\'a pas pu etre téléversé.');
+          warning('Erreur','Le fichier n\'a pas pu etre téléversé.');
       }
     }else{
       $query = $bdd -> prepare('UPDATE qualite_RR_question SET image= :image WHERE id = :id');
@@ -63,7 +63,7 @@ else
         remove_file($bdd,$_POST['old_file_1']);
       }
     }
-  } 
+  }
   $query = $bdd -> prepare('UPDATE qualite_RR_question SET type = :type,titre= :titre,question = :question, valide = :valide, ordre= :ordre WHERE id = :id');
   $query -> execute(array(
     'type' => $_POST['type'],
@@ -94,7 +94,26 @@ else
       $recherche = $_GET["recherche"];
   }
   ?>
-  <h2><?php echo "R&R" ; ?></h2>
+  <h2>R&amp;R</h2>
+  <style>
+  .img-hover{
+    visibility: hidden;
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:1000;
+    max-width: 80%;
+    max-height:80%;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px grey;
+    transition-delay: 0.1s;
+  }
+  .hov:hover .img-hover{
+    visibility: visible;
+    transition-delay: 1.5s;
+  }
+  </style>
   <div class="boutons_nav" style="display: flex; justify-content: center;">
     <a href="ajout.php" class="bouton_menu" style="margin-right:20%">Ajout</a>
     <a href="suppression.php" class="bouton_menu bouton_nav_selected">Modification/Suppression</a>
@@ -129,15 +148,17 @@ $nb=$_GET['nb'];
   $query ->bindValue(':titre','%'.$recherche.'%');
   $query ->bindValue(':nb',(int) $nb, PDO::PARAM_INT);
   $query ->execute();
-  while($Data = $query->fetch()){
-
-  ?>
-    <tr>
+  while($Data = $query->fetch()){ ?>
+    <tr class="hov">
       <td><?php echo $Data['ordre']; ?></td>
       <td><?php echo $Data['titre']; ?></td>
       <td><?php if($Data['type']){echo "MOI";}else{echo "MOD";} ?></td>
       <td><?php echo $Data['question'];?></td>
-      <td><a href="supprimer_question.php?id=<?php echo $Data['id']?>" class="btn btn-default pull-right">Modifier</a></td>
+      <td><img class="img-hover" src="<?php echo $img['chemin']; ?>" alt="Image"><td>
+      <td><a href="supprimer_question.php?id=<?php echo $Data['id']?>" class="btn btn-default pull-right">Modifier</a></td><?php
+      $query2=$bdd -> prepare('SELECT * FROM files WHere id = ?');
+      $query2 -> execute(array($Data['image']));
+      $img=$query2 -> fetch(); ?>
     </tr>
   <?php
 } ?>
