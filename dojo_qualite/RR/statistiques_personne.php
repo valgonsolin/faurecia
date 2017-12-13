@@ -30,7 +30,7 @@ else
     <th>Prénom</th>
     <th>Total questions traitées</th>
     <th>Taux de bonne reponses</th>
-    <th>quiz valide</th>
+    <th>R&amp;R valide</th>
 </tr>
 </thead>
 
@@ -54,10 +54,7 @@ while ($Data = $Query->fetch()) {
   $Query2->execute(array($identifiant));
 
   while ($Data2 = $Query2->fetch()) {
-      $valide =   $Data2['vrai_1']==$Data2['corrige_1'] &&
-        $Data2['vrai_2']==$Data2['corrige_2'] &&
-        $Data2['vrai_3']==$Data2['corrige_3'] &&
-        $Data2['vrai_4']==$Data2['corrige_4'];
+      $valide =   $Data2['vrai_1']==$Data2['valide'];
 
       if ($valide){ $bonne_reponse_id =$bonne_reponse_id + 1; }
       $tot_reponse_id +=1;
@@ -65,7 +62,7 @@ while ($Data = $Query->fetch()) {
     $Query3 = $bdd->prepare('SELECT * FROM qualite_RR_session WHERE qualite_RR_session.personne = ? ');
     $Query3->execute(array($identifiant));
     while ($Data3 = $Query3->fetch()) {
-      $validation= $validation || ($Data3['valide']==1);
+      $validation= $validation || ($Data3['succes']==1);
     }
 
     array_push($proportion_bonne_reponse_id, array ($identifiant, $nom, $prenom, $bonne_reponse_id, $tot_reponse_id, $validation));
@@ -83,7 +80,7 @@ foreach ($proportion_bonne_reponse_id as $element){
     <td><?php echo $element[4];?></td>
     <td><?php if ($element[4]>0) { echo (floatval($element[3])/$element[4])*100; echo "%"; }
               else { echo "0%" ; }  ?> </td>
-    <td> <?php  if ($validation){?>
+    <td> <?php  if ($element[5]){?>
                   <img src="ressources/checked.png" style="height: 30px; margin: 20px auto;" class="center-block">
         <?php    }else{?> <img src="ressources/cancel.png" style="height: 30px; margin: 20px auto;" class="center-block"> <?php } ?>
 

@@ -7,6 +7,9 @@ body {
   background-color: #efefef;
   font-family: 'clio', helvetica, sans-serif;
 }
+td{
+  vertical-align: middle !important;
+}
 .btn-default{
   border-color:#ccc;
   background-color: #ccc;

@@ -35,9 +35,9 @@ $n=$Qy->fetch();
 ?>
 
 <?php
-$Qy2 = $bdd->query('SELECT DISTINCT personne FROM qualite_RR_session WHERE valide=1 ');
+$Qy2 = $bdd->query('SELECT DISTINCT personne FROM qualite_RR_session WHERE succes=1 ');
 $nombre_valide=0;
-while($n2 = $Qy2->fetch()){
+while($n2 = $Qy2 -> fetch()){
   $nombre_valide+=1; }
 ?>
 <h3>Sur un total de <?php echo $n['nombre_total']; ?> personnes <?php echo $nombre_valide; ?> ont validé le quiz, soit <?php echo(floatval($nombre_valide)/$n['nombre_total'])*100; echo "%"; ?> de taux de réussite </h3>
@@ -57,10 +57,11 @@ while($n2 = $Qy2->fetch()){
 
 <?php
 
-$Query = $bdd->query('SELECT id,titre,question FROM qualite_RR_question ');
+$Query = $bdd->query('SELECT id,titre,question,ordre FROM qualite_RR_question ORDER BY ordre');
 $proportion_bonne_reponse_id = [];
 while ($Data = $Query->fetch()) {
   $identifiant = $Data['id'];
+  $ordre=$Data['ordre'];
   $ancien_titre = $Data['titre'];
   $question=$Data['question'];
   $tot_reponse_id = 0;
@@ -75,16 +76,13 @@ while ($Data = $Query->fetch()) {
   $Query2->execute(array($identifiant));
 
   while ($Data2 = $Query2->fetch()) {
-      $valide =   $Data2['vrai_1']==$Data2['corrige_1'] &&
-        $Data2['vrai_2']==$Data2['corrige_2'] &&
-        $Data2['vrai_3']==$Data2['corrige_3'] &&
-        $Data2['vrai_4']==$Data2['corrige_4'];
+      $valide =   $Data2['vrai_1']==$Data2['valide'];
 
       if ($valide){ $bonne_reponse_id =$bonne_reponse_id + 1; }
       $tot_reponse_id +=1;
     }
 
-  array_push($proportion_bonne_reponse_id, array ($identifiant, $ancien_titre, $question, $bonne_reponse_id, $tot_reponse_id));
+  array_push($proportion_bonne_reponse_id, array ($identifiant, $ancien_titre, $question, $bonne_reponse_id, $tot_reponse_id,$ordre));
 }
 ?>
 
@@ -94,7 +92,7 @@ foreach ($proportion_bonne_reponse_id as $element){
 ?>
 
   <tr class="stats" onclick="window.location='statistiques_details.php?id=<?php echo $element[0]; ?>';" title="Cliquez ici pour accéder aux statistiques de la question">
-    <td><?php echo $element[0];?></td>
+    <td><?php echo $element[5];?></td>
     <td><?php echo $element[1];?></td>
     <td><?php echo $element[2];?></td>
     <td><?php echo $element[4];?></td>

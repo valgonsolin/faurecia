@@ -121,7 +121,7 @@ if ($score>$limite){?>
     <p style="text-align: center;">Vous avez passez le test avec succès.</p>
 
     <?php
-    $Query = $bdd->prepare("UPDATE qualite_RR_session SET valide=1 WHERE id = ?");
+    $Query = $bdd->prepare("UPDATE qualite_RR_session SET succes=1 WHERE id = ?");
     $Query->execute(array($_GET["id"]));
 
 }else{
@@ -129,7 +129,7 @@ if ($score>$limite){?>
     <img src="ressources/cancel.png" style="height: 128px; margin: 20px auto;" class="center-block">
     <p style="text-align: center;">Vous n'avez pas réussi le test. </p>
     <?php
-    $Query = $bdd->prepare("UPDATE qualite_RR_session SET valide=0 WHERE id = ?");
+    $Query = $bdd->prepare("UPDATE qualite_RR_session SET succes=0 WHERE id = ?");
     $Query->execute(array($_GET["id"]));
 }
 

@@ -46,7 +46,7 @@ if (isset($_GET["recherche"])){
 <?php
 
 $Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN
-                        (SELECT id as id_session, valide, personne, type FROM
+                        (SELECT id as id_session, succes, personne, type FROM
                             (SELECT MAX(fin) as last_fin FROM qualite_RR_session WHERE fin IS NOT NULL GROUP BY personne ) as t_fin
                             LEFT JOIN qualite_RR_session ON qualite_RR_session.fin = last_fin) as result
                         ON result.personne = profil.id
@@ -66,7 +66,7 @@ while ($Data = $Query->fetch()) {
         if($Data['id_session'] != NULL){
         if (($Data["mo"] == 'MOD' and $Data['type'] == 0 )or
             ($Data["mo"] != 'MOD' and $Data['type'] == 1 )){
-            if ($Data['valide'] > 0){
+            if ($Data['succes'] > 0){
                 ?>
                 <td class="clickable" onclick="window.location='resultats.php?id=<?php echo $Data['id_session']; ?>'"><img src="ressources/checked.png" style="
             height: 24px;
