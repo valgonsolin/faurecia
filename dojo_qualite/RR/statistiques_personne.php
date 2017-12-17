@@ -25,7 +25,7 @@ else
 <table class="table">
 <thead class="thead">
 <tr>
-    <th style="width: 150px;">Idnetifiant</th>
+    <th style="width: 150px;">Identifiant</th>
     <th>Nom</th>
     <th>Prénom</th>
     <th>Total questions traitées</th>
@@ -74,11 +74,11 @@ foreach ($proportion_bonne_reponse_id as $element){
 ?>
 
 <tr>
-    <td><?php echo $element[0];?></a></td>
+    <td><?php echo $element[0];?></td>
     <td><?php echo $element[1];?></td>
     <td><?php echo $element[2];?></td>
     <td><?php echo $element[4];?></td>
-    <td><?php if ($element[4]>0) { echo (floatval($element[3])/$element[4])*100; echo "%"; }
+    <td><?php if ($element[4]>0) { echo round(((floatval($element[3])/$element[4])*100),2); echo "%"; }
               else { echo "0%" ; }  ?> </td>
     <td> <?php  if ($element[5]){?>
                   <img src="ressources/checked.png" style="height: 30px; margin: 20px auto;" class="center-block">

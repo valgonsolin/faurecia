@@ -82,7 +82,7 @@ foreach ($proportion_bonne_reponse_id as $element){
     <td><?php echo $element[1];?></td>
     <td><?php echo $element[2];?></td>
     <td><?php echo $element[4];?></td>
-    <td><?php if ($element[4]>0) { echo (floatval($element[3])/$element[4])*100; echo "%"; }
+    <td><?php if ($element[4]>0) { echo round(((floatval($element[3])/$element[4])*100),2); echo "%"; }
               else { echo "0%" ; }  ?> </td>
     <td> <?php  if ($validation){?>
                   <img src="ressources/checked.png" style="height: 30px; margin: 20px auto;" class="center-block">

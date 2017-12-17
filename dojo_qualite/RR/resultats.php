@@ -26,7 +26,7 @@ $Query->execute(array($_GET["id"]));
 ?>
 <h2>Résultats R&amp;R</h2>
 <table class="table">
-<h4>Réponse aux questions</h4>
+<h4>Réponse aux questions<a href="imprimer_fiche.php?id=<?php echo $_GET['id']; ?>" target=_blank class="pull-right btn btn-default">Imprimer les résultats</a></h4>
 <div style="height: 30px"></div>
 <table class="table">
 <thead class="thead">
