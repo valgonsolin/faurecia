@@ -1,0 +1,8 @@
+Dans le launchboard, les f et r sont des dates ? Qu'est ce que cela signifie signifie sinon ?
+Quels sont les couleurs dans l'excel ?
+Quel est le lien entre le pourcentage du launchboard a date et la date ? Enfin quel est ce calcul ?
+L'onglet statistiques est lié à un projet ou à tous les projets ?
+L'extraction donne l'excel avec tous les projets ?  Ou du coup seulement celui sur lequel on est ?
+
+Le but est d'ajouter un projet une fois puis qu'il soit immuable ? ou que on puisse le modifier entierement ?
+Comment s'effectue la validation par le manager ? Date par date ? Un projet est validé d'un coup ?

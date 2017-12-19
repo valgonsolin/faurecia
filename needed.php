@@ -86,7 +86,7 @@ global $url;
       <div class="dropdown">
 			<a href="<?php echo $url; ?>" class="bouton_menu <?php if($selected=='methode'){echo ' bouton_menu_selected';} ?>">Méthode</a>
 				<div class="dropdown-content">
-                    <a href="<?php echo $url; ?>" class="bouton_dropdown" >LaunchBoard</a>
+                    <a href="<?php echo $url; ?>/methode/launchboard" class="bouton_dropdown" >LaunchBoard</a>
                     <a href="<?php echo $url; ?>" class="bouton_dropdown">Formation PPTL</a>
                     <a href="<?php echo $url; ?>" class="bouton_dropdown">Charge</a>
                 </div>
