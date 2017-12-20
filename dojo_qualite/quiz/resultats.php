@@ -129,6 +129,8 @@ array_push($proportion_bonne_reponse_cat, array($ancien_titre, $bonne_reponse_ca
 
 
 <h4>Statistiques</h4>
+
+<table class="table">
     <thead class="thead">
         <tr>
             <th >Categorie</th>
@@ -139,7 +141,7 @@ array_push($proportion_bonne_reponse_cat, array($ancien_titre, $bonne_reponse_ca
         </tr>
     </thead>
 
-    <tbody>
+<tbody>
         <?php
 
 

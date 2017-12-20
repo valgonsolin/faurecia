@@ -102,7 +102,7 @@ while ($Data = $Query->fetch()) {
             <?php
         }
       }else{
-        echo "<td></td>";
+        echo "<td class="; echo "clickable>"; echo "aucune session" ; echo" </td>";
       }
 
 
