@@ -65,11 +65,64 @@ drawMenu('launchboard');
 //equipe id vers une autre table equipe qui contient les noms et mails de l'equipe
 //kickoff
 
+$recherche = "";
+if (isset($_GET["recherche"])){
+    $recherche = $_GET["recherche"];
+}
+$query = $bdd -> prepare('SELECT * FROM launchboard WHERE (nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre)');
+$query ->bindValue(':titre','%'.$recherche.'%');
+$query ->bindValue(':nom','%'.$recherche.'%');
+$query ->bindValue(':prenom','%'.$recherche.'%');
+$query ->execute();
 
 ?>
+<h2>LaunchRoom</h2>
+<form class="form-inline">
+  <div class="form-group">
+    <label for="recherche">Recherche :</label>
+    <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="Question" value="<?php echo $recherche;?>">
+  </div>
+  <button type="submit" class="btn btn-default">Rechercher</button>
+</form>
+<table class="table">
+<thead class="thead">
+<tr>
+    <th>Titre</th>
+    <th>Nom</th>
+    <th>Prenom</th>
+    <th>Description</th>
+    <th>% LB</th>
+    <th>Gate</th>
+    <th>Image</th>
+</tr>
+</thead>
+<tbody> <?php
+while($Data = $query -> fetch()){
+  $q = $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+  $q -> execute(array($Data['img_presentation']));?>
+<tr class="clickable" onclick="window.location='projet.php?id=<?php echo $Data['id']; ?>'">
+  <td><?php echo $Data['titre']; ?></td>
+  <td><?php echo $Data['nom']; ?></td>
+  <td><?php echo $Data['prenom']; ?></td>
+  <td><?php echo $Data['description']; ?></td>
+  <td></td>
+  <td></td>
+  <td><?php
+    if($Data['img_presentation'] != NULL){
+      $q= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+      $q -> execute(array($Data['img_presentation']));
+      $img= $q -> fetch();?>
+      <img src="<?php echo $img['chemin']; ?>" style="max-width:100px; max-height:100px;  margin:5px;" alt="Image">
+    <?php } ?>
+  </td>
+</tr>
+<?php
+}
 
+?>
+</tbody>
 
-
+</table>
 <?php
 drawFooter();
  ?>
