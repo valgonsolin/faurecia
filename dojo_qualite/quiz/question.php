@@ -78,7 +78,7 @@ if (! isset($_GET["id"])){
                       }else{
                         echo $Data['reponse_2']; }?></label>
                 </div>
-                <div class="checkbox disabled">
+                <div class="checkbox">
                     <label><input type="checkbox" name="rep_3"><?php
                       if(preg_match('#^img=#',$Data['reponse_3'])){
                         $id=substr($Data['reponse_3'],4);
@@ -90,7 +90,7 @@ if (! isset($_GET["id"])){
                       }else{
                         echo $Data['reponse_3']; }?></label>
                 </div>
-                <div class="checkbox disabled">
+                <div class="checkbox">
                     <label><input type="checkbox" name="rep_4"><?php
                       if(preg_match('#^img=#',$Data['reponse_4'])){
                         $id=substr($Data['reponse_4'],4);
