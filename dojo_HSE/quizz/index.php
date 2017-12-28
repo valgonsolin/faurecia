@@ -46,7 +46,7 @@ if (isset($_GET["recherche"])){
 $Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN
                         (SELECT id as id_session, valide, personne, type FROM
                             (SELECT MAX(fin) as last_fin FROM qualite_hse_session WHERE fin IS NOT NULL GROUP BY personne ) as t_fin
-                            LEFT JOIN qualite_quiz_session ON qualite_hse_session.fin = t_fin.last_fin) as result
+                            LEFT JOIN qualite_hse_session ON qualite_hse_session.fin = t_fin.last_fin) as result
                         ON result.personne = profil.id
                         WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0');
 $Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%'));
