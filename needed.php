@@ -76,8 +76,8 @@ global $url;
       <div class="dropdown">
       <a href="/dojo_HSE/mandatory_rules.php" class="bouton_menu <?php if($selected=='dojo_hse'){echo ' bouton_menu_selected';} ?>">Dojo HSE </a>
       <div class="dropdown-content">
-              <a href="<?php echo $url; ?>/dojo_HSE/mandatory_rules.php" class="bouton_dropdown" >mandatory rules</a>
-              <a href="<?php echo $url; ?>/dojo_HSE/quizz/index.php" class="bouton_dropdown">quizz</a>
+              <a href="<?php echo $url; ?>/dojo_HSE/mandatory_rules.php" class="bouton_dropdown" >Mandatory Rules</a>
+              <a href="<?php echo $url; ?>/dojo_HSE/quizz/index.php" class="bouton_dropdown">Quiz</a>
 
       </div>
       </div>
