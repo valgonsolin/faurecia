@@ -18,6 +18,15 @@ $Query->execute(array($_GET["id"]));
 <body>
 <div style="width:80%; margin: 0 auto;">
   <h2>Fiche Réponse R&amp;R</h2>
+  <?php
+  $q = $bdd -> prepare('SELECT * FROM qualite_RR_session as q JOIN profil ON profil.id = q.personne WHERE q.id= ?');
+  $q -> execute(array($_GET['id']));
+  $result = $q -> fetch();
+  echo "<p>".$result['nom'];
+  echo "   ".$result['prenom'];
+  echo "&emsp;&emsp;&emsp;Type : ".$result['mo'];
+  echo "<span style='float:right;'>".$result['fin']."</span></p>";
+   ?>
   <table class="table">
   <thead class="thead">
   <tr>
@@ -102,4 +111,4 @@ $Query->execute(array($_GET["id"]));
 </body>
 <script>
     window.print();
-</script>
+</script>'"
