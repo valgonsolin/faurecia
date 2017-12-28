@@ -73,8 +73,14 @@ global $url;
                     <a href="<?php echo $url; ?>/dojo_qualite/RR/index.php" class="bouton_dropdown"> <?php echo "R&R" ; ?></a>
                   </div>
 			</div>
-            <a class="bouton_menu <?php if($selected=='dojo_hse'){echo ' bouton_menu_selected';} ?>">Dojo HSE </a>
+      <div class="dropdown">
+      <a href="/dojo_HSE/mandatory_rules.php" class="bouton_menu <?php if($selected=='dojo_hse'){echo ' bouton_menu_selected';} ?>">Dojo HSE </a>
+      <div class="dropdown-content">
+              <a href="<?php echo $url; ?>/dojo_HSE/mandatory_rules.php" class="bouton_dropdown" >mandatory rules</a>
+              <a href="<?php echo $url; ?>/dojo_HSE/quizz/index.php" class="bouton_dropdown">quizz</a>
 
+      </div>
+      </div>
 			<div class="dropdown">
 			<a href="/logistique/index.php" class="bouton_menu <?php if($selected=='logistique'){echo ' bouton_menu_selected';} ?>">Logistique</a>
 				<div class="dropdown-content">
