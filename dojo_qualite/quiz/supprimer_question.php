@@ -8,14 +8,17 @@ drawMenu('quiz');
 if(empty($_SESSION['login']))
 { ?>
   <h2>Quiz</h2>
-  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
-  <a href="/identification.php?redirection=dojo_qualite/quiz/ajout.php"><button class="btn btn-default">Se connecter</button></a>
-  <a href="index.php"> Retourner au quiz</a>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
+  <a href="/moncompte/identification.php?redirection=dojo_qualite/quiz/ajout.php"><button class="btn btn-default">Se connecter</button></a>
+  <a href="index.php" class="btn btn-default"> Retourner au quiz</a>
 <?php
 }
 else
-{?>
-  <h2>Quiz</h2>
+{
+  echo "<h2>Quiz</h2>";
+  if(!$_SESSION['qualite']){
+    echo "<p>Vous n'avez pas les droits pour accéder à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
+  }else{ ?>
   <div class="boutons_nav" style="display: flex; justify-content: center;">
     <a href="ajout.php" class="bouton_menu" style="margin-right:20%">Ajout</a>
     <a href="suppression.php" class="bouton_menu bouton_nav_selected">Modification/Suppression</a>
@@ -147,10 +150,8 @@ else
 <?php
 }
 }
+}
 ?>
-
-
-
 
 
 <?php

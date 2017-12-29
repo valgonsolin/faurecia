@@ -6,7 +6,7 @@ drawheader('codir');
 if(empty($_SESSION['login'])){ ?>
   <h2>Edition profil</h2>
   <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
-  <a href="/identification.php?redirection=editer_profil.php"><button class="btn btn-default">Se connecter</button></a>
+  <a href="/moncompte/identification.php?redirection=editer_profil.php"><button class="btn btn-default">Se connecter</button></a>
   <a href="/index.php" class="btn btn-default">Accueil</a>
 <?php }else{
 

@@ -8,13 +8,17 @@ drawMenu('quiz');
 if(empty($_SESSION['login']))
 { ?>
   <h2>Quiz</h2>
-  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
-  <a href="/identification.php?redirection=dojo_qualite/quiz/ajout.php"><button class="btn btn-default">Se connecter</button></a>
-  <a href="index.php"> Retourner au quiz</a>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
+  <a href="/moncompte/identification.php?redirection=dojo_qualite/quiz/ajout.php"><button class="btn btn-default">Se connecter</button></a>
+  <a href="index.php" class="btn btn-default"> Retourner au quiz</a>
 <?php
 }
 else
 {
+  if(!$_SESSION['qualite']){
+    echo "<h2>Quiz</h2>";
+    echo "<p>Vous n'avez pas les droits pour accéder à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
+  }else{
   if(isset($_POST['reset'])){
     $query= $bdd -> query('SELECT * FROM qualite_quiz_question');
     $i=0;
@@ -184,6 +188,6 @@ $test->execute(); ?>
     <span class="clear" style="clear: both; display: block;"></span>
   </form>
 <?php
-}
+}}
 
 drawFooter();

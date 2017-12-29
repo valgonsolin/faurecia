@@ -7,13 +7,17 @@ drawMenu('quiz');
 if(empty($_SESSION['login']))
 { ?>
   <h2>Statistiques</h2>
-  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
-  <a href="/identification.php?redirection=dojo_qualite/quiz/statistiques.php"><button class="btn btn-default">Se connecter</button></a>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
+  <a href="/moncompte/identification.php?redirection=dojo_qualite/quiz/statistiques.php"><button class="btn btn-default">Se connecter</button></a>
   <a href="index.php" class="btn btn-default">Quiz</a>
 <?php
 }
 else
-{ ?>
+{
+  if(!$_SESSION['qualite']){
+    echo "<h2>Statistiques</h2>";
+    echo "<p>Vous n'avez pas les droits pour accéder à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
+  }else{?>
 
 <h2> Statistiques liés à la question <?php echo $_GET['id'] ?> </h2>
 
@@ -144,6 +148,7 @@ while ($Data = $Query->fetch()) {
 <a href="statistiques.php" class="btn btn-default">Retour</a>
 
 <?php
+}
 }
 drawFooter();
 ?>

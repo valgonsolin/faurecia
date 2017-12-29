@@ -8,14 +8,17 @@ drawMenu('quiz');
 if(empty($_SESSION['login']))
 { ?>
   <h2>Statistiques</h2>
-  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
-  <a href="/identification.php?redirection=dojo_HSE/quizz/statistiques.php"><button class="btn btn-default">Se connecter</button></a>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
+  <a href="/moncompte/identification.php?redirection=dojo_HSE/quizz/statistiques.php"><button class="btn btn-default">Se connecter</button></a>
   <a href="index.php" class="btn btn-default">Quiz</a>
 <?php
 }
 else
-{ ?>
-<h2> Statistiques </h2>
+{
+  echo "<h2> Statistiques </h2>";
+  if(!$_SESSION['hse']){
+    echo "<p>Vous n'avez pas les droits pour accéder à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
+  }else{?>
 <div id="lien_page">
 <div class="boutons_nav" style="display: flex; justify-content: center;">
   <a href="#lien_page" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Statistiques par questions</a>
@@ -104,5 +107,5 @@ foreach ($proportion_bonne_reponse_id as $element){
 
 
 <?php
-}
+} }
 drawFooter(); ?>

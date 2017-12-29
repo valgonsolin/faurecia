@@ -49,7 +49,7 @@ global $url;
         <div id="menu">
 
             <div class="dropdown">
-            <a href="<?php echo $url; ?>" class="bouton_menu  <?php if($selected=='RH'){echo ' bouton_menu_selected';} ?> dropbtn" >RH</a>
+            <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_menu  <?php if($selected=='RH'){echo ' bouton_menu_selected';} ?> dropbtn" >RH</a>
                 <div class="dropdown-content">
                     <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Présentation Usine</a>
                     <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Idées améliorations</a>
@@ -98,7 +98,7 @@ global $url;
                 </div>
 			</div>
 			<a href="/codir/kamishibai/index.php" class="bouton_menu <?php if($selected=='codir'){echo ' bouton_menu_selected';} ?>">Codir</a>
-            <a class="bouton_menu <?php if($selected=='connexion'){echo ' bouton_menu_selected';} ?>"" href=<?php if(!empty($_SESSION['login'])){echo "/deconnexion.php";}else{echo "/identification.php";} ?>><?php if(!empty($_SESSION['login'])){echo "Déconnexion";}else{echo "Connexion";} ?></a>
+            <a class="bouton_menu <?php if($selected=='moncompte'){echo ' bouton_menu_selected';} ?>"" href=<?php if(!empty($_SESSION['login'])){echo "/moncompte";}else{echo "/moncompte/identification.php";} ?>><?php if(!empty($_SESSION['login'])){echo "Mon Compte";}else{echo "Connexion";} ?></a>
 		</div>
     </div>
 

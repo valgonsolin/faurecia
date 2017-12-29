@@ -9,7 +9,7 @@ if(empty($_SESSION['login']))
 { ?>
   <h2>Statistiques</h2>
   <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
-  <a href="/identification.php?redirection=dojo_qualite/RR/statistiques.php"><button class="btn btn-default">Se connecter</button></a>
+  <a href="/moncompte/identification.php?redirection=dojo_qualite/RR/statistiques.php"><button class="btn btn-default">Se connecter</button></a>
   <a href="index.php" class="btn btn-default">R&amp;R</a>
 <?php
 }

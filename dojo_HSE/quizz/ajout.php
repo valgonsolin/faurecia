@@ -8,14 +8,17 @@ drawMenu('quizz');
 if(empty($_SESSION['login']))
 { ?>
   <h2>Quiz</h2>
-  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
-  <a href="/identification.php?redirection=dojo_HSE/quizz/ajout.php"><button class="btn btn-default">Se connecter</button></a>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
+  <a href="/moncompte/identification.php?redirection=dojo_HSE/quizz/ajout.php"><button class="btn btn-default">Se connecter</button></a>
   <a href="index.php" class="btn btn-default">Quiz</a>
 <?php
 }
 else
 {
   echo "<h2>Quiz</h2>";
+  if(!$_SESSION['hse']){
+    echo "<p>Vous n'avez pas les droits pour accéder à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
+  }else{
   $lastOrdre=-1;
   $query= $bdd -> query('SELECT * FROM qualite_hse_question ORDER BY ordre DESC LIMIT 1');
   while ($Data = $query->fetch()) {
@@ -147,7 +150,7 @@ else
 
 
 <?php
-}
+} }
 ?>
 
 

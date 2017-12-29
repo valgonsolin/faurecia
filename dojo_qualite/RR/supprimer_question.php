@@ -8,15 +8,18 @@ drawMenu('RR');
 if(empty($_SESSION['login']))
 { ?>
   <h2>R&amp;R</h2>
-  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
-  <a href="/identification.php?redirection=dojo_qualite/quiz/ajout.php"><button class="btn btn-default">Se connecter</button></a>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
+  <a href="/moncompte/identification.php?redirection=dojo_qualite/quiz/ajout.php"><button class="btn btn-default">Se connecter</button></a>
   <a href="index.php"> Retourner au R&amp;R</a>
 <?php
 }
 else
 {
+  echo "<h2>R&amp;R</h2>";
+  if(!$_SESSION['rr']){
+    echo "<p>Vous n'avez pas les droits pour accéder à cette partie.<a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
+  }else{
   if(!(isset($_GET['id']))){?>
-    <h2>R&amp;R</h2>
     <h4>OUPS... Votre session est inconnu.</h4>
     <a href="index.php"> Retourner au R&amp;R</a>
   <?php }else{
@@ -93,7 +96,7 @@ else
 
 <?php
 }
-}
+}}
 ?>
 
 

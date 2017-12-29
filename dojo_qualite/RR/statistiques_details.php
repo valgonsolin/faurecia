@@ -7,13 +7,17 @@ drawMenu('RR');
 if(empty($_SESSION['login']))
 { ?>
   <h2>Statistiques</h2>
-  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
-  <a href="/identification.php?redirection=dojo_qualite/RR/statistiques.php"><button class="btn btn-default">Se connecter</button></a>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
+  <a href="/moncompte/identification.php?redirection=dojo_qualite/RR/statistiques.php"><button class="btn btn-default">Se connecter</button></a>
   <a href="index.php" class="btn btn-default">R&amp;R</a>
 <?php
 }
 else
 {
+  if(!$_SESSION['rr']){
+    echo "<h2>Statistiques</h2>";
+    echo "<p>Vous n'avez pas les droits pour accéder à cette partie.<a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
+  }else{
   $Query = $bdd->prepare('SELECT * FROM qualite_RR_reponse
     JOIN qualite_RR_session ON qualite_RR_reponse.session=qualite_RR_session.id
     JOIN profil ON qualite_RR_session.personne=profil.id
@@ -83,6 +87,6 @@ else
 <a href="statistiques.php" class="btn btn-default">Retour</a>
 
 <?php
-}
+}   }
 drawFooter();
 ?>

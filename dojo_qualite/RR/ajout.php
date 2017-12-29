@@ -14,15 +14,17 @@ $lastOrdre= $Data['ordre'];
 if(empty($_SESSION['login']))
 { ?>
   <h2>R&amp;R</h2>
-  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
-  <a href="/identification.php?redirection=dojo_qualite/RR/ajout.php"><button class="btn btn-default">Se connecter</button></a>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
+  <a href="/moncompte/identification.php?redirection=dojo_qualite/RR/ajout.php"><button class="btn btn-default">Se connecter</button></a>
   <a href="index.php" class="btn btn-default">R&amp;R</a>
 <?php
 }
 else
 {
   echo "<h2>R&R</h2>";
-
+  if(!$_SESSION['rr']){
+    echo "<p>Vous n'avez pas les droits pour accéder à cette partie.<a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
+  }else{
   if(!empty($_POST)){
     $erreur=false;
     if($_FILES['file_1']['name'] != ""){
@@ -112,6 +114,7 @@ else
 
 
 <?php
+}
 }
 ?>
 
