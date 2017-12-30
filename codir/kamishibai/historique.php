@@ -19,7 +19,7 @@ $recherche = "";
         <button type="submit" class="btn btn-default">Rechercher</button>
     </form>
 
-    <p style="margin-top: 20px;margin-bottom: 20px;">Choisissez votre profil ou <a href="/editer_profil.php">ajoutez un nouveau profil</a>.</p>
+    <p style="margin-top: 20px;margin-bottom: 20px;">Choisissez votre profil ou <a href="/moncompte/editer_profil.php">ajoutez un nouveau profil</a>.</p>
 
     <table class="table"
     <thead class="thead">

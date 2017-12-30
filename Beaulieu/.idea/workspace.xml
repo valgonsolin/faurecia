@@ -54,8 +54,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editer_profil.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/editer_profil.php">
+      <file leaf-file-name="moncompte/editer_profil.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/moncompte/editer_profil.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3">
               <caret line="13" column="43" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="43" />
@@ -227,7 +227,7 @@
         <option value="$PROJECT_DIR$/codir/kamishibai/tirer_carte.php" />
         <option value="$PROJECT_DIR$/needed.php" />
         <option value="$PROJECT_DIR$/codir/kamishibai/imprimer_fiche.php" />
-        <option value="$PROJECT_DIR$/editer_profil.php" />
+        <option value="$PROJECT_DIR$/moncompte/editer_profil.php" />
         <option value="$PROJECT_DIR$/codir/kamishibai/reponse.php" />
         <option value="$PROJECT_DIR$/codir/kamishibai/index.php" />
         <option value="$PROJECT_DIR$/codir/kamishibai/historique.php" />
@@ -845,7 +845,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editer_profil.php">
+    <entry file="file://$PROJECT_DIR$/moncompte/editer_profil.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3">
           <caret line="13" column="43" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="43" />

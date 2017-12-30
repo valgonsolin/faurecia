@@ -74,7 +74,7 @@ while ($Data = $Query->fetch()) {
     ?>
 
     <tr>
-        <td class="clickable" title="Cliquez pour voir le profil" onclick="window.location='/editer_profil.php?id=<?php echo $Data['id']; ?>'"> <?php echo $Data['nom']; ?> </td>
+        <td> <?php echo $Data['nom']; ?> </td>
         <td><?php echo $Data['prenom']; ?></td>
         <td><?php echo $Data['tournee']; ?></td>
         <td><?php echo $Data['uap']; ?></td>

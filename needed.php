@@ -55,8 +55,9 @@ global $url;
                     <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Idées améliorations</a>
                     <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Formations</a>
                     <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Plan de rotation</a>
-                    <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Profils</a>
-
+                    <?php if((isset($_SESSION['login'])) && $_SESSION['admin']){ ?>
+                    <a href="<?php echo $url; ?>/moncompte/administration.php" class="bouton_dropdown" >Profils</a>
+                  <?php } ?>
                 </div>
             </div>
             <div class="dropdown">

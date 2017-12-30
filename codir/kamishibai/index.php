@@ -11,24 +11,20 @@ $recherche = "";
 if (isset($_GET["recherche"])){
     $recherche = $_GET["recherche"];
 }
+if(empty($_SESSION['login']))
+{ ?>
+  <h2>Kamishibai</h2>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
+  <a href="/moncompte/identification.php?redirection=codir/kamishibai"><button class="btn btn-default">Se connecter</button></a>
+  <a href="<?php echo $url; ?>" class="btn btn-default">Accueil</a>
+<?php
+}
+else
+{
 
+    echo "<h2>Kamishibai</h2>";
 ?>
-
-    <h2>Kamishibai</h2>
-
-
-    <form class="form-inline">
-        <div class="form-group">
-            <label for="recherche">Recherche :</label>
-            <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="Nom, Prénom" value="<?php echo $recherche;?>">
-        </div>
-        <button type="submit" class="btn btn-default">Rechercher</button>
-    </form>
-
     <p style="margin-top: 20px;margin-bottom: 20px;"><a href="historique.php">Voir l'historique </a>.</p>
-
-    <p style="margin-top: 20px;margin-bottom: 20px;">Choisissez votre profil ou <a href="/editer_profil.php">ajoutez un nouveau profil</a>.</p>
-
 
     <table class="table"
     <thead class="thead">
@@ -48,13 +44,13 @@ if (isset($_GET["recherche"])){
     $Query = $bdd->prepare('SELECT * FROM profil
                         LEFT JOIN (SELECT id as id_reponse, profil as id_profil FROM codir_kamishibai_reponse WHERE cloture = 0 GROUP BY id_profil) AS reponse
                         ON reponse.id_profil = profil.id
-                        WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0');
-    $Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%'));
+                        WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and profil.id = ?');
+    $Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%',$_SESSION['id']));
     while ($Data = $Query->fetch()) {
         ?>
 
         <tr>
-            <td><a href="/editer_profil.php?id=<?php echo $Data['id']; ?>"> <?php echo $Data['nom']; ?> </a> </td>
+            <td> <?php echo $Data['nom']; ?> </a> </td>
             <td><?php echo $Data['prenom']; ?></td>
             <td><?php echo $Data['tournee']; ?></td>
             <td><?php echo $Data['uap']; ?></td>
@@ -79,4 +75,5 @@ if (isset($_GET["recherche"])){
     </tbody>
     </table>
 <?php
+}
 drawFooter();

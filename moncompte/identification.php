@@ -22,6 +22,7 @@
           $_SESSION['qualite'] = $Data['qualite'];
           $_SESSION['rr'] = $Data['rr'];
           $_SESSION['hse'] = $Data['hse'];
+          $_SESSION['kamishibai'] = $Data['kamishibai'];
           ob_end_clean();
 
           if(isset($_GET['redirection'])){
