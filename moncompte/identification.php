@@ -28,7 +28,7 @@
           if(isset($_GET['redirection'])){
             header('Location: '.$url."/".$_GET['redirection']);
           }else{
-            header('Location: '.$url);
+            header('Location: '.$url."/moncompte");
           }
           exit();
         }else{

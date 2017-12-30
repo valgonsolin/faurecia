@@ -2,6 +2,13 @@
 include_once "../needed.php";
 
 drawHeader('moncompte');
+function img($int){
+    if($int>0){
+      return '<img src="ressources/checked.png" style="height: 20px;" >';
+    }else{
+        return '<img src="ressources/cancel.png" style="height: 20px;" >';
+    }
+}
 echo "<h2>Mon Compte</h2>";
 
 if(!empty($_POST)){
@@ -49,6 +56,13 @@ if(empty($_SESSION['login'])){
   $tournee = $Data['tournee'];
   ?>
 <p>Connecté en tant que <?php echo $_SESSION['nom']."  ".$_SESSION['prenom']; ?></p>
+<p><h4>Droits :</h4><b>
+  &emsp;&emsp;Admin : <?php echo(img($_SESSION['admin'])); ?>&emsp;&emsp;
+  Dojo qualité : <?php echo(img($_SESSION['qualite'])); ?>&emsp;&emsp;
+  R&amp;R : <?php echo(img($_SESSION['rr'])); ?>&emsp;&emsp;
+  HSE : <?php echo(img($_SESSION['hse'])); ?>&emsp;&emsp;
+  Kamishibai : <?php echo(img($_SESSION['kamishibai'])); ?></b>
+</p>
 <div class="btn btn-default" data-toggle="modal" data-target="#modal">Modifier le mot de passe</div>
 <div data-toggle="modal" data-target="#modal2" class="btn btn-default">Modifier mon profil</div>
 <a href="deconnexion.php" class="btn btn-default pull-right">Déconnexion</a>
