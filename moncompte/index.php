@@ -61,7 +61,8 @@ if(empty($_SESSION['login'])){
   Dojo qualité : <?php echo(img($_SESSION['qualite'])); ?>&emsp;&emsp;
   R&amp;R : <?php echo(img($_SESSION['rr'])); ?>&emsp;&emsp;
   HSE : <?php echo(img($_SESSION['hse'])); ?>&emsp;&emsp;
-  Kamishibai : <?php echo(img($_SESSION['kamishibai'])); ?></b>
+  Kamishibai : <?php echo(img($_SESSION['kamishibai'])); ?>
+  Logistique : <?php echo(img($_SESSION['logistique'])); ?></b>
 </p>
 <div class="btn btn-default" data-toggle="modal" data-target="#modal">Modifier le mot de passe</div>
 <div data-toggle="modal" data-target="#modal2" class="btn btn-default">Modifier mon profil</div>

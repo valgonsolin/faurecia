@@ -87,7 +87,9 @@ global $url;
 				<div class="dropdown-content">
                     <a href="<?php echo $url; ?>/logistique/index.php" class="bouton_dropdown" >Alerte composant</a>
                     <a href="<?php echo $url; ?>/logistique/pieces.php" class="bouton_dropdown">Pièces</a>
+                                  <?php if((isset($_SESSION['login'])) && $_SESSION['logistique']){ ?>
                     <a href="<?php echo $url; ?>/logistique/update.php" class="bouton_dropdown">Mise à jour</a>
+                  <?php } ?>
                 </div>
 			</div>
       <div class="dropdown">

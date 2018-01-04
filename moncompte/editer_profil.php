@@ -31,6 +31,7 @@ if(isset($_GET['id'])){
     $hse = $Data['hse'];
     $rr = $Data['rr'];
     $kamishibai = $Data['kamishibai'];
+    $logistique = $Data['logistique'];
     $qualite= $Data['qualite'];
 }else{
 ?>
@@ -48,6 +49,7 @@ if(isset($_GET['id'])){
     $hse=0;
     $rr=0;
     $kamishibai=0;
+    $logistique=0;
 }
 ?>
     <form class="form-horizontal" method="post" action="administration.php">
@@ -111,11 +113,13 @@ if(isset($_GET['id'])){
             <input type="hidden" name="rr" value="0">
             <input type="hidden" name="hse" value="0">
             <input type="hidden" name="kamishibai" value="0">
+            <input type="hidden" name="logistique" value="0">
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="admin" <?php if($admin){echo "checked";} ?>>Admin</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="qualite" <?php if($qualite){echo "checked";} ?>>Dojo Qualite</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="rr" <?php if($rr){echo "checked";} ?>>R&amp;R</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="hse" <?php if($hse){echo "checked";} ?>>HSE</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="kamishibai" <?php if($kamishibai){echo "checked";} ?>>Kamishibai</label>
+            <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="logistique" <?php if($logistique){echo "checked";} ?>>Logistique</label>
           </div>
         </div>
         <?php if(!isset($_GET['id'])){ ?>

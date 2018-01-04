@@ -7,10 +7,13 @@ drawMenu('update');
 
 echo "<h2>Mise à jour de la base de données des pièces</h2>";
 if(empty($_SESSION['login'])){ ?>
-  <h4>Vous devez être connecté en tant qu'administrateur pour accéder à cette partie.</h4>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
   <a href="/moncompte/identification.php?redirection=logistique/update.php"><button class="btn btn-default">Se connecter</button></a>
   <a href="/index.php" class="btn btn-default">Accueil</a>
 <?php }else{
+  if(!$_SESSION['logistique']){
+    echo "<p>Vous n'avez pas les droits pour accéder à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
+  }else{
 function drawform(){ ?>
   <div class="row">
     <div class="col-md-6">
@@ -72,7 +75,7 @@ else{
     <a href="/deconnexion.php" class="btn btn-default">Déconnexion</a>
     <?php
   }
-}}
+}}}
 
 
 
