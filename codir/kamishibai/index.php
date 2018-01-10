@@ -7,73 +7,63 @@ drawheader('codir');
 drawMenu("kamishibai");
 
 $recherche = "";
-
-if (isset($_GET["recherche"])){
-    $recherche = $_GET["recherche"];
-}
-if(empty($_SESSION['login']))
-{ ?>
-  <h2>Kamishibai</h2>
-  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
-  <a href="/moncompte/identification.php?redirection=codir/kamishibai"><button class="btn btn-default">Se connecter</button></a>
-  <a href="<?php echo $url; ?>" class="btn btn-default">Accueil</a>
-<?php
-}
-else
-{
-
-    echo "<h2>Kamishibai</h2>";
 ?>
-    <p style="margin-top: 20px;margin-bottom: 20px;"><a href="historique.php">Voir l'historique </a>.</p>
+    <h2>Historique kamishibai</h2>
 
-    <table class="table"
+
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="recherche">Recherche :</label>
+            <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="Carte" value="<?php echo $recherche;?>">
+        </div>
+        <button type="submit" class="btn btn-default">Rechercher</button>
+    </form>
+
+    <table class="table">
     <thead class="thead">
     <tr>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th style="width: 70px;">Tournée</th>
-        <th style="width: 30px;">UAP</th>
-        <th style="width: 30px;">MO</th>
-        <th style="width: 200px;">Actions</th>
+        <th style="width:90%;">Titre</th>
+        <th>Tirages</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
-
     <?php
-
-    $Query = $bdd->prepare('SELECT * FROM profil
-                        LEFT JOIN (SELECT id as id_reponse, profil as id_profil FROM codir_kamishibai_reponse WHERE cloture = 0 GROUP BY id_profil) AS reponse
-                        ON reponse.id_profil = profil.id
-                        WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and profil.id = ?');
-    $Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%',$_SESSION['id']));
+    $nb=0;
+    if(isset($_GET['nb'])){
+      $nb=$_GET['nb'];
+    }
+    $Query = $bdd->prepare('SELECT *,COUNT(*) as s FROM codir_kamishibai LEFT JOIN codir_kamishibai_reponse ON codir_kamishibai_reponse.kamishibai = codir_kamishibai.id WHERE titre LIKE :titre GROUP BY codir_kamishibai.id LIMIT 20 OFFSET :nb');
+    $Query ->bindValue(':titre','%'.$recherche.'%');
+    $Query ->bindValue(':nb',(int) $nb, PDO::PARAM_INT);
+    $Query -> execute();
     while ($Data = $Query->fetch()) {
         ?>
-
         <tr>
-            <td> <?php echo $Data['nom']; ?> </a> </td>
-            <td><?php echo $Data['prenom']; ?></td>
-            <td><?php echo $Data['tournee']; ?></td>
-            <td><?php echo $Data['uap']; ?></td>
-            <td><?php echo $Data['mo']; ?></td>
-            <?php
-            if (is_null($Data['id_reponse'])) {
-                ?>
-                <td><a href="tirer_carte.php?profil=<?php echo $Data['id']; ?>">Tirer une carte</a></td>
-                <?php
-            }else {
-                ?>
-                <td><a href="reponse.php?id=<?php echo $Data['id_reponse']; ?>">Accéder à la carte</a></td>
-                <?php
-            }
-                ?>
+          <td><?php echo $Data['titre']; ?></td>
+          <td style="text-align:center;"><?php if(is_null($Data['kamishibai'])){echo "0";}else{echo $Data['s'];}; ?></td>
+          <td align=right><a href="" class="btn btn-default" style="width:50px;">Voir</a></td>
         </tr>
-
 
         <?php
     }
     ?>
     </tbody>
-    </table>
+  </table> <?php
+    $test = $bdd->prepare('SELECT * FROM codir_kamishibai LEFT JOIN codir_kamishibai_reponse ON codir_kamishibai_reponse.kamishibai = codir_kamishibai.id WHERE titre LIKE :titre GROUP BY codir_kamishibai.id LIMIT 1 OFFSET :nb');
+    $test ->bindValue(':titre','%'.$recherche.'%');
+    $test ->bindValue(':nb',(int) $nb+20, PDO::PARAM_INT);
+    if($test->execute()){echo "";}else{echo "caca";} ?>
+    <form method="post" class="inline-form"> <?php
+      if($nb > 19){    ?>
+          <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb-20;?>" class="btn btn-default">Elements précédents</a>
+        <?php
+      }
+      if($test -> fetch()){ ?>
+        <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb+20;?>" class="btn btn-default">Elements suivants</a>
+      <?php } ?>
+        <span class="clear" style="clear: both; display: block;"></span>
+      </form>
+
 <?php
-}
 drawFooter();
