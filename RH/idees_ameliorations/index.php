@@ -16,15 +16,14 @@ if (isset($_GET["recherche"])){
 
 if(isset($_GET['nb'])){
   $debut=$_GET['nb'];
-  if
 }
 
 if(isset($_GET['vote'])){
   $a_vote=$_GET['vote'];
   if($a_vote>0){
-      $Qy = $bdd->prepare('SELECT FROM votes_idees WHERE personne= ? AND idee= ?')
-      $Qy->execute(array('%'.$SESSION['id'].'%',  '%'.$a_vote.'%'));
-      if($Qy->fetch()){warning("ERREUR","vous avez deja voté pour cette idée");}else{$bdd->exec(INSERT INTO votes_idees(id, personne, idee) VALUES('','%'.$SESSION['id'].'%','%'.$a_vote.'%')); success("SUCCES","Le vote a bien été pris en compte");}
+      $Qy = $bdd->prepare('SELECT FROM votes_idees WHERE personne= ? AND idee= ?');
+      $Qy -> execute(array('%'.$SESSION['id'].'%',  '%'.$a_vote.'%'));
+      if($Qy->fetch()){warning("ERREUR","vous avez deja voté pour cette idée");}else{$bdd->exec('INSERT INTO votes_idees(id, personne, idee) VALUES("","".$SESSION["id"]."%","%".$a_vote."%")'); success("SUCCES","Le vote a bien été pris en compte");}
   }
 }
 
