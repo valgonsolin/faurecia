@@ -33,7 +33,7 @@ $recherche = "";
     if(isset($_GET['nb'])){
       $nb=$_GET['nb'];
     }
-    $Query = $bdd->prepare('SELECT *,COUNT(*) as s FROM codir_kamishibai LEFT JOIN codir_kamishibai_reponse ON codir_kamishibai_reponse.kamishibai = codir_kamishibai.id WHERE titre LIKE :titre GROUP BY codir_kamishibai.id LIMIT 20 OFFSET :nb');
+    $Query = $bdd->prepare('SELECT *,COUNT(*) as s FROM codir_kamishibai LEFT JOIN codir_kamishibai_reponse ON codir_kamishibai_reponse.kamishibai = codir_kamishibai.id WHERE codir_kamishibai_reponse.cloture = 1 AND titre LIKE :titre GROUP BY codir_kamishibai.id LIMIT 20 OFFSET :nb');
     $Query ->bindValue(':titre','%'.$recherche.'%');
     $Query ->bindValue(':nb',(int) $nb, PDO::PARAM_INT);
     $Query -> execute();
@@ -42,7 +42,7 @@ $recherche = "";
         <tr>
           <td><?php echo $Data['titre']; ?></td>
           <td style="text-align:center;"><?php if(is_null($Data['kamishibai'])){echo "0";}else{echo $Data['s'];}; ?></td>
-          <td align=right><a href="" class="btn btn-default" style="width:50px;">Voir</a></td>
+          <td align=right><a href="historique.php?id=<?php echo$Data['0']; ?>" class="btn btn-default" style="width:50px;">Voir</a></td>
         </tr>
 
         <?php
@@ -50,10 +50,10 @@ $recherche = "";
     ?>
     </tbody>
   </table> <?php
-    $test = $bdd->prepare('SELECT * FROM codir_kamishibai LEFT JOIN codir_kamishibai_reponse ON codir_kamishibai_reponse.kamishibai = codir_kamishibai.id WHERE titre LIKE :titre GROUP BY codir_kamishibai.id LIMIT 1 OFFSET :nb');
+    $test = $bdd->prepare('SELECT * FROM codir_kamishibai LEFT JOIN codir_kamishibai_reponse ON codir_kamishibai_reponse.kamishibai = codir_kamishibai.id WHERE codir_kamishibai_reponse.cloture = 1 AND titre LIKE :titre GROUP BY codir_kamishibai.id LIMIT 1 OFFSET :nb');
     $test ->bindValue(':titre','%'.$recherche.'%');
     $test ->bindValue(':nb',(int) $nb+20, PDO::PARAM_INT);
-    if($test->execute()){echo "";}else{echo "caca";} ?>
+    $test->execute(); ?>
     <form method="post" class="inline-form"> <?php
       if($nb > 19){    ?>
           <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb-20;?>" class="btn btn-default">Elements précédents</a>
