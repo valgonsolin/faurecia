@@ -52,7 +52,7 @@ global $url;
             <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_menu  <?php if($selected=='RH'){echo ' bouton_menu_selected';} ?> dropbtn" >RH</a>
                 <div class="dropdown-content">
                     <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Présentation Usine</a>
-                    <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Idées améliorations</a>
+                    <a href="<?php echo $url; ?>/RH/idees_ameliorations/index.php" class="bouton_dropdown" >Idées améliorations</a>
                     <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Formations</a>
                     <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Plan de rotation</a>
                     <?php if((isset($_SESSION['login'])) && $_SESSION['admin']){ ?>
