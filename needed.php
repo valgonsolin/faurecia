@@ -1,7 +1,7 @@
 <?php
 session_start();
 global $domain_name;
-$url = "http://localhost";
+$url = "http://faureciabeaulieu.fr";
 $bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'tavg', 'lacolloc');
 
 ?>
