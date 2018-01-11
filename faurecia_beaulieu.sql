@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.7
+-- https://www.phpmyadmin.net/
 --
--- Client :  127.0.0.1
--- Généré le :  Ven 29 Septembre 2017 à 14:17
--- Version du serveur :  10.1.9-MariaDB
--- Version de PHP :  5.6.15
+-- Host: localhost
+-- Generation Time: Jan 11, 2018 at 10:19 AM
+-- Server version: 10.1.29-MariaDB
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `faurecia_beaulieu`
+-- Database: `faurecia_beaulieu`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `codir_kamishibai`
+-- Table structure for table `codir_kamishibai`
 --
 
 CREATE TABLE `codir_kamishibai` (
@@ -33,591 +35,589 @@ CREATE TABLE `codir_kamishibai` (
   `question1` text NOT NULL,
   `question2` text NOT NULL,
   `question3` text NOT NULL,
-  `question4` text NOT NULL,
-  `question5` text NOT NULL,
-  `nb_tirage` int(11) NOT NULL
+  `question4` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `codir_kamishibai`
+-- Dumping data for table `codir_kamishibai`
 --
 
-INSERT INTO `codir_kamishibai` (`id`, `ligne`, `titre`, `question1`, `question2`, `question3`, `question4`, `question5`, `nb_tirage`) VALUES
-(1, '', '5S control real vs pictures Crippa 1', '0', '0', '0', '0', '0', 0),
-(2, '', '5S control real vs pictures Crippa 2', '0', '0', '0', '0', '0', 0),
-(3, '', '5S control real vs pictures Bending 3', '0', '0', '0', '0', '0', 0),
-(4, '', '5S control real vs pictures Bending 5', '0', '0', '0', '0', '0', 0),
-(5, '', '5S control real vs pictures Bending 9', '0', '0', '0', '0', '0', 0),
-(6, '', '5S control real vs pictures Bending 2', '0', '0', '0', '0', '0', 0),
-(7, '', '5S control real vs pictures Bending 17', '0', '0', '0', '0', '0', 0),
-(8, '', '5S control real vs pictures Bending 8', '0', '0', '0', '0', '0', 0),
-(9, '', '5S control real vs pictures Bending 18', '0', '0', '0', '0', '0', 0),
-(10, '', '1 BOM controlling', '0', '0', '0', '0', '0', 0),
-(11, '', '1 HSE risk Removal in Logistic', '0', '0', '0', '0', '0', 0),
-(12, '', '1 HSE risk Removal in Bending', '0', '0', '0', '0', '0', 0),
-(13, '', '1 HSE risk Removal in Assembly', '0', '0', '0', '0', '0', 0),
-(14, '', '1 HSE risk Removal in Logistic', '0', '0', '0', '0', '0', 0),
-(15, '', '1 HSE risk Removal in Bending', '0', '0', '0', '0', '0', 0),
-(16, '', '1 HSE risk Removal in Assembly', '0', '0', '0', '0', '0', 0),
-(17, '', '1 HSE risk Removal in Logistic', '0', '0', '0', '0', '0', 0),
-(18, '', '1 HSE risk Removal in Bending', '0', '0', '0', '0', '0', 0),
-(19, '', '1 HSE risk Removal in Assembly', '0', '0', '0', '0', '0', 0),
-(20, '', '1 Improvement IDEA related Faurecia Great place to work', '0', '0', '0', '0', '0', 0),
-(21, '', '1 Improvement IDEA related Faurecia Great place to work', '0', '0', '0', '0', '0', 0),
-(22, '', '1 Maintenance Task tranfert check', '0', '0', '0', '0', '0', 0),
-(23, '', '13 MR checking: rules 1 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(24, '', '13 MR checking: rules 1 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(25, '', '13 MR checking: rules 1 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(26, '', '13 MR checking: rules 1 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(27, '', '13 MR checking: rules 1 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(28, '', '13 MR checking: rules 1 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(29, '', '13 MR checking: rules 1 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(30, '', '13 MR checking: rules 1 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(31, '', '13 MR checking: rules 1 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(32, '', '13 MR checking: rules 1 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(33, '', '13 MR checking: Rules 2 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(34, '', '13 MR checking: Rules 2 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(35, '', '13 MR checking: Rules 2 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(36, '', '13 MR checking: Rules 2 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(37, '', '13 MR checking: Rules 2 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(38, '', '13 MR checking: Rules 2 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(39, '', '13 MR checking: Rules 2 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(40, '', '13 MR checking: Rules 2 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(41, '', '13 MR checking: Rules 2 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(42, '', '13 MR checking: Rules 2 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(43, '', '13 MR checking: Rules 3 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(44, '', '13 MR checking: Rules 3 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(45, '', '13 MR checking: Rules 3 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(46, '', '13 MR checking: Rules 3 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(47, '', '13 MR checking: Rules 3 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(48, '', '13 MR checking: Rules 3 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(49, '', '13 MR checking: Rules 3 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(50, '', '13 MR checking: Rules 3 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(51, '', '13 MR checking: Rules 3 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(52, '', '13 MR checking: Rules 3 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(53, '', '13 MR checking: Rules 4 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(54, '', '13 MR checking: Rules 4 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(55, '', '13 MR checking: Rules 4 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(56, '', '13 MR checking: Rules 4 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(57, '', '13 MR checking: Rules 4 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(58, '', '13 MR checking: Rules 4 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(59, '', '13 MR checking: Rules 4 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(60, '', '13 MR checking: Rules 4 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(61, '', '13 MR checking: Rules 4 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(62, '', '13 MR checking: Rules 4 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(63, '', '13 MR checking: Rules 5 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(64, '', '13 MR checking: Rules 5 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(65, '', '13 MR checking: Rules 5 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(66, '', '13 MR checking: Rules 5 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(67, '', '13 MR checking: Rules 5 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(68, '', '13 MR checking: Rules 5 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(69, '', '13 MR checking: Rules 5 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(70, '', '13 MR checking: Rules 5 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(71, '', '13 MR checking: Rules 5 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(72, '', '13 MR checking: Rules 5 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(73, '', '13 MR checking: Rules 6 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(74, '', '13 MR checking: Rules 6 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(75, '', '13 MR checking: Rules 6 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(76, '', '13 MR checking: Rules 6 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(77, '', '13 MR checking: Rules 6 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(78, '', '13 MR checking: Rules 6 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(79, '', '13 MR checking: Rules 6 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(80, '', '13 MR checking: Rules 6 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(81, '', '13 MR checking: Rules 6 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(82, '', '13 MR checking: Rules 6 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(83, '', '13 MR checking: Rules 7 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(84, '', '13 MR checking: Rules 7 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(85, '', '13 MR checking: Rules 7 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(86, '', '13 MR checking: Rules 7 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(87, '', '13 MR checking: Rules 7 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(88, '', '13 MR checking: Rules 7 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(89, '', '13 MR checking: Rules 7 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(90, '', '13 MR checking: Rules 7 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(91, '', '13 MR checking: Rules 7 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(92, '', '13 MR checking: Rules 7 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(93, '', '13 MR checking: Rules 8 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(94, '', '13 MR checking: Rules 8 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(95, '', '13 MR checking: Rules 8 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(96, '', '13 MR checking: Rules 8 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(97, '', '13 MR checking: Rules 8 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(98, '', '13 MR checking: Rules 8 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(99, '', '13 MR checking: Rules 8 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(100, '', '13 MR checking: Rules 8 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(101, '', '13 MR checking: Rules 8 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(102, '', '13 MR checking: Rules 8 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(103, '', '13 MR checking: Rules 9 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(104, '', '13 MR checking: Rules 9 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(105, '', '13 MR checking: Rules 9 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(106, '', '13 MR checking: Rules 9 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(107, '', '13 MR checking: Rules 9 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(108, '', '13 MR checking: Rules 9 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(109, '', '13 MR checking: Rules 9 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(110, '', '13 MR checking: Rules 9 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(111, '', '13 MR checking: Rules 9 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(112, '', '13 MR checking: Rules 9 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(113, '', '13 MR checking: Rules 10 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(114, '', '13 MR checking: Rules 10 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(115, '', '13 MR checking: Rules 10 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(116, '', '13 MR checking: Rules 10 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(117, '', '13 MR checking: Rules 10 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(118, '', '13 MR checking: Rules 10 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(119, '', '13 MR checking: Rules 10 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(120, '', '13 MR checking: Rules 10 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(121, '', '13 MR checking: Rules 10 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(122, '', '13 MR checking: Rules 10 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(123, '', '13 MR checking: Rules 11 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(124, '', '13 MR checking: Rules 11 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(125, '', '13 MR checking: Rules 11 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(126, '', '13 MR checking: Rules 11 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(127, '', '13 MR checking: Rules 11 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(128, '', '13 MR checking: Rules 11 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(129, '', '13 MR checking: Rules 11 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(130, '', '13 MR checking: Rules 11 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(131, '', '13 MR checking: Rules 11 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(132, '', '13 MR checking: Rules 11 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(133, '', '13 MR checking: Rules 12 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(134, '', '13 MR checking: Rules 12 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(135, '', '13 MR checking: Rules 12 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(136, '', '13 MR checking: Rules 12 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(137, '', '13 MR checking: Rules 12 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(138, '', '13 MR checking: Rules 12 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(139, '', '13 MR checking: Rules 12 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(140, '', '13 MR checking: Rules 12 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(141, '', '13 MR checking: Rules 12 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(142, '', '13 MR checking: Rules 12 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(143, '', '13 MR checking: Rules 13 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(144, '', '13 MR checking: Rules 13 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(145, '', '13 MR checking: Rules 13 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(146, '', '13 MR checking: Rules 13 Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(147, '', '13 MR checking: Rules 13 Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(148, '', '13 MR checking: Rules 13 Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(149, '', '13 MR checking: Rules 13 Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(150, '', '13 MR checking: Rules 13 Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(151, '', '13 MR checking: Rules 13 Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(152, '', '13 MR checking: Rules 13 Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(153, '', '7 QB Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(154, '', '7 QB Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(155, '', '7 QB Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(156, '', '7 QB Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(157, '', '7 QB Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(158, '', '7 QB Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(159, '', '7 QB Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(160, '', '7 QB Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(161, '', '7 QB Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(162, '', '7 QB Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(163, '', '7 QB Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(164, '', '7 QB Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(165, '', '7 QB Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(166, '', '7 QB Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(167, '', '7 QB Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(168, '', '7 QB Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(169, '', '7 QB Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(170, '', '7 QB Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(171, '', '7 QB Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(172, '', '7 QB Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(173, '', 'control 7DB in PC&L', '0', '0', '0', '0', '0', 0),
-(174, '', 'control 7IB in PC&L', '0', '0', '0', '0', '0', 0),
-(175, '', 'SCRAP Tickets Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(176, '', 'SCRAP Tickets Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(177, '', 'SCRAP Tickets Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(178, '', 'SCRAP Tickets Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(179, '', 'SCRAP Tickets Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(180, '', 'SCRAP Tickets Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(181, '', 'SCRAP Tickets Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(182, '', 'SCRAP Tickets Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(183, '', 'SCRAP Tickets Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(184, '', 'SCRAP Tickets Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(185, '', 'SCRAP Tickets Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(186, '', 'SCRAP Tickets Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(187, '', 'SCRAP Tickets Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(188, '', 'SCRAP Tickets Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(189, '', 'SCRAP Tickets Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(190, '', 'SCRAP Tickets Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(191, '', 'SCRAP Tickets Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(192, '', 'SCRAP Tickets Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(193, '', 'SCRAP Tickets Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(194, '', 'SCRAP Tickets Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(195, '', '13 MR checking: rules 1 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(196, '', '13 MR checking: rules 1 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(197, '', '13 MR checking: rules 1 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(198, '', '13 MR checking: rules 1 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(199, '', '13 MR checking: rules 1 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(200, '', '13 MR checking: rules 1 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(201, '', '13 MR checking: rules 1 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(202, '', '13 MR checking: rules 1 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(203, '', '13 MR checking: rules 1 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(204, '', '13 MR checking: rules 1 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(205, '', '13 MR checking: Rules 2 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(206, '', '13 MR checking: Rules 2 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(207, '', '13 MR checking: Rules 2 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(208, '', '13 MR checking: Rules 2 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(209, '', '13 MR checking: Rules 2 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(210, '', '13 MR checking: Rules 2 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(211, '', '13 MR checking: Rules 2 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(212, '', '13 MR checking: Rules 2 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(213, '', '13 MR checking: Rules 2 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(214, '', '13 MR checking: Rules 2 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(215, '', '13 MR checking: Rules 3 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(216, '', '13 MR checking: Rules 3 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(217, '', '13 MR checking: Rules 3 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(218, '', '13 MR checking: Rules 3 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(219, '', '13 MR checking: Rules 3 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(220, '', '13 MR checking: Rules 3 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(221, '', '13 MR checking: Rules 3 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(222, '', '13 MR checking: Rules 3 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(223, '', '13 MR checking: Rules 3 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(224, '', '13 MR checking: Rules 3 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(225, '', '13 MR checking: Rules 4 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(226, '', '13 MR checking: Rules 4 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(227, '', '13 MR checking: Rules 4 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(228, '', '13 MR checking: Rules 4 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(229, '', '13 MR checking: Rules 4 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(230, '', '13 MR checking: Rules 4 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(231, '', '13 MR checking: Rules 4 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(232, '', '13 MR checking: Rules 4 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(233, '', '13 MR checking: Rules 4 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(234, '', '13 MR checking: Rules 4 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(235, '', '13 MR checking: Rules 5 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(236, '', '13 MR checking: Rules 5 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(237, '', '13 MR checking: Rules 5 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(238, '', '13 MR checking: Rules 5 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(239, '', '13 MR checking: Rules 5 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(240, '', '13 MR checking: Rules 5 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(241, '', '13 MR checking: Rules 5 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(242, '', '13 MR checking: Rules 5 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(243, '', '13 MR checking: Rules 5 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(244, '', '13 MR checking: Rules 5 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(245, '', '13 MR checking: Rules 6 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(246, '', '13 MR checking: Rules 6 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(247, '', '13 MR checking: Rules 6 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(248, '', '13 MR checking: Rules 6 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(249, '', '13 MR checking: Rules 6 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(250, '', '13 MR checking: Rules 6 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(251, '', '13 MR checking: Rules 6 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(252, '', '13 MR checking: Rules 6 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(253, '', '13 MR checking: Rules 6 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(254, '', '13 MR checking: Rules 6 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(255, '', '13 MR checking: Rules 7 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(256, '', '13 MR checking: Rules 7 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(257, '', '13 MR checking: Rules 7 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(258, '', '13 MR checking: Rules 7 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(259, '', '13 MR checking: Rules 7 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(260, '', '13 MR checking: Rules 7 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(261, '', '13 MR checking: Rules 7 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(262, '', '13 MR checking: Rules 7 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(263, '', '13 MR checking: Rules 7 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(264, '', '13 MR checking: Rules 7 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(265, '', '13 MR checking: Rules 8 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(266, '', '13 MR checking: Rules 8 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(267, '', '13 MR checking: Rules 8 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(268, '', '13 MR checking: Rules 8 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(269, '', '13 MR checking: Rules 8 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(270, '', '13 MR checking: Rules 8 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(271, '', '13 MR checking: Rules 8 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(272, '', '13 MR checking: Rules 8 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(273, '', '13 MR checking: Rules 8 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(274, '', '13 MR checking: Rules 8 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(275, '', '13 MR checking: Rules 9 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(276, '', '13 MR checking: Rules 9 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(277, '', '13 MR checking: Rules 9 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(278, '', '13 MR checking: Rules 9 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(279, '', '13 MR checking: Rules 9 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(280, '', '13 MR checking: Rules 9 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(281, '', '13 MR checking: Rules 9 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(282, '', '13 MR checking: Rules 9 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(283, '', '13 MR checking: Rules 9 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(284, '', '13 MR checking: Rules 9 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(285, '', '13 MR checking: Rules 10 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(286, '', '13 MR checking: Rules 10 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(287, '', '13 MR checking: Rules 10 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(288, '', '13 MR checking: Rules 10 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(289, '', '13 MR checking: Rules 10 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(290, '', '13 MR checking: Rules 10 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(291, '', '13 MR checking: Rules 10 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(292, '', '13 MR checking: Rules 10 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(293, '', '13 MR checking: Rules 10 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(294, '', '13 MR checking: Rules 10 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(295, '', '13 MR checking: Rules 11 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(296, '', '13 MR checking: Rules 11 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(297, '', '13 MR checking: Rules 11 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(298, '', '13 MR checking: Rules 11 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(299, '', '13 MR checking: Rules 11 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(300, '', '13 MR checking: Rules 11 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(301, '', '13 MR checking: Rules 11 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(302, '', '13 MR checking: Rules 11 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(303, '', '13 MR checking: Rules 11 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(304, '', '13 MR checking: Rules 11 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(305, '', '13 MR checking: Rules 12 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(306, '', '13 MR checking: Rules 12 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(307, '', '13 MR checking: Rules 12 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(308, '', '13 MR checking: Rules 12 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(309, '', '13 MR checking: Rules 12 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(310, '', '13 MR checking: Rules 12 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(311, '', '13 MR checking: Rules 12 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(312, '', '13 MR checking: Rules 12 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(313, '', '13 MR checking: Rules 12 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(314, '', '13 MR checking: Rules 12 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(315, '', '7QB  isola 1500', '0', '0', '0', '0', '0', 0),
-(316, '', '7QB  isola 1700', '0', '0', '0', '0', '0', 0),
-(317, '', '7QB  isola 1900', '0', '0', '0', '0', '0', 0),
-(318, '', '7QB  isola 1800', '0', '0', '0', '0', '0', 0),
-(319, '', '7QB  isola 6000', '0', '0', '0', '0', '0', 0),
-(320, '', '7QB  isola 10000', '0', '0', '0', '0', '0', 0),
-(321, '', '7QB  isola 1900', '0', '0', '0', '0', '0', 0),
-(322, '', '7QB  isola 11000', '0', '0', '0', '0', '0', 0),
-(323, '', '7QB  isola 6100', '0', '0', '0', '0', '0', 0),
-(324, '', '7QB  isola 2100', '0', '0', '0', '0', '0', 0),
-(325, '', '7QB  isola 1500', '0', '0', '0', '0', '0', 0),
-(326, '', '7QB  isola 1700', '0', '0', '0', '0', '0', 0),
-(327, '', '7QB  isola 1900', '0', '0', '0', '0', '0', 0),
-(328, '', '7QB  isola 1800', '0', '0', '0', '0', '0', 0),
-(329, '', '7QB  isola 6000', '0', '0', '0', '0', '0', 0),
-(330, '', '7QB  isola 10000', '0', '0', '0', '0', '0', 0),
-(331, '', '7QB  isola 1900', '0', '0', '0', '0', '0', 0),
-(332, '', '7QB  isola 11000', '0', '0', '0', '0', '0', 0),
-(333, '', '7QB  isola 6100', '0', '0', '0', '0', '0', 0),
-(334, '', '7QB  isola 2100', '0', '0', '0', '0', '0', 0),
-(335, '', 'BOP stock maxi in flat storage', '0', '0', '0', '0', '0', 0),
-(336, '', 'BOP Stock mini in flat storage', '0', '0', '0', '0', '0', 0),
-(337, '', '1 technical parameter Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(338, '', '1 technical parameter Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(339, '', '1 technical parameter Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(340, '', '1 technical parameter Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(341, '', '1 technical parameter Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(342, '', '1 technical parameter Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(343, '', '1 technical parameter Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(344, '', '1 technical parameter Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(345, '', '1 technical parameter Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(346, '', '1 technical parameter Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(347, '', '1 technical parameter Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(348, '', '1 technical parameter Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(349, '', '1 technical parameter Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(350, '', '1 technical parameter Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(351, '', '1 technical parameter Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(352, '', '1 technical parameter Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(353, '', '1 technical parameter Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(354, '', '1 technical parameter Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(355, '', '1 technical parameter Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(356, '', '1 technical parameter Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(357, '', 'Operator polyvalence Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(358, '', 'Operator polyvalence Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(359, '', 'Operator polyvalence Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(360, '', 'Operator polyvalence Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(361, '', 'Operator polyvalence Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(362, '', 'Operator polyvalence Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(363, '', 'Operator polyvalence Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(364, '', 'Operator polyvalence Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(365, '', 'Operator polyvalence Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(366, '', 'Operator polyvalence Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(367, '', 'Operator polyvalence Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(368, '', 'Operator polyvalence Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(369, '', 'Operator polyvalence Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(370, '', 'Operator polyvalence Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(371, '', 'Operator polyvalence Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(372, '', 'Operator polyvalence Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(373, '', 'Operator polyvalence Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(374, '', 'Operator polyvalence Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(375, '', 'Operator polyvalence Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(376, '', 'Operator polyvalence Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(377, '', 'Last SW audit Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(378, '', 'Last SW audit Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(379, '', 'Last SW audit Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(380, '', 'Last SW audit Bending piegatubi 5', '0', '0', '0', '0', '0', 0),
-(381, '', 'Last SW audit Bending piegatubi 9', '0', '0', '0', '0', '0', 0),
-(382, '', 'Last SW audit Bending piegatubi 2', '0', '0', '0', '0', '0', 0),
-(383, '', 'Last SW audit Bending piegatubi 3', '0', '0', '0', '0', '0', 0),
-(384, '', 'Last SW audit Bending piegatubi 17', '0', '0', '0', '0', '0', 0),
-(385, '', 'Last SW audit Bending piegatubi 8', '0', '0', '0', '0', '0', 0),
-(386, '', 'Last SW audit Bending piegatubi 18', '0', '0', '0', '0', '0', 0),
-(387, '', 'Last SW audit Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(388, '', 'Last SW audit Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(389, '', 'Last SW audit Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(390, '', 'Last SW audit Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(391, '', 'Last SW audit Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(392, '', 'Last SW audit Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(393, '', 'Last SW audit Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(394, '', 'Last SW audit Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(395, '', 'Last SW audit Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(396, '', 'Last SW audit Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(397, '', 'WC maxi vs Parts boards target Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(398, '', 'WC maxi vs Parts boards target Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(399, '', 'WC maxi vs Parts boards target Bending 3', '0', '0', '0', '0', '0', 0),
-(400, '', 'WC maxi vs Parts boards target Bending  5', '0', '0', '0', '0', '0', 0),
-(401, '', 'WC maxi vs Parts boards target Bending  9', '0', '0', '0', '0', '0', 0),
-(402, '', 'WC maxi vs Parts boards target Bending  2', '0', '0', '0', '0', '0', 0),
-(403, '', 'WC maxi vs Parts boards target Bending  3', '0', '0', '0', '0', '0', 0),
-(404, '', 'WC maxi vs Parts boards target Bending  17', '0', '0', '0', '0', '0', 0),
-(405, '', 'WC maxi vs Parts boards target Bending 8', '0', '0', '0', '0', '0', 0),
-(406, '', 'WC maxi vs Parts boards target Bending  18', '0', '0', '0', '0', '0', 0),
-(407, '', 'WC maxi vs Parts boards target Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(408, '', 'WC maxi vs Parts boards target Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(409, '', 'WC maxi vs Parts boards target Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(410, '', 'WC maxi vs Parts boards target Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(411, '', 'WC maxi vs Parts boards target Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(412, '', 'WC maxi vs Parts boards target Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(413, '', 'WC maxi vs Parts boards target Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(414, '', 'WC maxi vs Parts boards target Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(415, '', 'WC maxi vs Parts boards target Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(416, '', 'WC maxi vs Parts boards target Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(417, '', 'Check Gap leader TOP 5 Assembly ', '0', '0', '0', '0', '0', 0),
-(418, '', 'Check Gap leader TOP 5 Bending', '0', '0', '0', '0', '0', 0),
-(419, '', 'Check leak of oil/water in 1 machine', '0', '0', '0', '0', '0', 0),
-(420, '', 'Check Mgt controll reaction rules Bending', '0', '0', '0', '0', '0', 0),
-(421, '', 'Check Mgt controll reaction rules Assembly', '0', '0', '0', '0', '0', 0),
-(422, '', 'Check Mgt controll reaction rules PC&L', '0', '0', '0', '0', '0', 0),
-(423, '', 'Check number of MOD versus Day standard in Assembly', '0', '0', '0', '0', '0', 0),
-(424, '', 'Check number of MOD versus Day standard in Bending', '0', '0', '0', '0', '0', 0),
-(425, '', 'Check number of MOD versus Day standard in PC&L', '0', '0', '0', '0', '0', 0),
-(426, '', 'Check OK  1st start forklift', '0', '0', '0', '0', '0', 0),
-(427, '', 'Check PI availbale in Assembly ', '0', '0', '0', '0', '0', 0),
-(428, '', 'Check PI availbale in Bending', '0', '0', '0', '0', '0', 0),
-(429, '', 'Check PI availbale in Maintenance', '0', '0', '0', '0', '0', 0),
-(430, '', 'Check PI availbale in support fonction ', '0', '0', '0', '0', '0', 0),
-(431, '', 'Check QRCI board status Bending ', '0', '0', '0', '0', '0', 0),
-(432, '', 'Check QRCI board status Assembly', '0', '0', '0', '0', '0', 0),
-(433, '', 'Check Receving board PC&L', '0', '0', '0', '0', '0', 0),
-(434, '', 'Check respect of smoking aera', '0', '0', '0', '0', '0', 0),
-(435, '', 'Check routine of GL Assembly', '0', '0', '0', '0', '0', 0),
-(436, '', 'Check routine of GL PC&L', '0', '0', '0', '0', '0', 0),
-(437, '', 'Check routine of GL Bending', '0', '0', '0', '0', '0', 0),
-(438, '', 'Check Standard clothes', '0', '0', '0', '0', '0', 0),
-(439, '', 'check Stock pilling  interior :2 equivalent containers maxi', '0', '0', '0', '0', '0', 0),
-(440, '', 'Check SW of 1 C/O Assembly', '0', '0', '0', '0', '0', 0),
-(441, '', 'Check SW of 1 C/O Bending', '0', '0', '0', '0', '0', 0),
-(442, '', 'Check waste segregation Bending', '0', '0', '0', '0', '0', 0),
-(443, '', 'Check waste segregation Assembly', '0', '0', '0', '0', '0', 0),
-(444, '', 'Check waste segregation Office', '0', '0', '0', '0', '0', 0),
-(445, '', 'Check waste segregation External', '0', '0', '0', '0', '0', 0),
-(446, '', 'Give 10KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(447, '', 'Give 10KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(448, '', 'Give 10KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(449, '', 'Give 10KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(450, '', 'Give 10KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(451, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(452, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(453, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(454, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(455, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(456, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(457, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(458, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(459, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(460, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(461, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(462, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(463, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(464, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0', '0', 0),
-(465, '', 'GIVE 50 KE saving to Plant manager ', '0', '0', '0', '0', '0', 0),
-(466, '', 'Pay croissants for next Friday ', '0', '0', '0', '0', '0', 0),
-(467, '', 'Pay croissants for next Friday ', '0', '0', '0', '0', '0', 0),
-(468, '', 'Pay croissants for next Friday ', '0', '0', '0', '0', '0', 0),
-(469, '', '0 extra hours next week', '0', '0', '0', '0', '0', 0),
-(470, '', '0 extra hours next week', '0', '0', '0', '0', '0', 0),
-(471, '', '0 extra hours next week', '0', '0', '0', '0', '0', 0),
-(472, '', '0 extra hours next week', '0', '0', '0', '0', '0', 0),
-(473, '', 'HSE core team participation', '0', '0', '0', '0', '0', 0),
-(474, '', 'Improvement Iidea ergonomic issue', '0', '0', '0', '0', '0', 0),
-(475, '', 'Kanban loop order & respect in 1 machine or 1 line', '0', '0', '0', '0', '0', 0),
-(476, '', 'No extra hours tomorrow', '0', '0', '0', '0', '0', 0),
-(477, '', 'Non DLE improvement Idea', '0', '0', '0', '0', '0', 0),
-(478, '', 'OK 1 parts', '0', '0', '0', '0', '0', 0),
-(479, '', 'PC&L HSE MR', '0', '0', '0', '0', '0', 0),
-(480, '', 'Polyvalence of operator in Work station', '0', '0', '0', '0', '0', 0),
-(481, '', 'QRCI D3 checking', '0', '0', '0', '0', '0', 0),
-(482, '', 'QRCI D6 checking', '0', '0', '0', '0', '0', 0),
-(483, '', 'QRCI D8 checking', '0', '0', '0', '0', '0', 0),
-(484, '', '5S PC&L office', '0', '0', '0', '0', '0', 0),
-(485, '', '5S Plant Manager', '0', '0', '0', '0', '0', 0),
-(486, '', '5S ME office', '0', '0', '0', '0', '0', 0),
-(487, '', '5S UAP Office', '0', '0', '0', '0', '0', 0),
-(488, '', '5S HR office', '0', '0', '0', '0', '0', 0),
-(489, '', '5S finances Office', '0', '0', '0', '0', '0', 0),
-(490, '', '5S IT Offices', '0', '0', '0', '0', '0', 0),
-(491, '', 'SV dashboard control Assembly', '0', '0', '0', '0', '0', 0),
-(492, '', 'SV dashboard control Bending', '0', '0', '0', '0', '0', 0),
-(493, '', 'SV dashboard control PC&L', '0', '0', '0', '0', '0', 0),
-(494, '', 'TPM level 1 Bending crippa 1', '0', '0', '0', '0', '0', 0),
-(495, '', 'TPM level 1 Bending crippa 2', '0', '0', '0', '0', '0', 0),
-(496, '', 'TPM level 1  Bending 3', '0', '0', '0', '0', '0', 0),
-(497, '', 'TPM level 1 Bending  5', '0', '0', '0', '0', '0', 0),
-(498, '', 'TPM level 1 Bending  9', '0', '0', '0', '0', '0', 0),
-(499, '', 'TPM level 1  Bending 2', '0', '0', '0', '0', '0', 0),
-(500, '', 'TPM level 1  Bending 3', '0', '0', '0', '0', '0', 0),
-(501, '', 'TPM level 1  Bending 17', '0', '0', '0', '0', '0', 0),
-(502, '', 'TPM level 1 Bending  8', '0', '0', '0', '0', '0', 0),
-(503, '', 'TPM level 1 Bending  18', '0', '0', '0', '0', '0', 0),
-(504, '', 'TPM level 1 Assembly isola 1500', '0', '0', '0', '0', '0', 0),
-(505, '', 'TPM level 1 Assembly isola 1700', '0', '0', '0', '0', '0', 0),
-(506, '', 'TPM level 1 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(507, '', 'TPM level 1 Assembly isola 1800', '0', '0', '0', '0', '0', 0),
-(508, '', 'TPM level 1 Assembly isola 6000', '0', '0', '0', '0', '0', 0),
-(509, '', 'TPM level 1 Assembly isola 10000', '0', '0', '0', '0', '0', 0),
-(510, '', 'TPM level 1 Assembly isola 1900', '0', '0', '0', '0', '0', 0),
-(511, '', 'TPM level 1 Assembly isola 11000', '0', '0', '0', '0', '0', 0),
-(512, '', 'TPM level 1 Assembly isola 6100', '0', '0', '0', '0', '0', 0),
-(513, '', 'TPM level 1 Assembly isola 2100', '0', '0', '0', '0', '0', 0),
-(514, '', 'Check presence in MIP metting this week', '0', '0', '0', '0', '0', 0),
-(515, '', 'Check presence in MIP metting this week', '0', '0', '0', '0', '0', 0),
-(516, '', 'Check presence in MIP metting this week', '0', '0', '0', '0', '0', 0),
-(517, '', 'Check presence in MIP metting this week', '0', '0', '0', '0', '0', 0),
-(518, '', 'Check presence in MIP metting this week', '0', '0', '0', '0', '0', 0),
-(519, '', 'Check presence in MIP metting this week', '0', '0', '0', '0', '0', 0),
-(520, '', 'Check last payroll control formal validation', '0', '0', '0', '0', '0', 0),
-(521, '', 'Check last payroll control formal validation', '0', '0', '0', '0', '0', 0),
-(522, '', 'Check last payroll control formal validation', '0', '0', '0', '0', '0', 0),
-(523, '', 'Check material reception booked by material planner last 30 days', '0', '0', '0', '0', '0', 0),
-(524, '', 'Check material reception booked by material planner last 30 days', '0', '0', '0', '0', '0', 0),
-(525, '', 'Check material reception booked by material planner last 30 days', '0', '0', '0', '0', '0', 0),
-(526, '', 'Check SOD in maintenance parts reception/consumption', '0', '0', '0', '0', '0', 0),
-(527, '', 'Check SOD in maintenance parts reception/consumption', '0', '0', '0', '0', '0', 0),
-(528, '', 'Check SOD in maintenance parts reception/consumption', '0', '0', '0', '0', '0', 0),
-(529, '', 'Check cycle count booked by material planner last 30 days', '0', '0', '0', '0', '0', 0),
-(530, '', 'Check cycle count booked by material planner last 30 days', '0', '0', '0', '0', '0', 0),
-(531, '', 'Check cycle count booked by material planner last 30 days', '0', '0', '0', '0', '0', 0),
-(532, '', 'Check cycle count vs planning last 15 days in maintenance', '0', '0', '0', '0', '0', 0),
-(533, '', 'Check cycle count vs planning last 15 days in maintenance', '0', '0', '0', '0', '0', 0),
-(534, '', 'Check cycle count vs planning last 15 days in maintenance', '0', '0', '0', '0', '0', 0),
-(535, '', 'Check last inventory reconciliation with RDA', '0', '0', '0', '0', '0', 0),
-(536, '', 'Check last inventory reconciliation with RDA', '0', '0', '0', '0', '0', 0),
-(537, '', 'Check last inventory reconciliation with RDA', '0', '0', '0', '0', '0', 0),
-(538, '', 'Check last inventory reconciliation with Abintek', '0', '0', '0', '0', '0', 0),
-(539, '', 'Check last inventory reconciliation with Abintek', '0', '0', '0', '0', '0', 0),
-(540, '', 'Check last inventory reconciliation with Abintek', '0', '0', '0', '0', '0', 0),
-(541, '', 'Check root cause analysis in cycle count in last 30 days', '0', '0', '0', '0', '0', 0),
-(542, '', 'Check root cause analysis in cycle count in last 30 days', '0', '0', '0', '0', '0', 0),
-(543, '', 'Check root cause analysis in cycle count in last 30 days', '0', '0', '0', '0', '0', 0),
-(544, '', 'Check cycle count vs planning last 15 days', '0', '0', '0', '0', '0', 0),
-(545, '', 'Check cycle count vs planning last 15 days', '0', '0', '0', '0', '0', 0),
-(546, '', 'Check cycle count vs planning last 15 days', '0', '0', '0', '0', '0', 0),
-(547, '', 'Check last ABC class update ', '0', '0', '0', '0', '0', 0),
-(548, '', 'Check last ABC class update ', '0', '0', '0', '0', '0', 0),
-(549, '', 'Check last ABC class update ', '0', '0', '0', '0', '0', 0),
-(550, '', 'Check 7IB/7DB action plan review', '0', '0', '0', '0', '0', 0),
-(551, '', 'Check 7IB/7DB action plan review', '0', '0', '0', '0', '0', 0),
-(552, '', 'Check 7IB/7DB action plan review', '0', '0', '0', '0', '0', 0),
-(553, '', 'Check mono cage is closed & secured', '0', '0', '0', '0', '0', 0),
-(554, '', 'Check mono cage is closed & secured', '0', '0', '0', '0', '0', 0),
-(555, '', 'Check mono cage is closed & secured', '0', '0', '0', '0', '0', 0),
-(556, '', 'Check selling prices formal validation by controlling', '0', '0', '0', '0', '0', 0),
-(557, '', 'Check selling prices formal validation by controlling', '0', '0', '0', '0', '0', 0),
-(558, '', 'Check selling prices formal validation by controlling', '0', '0', '0', '0', '0', 0),
-(559, '', 'Check last SODA report', '0', '0', '0', '0', '0', 0),
-(560, '', 'Check last SODA report', '0', '0', '0', '0', '0', 0),
-(561, '', 'Check last SODA report', '0', '0', '0', '0', '0', 0),
-(562, '', 'Check last BOM audits', '0', '0', '0', '0', '0', 0),
-(563, '', 'Check last BOM audits', '0', '0', '0', '0', '0', 0),
-(564, '', 'Check last BOM audits', '0', '0', '0', '0', '0', 0),
-(565, '', 'Check last count of JA10', '0', '0', '0', '0', '0', 0),
-(566, '', 'Check last count of JA10', '0', '0', '0', '0', '0', 0),
-(567, '', 'Check last count of JA10', '0', '0', '0', '0', '0', 0),
-(568, '', 'Check the first 3 nok FG on the screen stock vs. Customer demand', '0', '0', '0', '0', '0', 0),
-(569, '', 'Check the first 3 nok FG on the screen stock vs. Customer demand', '0', '0', '0', '0', '0', 0),
-(570, '', 'Check the first 3 nok FG on the screen stock vs. Customer demand', '0', '0', '0', '0', '0', 0);
+INSERT INTO `codir_kamishibai` (`id`, `ligne`, `titre`, `question1`, `question2`, `question3`, `question4`) VALUES
+(1, '', '5S control real vs pictures Crippa 1', '0', '0', '0', '0'),
+(2, '', '5S control real vs pictures Crippa 2', '0', '0', '0', '0'),
+(3, '', '5S control real vs pictures Bending 3', '0', '0', '0', '0'),
+(4, '', '5S control real vs pictures Bending 5', '0', '0', '0', '0'),
+(5, '', '5S control real vs pictures Bending 9', '0', '0', '0', '0'),
+(6, '', '5S control real vs pictures Bending 2', '0', '0', '0', '0'),
+(7, '', '5S control real vs pictures Bending 17', '0', '0', '0', '0'),
+(8, '', '5S control real vs pictures Bending 8', '0', '0', '0', '0'),
+(9, '', '5S control real vs pictures Bending 18', '0', '0', '0', '0'),
+(10, '', '1 BOM controlling', '0', '0', '0', '0'),
+(11, '', '1 HSE risk Removal in Logistic', '0', '0', '0', '0'),
+(12, '', '1 HSE risk Removal in Bending', '0', '0', '0', '0'),
+(13, '', '1 HSE risk Removal in Assembly', '0', '0', '0', '0'),
+(14, '', '1 HSE risk Removal in Logistic', '0', '0', '0', '0'),
+(15, '', '1 HSE risk Removal in Bending', '0', '0', '0', '0'),
+(16, '', '1 HSE risk Removal in Assembly', '0', '0', '0', '0'),
+(17, '', '1 HSE risk Removal in Logistic', '0', '0', '0', '0'),
+(18, '', '1 HSE risk Removal in Bending', '0', '0', '0', '0'),
+(19, '', '1 HSE risk Removal in Assembly', '0', '0', '0', '0'),
+(20, '', '1 Improvement IDEA related Faurecia Great place to work', '0', '0', '0', '0'),
+(21, '', '1 Improvement IDEA related Faurecia Great place to work', '0', '0', '0', '0'),
+(22, '', '1 Maintenance Task tranfert check', '0', '0', '0', '0'),
+(23, '', '13 MR checking: rules 1 Bending crippa 1', '0', '0', '0', '0'),
+(24, '', '13 MR checking: rules 1 Bending crippa 2', '0', '0', '0', '0'),
+(25, '', '13 MR checking: rules 1 Bending piegatubi 3', '0', '0', '0', '0'),
+(26, '', '13 MR checking: rules 1 Bending piegatubi 5', '0', '0', '0', '0'),
+(27, '', '13 MR checking: rules 1 Bending piegatubi 9', '0', '0', '0', '0'),
+(28, '', '13 MR checking: rules 1 Bending piegatubi 2', '0', '0', '0', '0'),
+(29, '', '13 MR checking: rules 1 Bending piegatubi 3', '0', '0', '0', '0'),
+(30, '', '13 MR checking: rules 1 Bending piegatubi 17', '0', '0', '0', '0'),
+(31, '', '13 MR checking: rules 1 Bending piegatubi 8', '0', '0', '0', '0'),
+(32, '', '13 MR checking: rules 1 Bending piegatubi 18', '0', '0', '0', '0'),
+(33, '', '13 MR checking: Rules 2 Bending crippa 1', '0', '0', '0', '0'),
+(34, '', '13 MR checking: Rules 2 Bending crippa 2', '0', '0', '0', '0'),
+(35, '', '13 MR checking: Rules 2 Bending piegatubi 3', '0', '0', '0', '0'),
+(36, '', '13 MR checking: Rules 2 Bending piegatubi 5', '0', '0', '0', '0'),
+(37, '', '13 MR checking: Rules 2 Bending piegatubi 9', '0', '0', '0', '0'),
+(38, '', '13 MR checking: Rules 2 Bending piegatubi 2', '0', '0', '0', '0'),
+(39, '', '13 MR checking: Rules 2 Bending piegatubi 3', '0', '0', '0', '0'),
+(40, '', '13 MR checking: Rules 2 Bending piegatubi 17', '0', '0', '0', '0'),
+(41, '', '13 MR checking: Rules 2 Bending piegatubi 8', '0', '0', '0', '0'),
+(42, '', '13 MR checking: Rules 2 Bending piegatubi 18', '0', '0', '0', '0'),
+(43, '', '13 MR checking: Rules 3 Bending crippa 1', '0', '0', '0', '0'),
+(44, '', '13 MR checking: Rules 3 Bending crippa 2', '0', '0', '0', '0'),
+(45, '', '13 MR checking: Rules 3 Bending piegatubi 3', '0', '0', '0', '0'),
+(46, '', '13 MR checking: Rules 3 Bending piegatubi 5', '0', '0', '0', '0'),
+(47, '', '13 MR checking: Rules 3 Bending piegatubi 9', '0', '0', '0', '0'),
+(48, '', '13 MR checking: Rules 3 Bending piegatubi 2', '0', '0', '0', '0'),
+(49, '', '13 MR checking: Rules 3 Bending piegatubi 3', '0', '0', '0', '0'),
+(50, '', '13 MR checking: Rules 3 Bending piegatubi 17', '0', '0', '0', '0'),
+(51, '', '13 MR checking: Rules 3 Bending piegatubi 8', '0', '0', '0', '0'),
+(52, '', '13 MR checking: Rules 3 Bending piegatubi 18', '0', '0', '0', '0'),
+(53, '', '13 MR checking: Rules 4 Bending crippa 1', '0', '0', '0', '0'),
+(54, '', '13 MR checking: Rules 4 Bending crippa 2', '0', '0', '0', '0'),
+(55, '', '13 MR checking: Rules 4 Bending piegatubi 3', '0', '0', '0', '0'),
+(56, '', '13 MR checking: Rules 4 Bending piegatubi 5', '0', '0', '0', '0'),
+(57, '', '13 MR checking: Rules 4 Bending piegatubi 9', '0', '0', '0', '0'),
+(58, '', '13 MR checking: Rules 4 Bending piegatubi 2', '0', '0', '0', '0'),
+(59, '', '13 MR checking: Rules 4 Bending piegatubi 3', '0', '0', '0', '0'),
+(60, '', '13 MR checking: Rules 4 Bending piegatubi 17', '0', '0', '0', '0'),
+(61, '', '13 MR checking: Rules 4 Bending piegatubi 8', '0', '0', '0', '0'),
+(62, '', '13 MR checking: Rules 4 Bending piegatubi 18', '0', '0', '0', '0'),
+(63, '', '13 MR checking: Rules 5 Bending crippa 1', '0', '0', '0', '0'),
+(64, '', '13 MR checking: Rules 5 Bending crippa 2', '0', '0', '0', '0'),
+(65, '', '13 MR checking: Rules 5 Bending piegatubi 3', '0', '0', '0', '0'),
+(66, '', '13 MR checking: Rules 5 Bending piegatubi 5', '0', '0', '0', '0'),
+(67, '', '13 MR checking: Rules 5 Bending piegatubi 9', '0', '0', '0', '0'),
+(68, '', '13 MR checking: Rules 5 Bending piegatubi 2', '0', '0', '0', '0'),
+(69, '', '13 MR checking: Rules 5 Bending piegatubi 3', '0', '0', '0', '0'),
+(70, '', '13 MR checking: Rules 5 Bending piegatubi 17', '0', '0', '0', '0'),
+(71, '', '13 MR checking: Rules 5 Bending piegatubi 8', '0', '0', '0', '0'),
+(72, '', '13 MR checking: Rules 5 Bending piegatubi 18', '0', '0', '0', '0'),
+(73, '', '13 MR checking: Rules 6 Bending crippa 1', '0', '0', '0', '0'),
+(74, '', '13 MR checking: Rules 6 Bending crippa 2', '0', '0', '0', '0'),
+(75, '', '13 MR checking: Rules 6 Bending piegatubi 3', '0', '0', '0', '0'),
+(76, '', '13 MR checking: Rules 6 Bending piegatubi 5', '0', '0', '0', '0'),
+(77, '', '13 MR checking: Rules 6 Bending piegatubi 9', '0', '0', '0', '0'),
+(78, '', '13 MR checking: Rules 6 Bending piegatubi 2', '0', '0', '0', '0'),
+(79, '', '13 MR checking: Rules 6 Bending piegatubi 3', '0', '0', '0', '0'),
+(80, '', '13 MR checking: Rules 6 Bending piegatubi 17', '0', '0', '0', '0'),
+(81, '', '13 MR checking: Rules 6 Bending piegatubi 8', '0', '0', '0', '0'),
+(82, '', '13 MR checking: Rules 6 Bending piegatubi 18', '0', '0', '0', '0'),
+(83, '', '13 MR checking: Rules 7 Bending crippa 1', '0', '0', '0', '0'),
+(84, '', '13 MR checking: Rules 7 Bending crippa 2', '0', '0', '0', '0'),
+(85, '', '13 MR checking: Rules 7 Bending piegatubi 3', '0', '0', '0', '0'),
+(86, '', '13 MR checking: Rules 7 Bending piegatubi 5', '0', '0', '0', '0'),
+(87, '', '13 MR checking: Rules 7 Bending piegatubi 9', '0', '0', '0', '0'),
+(88, '', '13 MR checking: Rules 7 Bending piegatubi 2', '0', '0', '0', '0'),
+(89, '', '13 MR checking: Rules 7 Bending piegatubi 3', '0', '0', '0', '0'),
+(90, '', '13 MR checking: Rules 7 Bending piegatubi 17', '0', '0', '0', '0'),
+(91, '', '13 MR checking: Rules 7 Bending piegatubi 8', '0', '0', '0', '0'),
+(92, '', '13 MR checking: Rules 7 Bending piegatubi 18', '0', '0', '0', '0'),
+(93, '', '13 MR checking: Rules 8 Bending crippa 1', '0', '0', '0', '0'),
+(94, '', '13 MR checking: Rules 8 Bending crippa 2', '0', '0', '0', '0'),
+(95, '', '13 MR checking: Rules 8 Bending piegatubi 3', '0', '0', '0', '0'),
+(96, '', '13 MR checking: Rules 8 Bending piegatubi 5', '0', '0', '0', '0'),
+(97, '', '13 MR checking: Rules 8 Bending piegatubi 9', '0', '0', '0', '0'),
+(98, '', '13 MR checking: Rules 8 Bending piegatubi 2', '0', '0', '0', '0'),
+(99, '', '13 MR checking: Rules 8 Bending piegatubi 3', '0', '0', '0', '0'),
+(100, '', '13 MR checking: Rules 8 Bending piegatubi 17', '0', '0', '0', '0'),
+(101, '', '13 MR checking: Rules 8 Bending piegatubi 8', '0', '0', '0', '0'),
+(102, '', '13 MR checking: Rules 8 Bending piegatubi 18', '0', '0', '0', '0'),
+(103, '', '13 MR checking: Rules 9 Bending crippa 1', '0', '0', '0', '0'),
+(104, '', '13 MR checking: Rules 9 Bending crippa 2', '0', '0', '0', '0'),
+(105, '', '13 MR checking: Rules 9 Bending piegatubi 3', '0', '0', '0', '0'),
+(106, '', '13 MR checking: Rules 9 Bending piegatubi 5', '0', '0', '0', '0'),
+(107, '', '13 MR checking: Rules 9 Bending piegatubi 9', '0', '0', '0', '0'),
+(108, '', '13 MR checking: Rules 9 Bending piegatubi 2', '0', '0', '0', '0'),
+(109, '', '13 MR checking: Rules 9 Bending piegatubi 3', '0', '0', '0', '0'),
+(110, '', '13 MR checking: Rules 9 Bending piegatubi 17', '0', '0', '0', '0'),
+(111, '', '13 MR checking: Rules 9 Bending piegatubi 8', '0', '0', '0', '0'),
+(112, '', '13 MR checking: Rules 9 Bending piegatubi 18', '0', '0', '0', '0'),
+(113, '', '13 MR checking: Rules 10 Bending crippa 1', '0', '0', '0', '0'),
+(114, '', '13 MR checking: Rules 10 Bending crippa 2', '0', '0', '0', '0'),
+(115, '', '13 MR checking: Rules 10 Bending piegatubi 3', '0', '0', '0', '0'),
+(116, '', '13 MR checking: Rules 10 Bending piegatubi 5', '0', '0', '0', '0'),
+(117, '', '13 MR checking: Rules 10 Bending piegatubi 9', '0', '0', '0', '0'),
+(118, '', '13 MR checking: Rules 10 Bending piegatubi 2', '0', '0', '0', '0'),
+(119, '', '13 MR checking: Rules 10 Bending piegatubi 3', '0', '0', '0', '0'),
+(120, '', '13 MR checking: Rules 10 Bending piegatubi 17', '0', '0', '0', '0'),
+(121, '', '13 MR checking: Rules 10 Bending piegatubi 8', '0', '0', '0', '0'),
+(122, '', '13 MR checking: Rules 10 Bending piegatubi 18', '0', '0', '0', '0'),
+(123, '', '13 MR checking: Rules 11 Bending crippa 1', '0', '0', '0', '0'),
+(124, '', '13 MR checking: Rules 11 Bending crippa 2', '0', '0', '0', '0'),
+(125, '', '13 MR checking: Rules 11 Bending piegatubi 3', '0', '0', '0', '0'),
+(126, '', '13 MR checking: Rules 11 Bending piegatubi 5', '0', '0', '0', '0'),
+(127, '', '13 MR checking: Rules 11 Bending piegatubi 9', '0', '0', '0', '0'),
+(128, '', '13 MR checking: Rules 11 Bending piegatubi 2', '0', '0', '0', '0'),
+(129, '', '13 MR checking: Rules 11 Bending piegatubi 3', '0', '0', '0', '0'),
+(130, '', '13 MR checking: Rules 11 Bending piegatubi 17', '0', '0', '0', '0'),
+(131, '', '13 MR checking: Rules 11 Bending piegatubi 8', '0', '0', '0', '0'),
+(132, '', '13 MR checking: Rules 11 Bending piegatubi 18', '0', '0', '0', '0'),
+(133, '', '13 MR checking: Rules 12 Bending crippa 1', '0', '0', '0', '0'),
+(134, '', '13 MR checking: Rules 12 Bending crippa 2', '0', '0', '0', '0'),
+(135, '', '13 MR checking: Rules 12 Bending piegatubi 3', '0', '0', '0', '0'),
+(136, '', '13 MR checking: Rules 12 Bending piegatubi 5', '0', '0', '0', '0'),
+(137, '', '13 MR checking: Rules 12 Bending piegatubi 9', '0', '0', '0', '0'),
+(138, '', '13 MR checking: Rules 12 Bending piegatubi 2', '0', '0', '0', '0'),
+(139, '', '13 MR checking: Rules 12 Bending piegatubi 3', '0', '0', '0', '0'),
+(140, '', '13 MR checking: Rules 12 Bending piegatubi 17', '0', '0', '0', '0'),
+(141, '', '13 MR checking: Rules 12 Bending piegatubi 8', '0', '0', '0', '0'),
+(142, '', '13 MR checking: Rules 12 Bending piegatubi 18', '0', '0', '0', '0'),
+(143, '', '13 MR checking: Rules 13 Bending crippa 1', '0', '0', '0', '0'),
+(144, '', '13 MR checking: Rules 13 Bending crippa 2', '0', '0', '0', '0'),
+(145, '', '13 MR checking: Rules 13 Bending piegatubi 3', '0', '0', '0', '0'),
+(146, '', '13 MR checking: Rules 13 Bending piegatubi 5', '0', '0', '0', '0'),
+(147, '', '13 MR checking: Rules 13 Bending piegatubi 9', '0', '0', '0', '0'),
+(148, '', '13 MR checking: Rules 13 Bending piegatubi 2', '0', '0', '0', '0'),
+(149, '', '13 MR checking: Rules 13 Bending piegatubi 3', '0', '0', '0', '0'),
+(150, '', '13 MR checking: Rules 13 Bending piegatubi 17', '0', '0', '0', '0'),
+(151, '', '13 MR checking: Rules 13 Bending piegatubi 8', '0', '0', '0', '0'),
+(152, '', '13 MR checking: Rules 13 Bending piegatubi 18', '0', '0', '0', '0'),
+(153, '', '7 QB Bending crippa 1', '0', '0', '0', '0'),
+(154, '', '7 QB Bending crippa 2', '0', '0', '0', '0'),
+(155, '', '7 QB Bending piegatubi 3', '0', '0', '0', '0'),
+(156, '', '7 QB Bending piegatubi 5', '0', '0', '0', '0'),
+(157, '', '7 QB Bending piegatubi 9', '0', '0', '0', '0'),
+(158, '', '7 QB Bending piegatubi 2', '0', '0', '0', '0'),
+(159, '', '7 QB Bending piegatubi 3', '0', '0', '0', '0'),
+(160, '', '7 QB Bending piegatubi 17', '0', '0', '0', '0'),
+(161, '', '7 QB Bending piegatubi 8', '0', '0', '0', '0'),
+(162, '', '7 QB Bending piegatubi 18', '0', '0', '0', '0'),
+(163, '', '7 QB Assembly isola 1500', '0', '0', '0', '0'),
+(164, '', '7 QB Assembly isola 1700', '0', '0', '0', '0'),
+(165, '', '7 QB Assembly isola 1900', '0', '0', '0', '0'),
+(166, '', '7 QB Assembly isola 1800', '0', '0', '0', '0'),
+(167, '', '7 QB Assembly isola 6000', '0', '0', '0', '0'),
+(168, '', '7 QB Assembly isola 10000', '0', '0', '0', '0'),
+(169, '', '7 QB Assembly isola 1900', '0', '0', '0', '0'),
+(170, '', '7 QB Assembly isola 11000', '0', '0', '0', '0'),
+(171, '', '7 QB Assembly isola 6100', '0', '0', '0', '0'),
+(172, '', '7 QB Assembly isola 2100', '0', '0', '0', '0'),
+(173, '', 'control 7DB in PC&L', '0', '0', '0', '0'),
+(174, '', 'control 7IB in PC&L', '0', '0', '0', '0'),
+(175, '', 'SCRAP Tickets Bending crippa 1', '0', '0', '0', '0'),
+(176, '', 'SCRAP Tickets Bending crippa 2', '0', '0', '0', '0'),
+(177, '', 'SCRAP Tickets Bending piegatubi 3', '0', '0', '0', '0'),
+(178, '', 'SCRAP Tickets Bending piegatubi 5', '0', '0', '0', '0'),
+(179, '', 'SCRAP Tickets Bending piegatubi 9', '0', '0', '0', '0'),
+(180, '', 'SCRAP Tickets Bending piegatubi 2', '0', '0', '0', '0'),
+(181, '', 'SCRAP Tickets Bending piegatubi 3', '0', '0', '0', '0'),
+(182, '', 'SCRAP Tickets Bending piegatubi 17', '0', '0', '0', '0'),
+(183, '', 'SCRAP Tickets Bending piegatubi 8', '0', '0', '0', '0'),
+(184, '', 'SCRAP Tickets Bending piegatubi 18', '0', '0', '0', '0'),
+(185, '', 'SCRAP Tickets Assembly isola 1500', '0', '0', '0', '0'),
+(186, '', 'SCRAP Tickets Assembly isola 1700', '0', '0', '0', '0'),
+(187, '', 'SCRAP Tickets Assembly isola 1900', '0', '0', '0', '0'),
+(188, '', 'SCRAP Tickets Assembly isola 1800', '0', '0', '0', '0'),
+(189, '', 'SCRAP Tickets Assembly isola 6000', '0', '0', '0', '0'),
+(190, '', 'SCRAP Tickets Assembly isola 10000', '0', '0', '0', '0'),
+(191, '', 'SCRAP Tickets Assembly isola 1900', '0', '0', '0', '0'),
+(192, '', 'SCRAP Tickets Assembly isola 11000', '0', '0', '0', '0'),
+(193, '', 'SCRAP Tickets Assembly isola 6100', '0', '0', '0', '0'),
+(194, '', 'SCRAP Tickets Assembly isola 2100', '0', '0', '0', '0'),
+(195, '', '13 MR checking: rules 1 Assembly isola 1500', '0', '0', '0', '0'),
+(196, '', '13 MR checking: rules 1 Assembly isola 1700', '0', '0', '0', '0'),
+(197, '', '13 MR checking: rules 1 Assembly isola 1900', '0', '0', '0', '0'),
+(198, '', '13 MR checking: rules 1 Assembly isola 1800', '0', '0', '0', '0'),
+(199, '', '13 MR checking: rules 1 Assembly isola 6000', '0', '0', '0', '0'),
+(200, '', '13 MR checking: rules 1 Assembly isola 10000', '0', '0', '0', '0'),
+(201, '', '13 MR checking: rules 1 Assembly isola 1900', '0', '0', '0', '0'),
+(202, '', '13 MR checking: rules 1 Assembly isola 11000', '0', '0', '0', '0'),
+(203, '', '13 MR checking: rules 1 Assembly isola 6100', '0', '0', '0', '0'),
+(204, '', '13 MR checking: rules 1 Assembly isola 2100', '0', '0', '0', '0'),
+(205, '', '13 MR checking: Rules 2 Assembly isola 1500', '0', '0', '0', '0'),
+(206, '', '13 MR checking: Rules 2 Assembly isola 1700', '0', '0', '0', '0'),
+(207, '', '13 MR checking: Rules 2 Assembly isola 1900', '0', '0', '0', '0'),
+(208, '', '13 MR checking: Rules 2 Assembly isola 1800', '0', '0', '0', '0'),
+(209, '', '13 MR checking: Rules 2 Assembly isola 6000', '0', '0', '0', '0'),
+(210, '', '13 MR checking: Rules 2 Assembly isola 10000', '0', '0', '0', '0'),
+(211, '', '13 MR checking: Rules 2 Assembly isola 1900', '0', '0', '0', '0'),
+(212, '', '13 MR checking: Rules 2 Assembly isola 11000', '0', '0', '0', '0'),
+(213, '', '13 MR checking: Rules 2 Assembly isola 6100', '0', '0', '0', '0'),
+(214, '', '13 MR checking: Rules 2 Assembly isola 2100', '0', '0', '0', '0'),
+(215, '', '13 MR checking: Rules 3 Assembly isola 1500', '0', '0', '0', '0'),
+(216, '', '13 MR checking: Rules 3 Assembly isola 1700', '0', '0', '0', '0'),
+(217, '', '13 MR checking: Rules 3 Assembly isola 1900', '0', '0', '0', '0'),
+(218, '', '13 MR checking: Rules 3 Assembly isola 1800', '0', '0', '0', '0'),
+(219, '', '13 MR checking: Rules 3 Assembly isola 6000', '0', '0', '0', '0'),
+(220, '', '13 MR checking: Rules 3 Assembly isola 10000', '0', '0', '0', '0'),
+(221, '', '13 MR checking: Rules 3 Assembly isola 1900', '0', '0', '0', '0'),
+(222, '', '13 MR checking: Rules 3 Assembly isola 11000', '0', '0', '0', '0'),
+(223, '', '13 MR checking: Rules 3 Assembly isola 6100', '0', '0', '0', '0'),
+(224, '', '13 MR checking: Rules 3 Assembly isola 2100', '0', '0', '0', '0'),
+(225, '', '13 MR checking: Rules 4 Assembly isola 1500', '0', '0', '0', '0'),
+(226, '', '13 MR checking: Rules 4 Assembly isola 1700', '0', '0', '0', '0'),
+(227, '', '13 MR checking: Rules 4 Assembly isola 1900', '0', '0', '0', '0'),
+(228, '', '13 MR checking: Rules 4 Assembly isola 1800', '0', '0', '0', '0'),
+(229, '', '13 MR checking: Rules 4 Assembly isola 6000', '0', '0', '0', '0'),
+(230, '', '13 MR checking: Rules 4 Assembly isola 10000', '0', '0', '0', '0'),
+(231, '', '13 MR checking: Rules 4 Assembly isola 1900', '0', '0', '0', '0'),
+(232, '', '13 MR checking: Rules 4 Assembly isola 11000', '0', '0', '0', '0'),
+(233, '', '13 MR checking: Rules 4 Assembly isola 6100', '0', '0', '0', '0'),
+(234, '', '13 MR checking: Rules 4 Assembly isola 2100', '0', '0', '0', '0'),
+(235, '', '13 MR checking: Rules 5 Assembly isola 1500', '0', '0', '0', '0'),
+(236, '', '13 MR checking: Rules 5 Assembly isola 1700', '0', '0', '0', '0'),
+(237, '', '13 MR checking: Rules 5 Assembly isola 1900', '0', '0', '0', '0'),
+(238, '', '13 MR checking: Rules 5 Assembly isola 1800', '0', '0', '0', '0'),
+(239, '', '13 MR checking: Rules 5 Assembly isola 6000', '0', '0', '0', '0'),
+(240, '', '13 MR checking: Rules 5 Assembly isola 10000', '0', '0', '0', '0'),
+(241, '', '13 MR checking: Rules 5 Assembly isola 1900', '0', '0', '0', '0'),
+(242, '', '13 MR checking: Rules 5 Assembly isola 11000', '0', '0', '0', '0'),
+(243, '', '13 MR checking: Rules 5 Assembly isola 6100', '0', '0', '0', '0'),
+(244, '', '13 MR checking: Rules 5 Assembly isola 2100', '0', '0', '0', '0'),
+(245, '', '13 MR checking: Rules 6 Assembly isola 1500', '0', '0', '0', '0'),
+(246, '', '13 MR checking: Rules 6 Assembly isola 1700', '0', '0', '0', '0'),
+(247, '', '13 MR checking: Rules 6 Assembly isola 1900', '0', '0', '0', '0'),
+(248, '', '13 MR checking: Rules 6 Assembly isola 1800', '0', '0', '0', '0'),
+(249, '', '13 MR checking: Rules 6 Assembly isola 6000', '0', '0', '0', '0'),
+(250, '', '13 MR checking: Rules 6 Assembly isola 10000', '0', '0', '0', '0'),
+(251, '', '13 MR checking: Rules 6 Assembly isola 1900', '0', '0', '0', '0'),
+(252, '', '13 MR checking: Rules 6 Assembly isola 11000', '0', '0', '0', '0'),
+(253, '', '13 MR checking: Rules 6 Assembly isola 6100', '0', '0', '0', '0'),
+(254, '', '13 MR checking: Rules 6 Assembly isola 2100', '0', '0', '0', '0'),
+(255, '', '13 MR checking: Rules 7 Assembly isola 1500', '0', '0', '0', '0'),
+(256, '', '13 MR checking: Rules 7 Assembly isola 1700', '0', '0', '0', '0'),
+(257, '', '13 MR checking: Rules 7 Assembly isola 1900', '0', '0', '0', '0'),
+(258, '', '13 MR checking: Rules 7 Assembly isola 1800', '0', '0', '0', '0'),
+(259, '', '13 MR checking: Rules 7 Assembly isola 6000', '0', '0', '0', '0'),
+(260, '', '13 MR checking: Rules 7 Assembly isola 10000', '0', '0', '0', '0'),
+(261, '', '13 MR checking: Rules 7 Assembly isola 1900', '0', '0', '0', '0'),
+(262, '', '13 MR checking: Rules 7 Assembly isola 11000', '0', '0', '0', '0'),
+(263, '', '13 MR checking: Rules 7 Assembly isola 6100', '0', '0', '0', '0'),
+(264, '', '13 MR checking: Rules 7 Assembly isola 2100', '0', '0', '0', '0'),
+(265, '', '13 MR checking: Rules 8 Assembly isola 1500', '0', '0', '0', '0'),
+(266, '', '13 MR checking: Rules 8 Assembly isola 1700', '0', '0', '0', '0'),
+(267, '', '13 MR checking: Rules 8 Assembly isola 1900', '0', '0', '0', '0'),
+(268, '', '13 MR checking: Rules 8 Assembly isola 1800', '0', '0', '0', '0'),
+(269, '', '13 MR checking: Rules 8 Assembly isola 6000', '0', '0', '0', '0'),
+(270, '', '13 MR checking: Rules 8 Assembly isola 10000', '0', '0', '0', '0'),
+(271, '', '13 MR checking: Rules 8 Assembly isola 1900', '0', '0', '0', '0'),
+(272, '', '13 MR checking: Rules 8 Assembly isola 11000', '0', '0', '0', '0'),
+(273, '', '13 MR checking: Rules 8 Assembly isola 6100', '0', '0', '0', '0'),
+(274, '', '13 MR checking: Rules 8 Assembly isola 2100', '0', '0', '0', '0'),
+(275, '', '13 MR checking: Rules 9 Assembly isola 1500', '0', '0', '0', '0'),
+(276, '', '13 MR checking: Rules 9 Assembly isola 1700', '0', '0', '0', '0'),
+(277, '', '13 MR checking: Rules 9 Assembly isola 1900', '0', '0', '0', '0'),
+(278, '', '13 MR checking: Rules 9 Assembly isola 1800', '0', '0', '0', '0'),
+(279, '', '13 MR checking: Rules 9 Assembly isola 6000', '0', '0', '0', '0'),
+(280, '', '13 MR checking: Rules 9 Assembly isola 10000', '0', '0', '0', '0'),
+(281, '', '13 MR checking: Rules 9 Assembly isola 1900', '0', '0', '0', '0'),
+(282, '', '13 MR checking: Rules 9 Assembly isola 11000', '0', '0', '0', '0'),
+(283, '', '13 MR checking: Rules 9 Assembly isola 6100', '0', '0', '0', '0'),
+(284, '', '13 MR checking: Rules 9 Assembly isola 2100', '0', '0', '0', '0'),
+(285, '', '13 MR checking: Rules 10 Assembly isola 1500', '0', '0', '0', '0'),
+(286, '', '13 MR checking: Rules 10 Assembly isola 1700', '0', '0', '0', '0'),
+(287, '', '13 MR checking: Rules 10 Assembly isola 1900', '0', '0', '0', '0'),
+(288, '', '13 MR checking: Rules 10 Assembly isola 1800', '0', '0', '0', '0'),
+(289, '', '13 MR checking: Rules 10 Assembly isola 6000', '0', '0', '0', '0'),
+(290, '', '13 MR checking: Rules 10 Assembly isola 10000', '0', '0', '0', '0'),
+(291, '', '13 MR checking: Rules 10 Assembly isola 1900', '0', '0', '0', '0'),
+(292, '', '13 MR checking: Rules 10 Assembly isola 11000', '0', '0', '0', '0'),
+(293, '', '13 MR checking: Rules 10 Assembly isola 6100', '0', '0', '0', '0'),
+(294, '', '13 MR checking: Rules 10 Assembly isola 2100', '0', '0', '0', '0'),
+(295, '', '13 MR checking: Rules 11 Assembly isola 1500', '0', '0', '0', '0'),
+(296, '', '13 MR checking: Rules 11 Assembly isola 1700', '0', '0', '0', '0'),
+(297, '', '13 MR checking: Rules 11 Assembly isola 1900', '0', '0', '0', '0'),
+(298, '', '13 MR checking: Rules 11 Assembly isola 1800', '0', '0', '0', '0'),
+(299, '', '13 MR checking: Rules 11 Assembly isola 6000', '0', '0', '0', '0'),
+(300, '', '13 MR checking: Rules 11 Assembly isola 10000', '0', '0', '0', '0'),
+(301, '', '13 MR checking: Rules 11 Assembly isola 1900', '0', '0', '0', '0'),
+(302, '', '13 MR checking: Rules 11 Assembly isola 11000', '0', '0', '0', '0'),
+(303, '', '13 MR checking: Rules 11 Assembly isola 6100', '0', '0', '0', '0'),
+(304, '', '13 MR checking: Rules 11 Assembly isola 2100', '0', '0', '0', '0'),
+(305, '', '13 MR checking: Rules 12 Assembly isola 1500', '0', '0', '0', '0'),
+(306, '', '13 MR checking: Rules 12 Assembly isola 1700', '0', '0', '0', '0'),
+(307, '', '13 MR checking: Rules 12 Assembly isola 1900', '0', '0', '0', '0'),
+(308, '', '13 MR checking: Rules 12 Assembly isola 1800', '0', '0', '0', '0'),
+(309, '', '13 MR checking: Rules 12 Assembly isola 6000', '0', '0', '0', '0'),
+(310, '', '13 MR checking: Rules 12 Assembly isola 10000', '0', '0', '0', '0'),
+(311, '', '13 MR checking: Rules 12 Assembly isola 1900', '0', '0', '0', '0'),
+(312, '', '13 MR checking: Rules 12 Assembly isola 11000', '0', '0', '0', '0'),
+(313, '', '13 MR checking: Rules 12 Assembly isola 6100', '0', '0', '0', '0'),
+(314, '', '13 MR checking: Rules 12 Assembly isola 2100', '0', '0', '0', '0'),
+(315, '', '7QB  isola 1500', '0', '0', '0', '0'),
+(316, '', '7QB  isola 1700', '0', '0', '0', '0'),
+(317, '', '7QB  isola 1900', '0', '0', '0', '0'),
+(318, '', '7QB  isola 1800', '0', '0', '0', '0'),
+(319, '', '7QB  isola 6000', '0', '0', '0', '0'),
+(320, '', '7QB  isola 10000', '0', '0', '0', '0'),
+(321, '', '7QB  isola 1900', '0', '0', '0', '0'),
+(322, '', '7QB  isola 11000', '0', '0', '0', '0'),
+(323, '', '7QB  isola 6100', '0', '0', '0', '0'),
+(324, '', '7QB  isola 2100', '0', '0', '0', '0'),
+(325, '', '7QB  isola 1500', '0', '0', '0', '0'),
+(326, '', '7QB  isola 1700', '0', '0', '0', '0'),
+(327, '', '7QB  isola 1900', '0', '0', '0', '0'),
+(328, '', '7QB  isola 1800', '0', '0', '0', '0'),
+(329, '', '7QB  isola 6000', '0', '0', '0', '0'),
+(330, '', '7QB  isola 10000', '0', '0', '0', '0'),
+(331, '', '7QB  isola 1900', '0', '0', '0', '0'),
+(332, '', '7QB  isola 11000', '0', '0', '0', '0'),
+(333, '', '7QB  isola 6100', '0', '0', '0', '0'),
+(334, '', '7QB  isola 2100', '0', '0', '0', '0'),
+(335, '', 'BOP stock maxi in flat storage', '0', '0', '0', '0'),
+(336, '', 'BOP Stock mini in flat storage', '0', '0', '0', '0'),
+(337, '', '1 technical parameter Bending crippa 1', '0', '0', '0', '0'),
+(338, '', '1 technical parameter Bending crippa 2', '0', '0', '0', '0'),
+(339, '', '1 technical parameter Bending piegatubi 3', '0', '0', '0', '0'),
+(340, '', '1 technical parameter Bending piegatubi 5', '0', '0', '0', '0'),
+(341, '', '1 technical parameter Bending piegatubi 9', '0', '0', '0', '0'),
+(342, '', '1 technical parameter Bending piegatubi 2', '0', '0', '0', '0'),
+(343, '', '1 technical parameter Bending piegatubi 3', '0', '0', '0', '0'),
+(344, '', '1 technical parameter Bending piegatubi 17', '0', '0', '0', '0'),
+(345, '', '1 technical parameter Bending piegatubi 8', '0', '0', '0', '0'),
+(346, '', '1 technical parameter Bending piegatubi 18', '0', '0', '0', '0'),
+(347, '', '1 technical parameter Assembly isola 1500', '0', '0', '0', '0'),
+(348, '', '1 technical parameter Assembly isola 1700', '0', '0', '0', '0'),
+(349, '', '1 technical parameter Assembly isola 1900', '0', '0', '0', '0'),
+(350, '', '1 technical parameter Assembly isola 1800', '0', '0', '0', '0'),
+(351, '', '1 technical parameter Assembly isola 6000', '0', '0', '0', '0'),
+(352, '', '1 technical parameter Assembly isola 10000', '0', '0', '0', '0'),
+(353, '', '1 technical parameter Assembly isola 1900', '0', '0', '0', '0'),
+(354, '', '1 technical parameter Assembly isola 11000', '0', '0', '0', '0'),
+(355, '', '1 technical parameter Assembly isola 6100', '0', '0', '0', '0'),
+(356, '', '1 technical parameter Assembly isola 2100', '0', '0', '0', '0'),
+(357, '', 'Operator polyvalence Bending crippa 1', '0', '0', '0', '0'),
+(358, '', 'Operator polyvalence Bending crippa 2', '0', '0', '0', '0'),
+(359, '', 'Operator polyvalence Bending piegatubi 3', '0', '0', '0', '0'),
+(360, '', 'Operator polyvalence Bending piegatubi 5', '0', '0', '0', '0'),
+(361, '', 'Operator polyvalence Bending piegatubi 9', '0', '0', '0', '0'),
+(362, '', 'Operator polyvalence Bending piegatubi 2', '0', '0', '0', '0'),
+(363, '', 'Operator polyvalence Bending piegatubi 3', '0', '0', '0', '0'),
+(364, '', 'Operator polyvalence Bending piegatubi 17', '0', '0', '0', '0'),
+(365, '', 'Operator polyvalence Bending piegatubi 8', '0', '0', '0', '0'),
+(366, '', 'Operator polyvalence Bending piegatubi 18', '0', '0', '0', '0'),
+(367, '', 'Operator polyvalence Assembly isola 1500', '0', '0', '0', '0'),
+(368, '', 'Operator polyvalence Assembly isola 1700', '0', '0', '0', '0'),
+(369, '', 'Operator polyvalence Assembly isola 1900', '0', '0', '0', '0'),
+(370, '', 'Operator polyvalence Assembly isola 1800', '0', '0', '0', '0'),
+(371, '', 'Operator polyvalence Assembly isola 6000', '0', '0', '0', '0'),
+(372, '', 'Operator polyvalence Assembly isola 10000', '0', '0', '0', '0'),
+(373, '', 'Operator polyvalence Assembly isola 1900', '0', '0', '0', '0'),
+(374, '', 'Operator polyvalence Assembly isola 11000', '0', '0', '0', '0'),
+(375, '', 'Operator polyvalence Assembly isola 6100', '0', '0', '0', '0'),
+(376, '', 'Operator polyvalence Assembly isola 2100', '0', '0', '0', '0'),
+(377, '', 'Last SW audit Bending crippa 1', '0', '0', '0', '0'),
+(378, '', 'Last SW audit Bending crippa 2', '0', '0', '0', '0'),
+(379, '', 'Last SW audit Bending piegatubi 3', '0', '0', '0', '0'),
+(380, '', 'Last SW audit Bending piegatubi 5', '0', '0', '0', '0'),
+(381, '', 'Last SW audit Bending piegatubi 9', '0', '0', '0', '0'),
+(382, '', 'Last SW audit Bending piegatubi 2', '0', '0', '0', '0'),
+(383, '', 'Last SW audit Bending piegatubi 3', '0', '0', '0', '0'),
+(384, '', 'Last SW audit Bending piegatubi 17', '0', '0', '0', '0'),
+(385, '', 'Last SW audit Bending piegatubi 8', '0', '0', '0', '0'),
+(386, '', 'Last SW audit Bending piegatubi 18', '0', '0', '0', '0'),
+(387, '', 'Last SW audit Assembly isola 1500', '0', '0', '0', '0'),
+(388, '', 'Last SW audit Assembly isola 1700', '0', '0', '0', '0'),
+(389, '', 'Last SW audit Assembly isola 1900', '0', '0', '0', '0'),
+(390, '', 'Last SW audit Assembly isola 1800', '0', '0', '0', '0'),
+(391, '', 'Last SW audit Assembly isola 6000', '0', '0', '0', '0'),
+(392, '', 'Last SW audit Assembly isola 10000', '0', '0', '0', '0'),
+(393, '', 'Last SW audit Assembly isola 1900', '0', '0', '0', '0'),
+(394, '', 'Last SW audit Assembly isola 11000', '0', '0', '0', '0'),
+(395, '', 'Last SW audit Assembly isola 6100', '0', '0', '0', '0'),
+(396, '', 'Last SW audit Assembly isola 2100', '0', '0', '0', '0'),
+(397, '', 'WC maxi vs Parts boards target Bending crippa 1', '0', '0', '0', '0'),
+(398, '', 'WC maxi vs Parts boards target Bending crippa 2', '0', '0', '0', '0'),
+(399, '', 'WC maxi vs Parts boards target Bending 3', '0', '0', '0', '0'),
+(400, '', 'WC maxi vs Parts boards target Bending  5', '0', '0', '0', '0'),
+(401, '', 'WC maxi vs Parts boards target Bending  9', '0', '0', '0', '0'),
+(402, '', 'WC maxi vs Parts boards target Bending  2', '0', '0', '0', '0'),
+(403, '', 'WC maxi vs Parts boards target Bending  3', '0', '0', '0', '0'),
+(404, '', 'WC maxi vs Parts boards target Bending  17', '0', '0', '0', '0'),
+(405, '', 'WC maxi vs Parts boards target Bending 8', '0', '0', '0', '0'),
+(406, '', 'WC maxi vs Parts boards target Bending  18', '0', '0', '0', '0'),
+(407, '', 'WC maxi vs Parts boards target Assembly isola 1500', '0', '0', '0', '0'),
+(408, '', 'WC maxi vs Parts boards target Assembly isola 1700', '0', '0', '0', '0'),
+(409, '', 'WC maxi vs Parts boards target Assembly isola 1900', '0', '0', '0', '0'),
+(410, '', 'WC maxi vs Parts boards target Assembly isola 1800', '0', '0', '0', '0'),
+(411, '', 'WC maxi vs Parts boards target Assembly isola 6000', '0', '0', '0', '0'),
+(412, '', 'WC maxi vs Parts boards target Assembly isola 10000', '0', '0', '0', '0'),
+(413, '', 'WC maxi vs Parts boards target Assembly isola 1900', '0', '0', '0', '0'),
+(414, '', 'WC maxi vs Parts boards target Assembly isola 11000', '0', '0', '0', '0'),
+(415, '', 'WC maxi vs Parts boards target Assembly isola 6100', '0', '0', '0', '0'),
+(416, '', 'WC maxi vs Parts boards target Assembly isola 2100', '0', '0', '0', '0'),
+(417, '', 'Check Gap leader TOP 5 Assembly ', '0', '0', '0', '0'),
+(418, '', 'Check Gap leader TOP 5 Bending', '0', '0', '0', '0'),
+(419, '', 'Check leak of oil/water in 1 machine', '0', '0', '0', '0'),
+(420, '', 'Check Mgt controll reaction rules Bending', '0', '0', '0', '0'),
+(421, '', 'Check Mgt controll reaction rules Assembly', '0', '0', '0', '0'),
+(422, '', 'Check Mgt controll reaction rules PC&L', '0', '0', '0', '0'),
+(423, '', 'Check number of MOD versus Day standard in Assembly', '0', '0', '0', '0'),
+(424, '', 'Check number of MOD versus Day standard in Bending', '0', '0', '0', '0'),
+(425, '', 'Check number of MOD versus Day standard in PC&L', '0', '0', '0', '0'),
+(426, '', 'Check OK  1st start forklift', '0', '0', '0', '0'),
+(427, '', 'Check PI availbale in Assembly ', '0', '0', '0', '0'),
+(428, '', 'Check PI availbale in Bending', '0', '0', '0', '0'),
+(429, '', 'Check PI availbale in Maintenance', '0', '0', '0', '0'),
+(430, '', 'Check PI availbale in support fonction ', '0', '0', '0', '0'),
+(431, '', 'Check QRCI board status Bending ', '0', '0', '0', '0'),
+(432, '', 'Check QRCI board status Assembly', '0', '0', '0', '0'),
+(433, '', 'Check Receving board PC&L', '0', '0', '0', '0'),
+(434, '', 'Check respect of smoking aera', '0', '0', '0', '0'),
+(435, '', 'Check routine of GL Assembly', '0', '0', '0', '0'),
+(436, '', 'Check routine of GL PC&L', '0', '0', '0', '0'),
+(437, '', 'Check routine of GL Bending', '0', '0', '0', '0'),
+(438, '', 'Check Standard clothes', '0', '0', '0', '0'),
+(439, '', 'check Stock pilling  interior :2 equivalent containers maxi', '0', '0', '0', '0'),
+(440, '', 'Check SW of 1 C/O Assembly', '0', '0', '0', '0'),
+(441, '', 'Check SW of 1 C/O Bending', '0', '0', '0', '0'),
+(442, '', 'Check waste segregation Bending', '0', '0', '0', '0'),
+(443, '', 'Check waste segregation Assembly', '0', '0', '0', '0'),
+(444, '', 'Check waste segregation Office', '0', '0', '0', '0'),
+(445, '', 'Check waste segregation External', '0', '0', '0', '0'),
+(446, '', 'Give 10KE saving to plant manager', '0', '0', '0', '0'),
+(447, '', 'Give 10KE saving to plant manager', '0', '0', '0', '0'),
+(448, '', 'Give 10KE saving to plant manager', '0', '0', '0', '0'),
+(449, '', 'Give 10KE saving to plant manager', '0', '0', '0', '0'),
+(450, '', 'Give 10KE saving to plant manager', '0', '0', '0', '0'),
+(451, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0'),
+(452, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0'),
+(453, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0'),
+(454, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0'),
+(455, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0'),
+(456, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0'),
+(457, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0'),
+(458, '', 'Give 1KE saving to plant manager', '0', '0', '0', '0'),
+(459, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0'),
+(460, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0'),
+(461, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0'),
+(462, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0'),
+(463, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0'),
+(464, '', 'Give 5KE saving to plant manager', '0', '0', '0', '0'),
+(465, '', 'GIVE 50 KE saving to Plant manager ', '0', '0', '0', '0'),
+(466, '', 'Pay croissants for next Friday ', '0', '0', '0', '0'),
+(467, '', 'Pay croissants for next Friday ', '0', '0', '0', '0'),
+(468, '', 'Pay croissants for next Friday ', '0', '0', '0', '0'),
+(469, '', '0 extra hours next week', '0', '0', '0', '0'),
+(470, '', '0 extra hours next week', '0', '0', '0', '0'),
+(471, '', '0 extra hours next week', '0', '0', '0', '0'),
+(472, '', '0 extra hours next week', '0', '0', '0', '0'),
+(473, '', 'HSE core team participation', '0', '0', '0', '0'),
+(474, '', 'Improvement Iidea ergonomic issue', '0', '0', '0', '0'),
+(475, '', 'Kanban loop order & respect in 1 machine or 1 line', '0', '0', '0', '0'),
+(476, '', 'No extra hours tomorrow', '0', '0', '0', '0'),
+(477, '', 'Non DLE improvement Idea', '0', '0', '0', '0'),
+(478, '', 'OK 1 parts', '0', '0', '0', '0'),
+(479, '', 'PC&L HSE MR', '0', '0', '0', '0'),
+(480, '', 'Polyvalence of operator in Work station', '0', '0', '0', '0'),
+(481, '', 'QRCI D3 checking', '0', '0', '0', '0'),
+(482, '', 'QRCI D6 checking', '0', '0', '0', '0'),
+(483, '', 'QRCI D8 checking', '0', '0', '0', '0'),
+(484, '', '5S PC&L office', '0', '0', '0', '0'),
+(485, '', '5S Plant Manager', '0', '0', '0', '0'),
+(486, '', '5S ME office', '0', '0', '0', '0'),
+(487, '', '5S UAP Office', '0', '0', '0', '0'),
+(488, '', '5S HR office', '0', '0', '0', '0'),
+(489, '', '5S finances Office', '0', '0', '0', '0'),
+(490, '', '5S IT Offices', '0', '0', '0', '0'),
+(491, '', 'SV dashboard control Assembly', '0', '0', '0', '0'),
+(492, '', 'SV dashboard control Bending', '0', '0', '0', '0'),
+(493, '', 'SV dashboard control PC&L', '0', '0', '0', '0'),
+(494, '', 'TPM level 1 Bending crippa 1', '0', '0', '0', '0'),
+(495, '', 'TPM level 1 Bending crippa 2', '0', '0', '0', '0'),
+(496, '', 'TPM level 1  Bending 3', '0', '0', '0', '0'),
+(497, '', 'TPM level 1 Bending  5', '0', '0', '0', '0'),
+(498, '', 'TPM level 1 Bending  9', '0', '0', '0', '0'),
+(499, '', 'TPM level 1  Bending 2', '0', '0', '0', '0'),
+(500, '', 'TPM level 1  Bending 3', '0', '0', '0', '0'),
+(501, '', 'TPM level 1  Bending 17', '0', '0', '0', '0'),
+(502, '', 'TPM level 1 Bending  8', '0', '0', '0', '0'),
+(503, '', 'TPM level 1 Bending  18', '0', '0', '0', '0'),
+(504, '', 'TPM level 1 Assembly isola 1500', '0', '0', '0', '0'),
+(505, '', 'TPM level 1 Assembly isola 1700', '0', '0', '0', '0'),
+(506, '', 'TPM level 1 Assembly isola 1900', '0', '0', '0', '0'),
+(507, '', 'TPM level 1 Assembly isola 1800', '0', '0', '0', '0'),
+(508, '', 'TPM level 1 Assembly isola 6000', '0', '0', '0', '0'),
+(509, '', 'TPM level 1 Assembly isola 10000', '0', '0', '0', '0'),
+(510, '', 'TPM level 1 Assembly isola 1900', '0', '0', '0', '0'),
+(511, '', 'TPM level 1 Assembly isola 11000', '0', '0', '0', '0'),
+(512, '', 'TPM level 1 Assembly isola 6100', '0', '0', '0', '0'),
+(513, '', 'TPM level 1 Assembly isola 2100', '0', '0', '0', '0'),
+(514, '', 'Check presence in MIP metting this week', '0', '0', '0', '0'),
+(515, '', 'Check presence in MIP metting this week', '0', '0', '0', '0'),
+(516, '', 'Check presence in MIP metting this week', '0', '0', '0', '0'),
+(517, '', 'Check presence in MIP metting this week', '0', '0', '0', '0'),
+(518, '', 'Check presence in MIP metting this week', '0', '0', '0', '0'),
+(519, '', 'Check presence in MIP metting this week', '0', '0', '0', '0'),
+(520, '', 'Check last payroll control formal validation', '0', '0', '0', '0'),
+(521, '', 'Check last payroll control formal validation', '0', '0', '0', '0'),
+(522, '', 'Check last payroll control formal validation', '0', '0', '0', '0'),
+(523, '', 'Check material reception booked by material planner last 30 days', '0', '0', '0', '0'),
+(524, '', 'Check material reception booked by material planner last 30 days', '0', '0', '0', '0'),
+(525, '', 'Check material reception booked by material planner last 30 days', '0', '0', '0', '0'),
+(526, '', 'Check SOD in maintenance parts reception/consumption', '0', '0', '0', '0'),
+(527, '', 'Check SOD in maintenance parts reception/consumption', '0', '0', '0', '0'),
+(528, '', 'Check SOD in maintenance parts reception/consumption', '0', '0', '0', '0'),
+(529, '', 'Check cycle count booked by material planner last 30 days', '0', '0', '0', '0'),
+(530, '', 'Check cycle count booked by material planner last 30 days', '0', '0', '0', '0'),
+(531, '', 'Check cycle count booked by material planner last 30 days', '0', '0', '0', '0'),
+(532, '', 'Check cycle count vs planning last 15 days in maintenance', '0', '0', '0', '0'),
+(533, '', 'Check cycle count vs planning last 15 days in maintenance', '0', '0', '0', '0'),
+(534, '', 'Check cycle count vs planning last 15 days in maintenance', '0', '0', '0', '0'),
+(535, '', 'Check last inventory reconciliation with RDA', '0', '0', '0', '0'),
+(536, '', 'Check last inventory reconciliation with RDA', '0', '0', '0', '0'),
+(537, '', 'Check last inventory reconciliation with RDA', '0', '0', '0', '0'),
+(538, '', 'Check last inventory reconciliation with Abintek', '0', '0', '0', '0'),
+(539, '', 'Check last inventory reconciliation with Abintek', '0', '0', '0', '0'),
+(540, '', 'Check last inventory reconciliation with Abintek', '0', '0', '0', '0'),
+(541, '', 'Check root cause analysis in cycle count in last 30 days', '0', '0', '0', '0'),
+(542, '', 'Check root cause analysis in cycle count in last 30 days', '0', '0', '0', '0'),
+(543, '', 'Check root cause analysis in cycle count in last 30 days', '0', '0', '0', '0'),
+(544, '', 'Check cycle count vs planning last 15 days', '0', '0', '0', '0'),
+(545, '', 'Check cycle count vs planning last 15 days', '0', '0', '0', '0'),
+(546, '', 'Check cycle count vs planning last 15 days', '0', '0', '0', '0'),
+(547, '', 'Check last ABC class update ', '0', '0', '0', '0'),
+(548, '', 'Check last ABC class update ', '0', '0', '0', '0'),
+(549, '', 'Check last ABC class update ', '0', '0', '0', '0'),
+(550, '', 'Check 7IB/7DB action plan review', '0', '0', '0', '0'),
+(551, '', 'Check 7IB/7DB action plan review', '0', '0', '0', '0'),
+(552, '', 'Check 7IB/7DB action plan review', '0', '0', '0', '0'),
+(553, '', 'Check mono cage is closed & secured', '0', '0', '0', '0'),
+(554, '', 'Check mono cage is closed & secured', '0', '0', '0', '0'),
+(555, '', 'Check mono cage is closed & secured', '0', '0', '0', '0'),
+(556, '', 'Check selling prices formal validation by controlling', '0', '0', '0', '0'),
+(557, '', 'Check selling prices formal validation by controlling', '0', '0', '0', '0'),
+(558, '', 'Check selling prices formal validation by controlling', '0', '0', '0', '0'),
+(559, '', 'Check last SODA report', '0', '0', '0', '0'),
+(560, '', 'Check last SODA report', '0', '0', '0', '0'),
+(561, '', 'Check last SODA report', '0', '0', '0', '0'),
+(562, '', 'Check last BOM audits', '0', '0', '0', '0'),
+(563, '', 'Check last BOM audits', '0', '0', '0', '0'),
+(564, '', 'Check last BOM audits', '0', '0', '0', '0'),
+(565, '', 'Check last count of JA10', '0', '0', '0', '0'),
+(566, '', 'Check last count of JA10', '0', '0', '0', '0'),
+(567, '', 'Check last count of JA10', '0', '0', '0', '0'),
+(568, '', 'Check the first 3 nok FG on the screen stock vs. Customer demand', '0', '0', '0', '0'),
+(569, '', 'Check the first 3 nok FG on the screen stock vs. Customer demand', '0', '0', '0', '0'),
+(570, '', 'Check the first 3 nok FG on the screen stock vs. Customer demand', '0', '0', '0', '0');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `codir_kamishibai_reponse`
+-- Table structure for table `codir_kamishibai_reponse`
 --
 
 CREATE TABLE `codir_kamishibai_reponse` (
@@ -632,35 +632,109 @@ CREATE TABLE `codir_kamishibai_reponse` (
   `commentaire2` text NOT NULL,
   `commentaire3` text NOT NULL,
   `commentaire4` text NOT NULL,
-  `cloture` tinyint(4) NOT NULL
+  `cloture` tinyint(4) NOT NULL,
+  `date_cloture` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `codir_kamishibai_reponse`
+-- Dumping data for table `codir_kamishibai_reponse`
 --
 
-INSERT INTO `codir_kamishibai_reponse` (`id`, `kamishibai`, `profil`, `reponse1`, `reponse2`, `reponse3`, `reponse4`, `commentaire1`, `commentaire2`, `commentaire3`, `commentaire4`, `cloture`) VALUES
-(1, 522, 4, 0, 1, 0, 0, '', '', '', '', 1),
-(2, 115, 4, 0, 1, 0, 0, '', '', '', '', 1),
-(3, 282, 4, 0, 1, 0, 0, '', '', '', '', 1),
-(4, 53, 5, 0, 0, 0, 0, '', '', '', 'csqscsc', 1),
-(5, 246, 4, -1, -1, -1, -1, '', '', '', '', 1),
-(6, 330, 4, -1, -1, -1, -1, '', '', '', '', 1),
-(7, 183, 4, -1, -1, -1, -1, '', '', '', '', 1),
-(8, 307, 4, -1, -1, -1, -1, '', '', '', '', 0),
-(9, 453, 16, -1, -1, -1, -1, '', '', '', '', 0),
-(10, 33, 9, -1, -1, -1, -1, '', '', '', '', 0),
-(11, 410, 6, -1, -1, -1, -1, '', '', '', '', 0),
-(12, 426, 22, -1, -1, -1, -1, '', '', '', '', 0),
-(13, 345, 20, -1, -1, -1, -1, '', '', '', '', 0),
-(14, 506, 24, -1, -1, -1, -1, '', '', '', '', 0),
-(15, 29, 23, -1, -1, -1, -1, '', '', '', '', 0),
-(16, 281, 25, -1, -1, -1, -1, '', '', '', '', 0);
+INSERT INTO `codir_kamishibai_reponse` (`id`, `kamishibai`, `profil`, `reponse1`, `reponse2`, `reponse3`, `reponse4`, `commentaire1`, `commentaire2`, `commentaire3`, `commentaire4`, `cloture`, `date_cloture`) VALUES
+(1, 522, 4, 0, 1, 0, 0, '', '', '', '', 1, '0000-00-00'),
+(2, 115, 4, 0, 1, 0, 0, '', '', '', '', 1, '0000-00-00'),
+(3, 282, 4, 0, 1, 0, 0, '', '', '', '', 1, '0000-00-00'),
+(4, 53, 5, 0, 0, 0, 0, '', '', '', 'csqscsc', 1, '0000-00-00'),
+(5, 246, 4, -1, -1, -1, -1, '', '', '', '', 1, '0000-00-00'),
+(6, 330, 4, -1, -1, -1, -1, '', '', '', '', 1, '0000-00-00'),
+(7, 183, 4, -1, -1, -1, -1, '', '', '', '', 1, '0000-00-00'),
+(8, 307, 4, -1, -1, -1, -1, '', '', '', '', 0, '0000-00-00'),
+(9, 453, 16, -1, -1, -1, -1, '', '', '', '', 0, '0000-00-00'),
+(10, 33, 9, -1, -1, -1, -1, '', '', '', '', 0, '0000-00-00'),
+(11, 410, 6, -1, -1, -1, -1, '', '', '', '', 0, '0000-00-00'),
+(12, 426, 22, -1, -1, -1, -1, '', '', '', '', 0, '0000-00-00'),
+(13, 345, 20, -1, -1, -1, -1, '', '', '', '', 0, '0000-00-00'),
+(14, 506, 24, -1, -1, -1, -1, '', '', '', '', 0, '0000-00-00'),
+(15, 29, 23, -1, -1, -1, -1, '', '', '', '', 0, '0000-00-00'),
+(16, 281, 25, -1, -1, -1, -1, '', '', '', '', 0, '0000-00-00'),
+(17, 433, 26, -1, -1, -1, -1, '', '', '', '', 1, '0000-00-00'),
+(18, 58, 29, -1, -1, -1, -1, '', '', '', '', 1, '0000-00-00'),
+(19, 404, 29, -1, -1, -1, -1, '', '', '', '', 0, '0000-00-00');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `logistique_alerte`
+-- Table structure for table `equipe`
+--
+
+CREATE TABLE `equipe` (
+  `id` int(11) NOT NULL,
+  `nom` int(11) NOT NULL,
+  `prenom` int(11) NOT NULL,
+  `mail` int(11) NOT NULL,
+  `id_equipe` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `files`
+--
+
+CREATE TABLE `files` (
+  `id` int(11) NOT NULL,
+  `chemin` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `categorie` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `taille` int(11) NOT NULL,
+  `date_ajout` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `files`
+--
+
+INSERT INTO `files` (`id`, `chemin`, `categorie`, `taille`, `date_ajout`) VALUES
+(9, '../../ressources/6d26d9256d5694f207056ae96de26cd3.jpg', 'quiz', 1298657, '2017-11-29'),
+(10, '../../ressources/48ac294b7e05db70fc2df0a9f05160a5.JPG', 'quiz', 2830323, '2017-11-29'),
+(55, '../../ressources/b8072b23d1908a22ac347e09a8203807.JPG', 'quiz', 2256477, '2017-12-01'),
+(56, '../../ressources/48596f5520261ab4b921816203605171.JPG', 'quiz', 2256477, '2017-12-01'),
+(61, '../../ressources/31360528078a93319889bd50270147d8.JPG', 'R&R', 3329809, '2017-12-03'),
+(62, '../../ressources/cdd1d99a97b9ec4afabb4759db55a31c.JPG', 'R&R', 2630405, '2017-12-03'),
+(63, '../../ressources/b72a4314a93a236d97cda2b57d390cd8.JPG', 'R&R', 3015309, '2017-12-03'),
+(68, '../../ressources/46b018fe12608d4b179faea19554135c.jpg', 'R&R', 1298657, '2017-12-04'),
+(69, '../../ressources/43ae282b02fb3b77cd6bb9324aedf9fd.jpg', 'R&R', 2170079, '2017-12-04'),
+(74, '../../ressources/8d74cdca44fc90d684cf50bfb077b6a8.JPG', 'R&R', 2999917, '2017-12-07'),
+(75, '../../ressources/3dd7f3ded81ca1f65862019565c70fa1.JPG', 'R&R', 1989042, '2017-12-07'),
+(76, '../../ressources/a486332a68255f4e12c21204ef5f4255.JPG', 'R&R', 3772641, '2017-12-07'),
+(77, '../../ressources/d7d04b7ff438538b487646bd595e958e.jpg', 'Quiz', 1412423, '2017-12-29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `launchboard`
+--
+
+CREATE TABLE `launchboard` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenom` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `titre` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img_presentation` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `launchboard`
+--
+
+INSERT INTO `launchboard` (`id`, `nom`, `prenom`, `titre`, `client`, `description`, `img_presentation`) VALUES
+(1, 'gonsolin', 'valentin', 'TEST', 'JCS', 'Ceci est un projet de test!', 68);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logistique_alerte`
 --
 
 CREATE TABLE `logistique_alerte` (
@@ -674,7 +748,7 @@ CREATE TABLE `logistique_alerte` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `logistique_alerte`
+-- Dumping data for table `logistique_alerte`
 --
 
 INSERT INTO `logistique_alerte` (`id`, `piece`, `e_kanban`, `date`, `train`, `uc_restant_en_ligne`, `state`) VALUES
@@ -806,12 +880,13 @@ INSERT INTO `logistique_alerte` (`id`, `piece`, `e_kanban`, `date`, `train`, `uc
 (133, 503, 504, '2017-09-26 07:31:23', 'Violet', 1, 1),
 (134, 10337, -1, '2017-09-26 15:14:24', 'Jaune', 0, 1),
 (135, 5972, -1, '2017-09-26 21:33:07', 'Orange', 0, 1),
-(136, 590, -1, '2017-09-26 21:33:38', 'Jaune', 0, -1);
+(136, 590, -1, '2017-09-26 21:33:38', 'Jaune', 0, -1),
+(137, 4, -1, '2017-12-06 00:02:40', 'Ceramique', 4, -1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `logistique_e_kanban`
+-- Table structure for table `logistique_e_kanban`
 --
 
 CREATE TABLE `logistique_e_kanban` (
@@ -823,7 +898,7 @@ CREATE TABLE `logistique_e_kanban` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `logistique_e_kanban`
+-- Dumping data for table `logistique_e_kanban`
 --
 
 INSERT INTO `logistique_e_kanban` (`id`, `code_barres`, `piece`, `ligne`, `quantite`) VALUES
@@ -1665,7 +1740,7 @@ INSERT INTO `logistique_e_kanban` (`id`, `code_barres`, `piece`, `ligne`, `quant
 -- --------------------------------------------------------
 
 --
--- Structure de la table `logistique_pieces`
+-- Table structure for table `logistique_pieces`
 --
 
 CREATE TABLE `logistique_pieces` (
@@ -1677,13 +1752,13 @@ CREATE TABLE `logistique_pieces` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `logistique_pieces`
+-- Dumping data for table `logistique_pieces`
 --
 
 INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `adresse`) VALUES
 (2, '5057', '1355057XXX', 'PERFORATED PIPE RESONATOR', '770'),
-(3, '3162', 'E4043162', 'BAFLE INTERMEDIO T71-T73/B73 PSA EP6', 'F 103'),
-(4, '7515', '1657515XXX', 'Manchon D67.5-D50.5-L134 - A94 EB2DTS', 'CAVE'),
+(3, '3162', 'E4043162', 'BAFLE INTERMEDIO T71-T73/B73 PSA EP6', 'F 103\n'),
+(4, '7515', '1657515XXX', 'Manchon D67.5-D50.5-L134 - A94 EB2DTS', 'CAVE\n'),
 (5, '3402', '1433402XXX', 'FIBRE 65G/L', 'CAVE'),
 (6, '7371', '1557371XXX', 'MANCHON FIBER  62.5x50.5 L 113,5', 'CAVE'),
 (7, '9369', '1969369XXX', 'BICONE TUBE P8 EB2', 'E 009'),
@@ -1710,7 +1785,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (28, '1405', '3110140500', 'PATTE M9R ( petite )', 'E 099'),
 (29, '2204', '3110220400', 'M9R Clamshell Lower', 'E 089'),
 (30, '1403', '3110140300', 'M9R Clamshell Upper', 'E 093'),
-(31, '1574', '3110157400', 'Bride d''entr?e M9R  ( grande )', 'E 091'),
+(31, '1574', '3110157400', 'Bride d\'entr?e M9R  ( grande )', 'E 091'),
 (32, '174', '3110017400', 'BRIDE EGR   M9R', 'E 101'),
 (33, '1825', '3110182500', 'PATTE M9R ( grande )', 'E 097'),
 (34, '1261', '1531261XXX', 'TSFR 1,4512 D80 -1,20 - 214', '770'),
@@ -1744,7 +1819,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (63, '6934', '1006934XXX', 'COUP 140X306 INT', 'B 014'),
 (64, '7922', '1667922XXX', 'COUPELLE INT.', 'B 001'),
 (65, '6878', '1276878XXX', 'TUBO INTERIOR ENTRADA DV6', 'AK 03'),
-(66, '2368', '1832368XXX', 'TUBE D''ENTREE CMF1', 'AD 15'),
+(66, '2368', '1832368XXX', 'TUBE D\'ENTREE CMF1', 'AD 15'),
 (67, '7456', '1087456XXX', 'OUTSIDE BAFFLE', 'AJ 02'),
 (68, '8424', '1128424XXX', 'Tube Perfo', 'AB 25'),
 (69, '1164', '1881164XXX', 'TUBE ENTREE CMF1 ?55 EP 0,8MM', 'AI 02'),
@@ -1782,7 +1857,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (101, '7576', '1127576XXX', 'Tube Perfo', 'Y 035'),
 (102, '7618', '1387618XXX', 'Perforated pipe 1 A7 DV6C', 'Y 034'),
 (103, '2006', '1612006XXX', 'TUBE SORTIE T7 DV6 ?5 60,00', 'Y 033'),
-(104, '565', '1660565XXX', 'TUBE D''ENTREE', 'Y 032'),
+(104, '565', '1660565XXX', 'TUBE D\'ENTREE', 'Y 032'),
 (105, '9989', 'E4049989XX', 'COUPELLE INT?RIEURE', 'Y 031'),
 (106, '4542', 'E4054542XX', 'TUBE SORTIE T7 DV6 ?5 60,00', 'Y 030'),
 (107, '4545', 'E4054545XX', 'COUPELLE INT?RIEURE', 'Y 029'),
@@ -1808,7 +1883,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (127, '8755', '1788755XXX', 'COUPELLE INTERIEUR CMF1', 'AF 23'),
 (128, '9224', '1789224XXX', 'COUPELLE SORTIE CMF1', 'AF 22'),
 (129, '893', '1620893XXX', 'TUBE SORTIE CMF1', 'AF 21'),
-(130, '894', '1620894XXX', 'TUBE D''ENTREE', 'AE 25'),
+(130, '894', '1620894XXX', 'TUBE D\'ENTREE', 'AE 25'),
 (131, '892', '1620892XXX', 'COUPELLE INTERIEURE CMF1', 'AE 21'),
 (132, '891', '1620891XXX', 'COUPELLE INTERIEURE CMF1', 'AE 24'),
 (133, '895', '1620895XXX', 'COUPELLE INTERIEURE CMF1', 'AE 22'),
@@ -1849,7 +1924,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (171, '9834', '3140983400', 'COUPELLE EXT. SORTIE    T87', 'AB 14'),
 (172, '8747', '3140874700', 'COUPELLE EXT. SORTIE   T87', 'AB 13'),
 (173, '2180', '1762180XXX', 'TUBE DE SORTIE', 'AB 12'),
-(174, '2182', '1762182XXX', 'TUBE D''ENTREE', 'AB 11'),
+(174, '2182', '1762182XXX', 'TUBE D\'ENTREE', 'AB 11'),
 (175, '2181', '1762181XXX', 'COUPELLE INT.', 'AA 15'),
 (176, '2179', '1762179XXX', 'COUPELLE INT.', 'AA 14'),
 (177, '4396', '1764396XXX', 'COUPELLE INT.', 'AA 13'),
@@ -1900,7 +1975,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (225, '9146', '3140914670', 'TUBE ENTREE T7 EP6 ?5 50,00', 'B 049'),
 (226, '9147', '3140914770', 'TUBE SORTIE T7 EP6 ?5 50,00', 'B 059'),
 (227, '4404', '1134404XXX', 'TUBE INT.', 'B 016'),
-(228, '4175', '1924175XXX', 'TUBE D''ENTREE', 'B 026'),
+(228, '4175', '1924175XXX', 'TUBE D\'ENTREE', 'B 026'),
 (229, '9139', '3140913900', 'A- FIBRE DE VERRE', 'B 032'),
 (233, '997', '1620997XXX', 'COUPELLE INT.', 'B 046'),
 (234, '1001', '1621001XXX', 'COUPELLE INT.', 'B 048'),
@@ -2069,7 +2144,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (427, '8790', '1458790XXX', 'TUBE', 'F 242'),
 (428, '4467', '1594467XXX', 'COUPELLE INT LAND ROVER', 'E 49'),
 (429, '1766', '2001766XXX', 'TUBE PERFO  55 x 1 x 285   1.4510', 'D 05'),
-(430, '5841', '1385841XXX', 'BRIDE D '' ENTREE', 'F 413'),
+(430, '5841', '1385841XXX', 'BRIDE D \' ENTREE', 'F 413'),
 (431, '7970', '1727970XXX', 'Patte turbo 1', 'F 141'),
 (432, '4666', '1794666XXX', 'Rondelle 15 X 4,5', 'F 239'),
 (433, '6516', '1406516XXX', 'ECROU AUTOFREINE M6 X 1', 'F 344'),
@@ -2084,8 +2159,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (443, '8131', '1098131XXX', 'C CATA 20Gr JM DF 404', 'G 11'),
 (444, '3378', '1533378XXX', 'HC CATA 30Gr 5G - BASF', 'G 15'),
 (445, '6470', '1476470XDP', 'DPF Ceramic 6p NGK', 'G 07'),
-(447, '48', '1210048XXX', 'SCR Ceramic LG.152,4 (6")', 'G 04'),
-(448, '2773', '1702773XXX', 'DPF FILTRE lg 6"', 'G 02'),
+(447, '48', '1210048XXX', 'SCR Ceramic LG.152,4 (6\")', 'G 04'),
+(448, '2773', '1702773XXX', 'DPF FILTRE lg 6\"', 'G 02'),
 (449, '5142', 'E4051424', 'CERAMIQUE', 'G 21'),
 (451, '5650', 'E4056500', 'CEARAMIQUE D110 X 98.7', 'G 19'),
 (452, '5142', 'E4051426', 'CEARAMIQUE', 'G 23'),
@@ -2094,7 +2169,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (455, '1149', '3141149200', 'DPF Ceramic 6p Ibiden', 'G 14'),
 (456, '3380', '1533380XXX', 'HC CATA 50Gr 5G - BASF', 'G 25'),
 (457, '6915', '1116915XXX', 'HC CATA 70 Gr - UMICORE 5593', 'G 04'),
-(458, '7777', '1697777XXX', 'TUBE D''ENTREE T7/B81', 'A 12'),
+(458, '7777', '1697777XXX', 'TUBE D\'ENTREE T7/B81', 'A 12'),
 (459, '7213', 'E4072131', 'CROCHET INTER B81 EP6CDTX', 'F 213'),
 (460, '4958', 'E4049581', 'A-CROCHET DOUBLE T76 EP6CDT', 'A 56'),
 (461, '2470', '18G2470000', 'CROCHET INTER T52.', 'DEBORD'),
@@ -2134,7 +2209,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (501, '3244', '1423244XXX', 'Outlet Tube - UC DV6 E5 3mm', 'A 22'),
 (502, '4739', '1154739XXX', 'Outlet Tube - C/D DV6 E5 3mm', 'D 19'),
 (503, '9305', '1249305XXX', 'Pressure Sensor Boss', 'F 415'),
-(504, '6615', '1006615XXX', 'NAPA FAP DV6E5 6"', 'B 75'),
+(504, '6615', '1006615XXX', 'NAPA FAP DV6E5 6\"', 'B 75'),
 (505, '9345', '1859345XXX', 'Prise de sonde SCR VICTORA', 'A 26'),
 (506, '8290', '1348290XXX', 'SCR Outlet Sensor Boss', 'F 206'),
 (507, 'P005', '3140329200', 'BOUCHON SUPPORT PRESSION BLANC', 'F 124'),
@@ -2184,8 +2259,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (555, '14', '1160014XXX', 'frette entr?e T7 DW10 C', 'C 43'),
 (556, '4052', '1384052XXF', 'SCR -  cone de sortie', 'B 33'),
 (557, '1388', '1641388XXX', 'tuyau de pression AV', 'C 37'),
-(558, '2612', '1002612XXX', 'TUBE (INTERIEUR) - TUBE D''ENTREE D55 T1.', ''),
-(559, '5504', 'E4055504', 'TUBE D''ENTREE', 'B 31'),
+(558, '2612', '1002612XXX', 'TUBE (INTERIEUR) - TUBE D\'ENTREE D55 T1.', ''),
+(559, '5504', 'E4055504', 'TUBE D\'ENTREE', 'B 31'),
 (560, '5028', '1345028XXH', 'SCR - Inlet cone BVH2/2P/3', 'B 19'),
 (561, '6457', 'E4076457', 'COUPELLE INTERIEURE GAUCHE pos 1', ''),
 (562, '2227', 'E4072227', 'COUPELLE INT LANDROVER GAUCHE pos 2', ''),
@@ -2221,8 +2296,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (600, '3534', '1523534XXX', 'COUPELLE INT LANDROVER GAUCHE pos 2', ''),
 (601, '455', '1560455XXX', 'tuyau pression AR', 'A 61'),
 (602, '437', '1560437XXX', 'TUYAU FRETTE DIA 45 EP 1.2', ''),
-(603, '6099', '1396099XXX', 'TUBE PRESSION ARRIERE LONG SCR BVH2''', 'B 72'),
-(604, '6101', '1396101XXX', 'TUBE PRESSION AVANT COURT SCR BVH2''', 'B 74'),
+(603, '6099', '1396099XXX', 'TUBE PRESSION ARRIERE LONG SCR BVH2\'', 'B 72'),
+(604, '6101', '1396101XXX', 'TUBE PRESSION AVANT COURT SCR BVH2\'', 'B 74'),
 (605, '5985', '1195985XXX', 'S/E CROCHET SCR BVH', 'B 18'),
 (606, '8331', '1348331XXX', 'Pressure Pipe Downstream - BVH2', ''),
 (607, '8309', '1348309XXX', 'Pressure Pipe Upstream - BVH2', ''),
@@ -2262,8 +2337,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (650, '6482', 'E4064820', 'CANULE T76 EP6 CDTX    48.00', 'F 216'),
 (651, '4371', 'E4043715', 'CROCHET T7 EP6CDTX', 'F 241'),
 (655, '2458', 'E3024586', 'D HANGER AND BELT ASSY.', 'D 17'),
-(656, '8346', '1528346ST', 'TUBE D''ENTREE T7 EP6CDT    60.00', 'D 21'),
-(657, '4091', 'E4040916ST', 'TUBE D''ENTREE T7 EP3        45.00', ''),
+(656, '8346', '1528346ST', 'TUBE D\'ENTREE T7 EP6CDT    60.00', 'D 21'),
+(657, '4091', 'E4040916ST', 'TUBE D\'ENTREE T7 EP3        45.00', ''),
 (658, '4371', 'E4043712', 'CROCHET DOUBLE T7 EP6', 'F 345'),
 (659, '6034', 'E4060340', 'CROCHET INTER T7 EP6CDTX', 'F 308'),
 (661, '2458', 'E3024585', 'C HANGER AND STIFFNER ASSY.', 'C 59'),
@@ -2320,16 +2395,16 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (714, '403', '1700403XXX', 'COUPELLE JLR', 'E 16'),
 (715, '4795', '1714795XXX', 'COUPELLE JLR', 'B 51'),
 (716, '6725', '1536725XXX', 'TUBE RESONATEUR JLR        35.00', ''),
-(717, '1824', '1451824XXX', 'SUPPORT TUYAU D''ENTREE', 'A 25'),
+(717, '1824', '1451824XXX', 'SUPPORT TUYAU D\'ENTREE', 'A 25'),
 (718, '4810', '1714810XXX', 'COUPELLE JLR', 'B 53'),
-(719, '2122', '1412122XXX', 'TUYAU D''ENTREE JLR        45.00', ''),
+(719, '2122', '1412122XXX', 'TUYAU D\'ENTREE JLR        45.00', ''),
 (720, '6611', '1706611KXX', 'SOURDINE ASSEMBLEE JLR L550 GTDI - D65', ''),
 (721, '2121', '1412121XXX', 'TUYAU DE SORTIE JLR      45.00', ''),
 (722, '2314', '1002314XXX', 'COUPELLE INT - D# T1.2 3T+200 PATTERN F2', 'E 42'),
 (723, '2301', '1002301XXX', 'DEMI-COQUILLE - DEMI-COQUILLE TUBE INTER', 'A 47'),
 (724, '2607', '1002607XXX', 'ISOLATION ACOUSTIQUE - INOX MANCHON', 'F 106'),
 (725, '2310', '1002310XXX', 'TUBE (INTERIEUR) - TUBE D50 T1 #R# L195', 'F 04'),
-(726, '7103', '1277103XXX', 'TUYAU D''ENTREE T7 EP6  50,00', ''),
+(726, '7103', '1277103XXX', 'TUYAU D\'ENTREE T7 EP6  50,00', ''),
 (727, '2290', '1382290XXX', 'HOOK', 'C 34'),
 (728, '1533', '1191533XXX', 'CROCHET DOUBLE ASS T9', 'D 43'),
 (729, '7972', '1727972XXX', 'Patte turbo 2', 'F 339'),
@@ -2363,7 +2438,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (758, '716', '1400716X', 'MANTA 1540 - 369 x 70 HOT-END EP6', 'B 83'),
 (759, '715', '1400715X', 'MANTA 1540 - 369 x 45 HOT-END EP6', 'B 78'),
 (760, '5142', 'E4051421', 'CONO DE ENTRADA HOT-END PSA EP6', 'E 02'),
-(763, '8393', 'E4083938XX', 'Tube de sortie 60 ep1.5 / 1.4509 BVH2''', ''),
+(763, '8393', 'E4083938XX', 'Tube de sortie 60 ep1.5 / 1.4509 BVH2\'', ''),
 (764, '3047', '1463047', 'TUBE DE SORTIE D60 ep1.5-1.4509', ''),
 (765, '217', '1660217XXX', 'PATTE SUPPORT', 'B 07'),
 (766, '2974', 'E4029748', 'TAPA PLASTICA BRIDA HOT-END PSA EP6', 'E 39'),
@@ -2423,10 +2498,10 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (825, '1057', '3141057400', 'FRETTE ENTREE DV6EURO5', ''),
 (826, '3663', '1013663XXX', 'SEMI COQUILHA ENTRADA AR', 'D 41'),
 (827, '1330', '1071330XXX', 'Semi-coquilha sup av', 'E 10'),
-(828, '8418', '1148418XXX', 'Collier d''assemblage', 'D 52'),
+(828, '8418', '1148418XXX', 'Collier d\'assemblage', 'D 52'),
 (829, '6012', '1016012XXX', 'A JOINT DE MAINTIEN', 'A 68'),
 (830, '3259', '1213259XXX', 'Turbo Bracket', 'F 119'),
-(831, '6755', '1176755X00', 'TUBE D''ENTREE P87', 'DE 01'),
+(831, '6755', '1176755X00', 'TUBE D\'ENTREE P87', 'DE 01'),
 (832, '6758', '1176758X00', 'TUBE DE SORTIE P87', 'DE 02'),
 (833, '6767', '1176767XXX', 'COUPELLE INTERIEURE', 'F 065'),
 (834, '6770', '1176770XXX', 'COUPELLE INTERIEURE', 'F 067'),
@@ -2446,7 +2521,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (848, '', '18G10451T0', 'A NAPPE SAFFIL OBM', '0'),
 (849, '', '18G1050000', 'ENV.ASS.MARQUEE BRESIL', '0'),
 (850, '', '18G10501T0', 'ENV ASS 150X85 MARQ.BRESIL', '0'),
-(851, '', '18G10511J0', 'TUBE D''ENTREE          45,00', '0'),
+(851, '', '18G10511J0', 'TUBE D\'ENTREE          45,00', '0'),
 (852, '', '18G1051500', 'BRB AS120.06  BOB0141,2X1,45', '0'),
 (853, '', '18G1051600', 'TSBR AS120.06  R45-1,50-6358', '0'),
 (854, '', '18G10531J0', 'TUBE DE SORTIE         45,00', '0'),
@@ -2554,7 +2629,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (955, '', '10696', '1/2 coquil inf 1225329-B', '0'),
 (956, '', '10706', 'tube 409 38x1.5 lg 2624', '0'),
 (957, '', '10707', 'tube 409 42x1.5 lg 1768', '0'),
-(958, '', '10708', 'bride d''entr?e 1256 048', '0'),
+(958, '', '10708', 'bride d\'entr?e 1256 048', '0'),
 (959, '', '10710', 'Crochet AR TU1  1 255 879', '0'),
 (960, '', '10712', 'tube 409 42 x 1.5 lg 539', '0'),
 (961, '', '10714', 'Crochet AR TU3  1 255 996', '0'),
@@ -2644,7 +2719,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (1045, '', '11231', 'PC ET3 A8 9653157280', '0'),
 (1046, '', '11266', 'PF A6 TU5JP4S 9651956580', '0'),
 (1047, '', '11292', 'JEU 1/2 coq. 1250744/731', '0'),
-(1048, '', '11313', 'Bride d''entr?e ET3 T1 ,T5', '0'),
+(1048, '', '11313', 'Bride d\'entr?e ET3 T1 ,T5', '0'),
 (1049, '', '11327', 'ecran 1462384 non marque', '0'),
 (1050, '', '11328', 'PC ET3 A8  9680088980', '0'),
 (1051, '', '11336', 'ETIQUET PSA IMAGE PEUGEOT', '0'),
@@ -2802,7 +2877,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (1203, '', '11913', 'Palette EUR 1200*800', '0'),
 (1204, '', '11915', 'Ens. carton+calage F4RT', '0'),
 (1205, '', '54799', 'A7  HC X M2 V05 G61330 (OCTTOP)', '0'),
-(1206, '', '1528346', 'TUBE D''ENTREE T7 EP6CDT    60.00', '0'),
+(1206, '', '1528346', 'TUBE D\'ENTREE T7 EP6CDT    60.00', '0'),
 (1207, '', '1552422', 'SIL. ARRIERE T76 EP6CDTX  PSA3166', '0'),
 (1208, '', '31400970', 'COUPELLE EXT. SORTIE    X62', '0'),
 (1209, '', '314061909', 'FLAN ENVEL 493X176x1,2', '0'),
@@ -2831,8 +2906,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (1232, '', '1108839719', 'SIL AV 505', '0'),
 (1233, '', '1108841795', 'BRP AS120-04  BOB0126,2X1,20', '0'),
 (1234, '', '1108841796', 'AS120 04 R40,0-1,20-P.P', '0'),
-(1235, '', '1108855416', '172128 SIL D44 "APACAT3102"XU XUD', '0'),
-(1236, '', '1108855499', 'SIL D44 "APACAT3102"XU XUD', '0'),
+(1235, '', '1108855416', '172128 SIL D44 \"APACAT3102\"XU XUD', '0'),
+(1236, '', '1108855499', 'SIL D44 \"APACAT3102\"XU XUD', '0'),
 (1237, '', '1108864595', 'BRP AS120-06  BOB0131,8X1,45', '0'),
 (1238, '', '1108864596', 'TSP AS120-06 R42.0-1,50-6314', '0'),
 (1239, '', '1108871400', 'BRIDE XC8', '0'),
@@ -3476,7 +3551,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (1876, '', '1821298000', 'FRETTE CINTREE XM      60,00', '0'),
 (1877, '', '1821298900', 'TUYAU AR TRONC         60,00', '0'),
 (1878, '', '1821299000', 'FRETTE                 60,00', '0'),
-(1879, '', '1821300000', 'SIL ZX  "PSA  4076"', '0'),
+(1879, '', '1821300000', 'SIL ZX  \"PSA  4076\"', '0'),
 (1880, '', '1821301900', 'FLAN 1/2 COQUILLE SUP', '0'),
 (1881, '', '1821302900', 'FLAN 1/2 COQUILLE INF', '0'),
 (1882, '', '1821303000', 'COUPELLE EMBOUTIE', '0'),
@@ -3522,7 +3597,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (1922, '', '1821436900', 'CANULE TRONC           60,00', '0'),
 (1923, '', '1821437000', 'CROCHET AV', '0'),
 (1924, '', '1821438000', 'CROCHET AR', '0'),
-(1925, '', '1821439000', 'SIL AR  "PSA 3342 **Y"', '0'),
+(1925, '', '1821439000', 'SIL AR  \"PSA 3342 **Y\"', '0'),
 (1926, '', '1821440900', 'FLAN SUP', '0'),
 (1927, '', '1821441900', 'FLAN INF', '0'),
 (1928, '', '1821442070', 'COUPELLE 1  217G84', '0'),
@@ -3557,7 +3632,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (1957, '', '1821537600', 'TSB AS120-04   R45-1,20-6130', '0'),
 (1958, '', '1821537700', '45 TSB AS120-04 EP 1,2', '0'),
 (1959, '', '1821554000', 'TUBE ENTREE            48,00', '0'),
-(1960, '', '1821557100', 'CANULE N2 "AUTRICHE".', '0'),
+(1960, '', '1821557100', 'CANULE N2 \"AUTRICHE\".', '0'),
 (1961, '', '1821561000', 'SOURDINE               80,00', '0'),
 (1962, '', '1821608000', 'TUBE ENTREE            48,00', '0'),
 (1963, '', '1821624032', 'SOURDINE                 64,00', '0'),
@@ -3660,7 +3735,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (2060, '', '1822677999', 'BOUCHON EXTREMITE', 'E 028'),
 (2061, '', '1822692000', 'A MANCHON INOX', '0'),
 (2062, '', '1822735000', 'TUYAU FRETTE AR        48,00', '0'),
-(2063, '', '1822736000', 'SIL INT "PSA 3125"  170X100', '0'),
+(2063, '', '1822736000', 'SIL INT \"PSA 3125\"  170X100', '0'),
 (2064, '', '1822737000', 'ENVELOPPE EXT ASS.', '0'),
 (2065, '', '1822738000', 'R COUPELLE EXTERIEURE', '0'),
 (2066, '', '1822738070', 'COUPELLE EXTERIEURE', '0'),
@@ -3770,7 +3845,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (2170, '', '1823497000', '1/2 CONES INT AV INF.', '0'),
 (2171, '', '1823501000', '1/2 CONE  INT AR SUP.', '0'),
 (2172, '', '1823502000', '1/2 CONE  INT AR INF.', '0'),
-(2173, '', '1823525000', '406  SIL  D83 "PSA 3135"', '0'),
+(2173, '', '1823525000', '406  SIL  D83 \"PSA 3135\"', '0'),
 (2174, '', '1823527000', 'TUBE ENTREE AVEC RESTRICTEUR', '0'),
 (2175, '', '1823528070', 'COUPELLE INT.', '0'),
 (2176, '', '1823529070', 'COUPELLE INTERIEUR', '0'),
@@ -3803,7 +3878,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (2203, '', '1823548100', 'COUPELLE INT.', '0'),
 (2204, '', '1823549070', 'COUPELLE INT.', '0'),
 (2205, '', '1823549100', 'COUPELLE INT.', '0'),
-(2206, '', '1823550000', 'TUBE D''ENTREE          54,00', '0'),
+(2206, '', '1823550000', 'TUBE D\'ENTREE          54,00', '0'),
 (2207, '', '1823550500', 'BRB AS120-06  BOB0168,3X1,90', '0'),
 (2208, '', '1823550600', 'TSBR AS120-06  R54-2,00-6366', '0'),
 (2209, '', '1823552000', 'TUBE RESONATEUR D83    38,00', '0'),
@@ -3852,7 +3927,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (2252, '', '1823629070', 'CROCHET TUBE', 'MESSEI'),
 (2253, '', '1823630000', 'CANULE + ENJOLIVEUR D82', 'MESSEI'),
 (2254, '', '1823631000', 'PATTE SUPPORT CROCHET DROIT', 'MESSEI'),
-(2255, '', '1823632000', 'SIL AR  "PSA  3137"  D82', '0'),
+(2255, '', '1823632000', 'SIL AR  \"PSA  3137\"  D82', '0'),
 (2256, '', '1823634000', '406         SIL D82 PSA 3135', '0'),
 (2257, '', '1823635000', 'SIL AR ASSEMBLE D82 PSA 3135', '0'),
 (2258, '', '1823663000', 'TUBE TRONC. OPEL       50,00', '0'),
@@ -3868,7 +3943,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (2268, '', '1823750000', 'TUYAUTERIE AR.ASS.', '0'),
 (2269, '', '1823751000', 'CANULE D83 XUD9 ASD    48,00', '0'),
 (2270, '', '1823751900', 'CANULE D83 XUD9 TRONC. 48,00', '0'),
-(2271, '', '1823770100', 'TUYAU D''ENTREE.         45,00', '0'),
+(2271, '', '1823770100', 'TUYAU D\'ENTREE.         45,00', '0'),
 (2272, '', '1823770500', 'R BRB 1.4512    BOB0142,4X1,00', '0'),
 (2273, '', '1823770600', 'TSBR 1.4512  R45,0-1,00-6378', '0'),
 (2274, '', '1823770700', '45 TSBR 1.4512  EP 1', '0'),
@@ -3914,7 +3989,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (2314, '', '1824042900', 'CANULE D82 XUD9 TRONC  48,00', '0'),
 (2315, '', '1824049000', 'ENSEMBLE CABLE ET AGRAFES', '0'),
 (2316, '', '1824056000', 'SIL AR ASSEMBLE D95 PSA 3137', '0'),
-(2317, '', '1824057000', 'SIL AR  "PSA 3137"', '0'),
+(2317, '', '1824057000', 'SIL AR  \"PSA 3137\"', '0'),
 (2318, '', '1824060000', 'CANULE + ENJOLIVEUR D85', 'MESSEI'),
 (2319, '', '1824101000', 'TUBE ENTREE 2 AS120 06 50,00', '0'),
 (2320, '', '1824101500', 'BRB AS120-06  BOB0155,8X1,90', '0'),
@@ -3966,7 +4041,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (2366, '', '1824284100', 'R COUPELLE EXT. X70 MERCOSUR', '0'),
 (2367, '', '1824285070', 'R COUP. INT. X70 MERCOSUR', '0'),
 (2368, '', '1824285100', 'R COUP. INT. X70 MERCOSUR', '0'),
-(2369, '', '1824286000', 'TUBE D''ENTREE 1,50     60,00', '0'),
+(2369, '', '1824286000', 'TUBE D\'ENTREE 1,50     60,00', '0'),
 (2370, '', '1824286500', 'BRB AS120-06  BOB0188,8X1,45', '0'),
 (2371, '', '1824286600', 'TSBR AS120-06  R60-1,50-6194', '0'),
 (2372, '', '1824287500', 'BRB AS120-06  BOB0188,8X1,45', '0'),
@@ -4173,7 +4248,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (2573, '', '1825780000', 'PALETTE ETUVEE  1200X1000', '0'),
 (2574, '', '1825783000', 'INTERCAL. CARTON SC 1050X700', '0'),
 (2575, '', '1825785000', 'SEPARATEUR CENTRAL', '0'),
-(2576, '', '1825786000', 'INTERCALAIRE CALE D''ANGLE', '0'),
+(2576, '', '1825786000', 'INTERCALAIRE CALE D\'ANGLE', '0'),
 (2577, '', '1825787000', 'CARTON  CONDITIONNEMNT COLL', '0'),
 (2578, '', '1825788000', 'CARTON MODU3P 1140X950X850', '0'),
 (2579, '', '1825789000', 'POCHETTE ADHESIVE/EMBALLAGE', 'DD 15'),
@@ -4288,7 +4363,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (2687, '', '1827965000', 'NAPPE DE MAINTIEN', '0'),
 (2688, '', '1827986000', 'COUPELLE INTERIEURE.', '0'),
 (2689, '', '1827986100', 'COUPELLE INTERIEURE.', '0'),
-(2690, '', '1828039070', 'SIL INT "PSA 3357 Y" 200X130', '0'),
+(2690, '', '1828039070', 'SIL INT \"PSA 3357 Y\" 200X130', '0'),
 (2691, '', '1828086000', 'ELEMENT CATA', '0'),
 (2692, '', '1828193000', 'NAPPE ISOLATION (3M)', '0'),
 (2693, '', '1828207000', 'EBAUCHE SOURDINE  72,00', '0'),
@@ -4325,7 +4400,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (2724, '', '1828387000', 'ISOLATION CENTRALE THERMO EX', '0'),
 (2725, '', '1828388000', 'ELEMENT CATA 114636108', '0'),
 (2726, '', '1828395000', 'SIL AR ASSEMBLE D93 PSA 3137', '0'),
-(2727, '', '1828396000', 'SIL AR  "PSA 3137"', '0'),
+(2727, '', '1828396000', 'SIL AR  \"PSA 3137\"', '0'),
 (2728, '', '1828397000', 'CANULE + ENJOLIVEUR D93', '0'),
 (2729, '', '1828439000', 'ENVELOPPE ASS.', '0'),
 (2730, '', '1828449500', 'BRB 1_4512 BOB 0142,4X1,00', '0'),
@@ -4369,7 +4444,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (2768, '', '1828772000', 'C PAIN CATA 6198', '0'),
 (2769, '', '1828773000', 'C PAIN CATA 6120', '0'),
 (2770, '', '1828779000', 'TUBE ENTREE E16 TRONC. 45,00', '0'),
-(2771, '', '1828779100', 'TUBE D''ENTREE TRONC.   45,00', '0'),
+(2771, '', '1828779100', 'TUBE D\'ENTREE TRONC.   45,00', '0'),
 (2772, '', '1828780100', 'TUBE SORTIE TRONC.     45,00', '0'),
 (2773, '', '1828780500', 'BRB AS120-06  BOB0141,2X1,45', '0'),
 (2774, '', '1828780600', 'TSBR AS120-06  R45-1,50-6338', '0'),
@@ -4652,7 +4727,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (3051, '', '1882719000', 'TUBE ENTR?E SONDE D4FT', '0'),
 (3052, '', '1882720000', 'TUBE SORTIE SONDE D4FT', '0'),
 (3053, '', '1882721000', 'TUBE ENTR?E AVEC BRIDE D4FT', '0'),
-(3054, '', '1882722000', 'BOITE ET TUBE D''ENTR?E D4FT', '0'),
+(3054, '', '1882722000', 'BOITE ET TUBE D\'ENTR?E D4FT', '0'),
 (3055, '', '1882723000', 'TUBE SORTIE ET BRIDE  D4FT', '0'),
 (3056, '', '1882724000', 'BOITE AVEC TUBES  D4FT', '0'),
 (3057, '', '1882725000', 'BOITE TUB PONTET SOUD?S D4FT', '0'),
@@ -5100,9 +5175,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (3499, '', '3140048800', 'MANTEAU CATA ASS Z9 EW12E4', '0'),
 (3500, '', '3140054200', 'DESCENTE COLL V-G9   EW10A', '0'),
 (3501, '', '3140054210', 'DESCENTE COLL V-G9   EW10A', '0'),
-(3502, '', '3140055700', 'A BAGUE DE MAINTIEN ARR', '0'),
-(3503, '', '3140056200', 'FRETTE DE SORTIE (EMBOUTI)', '0');
+(3502, '', '3140055700', 'A BAGUE DE MAINTIEN ARR', '0');
 INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `adresse`) VALUES
+(3503, '', '3140056200', 'FRETTE DE SORTIE (EMBOUTI)', '0'),
 (3504, '', '3140056400', 'BRIDE FORGEE AVANT', 'DG 43'),
 (3505, '', '3140059300', 'ISOLANT THERMIQUE HKO', '0'),
 (3506, '', '3140060200', 'CERAMIQUE  K    (SUPP. NGK)', '0'),
@@ -5139,13 +5214,13 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (3537, '', '3140068900', 'TYT KTA.R. T1 TU5 -15,0-K181', '0'),
 (3538, '', '3140068920', 'TYT KTA.R. T1 TU5 -15,0-K181', '0'),
 (3539, '', '3140069000', 'CATA S/COLLECTEUR TU5   K181', '0'),
-(3540, '', '3140070000', 'TYT T5 TU5K'' 5BE  BLEU  3060', '0'),
-(3541, '', '3140070010', 'TYT T5 TU5K'' 5BE  BLEU  3060', '0'),
+(3540, '', '3140070000', 'TYT T5 TU5K\' 5BE  BLEU  3060', '0'),
+(3541, '', '3140070010', 'TYT T5 TU5K\' 5BE  BLEU  3060', '0'),
 (3542, '', '3140070100', 'CATA S/COLLECTEUR TU5   3060', '0'),
-(3543, '', '3140070200', 'TYT T5 TU5K'' 5AL VIOLET 3060', '0'),
-(3544, '', '3140070210', 'TYT T5 TU5K'' 5AL VIOLET 3060', '0'),
-(3545, '', '3140070300', 'TYT T5 TU5K''     JAUNE  3060', '0'),
-(3546, '', '3140070310', 'TYT T5 TU5K''     JAUNE  3060', '0'),
+(3543, '', '3140070200', 'TYT T5 TU5K\' 5AL VIOLET 3060', '0'),
+(3544, '', '3140070210', 'TYT T5 TU5K\' 5AL VIOLET 3060', '0'),
+(3545, '', '3140070300', 'TYT T5 TU5K\'     JAUNE  3060', '0'),
+(3546, '', '3140070310', 'TYT T5 TU5K\'     JAUNE  3060', '0'),
 (3547, '', '3140070500', 'TYT T5 TU5  5BE  BLEU   K181', '0'),
 (3548, '', '3140070510', 'TYT T5 TU5  5BE  BLEU   K181', '0'),
 (3549, '', '3140070700', 'TYT T5 TU5  5AL  VIOLET K181', '0'),
@@ -5157,9 +5232,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (3555, '', '3140083200', 'A MANCHON INOX', '0'),
 (3556, '', '3140083300', 'COUPELLE RENFORT X73 PH2', '0'),
 (3557, '', '3140083800', 'TYT KTA. N7 TU5US83BVM  K181', '0'),
-(3558, '', '3140083900', 'TYT KTA.R. N7 TU5K'' BVA 3060', '0'),
-(3559, '', '3140083910', 'TYT KTA.R. N7 TU5K'' BVA 3060', '0'),
-(3560, '', '3140084000', 'TYT KTA.R. N7 TU5K''BVM  3060', '0'),
+(3558, '', '3140083900', 'TYT KTA.R. N7 TU5K\' BVA 3060', '0'),
+(3559, '', '3140083910', 'TYT KTA.R. N7 TU5K\' BVA 3060', '0'),
+(3560, '', '3140084000', 'TYT KTA.R. N7 TU5K\'BVM  3060', '0'),
 (3561, '', '3140084500', '1/2 COQUILLE ISOLANTE SUP', 'DG 11'),
 (3562, '', '3140084600', '1/2 COQUILLE ISOLANTE INF', 'DG 12'),
 (3563, '', '3140085900', 'C CERAM D143,8X88,9 140G 6569', '0'),
@@ -5172,7 +5247,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (3570, '', '3140087300', 'TYT CATA ASS DV6EURO4TT K346', '0'),
 (3571, '', '3140087310', 'TYT CATA ASS DV6EURO4TT K346', '0'),
 (3572, '', '3140087500', 'PAIN CATA 120G', '0'),
-(3573, '', '3140087700', 'TYT KTA.R. N7 TU5 BVA "K181"', '0'),
+(3573, '', '3140087700', 'TYT KTA.R. N7 TU5 BVA \"K181\"', '0'),
 (3574, '', '3140088900', 'PROTECTEUR DE VANNE Z9.', '0'),
 (3575, '', '3140089100', 'CONE DE SORTIE', '0'),
 (3576, '', '3140089110', 'CONE DE SORTIE', '0'),
@@ -5209,8 +5284,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (3607, '', '3140094400', 'CORPS CATALYSEUR K299', '0'),
 (3608, '', '3140094500', 'ETIQUETTE CODE  BARRE VERTE', '0'),
 (3609, '', '3140094600', 'ETIQUETTE CODE BARRE BLANCHE', '0'),
-(3610, '', '3140095100', 'TUBE D''ENTR?E D4FT', '0'),
-(3611, '', '3140095190', 'TUBE D''ENTR?E EBAUCHE  D4FT', '0'),
+(3610, '', '3140095100', 'TUBE D\'ENTR?E D4FT', '0'),
+(3611, '', '3140095190', 'TUBE D\'ENTR?E EBAUCHE  D4FT', '0'),
 (3612, '', '3140095290', 'TUBE DE SORTIE EBAUCHE D4FT', '0'),
 (3613, '', '3140096650', 'BRB 1.4510    BOB0189,7X1,00', '0'),
 (3614, '', '3140096660', 'TSBR 1.4510  R60,0-1,00-6365', '0'),
@@ -5557,7 +5632,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (3955, '', '3140221690', 'CANULE T72 TRONC.      55,00', '0'),
 (3956, '', '3140221700', 'TYT INTER T7 EP6     PSA3093', '0'),
 (3957, '', '3140221710', 'TYT INTER T7 EP6     PSA3093', '0'),
-(3958, '', '3140221800', 'TUYAU D''ENTREE T7 EP6  50,00', '0'),
+(3958, '', '3140221800', 'TUYAU D\'ENTREE T7 EP6  50,00', '0'),
 (3959, '', '3140221900', 'SIL. INTER T7 EP6    PSA3093', '0'),
 (3960, '', '3140221970', 'SIL. INTER T7 EP6    PSA3093', '0'),
 (3961, '', '3140222000', 'COUPELLES EXT.T7 D=145', '0'),
@@ -5607,8 +5682,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (4005, '', '3140234900', 'ECRAN THERMIQUE CATA T6.', '0'),
 (4006, '', '3140235000', 'ENS TYT ASS. T1 TU1JPL4 K179', '0'),
 (4007, '', '3140235010', 'ENS TYT ASS. T1 TU1JPL4 K179', '0'),
-(4008, '', '3140235100', 'ENS TYT ASS. T1 TU1JPK'' 3056', '0'),
-(4009, '', '3140235110', 'ENS TYT ASS. T1 TU1JPK'' 3056', '0'),
+(4008, '', '3140235100', 'ENS TYT ASS. T1 TU1JPK\' 3056', '0'),
+(4009, '', '3140235110', 'ENS TYT ASS. T1 TU1JPK\' 3056', '0'),
 (4010, '', '3140235300', 'ENS TYT ASS. T1 TU3 BVM K208', '0'),
 (4011, '', '3140235310', 'ENS TYT ASS. T1 TU3 BVM K208', '0'),
 (4012, '', '3140235400', 'ENS TYT ASS. T1 TU3 BVA K208', '0'),
@@ -5642,7 +5717,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (4040, '', '3140244060', 'TSBR 1.4512  R50,0-1,50-6320', '0'),
 (4041, '', '3140244100', 'TUBE SORTIE PERFO X91    50,00', '0'),
 (4042, '', '3140245200', 'TUYAU CINTRE T5 TU3', '0'),
-(4043, '', '3140245300', 'TUYAU CINTRE T5 TU3 K''', '0'),
+(4043, '', '3140245300', 'TUYAU CINTRE T5 TU3 K\'', '0'),
 (4044, '', '3140245400', 'TUYAU CINTRE  T5 TU5 (5 BE)', '0'),
 (4045, '', '3140245500', 'TUYAU CINTRE  T5 TU5 (5 AL)', '0'),
 (4046, '', '3140245700', 'TUYAU CINTRE   T5 TU5 MA', '0'),
@@ -5842,8 +5917,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (4240, '', '3140326900', 'A BRIDE FLOTTANTE  LYNX YK', 'DEBORD'),
 (4241, '', '3140327100', 'TYT KTA.R. A7 TU3A E3   K385', '0'),
 (4242, '', '3140327110', 'TYT KTA.R. A7 TU3A E3   K385', '0'),
-(4243, '', '3140327200', 'TYT KTA.R. A7 TU3A K''   3054', '0'),
-(4244, '', '3140327210', 'TYT KTA.R. A7 TU3A K''   3054', '0'),
+(4243, '', '3140327200', 'TYT KTA.R. A7 TU3A K\'   3054', '0'),
+(4244, '', '3140327210', 'TYT KTA.R. A7 TU3A K\'   3054', '0'),
 (4245, '', '3140327300', 'TUYAU CINTRE TU3A E3-1.0L-', '0'),
 (4246, '', '3140327390', 'TUYAU TRONCONNE 1-4509-45,00', '0'),
 (4247, '', '3140327400', 'COUPELLE EXTERIEURE X91 V4Y', 'I 014'),
@@ -5910,7 +5985,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (4308, '', '3140353800', 'SIL AR ASS A7 EP6DTS PSA4258', '0'),
 (4309, '', '3140354200', 'EMBASE TUBE DE PRESSION', '0'),
 (4310, '', '3140354270', 'EMBASE TUBE DE PRESSION AFS', '==>G5931'),
-(4311, '', '3140355200', 'MONO 6" C375/6 (ELEMENT CATA D7F 2E PAIN', '0'),
+(4311, '', '3140355200', 'MONO 6\" C375/6 (ELEMENT CATA D7F 2E PAIN', '0'),
 (4312, '', '3140355870', 'KTA ACC T5B5 DW10BTED4  K216', '0'),
 (4313, '', '3140355970', 'KTA T6 DW10BTED4 COSM.  K216', '0'),
 (4314, '', '3140356010', 'KTAFAP T6DW10BTED4 K216 F015', '0'),
@@ -5948,9 +6023,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (4346, '', '3140366200', '1/2 COQUILLE INF.     <317>', '0'),
 (4347, '', '3140366400', 'TYT SANS VOLUME T7 DV6.', '0'),
 (4348, '', '3140366410', 'TYT SANS VOLUME T7 DV6.', '0'),
-(4349, '', '3140366500', 'TUBE SORTIE PERFO      55,00', '0'),
-(4350, '', '3140366550', 'BRB 1.4512    BOB0173,4X1,20', '0');
+(4349, '', '3140366500', 'TUBE SORTIE PERFO      55,00', '0');
 INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `adresse`) VALUES
+(4350, '', '3140366550', 'BRB 1.4512    BOB0173,4X1,20', '0'),
 (4351, '', '3140366560', 'TSBR 1.4512  R55,0-1,20-6326', '0'),
 (4352, '', '3140366600', 'SIL AR ASS T7 DV6    PSA3095', '0'),
 (4353, '', '3140366610', 'SIL AR ASS T7 DV6    PSA3095', '0'),
@@ -5978,7 +6053,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (4375, '', '3140372300', 'CERAMIQUE AFS 140G', '0'),
 (4376, '', '3140372400', 'CORPS CATALYSEUR T5/B5 AFS', '0'),
 (4377, '', '3140373800', 'POT KTA M2S F9Q        <>026', '0'),
-(4378, '', '3140373810', 'POT KTA M2S F9Q "758" <>026', '0'),
+(4378, '', '3140373810', 'POT KTA M2S F9Q \"758\" <>026', '0'),
 (4379, '', '3140374700', 'TYT CATA ASS DV6        K394', '0'),
 (4380, '', '3140374710', 'TYT CATA ASS/E3 K394', '0'),
 (4381, '', '3140375100', 'HC CERAMIQUE 120GR DF88P', '0'),
@@ -6188,7 +6263,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (4585, '', '3140456410', 'TYT CATA ASS DV6 T5./B5 K410', '0'),
 (4586, '', '3140456500', 'TYT CATA ASS DV6 T5./B5 K411', '0'),
 (4587, '', '3140456510', 'TYT CATA ASS DV6 T5./B5 K411', '0'),
-(4588, '', '3140456600', 'FRETTE D''ENTREE     FAP I3I4', '0'),
+(4588, '', '3140456600', 'FRETTE D\'ENTREE     FAP I3I4', '0'),
 (4589, '', '3140457100', 'MANTEAU D159X1.2    FAP I3I4', '0'),
 (4590, '', '3140457190', 'FLAN ENVEL 493X395x1,2', '0'),
 (4591, '', '3140457300', 'BAGUE FENDUE        FAP I3I4', '0'),
@@ -6319,10 +6394,10 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (4716, '', '3140505800', 'TYT CATA G9 K411 GRD EXP', '0'),
 (4717, '', '3140505810', 'TYT CATA G9 K411 GRD EXP', '0'),
 (4718, '', '3140506100', 'S/ENS CROCHET / PATTE T72.', '1021021XXX'),
-(4719, '', '3140512200', 'TUBE D''ENTREE      CATA I3I4', 'DEBORD'),
+(4719, '', '3140512200', 'TUBE D\'ENTREE      CATA I3I4', 'DEBORD'),
 (4720, '', '3140512300', 'PATTE FIXATION SUP CATA I3I4', '0'),
 (4721, '', '3140512600', 'A CALE EN L           FAP I3I4', '0'),
-(4722, '', '3140517900', 'CONE D''ENTREE       FAP I3I4', 'DEBORD'),
+(4722, '', '3140517900', 'CONE D\'ENTREE       FAP I3I4', 'DEBORD'),
 (4723, '', '3140518100', 'SOURDINE X73 D.        70,00', '0'),
 (4724, '', '3140518200', 'SOURDINE ASSEMBLEE X73 70,00', '0'),
 (4725, '', '3140519500', 'TUBE PRESS AMONT    FAP I3I4', '0'),
@@ -6795,9 +6870,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (5192, '', '3140840800', 'SIL NU T7 DV6        PSA3189', '0'),
 (5193, '', '3140840900', 'enveloppe   PSA  3189', '0'),
 (5194, '', '3140841000', 'COUPELLE ENTREE TOLE EP 1,0', 'AA 43'),
-(5195, '', '3140841100', 'COUPELLE SORTIE TOLE EP:1,0', 'AA 44'),
-(5196, '', '3140842270', 'TUBE ENTREE T7 DV6 ?5 50,00', '0');
+(5195, '', '3140841100', 'COUPELLE SORTIE TOLE EP:1,0', 'AA 44');
 INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `adresse`) VALUES
+(5196, '', '3140842270', 'TUBE ENTREE T7 DV6 ?5 50,00', '0'),
 (5197, '', '3140843810', 'TYT ASS T7  EP6DTS', '0'),
 (5198, '', '3140845000', 'POT CATA D4FT', '0'),
 (5199, '', '3140845010', 'POT KTA D4FT 527', '0'),
@@ -7116,11 +7191,11 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (5512, '', '3141070510', 'TYT ASS T76  DW10BTED4 90G', '0'),
 (5513, '', '3141073200', 'S/ENS ENV CATA AFS PH2 K497', 'IN38'),
 (5514, '', '3141073400', 'S/ENS ENV CATA AFS PH2 K497', '0'),
-(5515, '', '3141074500', 'TUYAU D''ENTREE T7 EP6  50,00', '0'),
+(5515, '', '3141074500', 'TUYAU D\'ENTREE T7 EP6  50,00', '0'),
 (5516, '', '3141076810', 'TYT ASS T76/T84 DW10C BVM', '0'),
 (5517, '', '3141077000', 'TUYAUTERIE MONOBLOC T76 DW10  PSA3179', '0'),
 (5518, '', '3141077110', 'TYT ASS T76/T84 DW10C BVA', '0'),
-(5519, '', '3141078800', 'Collier d''assemblage', '1148418XXX'),
+(5519, '', '3141078800', 'Collier d\'assemblage', '1148418XXX'),
 (5520, '', '3141079500', 'pontet G9', '0'),
 (5521, '', '3141082500', 'A ENS.BRIDE D.62 USINEE C1 FAP', '0'),
 (5522, '', '3141082600', 'A ENS.BRIDE D.62 USINEE C1 FAP', '0'),
@@ -7185,7 +7260,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (5581, '', '7903234016', 'ECROU FREIN H M6.', '0'),
 (5582, '', '7903234017', 'ECROU DR H M8 X 1,25. AUTOFRENANTE', 'DD 25'),
 (5583, '', '7903602077', 'VIS EMB HM6 LG20MM', 'DE 21'),
-(5584, '', '9150917480', 'CUVETTE D''APPUI RESSORT', '0'),
+(5584, '', '9150917480', 'CUVETTE D\'APPUI RESSORT', '0'),
 (5585, '', '9150951680', 'BALL JOINT KIT BOSS 1498680-A IVECO', '0'),
 (5586, '', '9151444980', 'BRIDE', '0'),
 (5587, '', '9603895480', 'BALL JOINT KIT GASKET 1498706-A', 'POUR EXPED'),
@@ -7347,7 +7422,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (5743, '', '1061539X00', 'TYT INTER RTE T87DV6', '0'),
 (5744, '', '10678ST', 'Soutraitance10678', '0'),
 (5745, '', '1068038XXX', 'BAFFLE', 'B 061'),
-(5746, '', '1069151XXX', 'ELEMENT FAP NGK 8"', '0'),
+(5746, '', '1069151XXX', 'ELEMENT FAP NGK 8\"', '0'),
 (5747, '', '10693ST', 'Soutraitance10693', '0'),
 (5748, '', '1069581XXX', 'CATA-FAP B58/T87 DW10C-RTE K553 F023', '0'),
 (5749, '', '1069584XXX', 'Pain kta', '0'),
@@ -7661,9 +7736,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6057, '', '11354ST', 'Soutraitance11354', '0'),
 (6058, '', '11355ST', 'Soutraitance11355', '0'),
 (6059, '', '11361ST', 'Soutraitance11361', '0'),
-(6060, '', '1136238XXX', 'TUBE TSFR-1,4512 D45,0-1,20-2795', '770'),
-(6061, '', '11363ST', 'Soutraitance11363', '0');
+(6060, '', '1136238XXX', 'TUBE TSFR-1,4512 D45,0-1,20-2795', '770');
 INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `adresse`) VALUES
+(6061, '', '11363ST', 'Soutraitance11363', '0'),
 (6062, '', '11364ST', 'Soutraitance11364', '0'),
 (6063, '', '1136544RXX', '1717WF TYT INTER T73 EP6CDTM ARGENTINE', '0'),
 (6064, '', '1136547XXX', 'CANULE T73                         42.00', '0'),
@@ -7785,7 +7860,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6180, '', '11607ST', 'Soutraitance11607', '0'),
 (6181, '', '1162576XXX', '63.5  TSFR AS120-06 R63,5 - 1,50 - 6405', '720'),
 (6182, '', '11625ST', 'Soutraitance11625', '0'),
-(6183, '', '1162823XXX', 'CATA-FAP B585 DW10C K553 60g 8"', '0'),
+(6183, '', '1162823XXX', 'CATA-FAP B585 DW10C K553 60g 8\"', '0'),
 (6184, '', '1162834AXX', 'TYT ECH ASS T87 DW10C K553', '0'),
 (6185, '', '11631ST', 'Soutraitance11631', '0'),
 (6186, '', '1163448AXX', 'TYT ECH ASS T76 DW10C K568', '0'),
@@ -7887,7 +7962,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6282, '', '11911ST', 'Soutraitance11911', '0'),
 (6283, '', '11914ST', 'Soutraitance11914', '0'),
 (6284, '', '1193952XXX', 'CATA-FAP B58/T87/B81 DW10C-RTE K553 F023', '0'),
-(6285, '', '1193953AXX', 'TYT ECH ASS T87 DW10C RTE K553 F010 (8")', '0'),
+(6285, '', '1193953AXX', 'TYT ECH ASS T87 DW10C RTE K553 F010 (8\")', '0'),
 (6286, '', '1195890XXX', 'TSFR 1.4512 D63,5-1,00- 6380', '720'),
 (6287, '', '1195910XXX', 'TSFR 1.4512 D80-1,00- 6180', '0'),
 (6288, '', '1203949XXX', 'TSFR 1.4510 D42,0-1,20-5100', '770'),
@@ -7986,7 +8061,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6381, '', '1821381R00', 'TUYAU DE SORTIE ASS POLI CDT', '0'),
 (6382, '', '18213831C0', 'SUPPORT  217G74', '0'),
 (6383, '', '1821434R00', 'SIL AR PSA 3342 **Y', '0'),
-(6384, '', '18214391C0', 'SIL AR  "PSA 3342 **Y"', '0'),
+(6384, '', '18214391C0', 'SIL AR  \"PSA 3342 **Y\"', '0'),
 (6385, '', '18214401C0', '1/2 COQUILLE SUP.', '0'),
 (6386, '', '18214411C0', '1/2 COQUILLE INF', '0'),
 (6387, '', '18214501C0', 'SOURDINE               80,00', '0'),
@@ -8015,7 +8090,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6410, '', '18220321C0', 'COUP EXT  DEPANNAGE MESSEI', '0'),
 (6411, '', '1822076T00', 'SIL. ASSEMBLE ZX    PSA 4094', '0'),
 (6412, '', '1822103R00', 'SIL AR ASS 106      PSA 3024', '0'),
-(6413, '', '182210400B', 'SIL AR  "PSA 3024"', '0'),
+(6413, '', '182210400B', 'SIL AR  \"PSA 3024\"', '0'),
 (6414, '', '18221241C0', 'SOURDINE               64,00', '0'),
 (6415, '', '1822197R00', 'SIL AR ASS N37 XU10 PSA 4078', '0'),
 (6416, '', '18222540C0', 'ENVELOPPE ASS.', '0'),
@@ -8075,7 +8150,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6470, '', '18233450C0', 'COUPELLE INT.(260X150)', '0'),
 (6471, '', '18233460C0', 'COUPELLE INT.(260X150)', '0'),
 (6472, '', '1823441R00', '171782 TX INTER ASS D82  PSA 3125', '0'),
-(6473, '', '182346290B', 'SIL AR D82   "PSA 3133"', '0'),
+(6473, '', '182346290B', 'SIL AR D82   \"PSA 3133\"', '0'),
 (6474, '', '1823462R00', 'SIL AR ASSEMBLE D82 PSA 3133', '0'),
 (6475, '', '18234771C0', 'FRETTE + RESTRICTEUR    48,00', '0'),
 (6476, '', '1823486R00', 'SIL ASS PSA 3135  D83 XU10.', '0'),
@@ -8084,11 +8159,11 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6479, '', '18235011C0', '1/2 CONE  INT AR SUP.', '0'),
 (6480, '', '18235021C0', '1/2 CONE  INT AR INF.', '0'),
 (6481, '', '18235381C0', 'SOURDINE PERFO         80,00', '0'),
-(6482, '', '18235501C0', 'TUBE D''ENTREE          54,00', '0'),
+(6482, '', '18235501C0', 'TUBE D\'ENTREE          54,00', '0'),
 (6483, '', '18235521C0', 'TUBE RESONATEUR D83    38,00', '0'),
 (6484, '', '1823553W00', 'R BICONE                 80,00', '0'),
 (6485, '', '18235591C0', 'TUBE RESONATEUR        40,00', '0'),
-(6486, '', '18235851C0', 'TUBE D''ENTREE          60,00', '0'),
+(6486, '', '18235851C0', 'TUBE D\'ENTREE          60,00', '0'),
 (6487, '', '18235860RP', 'TUBE DE SORTIE         60,00', '0'),
 (6488, '', '18235861C0', 'TUBE DE SORTIE         60,00', '0'),
 (6489, '', '1823603T00', 'TUYAUTERIE ASS', '0'),
@@ -8097,7 +8172,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6492, '', '1823635R00', '1726P9 SIL AR ASSEMBLE D82 PSA 3135', '0'),
 (6493, '', '1823670T00', 'SIL AR ASSEMBLE X1  PSA 4121', '0'),
 (6494, '', '1823747R00', 'SIL AR ASS N52 XU10 PSA 4078', '0'),
-(6495, '', '1823750R0B', 'TUY AR  (PD) "PSA 3133"', '0'),
+(6495, '', '1823750R0B', 'TUY AR  (PD) \"PSA 3133\"', '0'),
 (6496, '', '18237511C0', 'CANULE D83 XUD9 ASD    48,00', '0'),
 (6497, '', '18237650PA', 'COUPELLE ENTREE MESSEI', '0'),
 (6498, '', '18237671J0', 'COUPELLE SORTIE VIGO', '0'),
@@ -8251,7 +8326,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6646, '', '18293251T0', 'CONE', '0'),
 (6647, '', '18293981C0', 'S/ENS.SOURD.+ MANCHON  80,00', '0'),
 (6648, '', '18294091C0', '1/2 COQUILLE SUP. ASS.', '0'),
-(6649, '', '18294791C0', 'TUBE D''ENTREE X65      50,00', '0'),
+(6649, '', '18294791C0', 'TUBE D\'ENTREE X65      50,00', '0'),
 (6650, '', '18294821C0', '1/2 COQUILLE SUP.', '0'),
 (6651, '', '18294891C0', 'CATA.X65 F4R SPORT <> C125', '0'),
 (6652, '', '18294901C0', 'CATA.X65 F4R SPORT <> C124', '0'),
@@ -8543,12 +8618,12 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6938, '', '18G0107500', 'BRB 1.4512    BOB0150,4X1,45', '0'),
 (6939, '', '18G0107600', 'TSBR 1.4512    R48-1,50-6472', '0'),
 (6940, '', '18G0107900', 'TUBE PERFO TRONC. X74  48,00', '0'),
-(6941, '', '18G0109000', 'A MANCHON INOX', '0'),
-(6942, '', '18G0114000', 'COUPELLE INTERIEURE', '0');
+(6941, '', '18G0109000', 'A MANCHON INOX', '0');
 INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `adresse`) VALUES
+(6942, '', '18G0114000', 'COUPELLE INTERIEURE', '0'),
 (6943, '', '18G0119000', 'A MANCHON INOX', '0'),
-(6944, '', '18G0147000', 'SIL INT "PSA 3042" 170X100', '0'),
-(6945, '', '18G01471C0', 'SIL INT "PSA 3042" 170X100', '0'),
+(6944, '', '18G0147000', 'SIL INT \"PSA 3042\" 170X100', '0'),
+(6945, '', '18G01471C0', 'SIL INT \"PSA 3042\" 170X100', '0'),
 (6946, '', '18G0148000', 'TUBE ENTREE            54,00', '0'),
 (6947, '', '18G01481C0', 'TUBE ENTREE            54,00', '0'),
 (6948, '', '18G0149900', 'TUBE EBAU. AS120/06    60,00', '0'),
@@ -8558,7 +8633,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6952, '', '18G0189000', 'BOUCHON PROTECTION ENTREE', '0'),
 (6953, '', '18G01891T0', 'TAPON DE ENTRADA', '0'),
 (6954, '', '18G0189999', 'BOUCHON PROTECTION ENTREE', '0'),
-(6955, '', '18G0208000', 'SIL INT "PSA 3042" 170X100', '0'),
+(6955, '', '18G0208000', 'SIL INT \"PSA 3042\" 170X100', '0'),
 (6956, '', '18G02081C0', 'SIL N68 EW7        PSA 3042', '0'),
 (6957, '', '18G0215000', 'TUBE  ENTREE           54,00', '0'),
 (6958, '', '18G02151C0', 'TUBE  ENTREE           54,00', '0'),
@@ -8572,10 +8647,10 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (6966, '', '18G0300070', 'COUP.INT.PERF.', '0'),
 (6967, '', '18G0300500', 'FEUILLARD PERFORE / COUPELLE', '0'),
 (6968, '', '18G0333070', 'COUP. INT Z8  (150X85) 217F41', 'AC 43'),
-(6969, '', '18G0335000', 'S/ENS D''ENTREE  Z8 EW10', '0'),
+(6969, '', '18G0335000', 'S/ENS D\'ENTREE  Z8 EW10', '0'),
 (6970, '', '18G0336000', 'S/ENS DE SORTIE Z8 EW10', '0'),
 (6971, '', '18G0337070', 'COUP. INT Z8  (150X85)', 'AC 45'),
-(6972, '', '18G0346000', 'S/ENS D''ENTREE  Z8 ES9', '0'),
+(6972, '', '18G0346000', 'S/ENS D\'ENTREE  Z8 ES9', '0'),
 (6973, '', '18G0347000', 'S/ENS DE SORTIE Z8 ES9', '0'),
 (6974, '', '18G0360000', 'C ELEMENT CATA 5101', '0'),
 (6975, '', '18G0363000', 'A MANCHON INOX', '0'),
@@ -8738,14 +8813,14 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (7132, '', '18G1280R00', 'TUYAUTERIE PRIMAIRE', '0'),
 (7133, '', '18G1280R70', 'TUYAUTERIE PRIMAIRE', '0'),
 (7134, '', '18G1283070', 'COUP. EXT 150X85', '0'),
-(7135, '', '18G12841J0', 'TUBE D''ENTREE          45,00', '0'),
+(7135, '', '18G12841J0', 'TUBE D\'ENTREE          45,00', '0'),
 (7136, '', '18G1284500', 'BRB AS120-06  BOB0141,2X1,45', '0'),
 (7137, '', '18G1284600', 'TSBR AS120.06  R45-1,50-6177', '0'),
 (7138, '', '18G1284700', 'Tube perfo', '0'),
 (7139, '', '18G1310000', 'A COLLIER ASSEMBLE', '0'),
 (7140, '', '18G1312070', 'TUY CATA D93 ES9J4S ASS K161', '0'),
 (7141, '', '18G1312R70', '1731K1 TUY CATA D93 ES9J4S ASS K161', '0'),
-(7142, '', '18G1313000', 'CONE D''ENTREE', '0'),
+(7142, '', '18G1313000', 'CONE D\'ENTREE', '0'),
 (7143, '', '18G1314000', 'CONE DE SORTIE', 'DF 12'),
 (7144, '', '18G13141T0', 'CONE DE SORTIE', '0'),
 (7145, '', '18G1317000', 'MANTEAU CATA ASS Z8DW12', '0'),
@@ -8784,7 +8859,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (7178, '', '18G1372R70', '1731J9 TUY CATA Z8 ES9J4S ASS. K161', '0'),
 (7179, '', '18G13990PA', 'COUP. SORT.Z8 200X130', '0'),
 (7180, '', '18G14000PA', 'COUP. BOR. Z8 200X130', '0'),
-(7181, '', '18G14191J0', 'TUBE D''ENTREE PERFORE  54,00', '0'),
+(7181, '', '18G14191J0', 'TUBE D\'ENTREE PERFORE  54,00', '0'),
 (7182, '', '18G1419500', 'BRB AS120-06  BOB0168,3X1,90', '0'),
 (7183, '', '18G1419600', 'TSBR AS120-06  R54-2,00-5878', '0'),
 (7184, '', '18G1448000', 'COUPELLE REDUCTEUR MEGANE.', '0'),
@@ -8890,7 +8965,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (7284, '', '18G1892000', 'SIL AR ASSEMBLE D92 PSA 3158', '0'),
 (7285, '', '18G1892R00', 'SIL AR ASSEMBLE D92 PSA 3158', '0'),
 (7286, '', '18G1893000', 'SIL AR EMBOUTI D92  PSA 3158', '0'),
-(7287, '', '18G1898000', 'TUBE D''ENTREE  PERFORE 60,00', '0'),
+(7287, '', '18G1898000', 'TUBE D\'ENTREE  PERFORE 60,00', '0'),
 (7288, '', '18G1898500', 'BRB 1.4512    BOB0188,8X1,45', '0'),
 (7289, '', '18G1898600', 'TSBR 1.4512  R60,0-1,50-6162', '0'),
 (7290, '', '18G1899000', 'A MANCHON INOX', '0'),
@@ -8922,9 +8997,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (7316, '', '18G1988070', 'COUPELLE INTERIEURE 150X85', '0'),
 (7317, '', '18G19881C0', 'S-COUPELLE INTERIEURE 150X85', '0'),
 (7318, '', '18G1989000', 'S/ENS INTERIEUR', '0'),
-(7319, '', '18G1991000', 'SIL INT T5 "PSA 3049"', '0'),
-(7320, '', '18G1991070', 'SIL INT T5 "PSA 3049"', '0'),
-(7321, '', '18G19911C0', 'SIL INT T5 "PSA 3049"', '0'),
+(7319, '', '18G1991000', 'SIL INT T5 \"PSA 3049\"', '0'),
+(7320, '', '18G1991070', 'SIL INT T5 \"PSA 3049\"', '0'),
+(7321, '', '18G19911C0', 'SIL INT T5 \"PSA 3049\"', '0'),
 (7322, '', '18G1992000', 'ENVELOPPE PRE CATA 117X1,2', '0'),
 (7323, '', '18G1993000', 'PAIN CERAMIQUE', '0'),
 (7324, '', '18G1994000', 'NAPPE DE MAINTIEN', '0'),
@@ -8948,10 +9023,10 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (7342, '', '18G2141000', 'ELEMENT CATA D97X150     TU1', '0'),
 (7343, '', '18G2144000', 'CATA S/COLLECTEUR TU1   3056', '0'),
 (7344, '', '18G2160000', 'SANGLE T1 TU.', '0'),
-(7345, '', '18G2166000', 'TUYAU D''ENTREE + REDUC. X64', '0'),
-(7346, '', '18G2166100', 'TUYAU D''ENTREE + REDUC. X64', '0'),
+(7345, '', '18G2166000', 'TUYAU D\'ENTREE + REDUC. X64', '0'),
+(7346, '', '18G2166100', 'TUYAU D\'ENTREE + REDUC. X64', '0'),
 (7347, '', '18G2172000', 'TUYAU ENTREE CATA X64  55,00', '0'),
-(7348, '', '18G2172800', 'TUYAU D''ENTREE TRONC.  55,00', '0'),
+(7348, '', '18G2172800', 'TUYAU D\'ENTREE TRONC.  55,00', '0'),
 (7349, '', '18G2317000', 'ETIQUETTE CODE BARRE JAUNE', '0'),
 (7350, '', '18G2337500', 'BRB 1.4510    BOB0173,4X1,20', '0'),
 (7351, '', '18G2337600', 'TSBR 1.4510  R55,0-1,20-6326', '0'),
@@ -9089,7 +9164,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (7483, '', '18G3282000', 'SUPPORT ECRAN ASS.    P5 V4Y', 'DEBORD'),
 (7484, '', '18G3284000', 'DESCENTE ECHAPT ARR.  P5 V4Y', '0'),
 (7485, '', '18G3284R00', 'DESCENTE ECHAPT ARR.  P5 V4Y', '0'),
-(7486, '', '18G3285000', 'A BRIDE D''ENTREE', '0'),
+(7486, '', '18G3285000', 'A BRIDE D\'ENTREE', '0'),
 (7487, '', '18G3286070', 'PRE CATA ASS C203', '0'),
 (7488, '', '18G3288000', 'TUYAU AVANT   D.45    P5 V4Y', '0'),
 (7489, '', '18G3288900', 'TUYAU AV. TRONC P5 V4Y 45,00', '0'),
@@ -9124,8 +9199,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (7518, '', '18G34011C0', 'CATALYSEUR CYLINDRIQUE K220', '0'),
 (7519, '', '18G3403000', 'A NAPPE DE FIBRE', '0'),
 (7520, '', '18G3404000', 'C ELEMENT CATA', '0'),
-(7521, '', '18G3405000', 'TYT KTA.R. T5 TU3 K''    3054', '0'),
-(7522, '', '18G3405R00', '1731T8 TYT KTA.R. T5 TU3 K'' 3054', '0'),
+(7521, '', '18G3405000', 'TYT KTA.R. T5 TU3 K\'    3054', '0'),
+(7522, '', '18G3405R00', '1731T8 TYT KTA.R. T5 TU3 K\' 3054', '0'),
 (7523, '', '18G3411000', 'TUBE DE LIAISON D9     50,00', 'BRAGANCA'),
 (7524, '', '18G3411900', 'TUBE DE LIAISON TRONC. 50,00', 'BRAGANCA'),
 (7525, '', '18G3412000', 'TUBE DE LIAISON D9     50,00', '0'),
@@ -9193,7 +9268,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (7587, '', '18G3599000', 'TUYAU CINTRE   45X2,0_1-4512', '0'),
 (7588, '', '18G3600000', 'TYT KTA. N7 TU5US83 BVA K181', '0'),
 (7589, '', '18G3600T00', 'TYT KTA. N7 TU5US83 BVA K181', '0'),
-(7590, '', '18G3601000', 'TUYAU AVANT N7 TU5K''', '0'),
+(7590, '', '18G3601000', 'TUYAU AVANT N7 TU5K\'', '0'),
 (7591, '', '18G3602000', 'ECRAN THERMIQUE', 'DEBORD'),
 (7592, '', '18G3604000', 'PRISE SONDE', '0'),
 (7593, '', '18G3626070', 'COUPELLE INT. T12    260X150', '0'),
@@ -9279,9 +9354,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (7673, '', '18G3843000', 'PATTE SUPPORT   P5 V4Y', '0'),
 (7674, '', '18G3844000', 'SUPPORT ECRAN ASS.    P5 V4Y', 'IN08'),
 (7675, '', '18G3847000', 'GOUJON          P5 V4Y', 'CONT V4Y'),
-(7676, '', '18G3849000', 'TYT KTA.R. T5 TU5 BVM K''3060', '0'),
-(7677, '', '18G3849C00', 'TYT KTA.R T5TU5 K''3060 JAUNE', '0'),
-(7678, '', '18G3853000', 'TUYAU CINTRE   T5 TU5 JP4 K''', '0'),
+(7676, '', '18G3849000', 'TYT KTA.R. T5 TU5 BVM K\'3060', '0'),
+(7677, '', '18G3849C00', 'TYT KTA.R T5TU5 K\'3060 JAUNE', '0'),
+(7678, '', '18G3853000', 'TUYAU CINTRE   T5 TU5 JP4 K\'', '0'),
 (7679, '', '18G3864000', 'ECRAN THERMIQUE P5 V4Y', '0'),
 (7680, '', '18G3892000', 'CROCHET AVANT X70.', '0'),
 (7681, '', '18G38921T0', 'FRONT BRACKET', '0'),
@@ -9409,9 +9484,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (7803, '', '18G4558000', 'GOUJON', 'DEBORD'),
 (7804, '', '18G4559000', '1/2 COQUILLE DROITE ASSEMBL', '0'),
 (7805, '', '18G4562000', 'TUBE AR ET BRIDE', '0'),
-(7806, '', '18G4569000', 'TUBE FRETTE SORTIE FAP 55,00', '0'),
-(7807, '', '18G45691J0', 'TUBE FRETTE SORTIE FAP 55,00', '0');
+(7806, '', '18G4569000', 'TUBE FRETTE SORTIE FAP 55,00', '0');
 INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `adresse`) VALUES
+(7807, '', '18G45691J0', 'TUBE FRETTE SORTIE FAP 55,00', '0'),
 (7808, '', '18G4581000', 'SIL AR ASS T5 DW10   PSA3051', '0'),
 (7809, '', '18G4581R00', '1726WT SIL AR ASS T5 DW10 PSA3051', '0'),
 (7810, '', '18G4582000', 'SIL NU T5 DV4/DW10 PSA 3051R', '0'),
@@ -9591,8 +9666,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (7984, '', '18G4832000', 'COUP. EXT. Z8(150X85) 217F40', 'AC 44'),
 (7985, '', '18G4833000', 'TYT INTER Z8 EW10   PSA 3364', '0'),
 (7986, '', '18G4833R00', '1717W3 TYT INTER Z8 EW10 PSA 3364', '0'),
-(7987, '', '18G4835000', 'TUBE D''ENTREE Z8       60,00 R90', '0'),
-(7988, '', '18G4835900', '60 TUBE D''ENTREE Z8 TRONC 60,00', '0'),
+(7987, '', '18G4835000', 'TUBE D\'ENTREE Z8       60,00 R90', '0'),
+(7988, '', '18G4835900', '60 TUBE D\'ENTREE Z8 TRONC 60,00', '0'),
 (7989, '', '18G4836000', 'SUPPORT TUBE DE PRESSION', '0'),
 (7990, '', '18G4837000', 'TYT AR Z8 DW10TD    PSA 3355', '0'),
 (7991, '', '18G4837070', 'SIL. ARRIERE ASS Z9 PSA3355', '0'),
@@ -9738,7 +9813,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8131, '', '18G5285C00', '1717Z1 TYT INTER T5 TU5 PSA 3049', '0'),
 (8132, '', '18G5287000', 'TYT INTER T52 TU5   PSA 3049', '0'),
 (8133, '', '18G5287R00', '1717Z2 TYT INTER T52 TU5 PSA 3049', '0'),
-(8134, '', '18G5290000', 'SIL INT "PSA 3356" Z8 150X85', '0'),
+(8134, '', '18G5290000', 'SIL INT \"PSA 3356\" Z8 150X85', '0'),
 (8135, '', '18G5291000', 'S/ENS AR TRANSV Z8  PSA 3357', '0'),
 (8136, '', '18G5308000', 'BICONE                 72,00', '0'),
 (8137, '', '18G5308900', 'BICONE EBAUCHE         72,00', '0'),
@@ -9750,10 +9825,10 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8143, '', '18G5315000', 'S/ENS.(SOURD.+MANCHON) 80,00', '0'),
 (8144, '', '18G5316000', 'S/ENS. SOURDINEMANCHON 80,00', '0'),
 (8145, '', '18G53161C0', 'S/ENS. SOURDINEMANCHON 80,00', '0'),
-(8146, '', '18G5317000', 'SIL-EMBOUTI Z8ES9 "PSA 3360"', '0'),
-(8147, '', '18G5318000', 'SIL-EMBOUTI Z8EW  "PSA 3358"', '0'),
-(8148, '', '18G5319000', 'SIL INT "PSA 3364" Z8 150X85', '0'),
-(8149, '', '18G5320000', 'SIL-EMB Z8 "PSA 3355"', '0'),
+(8146, '', '18G5317000', 'SIL-EMBOUTI Z8ES9 \"PSA 3360\"', '0'),
+(8147, '', '18G5318000', 'SIL-EMBOUTI Z8EW  \"PSA 3358\"', '0'),
+(8148, '', '18G5319000', 'SIL INT \"PSA 3364\" Z8 150X85', '0'),
+(8149, '', '18G5320000', 'SIL-EMB Z8 \"PSA 3355\"', '0'),
 (8150, '', '18G5321000', 'S/ENS.FAISCEAU', '0'),
 (8151, '', '18G5322000', 'S/ENS.FAISCEAU', '0'),
 (8152, '', '18G5324000', 'POT CATA K178', '0'),
@@ -9823,8 +9898,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8216, '', '18G5665000', 'COUPELLE INT. T1     260X150', '0'),
 (8217, '', '18G5665070', 'COUPELLE INT. T1     260X150', '0'),
 (8218, '', '18G56650C0', 'COUPELLE INT. T1     260X150', '0'),
-(8219, '', '18G5686000', 'SIL INT T1 "PSA 3049" 150X85', '0'),
-(8220, '', '18G56861C0', 'SIL INT T1 "PSA 3049" 150X85', '0'),
+(8219, '', '18G5686000', 'SIL INT T1 \"PSA 3049\" 150X85', '0'),
+(8220, '', '18G56861C0', 'SIL INT T1 \"PSA 3049\" 150X85', '0'),
 (8221, '', '18G5688070', 'COUPELLE ENTREE.', '0'),
 (8222, '', '18G5695000', 'TUBE ENT PERFO    45,00', '770'),
 (8223, '', '18G5695500', 'BRB 1.4512    BOB0141,2X1,50', '0'),
@@ -9884,7 +9959,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8277, '', '18G5759500', 'BRB 1.4509    BOB0170X1,20', '0'),
 (8278, '', '18G5759600', 'TSBR 1.4509  R54,0-1,20-6445', '0'),
 (8279, '', '18G5776000', 'SUPPORT CROCHET ARRIERE T5.', '0'),
-(8280, '', '18G5805000', 'TUYAU T1 TU3 K''-D45-1.4512', '0'),
+(8280, '', '18G5805000', 'TUYAU T1 TU3 K\'-D45-1.4512', '0'),
 (8281, '', '18G5805900', 'TUYAU TRONCONNE        45,00', '0'),
 (8282, '', '18G5809000', 'TUYAU T1 TU5-IRAN- NON PERCE', '0'),
 (8283, '', '18G5823000', 'CROCHET AVANT T1 DV6.', '0'),
@@ -9972,7 +10047,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8365, '', '18G5932000', 'EMBASE TUBE DE PRESSION', '0'),
 (8366, '', '18G5940000', 'NAPPE DE MAINTIEN CERAMIQUE', '0'),
 (8367, '', '18G5943000', 'A JOINT DE MAINTIEN', '3140931100'),
-(8368, '', '18G5944000', 'A JOINT D''ETANCHEITE', '0'),
+(8368, '', '18G5944000', 'A JOINT D\'ETANCHEITE', '0'),
 (8369, '', '18G5946000', 'TUBE ARRIERE', '0'),
 (8370, '', '18G5947000', 'FAP DV6 TED4', '0'),
 (8371, '', '18G5989000', 'SUPPORT ECRAN THERMIQUE', 'DJ 21'),
@@ -10024,13 +10099,13 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8417, '', '18G6118R00', '1731EV TYT KTA.R. T1 TU1-FLUO- K179', '0'),
 (8418, '', '18G6119000', 'TUYAU T1 TU1-D45-FLUO-1.4512', '0'),
 (8419, '', '18G6119900', 'TUYAU TRONCONNE        45,00', '0'),
-(8420, '', '18G6121000', 'TYT KTA.R. T1 TU1K/K''   3056', '0'),
-(8421, '', '18G6121R00', '1731EW TYT KTA.R. T1 TU1K/K''', '0'),
-(8422, '', '18G6122000', 'TUYAU T1 TU1 K''-D45-1.4512', '0'),
+(8420, '', '18G6121000', 'TYT KTA.R. T1 TU1K/K\'   3056', '0'),
+(8421, '', '18G6121R00', '1731EW TYT KTA.R. T1 TU1K/K\'', '0'),
+(8422, '', '18G6122000', 'TUYAU T1 TU1 K\'-D45-1.4512', '0'),
 (8423, '', '18G6123000', 'TYT AV AVAL  ASS. T1 TU1JPL4', '0'),
 (8424, '', '18G6123R00', '1705ZV TYT AV AVAL  ASS. T1 TU1JPL4', '0'),
 (8425, '', '18G6128000', 'TYT KTA.R. T1 TU3 ASS.  3054', '0'),
-(8426, '', '18G6128R00', '1731EX TYT KTA.R. T1 TU3 CDT "3054"', '0'),
+(8426, '', '18G6128R00', '1731EX TYT KTA.R. T1 TU3 CDT \"3054\"', '0'),
 (8427, '', '18G6130000', 'ENS TYT ASS. T1 TU3 BVM K208', '0'),
 (8428, '', '18G6130100', 'S-TYT ASS. T1 TU3 BVM  K208', '0'),
 (8429, '', '18G6131000', 'TYT KTA.R. T1 TU3-FLUO- K208', '0'),
@@ -10101,7 +10176,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8494, '', '18G6246W00', 'TYT INTER T5 TU5    PSA 3077', '0'),
 (8495, '', '18G6247000', 'TUBE AVANT T5/B5 TU5   45,00', '0'),
 (8496, '', '18G6247900', 'TUYAU AVANT T5 TRONC.  45,00', '0'),
-(8497, '', '18G6248000', 'SIL INT T5 FLUO "PSA 3077"', '0'),
+(8497, '', '18G6248000', 'SIL INT T5 FLUO \"PSA 3077\"', '0'),
 (8498, '', '18G6248LAS', 'TUBE SOUD. LAS. D120X1,0X342', '0'),
 (8499, '', '18G6248MAR', 'TUBE MARQUE', '0'),
 (8500, '', '18G6249000', 'TUBE ARRIERE T5 TU5    45,00', '0'),
@@ -10167,8 +10242,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8560, '', '18G6322000', 'SIL EMBOUTI N7', '0'),
 (8561, '', '18G63221C0', 'SIL EMBOUTI N7', '0'),
 (8562, '', '18G63221T0', 'SILENCER', '0'),
-(8563, '', '18G6331000', 'SIL INT "PSA 3042" 170X100', '0'),
-(8564, '', '18G63311C0', 'SIL INT "PSA 3042" 170X100', '0'),
+(8563, '', '18G6331000', 'SIL INT \"PSA 3042\" 170X100', '0'),
+(8564, '', '18G63311C0', 'SIL INT \"PSA 3042\" 170X100', '0'),
 (8565, '', '18G6332000', 'S/ENS  COUP/BICONE T1 EW10J4', '0'),
 (8566, '', '18G63321C0', 'S/ENS  COUP/BICONE T1 EW10J4', '0'),
 (8567, '', '18G6333000', 'ENVELOPPE ASS.', '0'),
@@ -10264,10 +10339,10 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8657, '', '18G6481000', 'SIL AR ASS Z9 DT17   PSA3369', '0'),
 (8658, '', '18G6481070', 'SIL. ARRIERE ASS Z9 PSA3369', '0'),
 (8659, '', '18G6481R00', '1726WP PSA3369 SIL AR ASS Z9 DT17', '0'),
-(8660, '', '18G6481W00', 'SIL AR ASS Z9 DT17   PSA3369', '0'),
-(8661, '', '18G6482000', 'SIL-EMBOUTI Z9DT17   PSA3369', '0');
+(8660, '', '18G6481W00', 'SIL AR ASS Z9 DT17   PSA3369', '0');
 INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `adresse`) VALUES
-(8662, '', '18G6484000', 'TUBE D''ENTREE Z9       64,00 R120', '0'),
+(8661, '', '18G6482000', 'SIL-EMBOUTI Z9DT17   PSA3369', '0'),
+(8662, '', '18G6484000', 'TUBE D\'ENTREE Z9       64,00 R120', '0'),
 (8663, '', '18G6484900', '64 TUBE ENTREE Z9         64,00', '0'),
 (8664, '', '18G6487000', 'FLEXIBLE Z9', '0'),
 (8665, '', '18G6488000', 'TUBE AVANT Z9 ES9', 'DK 11'),
@@ -10408,9 +10483,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8800, '', '18G6744000', 'POT CATA ACOUSTIQUE T5  K331', '0'),
 (8801, '', '18G6746000', 'TUYAU ENTREE T5 EW10   55,00', '0'),
 (8802, '', '18G6746900', 'FRETTE AVANT EBAU T5  55,00', '0'),
-(8803, '', '18G6748000', 'CONE D''ENTREE', '0'),
+(8803, '', '18G6748000', 'CONE D\'ENTREE', '0'),
 (8804, '', '18G6748070', 'COUPELLE INT T7', 'DEBORD'),
-(8805, '', '18G67480PA', 'CONE D''ENTREE', '0'),
+(8805, '', '18G67480PA', 'CONE D\'ENTREE', '0'),
 (8806, '', '18G6749000', 'ENVELOPPE D 159 LG453 EP1.2 1.4509', 'PAL'),
 (8807, '', '18G6749900', 'FLAN  LG453 EP1.2 1.4509', '0'),
 (8808, '', '18G6750000', 'C CERAMIQUE 162CM2 LG101.6', '0'),
@@ -10518,15 +10593,15 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8910, '', '31400657C0', 'TUBE ENTREE            55,00', '0'),
 (8911, '', '31400671C0', '170675 FLEXIBLE ASS. B5/T5 EW10A', '0'),
 (8912, '', '31400689R0', '1731HF TYT KTA.R. T1 TU5 -15,0-K181', '0'),
-(8913, '', '31400700C0', 'TYT T5 TU5K'' 5BE  BLEU  3060', '0'),
-(8914, '', '31400702C0', 'TYT T5 TU5K'' 5AL VIOLET 3060', '0'),
+(8913, '', '31400700C0', 'TYT T5 TU5K\' 5BE  BLEU  3060', '0'),
+(8914, '', '31400702C0', 'TYT T5 TU5K\' 5AL VIOLET 3060', '0'),
 (8915, '', '31400705C0', '1731HP TYT T5 TU5  5BE  BLEU   K181', '0'),
 (8916, '', '31400707C0', '1731HQ TYT T5 TU5  5AL  VIOLET K181', '0'),
 (8917, '', '31400709C0', '1731HR TYT T5 TU5 JAUNE  K181', '0'),
 (8918, '', '31400833C0', 'COUPELLE RENFORT X73 PH2', '0'),
 (8919, '', '31400838T0', 'TYT KTA.N7 TU5US83 BVM  K181', '0'),
-(8920, '', '31400839T0', 'TYT KTA.R. N7 TU5K'' BVA 3060', '0'),
-(8921, '', '31400840T0', 'TYT KTA.R. N7 TU5K''BVM  3060', '0'),
+(8920, '', '31400839T0', 'TYT KTA.R. N7 TU5K\' BVA 3060', '0'),
+(8921, '', '31400840T0', 'TYT KTA.R. N7 TU5K\'BVM  3060', '0'),
 (8922, '', '31400860T0', 'TUYAU INTERIEUR D55   1.4509', '0'),
 (8923, '', '31400870C0', '1706F0 TYT CATA ASS DV6EURO4TT K345', '0'),
 (8924, '', '31400870W0', 'TYT CATA ASS DV6EURO4TT K345', '0'),
@@ -10567,7 +10642,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (8959, '', '31401230B0', 'S/ENS.(SOURD.+MANCHON) 80,00', '0'),
 (8960, '', '31401230J0', 'S/ENS.(SOURD.+MANCHON) 80,00', '0'),
 (8961, '', '31401230W0', 'S/ENS.(SOURD.+MANCHON) 80,00', '0'),
-(8962, '', '31401232J0', 'TUBE D''ENTREE          42,00', '0'),
+(8962, '', '31401232J0', 'TUBE D\'ENTREE          42,00', '0'),
 (8963, '', '31401239T0', '1731JS TYT KTA.R. A8 TU3JP GNV K352', '0'),
 (8964, '', '31401240J0', 'CATA S/COLLECTEUR TU3   K352', '0'),
 (8965, '', '31401277PA', 'CONE ENTREE', '0'),
@@ -10738,7 +10813,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (9130, '', '31403265LA', 'ENV CATA DV6 D159X1,2 L145', '0'),
 (9131, '', '31403269T0', 'A BRIDA FLOTTANTE  LYNX YK', '0'),
 (9132, '', '31403271R0', 'TYT KTA.R. A7 TU3A E3   K385', '0'),
-(9133, '', '31403272R0', '1731PE TYT KTA.R. A7 TU3A K'' 3054', '0'),
+(9133, '', '31403272R0', '1731PE TYT KTA.R. A7 TU3A K\' 3054', '0'),
 (9134, '', '31403296J0', 'CONE SORTIE KTAFAPII DV6 AFS', '0'),
 (9135, '', '31403307T0', 'TUBO PINZON', '0'),
 (9136, '', '31403351J0', 'FRETTE', '0'),
@@ -11072,8 +11147,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (9464, '', 'E4049508XX', 'POT CATA PSA EP3C - EP6C', '0'),
 (9465, '', 'E4044047XX', 'ELEMENT CATA 5166 CP', '0'),
 (9466, '', 'E3024589', 'REAR MUFFLER ASSY.', '0'),
-(9467, '', 'E4040916', 'TUBE D''ENTREE T7 EP3        45.00', '0'),
-(9468, '', 'E4049580', 'TUBE D''ENTREE T76 EP6CDT      60.00', '0'),
+(9467, '', 'E4040916', 'TUBE D\'ENTREE T7 EP3        45.00', '0'),
+(9468, '', 'E4049580', 'TUBE D\'ENTREE T76 EP6CDT      60.00', '0'),
 (9469, '', 'E4049988XX', 'A-TUBE ENTREE', '0'),
 (9470, '', 'E4051650', 'CROCHET INTERMEDIAIRE T72 DW10', '0'),
 (9471, '', 'E4053446', 'TUYAU INTER T7 DW10         55.00', '0'),
@@ -11106,9 +11181,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (9498, '', 'E4060430', 'CANULE GAUCHE T75 EP6CDTX   50.00', 'DE 44'),
 (9499, '', 'E4060431', 'CANULE DROITE T75 EP6CDTX   50.00', 'DH 11'),
 (9500, '', 'E4060465', 'SILENCIEUX INTER T7 EP3   PSA3197', '0'),
-(9501, '', 'E4063264', 'SIL. ARRIERE T7 EP6 CDTX   PSA3185', '0'),
-(9502, '', 'E4068611', 'MANCHON inox CANULE', 'DD 13');
+(9501, '', 'E4063264', 'SIL. ARRIERE T7 EP6 CDTX   PSA3185', '0');
 INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `adresse`) VALUES
+(9502, '', 'E4068611', 'MANCHON inox CANULE', 'DD 13'),
 (9503, '', 'E4070700', 'PROTECTION ENJOLIVEUR', '0'),
 (9504, '', 'E4072119', 'TUYAU INTER B81          65.00', '0'),
 (9505, '', 'E4072132', 'SIL. ARRIERE B81 EP6CDTX   PSA3377', '0'),
@@ -11696,7 +11771,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10087, '', '1464009', 'S/ENS. SUPPORT AR', '0'),
 (10088, '', '1464022', 'S/ENS.SUPPORT AR.', '0'),
 (10089, '', '1463138', 'TUERCA HOT-END PSA EP6', '0'),
-(10090, '', '1123882XXX', 'Envolvente FAP 6''''', '0'),
+(10090, '', '1123882XXX', 'Envolvente FAP 6\'\'', '0'),
 (10091, '', '1161506XXX', 'Restricteur dia 37 Ver DUM', 'CAVE'),
 (10092, '', '1279469XXX', 'MIG UGI A439 STANDARD PAY-OFF-PACK', '0'),
 (10093, '', '20801 9Y100', 'CATALYST 20801 BH45A LADRILLO CERAMICO', '0'),
@@ -11718,7 +11793,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10109, '', '1249627XXX', 'KTA-FAP T7 DW10C K628 40G', '0'),
 (10110, '', '1215575XXX', 'PAIN CATA 40G /FT3 DCF95', '0'),
 (10111, '', '1249626XXX', 'S/ENS.CANING / CONES ASS. DW10 C', '0'),
-(10112, '', '18G6248J00', 'SIL INT T5 FLUO "PSA 3077"', '0'),
+(10112, '', '18G6248J00', 'SIL INT T5 FLUO \"PSA 3077\"', '0'),
 (10113, '', '1299751XXX', 'COL DE CYGNE T73 RUSSIE     50,00', '0'),
 (10114, '', '1302245XXX', 'TSFR 1,4512 D50 -1,50 - 2300', '770'),
 (10115, '', '1302225XXX', 'TSFR 1,4512 D50 -1,20 - 5950', '770'),
@@ -11762,8 +11837,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10153, '', '1882999000', 'KIT CONDITI.KTAFAP DV6 EURO 5 MONDE', '0'),
 (10154, '', '1112210PNG', 'SIL ASS T84 HYBRIDE PEINT+GRENAILLAGE', '0'),
 (10155, '', '9804666880', 'Ligne EB2 T91       TENECCO', '0'),
-(10156, '', '1353834XXX', 'TUBE D''ENTREE D60 X62 LG 514', '770'),
-(10157, '', '1353836XXX', 'TUBE D''ENTREE D60 X62 LG 434', '770'),
+(10156, '', '1353834XXX', 'TUBE D\'ENTREE D60 X62 LG 514', '770'),
+(10157, '', '1353836XXX', 'TUBE D\'ENTREE D60 X62 LG 434', '770'),
 (10158, '', '1889461070', 'S/ENS BICONE-FLEXIBLE A8DV6ATE', '0'),
 (10159, '', '1889698070', 'S/ENS  BICONE-FLEXIBLE  A9  EB0-EB2', '0'),
 (10160, '', '1218850RXX', 'TYT AR RECHANGE  T91', '0'),
@@ -11844,7 +11919,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10235, '', '1448870XXX', 'TSFR 1,4510 D45 -1,00 - 2560', '770'),
 (10236, '', '9804663980', 'Ligne EC5 T91       TENECCO', '0'),
 (10237, '', '1825790000', 'CARTON MODU3P ECO', '0'),
-(10238, '', '1296787XXX', 'TYT CATA ASS EP6  BVH2''   FDT (prince 3)', '0'),
+(10238, '', '1296787XXX', 'TYT CATA ASS EP6  BVH2\'   FDT (prince 3)', '0'),
 (10239, '', '1092265XXX', 'Support sonde M16X1.5', '0'),
 (10240, '', '1458911XXX', 'TSFR 1,4512 D70 -1,00 - 6300', '720'),
 (10241, '', '1387611XXX', 'Peforated pipe 1  A7 DV4C', '0'),
@@ -11863,7 +11938,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10254, '', 'E4054013', 'monolith-5627-110x125 2705627004', '0'),
 (10255, '', '1468055XXX', 'TSFR 1,4512 D63,5 -1,50 - 6130', '720'),
 (10256, '', '1857519XXX', 'TSFR 1,4301 D55 - 1,20 - 6180', '0'),
-(10257, '', '1277409RXX', '9803421880 FAP DV6 6" F026I', '0'),
+(10257, '', '1277409RXX', '9803421880 FAP DV6 6\" F026I', '0'),
 (10258, '', '2428740116', 'Halbschale + Loch + PSA-Pr?gung', '0'),
 (10259, '', '1481607XXX', 'BR 1.4509 BOB 733,0 X 0,8', '760'),
 (10260, '', '1481611XXX', 'BR 1.4509 BOB 727,0 X 0,5', '760'),
@@ -11884,7 +11959,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10275, '', '1271042XXX', 'TYT ECH ASS   DV6 T91?6', '0'),
 (10276, '', '1455385XXX', 'Subassy OP20 - SCR BVH2P', '0'),
 (10277, '', '1396102XXX', 'KTA-FAP T7 DW10C K568', '0'),
-(10278, '', '1528346STI', 'TUBE D''ENTREE T7 EP6CDT    60.00', 'F 050'),
+(10278, '', '1528346STI', 'TUBE D\'ENTREE T7 EP6CDT    60.00', 'F 050'),
 (10279, '', 'E4040916STI', 'TUBE AVANT EP3 T7 11645', '0'),
 (10280, '', '11742ST', 'TUBE INTER EP6 DT  T72 11740', '0'),
 (10281, '', '11723ST', 'TUBE INTER EP6 DTS T72 11719', '0'),
@@ -11928,9 +12003,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10319, '', '9804664280', 'Ligne EC5 T92       TENECCO', '0'),
 (10320, '', '9804768280', 'TYT ECH ASS T92 EC5', '0'),
 (10321, '', '9804131680', 'TYT ECH ASS T92 DW10 FD E6', '0'),
-(10322, '', '967680498X', 'SCR FAP DW10 Euro 6', 'SYN'),
-(10323, '', '9803101080', 'TUY ECH ARR T91 DW10 FD PSA 3396', '0');
+(10322, '', '967680498X', 'SCR FAP DW10 Euro 6', 'SYN');
 INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `adresse`) VALUES
+(10323, '', '9803101080', 'TUY ECH ARR T91 DW10 FD PSA 3396', '0'),
 (10324, '', '1476470XXX', 'DPF Ceramic 6p NGK', '0'),
 (10325, '', '1513197XXX', 'TSFR 1.4510 R60 - 1,20 - 1500', '0'),
 (10326, '', '1883015000', 'FEUILLE CARTON 1450X1000', '0'),
@@ -11964,8 +12039,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10354, '', '1549928XXX', 'BR 1.4512 BOB153.8X1,2', '0'),
 (10355, '', '1509267XXX', 'DW10C - Monolith 20GR  BASF', '0'),
 (10356, '', '1536497XXX', 'FIBRE COTE DROIT', '0'),
-(10357, '', '1486971XXX', 'SCR T9 BVH2'' ASS 6"', '0'),
-(10358, '', '1486970XXX', 'SCR FAP 6p BVH2'' SANS TUBE PRESSION', '0'),
+(10357, '', '1486971XXX', 'SCR T9 BVH2\' ASS 6\"', '0'),
+(10358, '', '1486970XXX', 'SCR FAP 6p BVH2\' SANS TUBE PRESSION', '0'),
 (10359, '', '9806475180', 'Ligne EB2DT  T91  TENECCO', 'SYN'),
 (10360, '', '9806916580', 'Ligne EB2DT  T92  TENECCO', 'SYN'),
 (10361, '', '1557033XXX', 'TSFR 1,4512 D64 -1,00 - 457,5', '0'),
@@ -12060,7 +12135,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10450, '', 'E4059241', 'ENVELOPPE EXT.', '0'),
 (10451, '', 'E4059242', 'ENVELOPPE INT.', '0'),
 (10452, '', 'E4059244', 'TUBE DE SORTIE', '0'),
-(10453, '', 'E4059243', 'TUBE D''ENTREE', '0'),
+(10453, '', 'E4059243', 'TUBE D\'ENTREE', '0'),
 (10454, '', 'E4056949', 'COUPELLE INT.', 'E 021'),
 (10455, '', 'E4038689', 'SOURDINE', '0'),
 (10456, '', 'E40591562X', 'SILENCIEUX ARRIERE T7EP3 PSA3184', '0'),
@@ -12203,7 +12278,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10593, '', '1676986XXX', 'BR  1.4509  BOB 371.4 X 0.6', '0'),
 (10594, '', '1676989XXX', 'BR  1.4509  BOB 367,4 X 0.6', '0'),
 (10595, '', 'E4049988XXX', 'A-TUBO INT PERF ENTR', '0'),
-(10596, '', 'E4059243XXX', 'TUBE D''ENTREE', 'E 010'),
+(10596, '', 'E4059243XXX', 'TUBE D\'ENTREE', 'E 010'),
 (10597, '', 'E4060385XXX', 'TUBE PERFORE', 'DEBORD'),
 (10598, '', '1680862XXX', '1.4509*709*0,93(+0,07/-0,0)', '0'),
 (10599, '', '1387611KXX', 'Tube Perfor? ?48 ?p1,0 -L160- A7', '0'),
@@ -12273,7 +12348,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10663, '', '1729914XXX', 'BR 1.4512 BOB 472 X 0.6', '0'),
 (10664, '', '1296787RXX', '9803403380 TYT CATA ASS BVH2 EP6 FDT P3', '0'),
 (10665, '', '1620770AXX', 'SIL CMF1 K9K  <>596', '0'),
-(10666, '', '1620765XXX', 'TUBE D''ENTRE', '0'),
+(10666, '', '1620765XXX', 'TUBE D\'ENTRE', '0'),
 (10667, '', '1750937XXX', 'TSFR 1,4512 D50 -1,20 - 1760', '0'),
 (10668, '', '1746515XXX', 'BR 1.4509 BOB 221.0 X 1.5', '0'),
 (10669, '', '1746516XXX', 'BR 1.4509 BOB 237.0 X 1.5', '0'),
@@ -12394,7 +12469,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10784, '', '1761809XXX', 'TUBE ENTREE CMF1', '0'),
 (10785, '', '1533325XXX', 'CATA FAP K685 F026I CONE 3 MM', '0'),
 (10786, '', '1176753AXX', 'PSA3386    SILENCIEUX EMBOUTI P87', '0'),
-(10787, '', '1486971HXX', 'SCR T9 BVH2'' ASS 6"', '0'),
+(10787, '', '1486971HXX', 'SCR T9 BVH2\' ASS 6\"', '0'),
 (10788, '', '1791924XXX', 'DEMI-COQUILLE SUPERIEURE P87', '0'),
 (10789, '', '1176754XXX', 'DEMI-COQUILLE INFERIEURE P87', '0'),
 (10790, '', '1476456HXX', 'SCR B81-T8   BVH2', '0'),
@@ -12418,7 +12493,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10808, '', '1789233XXX', 'Manchon D61.5-D45.5-L77 -CMF1 XFB M5Ft', '0'),
 (10809, '', '1784731XXX', 'SILENCIEUX EMBOUTI RENAULT <>589', '0'),
 (10810, '', '1780867XXX', 'CANULE GAUCHE JLR          D55', '0'),
-(10811, '', '1715699XXX', 'TUBE D''ENTREE JLR          D55', '0'),
+(10811, '', '1715699XXX', 'TUBE D\'ENTREE JLR          D55', '0'),
 (10812, '', '1827392XXX', 'CANULE GAUCHE JLR          D55', '0'),
 (10813, '', '1782635XXX', 'CANULE DROITE JLR          D55', '0'),
 (10814, '', '1782094XXX', 'MANCHON JLR', '0'),
@@ -12432,7 +12507,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10822, '', '1860763XXX', 'BR 1.4510 BOB 676,0 X 1,0', '0'),
 (10823, '', '1588783', 'TUBE KO DIAM 45 EP 1.2  1.4509', '0'),
 (10824, '', '1382788XXF', 'DV6E6 SCR BVH1 Inlet cone', '0'),
-(10825, '', '1788150XXX', 'TUBE D''ENTREE', '0'),
+(10825, '', '1788150XXX', 'TUBE D\'ENTREE', '0'),
 (10826, '', '1788149XXX', 'TUBE DE SORTIE', '0'),
 (10827, '', '1832364XXX', 'DEMI-COQUILLE SUPERIEURE', '0'),
 (10828, '', '1832369XXX', 'DEMI-COQUILLE INF CMF1', '0'),
@@ -12546,7 +12621,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10936, '', '1994385XXX', 'BR 1.4509 2D MAT BOB 163,8 X 1,2', '0'),
 (10937, '', '1994399XXX', 'BR 1.4509 2D MAT BOB 119,3 X 1,2', '0'),
 (10938, '', '1904092XXX', 'TUBE DE SORTIE CMF1', '0'),
-(10939, '', '1904142XXX', 'TUBE D''ENTREE CMF1', '0'),
+(10939, '', '1904142XXX', 'TUBE D\'ENTREE CMF1', '0'),
 (10940, '', '1996078XXX', 'TSFR 1,4510 D60 -1,00 - 990', '0'),
 (10941, '', '1996082XXX', 'TSFR 1,4510 D60 -1,00 - 1120', '0'),
 (10942, '', '1883129000', 'KIT DE SUBSTITUTION X62', '0'),
@@ -12597,7 +12672,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (10987, '', '1806317AXX', 'JLR D3C3L DAM186', '0'),
 (10988, '', '1984467XXX', 'Isolation  657 gr  +/-15%', '0'),
 (10989, '', '1811394XXX', 'COUPELLE DE SORTIE X7/R8', 'AB 15'),
-(10990, '', '1811408XXX', 'COUPELLE D''ENTREE X7/R8', 'AB 14'),
+(10990, '', '1811408XXX', 'COUPELLE D\'ENTREE X7/R8', 'AB 14'),
 (10991, '', '1964660XXX', 'Ebauche Tube Perfor? D70-1-L80 - JLR D8', '0'),
 (10992, '', '1964660KXX', 'S/ENSEMBLE SOURDINE JLR D8 AJ200D', '0'),
 (10993, '', '2037588XXX', 'BR  AS120-02  BOB 508,0 X 0,60', '0'),
@@ -12626,9 +12701,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (11016, '', '1088161X00', 'CANULE A ENJOLIVEUR RESCIEE', '0'),
 (11017, '', '1811392XXX', 'COUPELLE INTERIEURE', 'AC 11'),
 (11018, '', '1988302XXX', 'TUBE DE SORTIE PERFORE', 'AB 13'),
-(11019, '', '2016370XXX', 'TUBE D''ENTREE PERFORE', 'AB 24'),
+(11019, '', '2016370XXX', 'TUBE D\'ENTREE PERFORE', 'AB 24'),
 (11020, '', '1986277XXX', 'TUBE DE SORTIE PERFORE', 'AC 13'),
-(11021, '', '1986276XXX', 'TUBE D''ENTREE PERFORE', 'AC 12'),
+(11021, '', '1986276XXX', 'TUBE D\'ENTREE PERFORE', 'AC 12'),
 (11022, '', '2059161XXX', 'BR  1,4512  BOB 103,5 X 1,50 -2D MAT', '0'),
 (11023, '', '2059230XXX', 'TSFR 1,4512 D50 - 1,00 - 2180', '0'),
 (11024, '', '2061932XXX', 'BR  AS120  BOB 569,0 X 0,40', '0'),
@@ -12674,11 +12749,11 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (11064, '', '2009887XXX', 'COUPELLE SORTIE  A9 EP6', '0'),
 (11065, '', '2009883XXX', 'COUPELLE INTERIEURE A9 EP6', '0'),
 (11066, '', '2009884XXX', 'COUPELLE INTERIEURE A9 EP6', '0'),
-(11067, '', '3110025400', 'M9R Inlet Flange "A"', '0'),
-(11068, '', '3110017100', 'M9R Clamshell Upper "A"', '0'),
-(11069, '', '3110017200', 'M9R Clamshell Lower "A"', '0'),
-(11070, '', '3110017300', 'M9R Outlet Flange "A"', '0'),
-(11071, '', '3110023600', 'M9R Bracket "A"', '0'),
+(11067, '', '3110025400', 'M9R Inlet Flange \"A\"', '0'),
+(11068, '', '3110017100', 'M9R Clamshell Upper \"A\"', '0'),
+(11069, '', '3110017200', 'M9R Clamshell Lower \"A\"', '0'),
+(11070, '', '3110017300', 'M9R Outlet Flange \"A\"', '0'),
+(11071, '', '3110023600', 'M9R Bracket \"A\"', '0'),
 (11072, '', '2122145XXX', 'BR  1,4510  BOB 416,4 X 1', '0'),
 (11073, '', '1796381XXX', 'COUPELLE INTERIEURE', 'AC 25'),
 (11074, '', '1796385XXX', 'TUBE ENTREE PERFORE', 'AC 24'),
@@ -12730,8 +12805,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (11120, '', '18G0494070', '1731N9 TYT KTA.R. S8/S20 TU1 K179', '0'),
 (11121, '', '18G6103X70', '1731EZ TYT KTA.R. T1 TU3 ECO   K285', '0'),
 (11122, '', '18G6118X70', '1731EV TYT KTA.R. T1 TU1-FLUO- K179', '0'),
-(11123, '', '18G6121X70', '1731EW TYT KTA.R. T1 TU1K/K''', '0'),
-(11124, '', '18G6128X70', '1731EX TYT KTA.R. T1 TU3 CDT "3054"', '0'),
+(11123, '', '18G6121X70', '1731EW TYT KTA.R. T1 TU1K/K\'', '0'),
+(11124, '', '18G6128X70', '1731EX TYT KTA.R. T1 TU3 CDT \"3054\"', '0'),
 (11125, '', '18G6131X70', '1731EY TYT KTA.R. T1 TU3-FLUO- K208', '0'),
 (11126, '', '3140068970', '1731HF TYT KTA.R. T1 TU5 -15,0-K181', '0'),
 (11127, '', '3140070770', '1731HQ TYT T5 TU5  5AL  VIOLET K181', '0'),
@@ -12765,8 +12840,8 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (11155, '', '2126582XXX', 'COUPELLE JLR', '0'),
 (11156, '', '2125909XXX', 'COUPELLE JLR', '0'),
 (11157, '', '2086014XXX', 'SUPPORT TUYAU DE SORTIE', '0'),
-(11158, '', '2126578XXX', 'SUPPORT TUYAU D''ENTREE', '0'),
-(11159, '', '2128617XXX', 'SUPPORT TUYAU D''ENTREE', '0'),
+(11158, '', '2126578XXX', 'SUPPORT TUYAU D\'ENTREE', '0'),
+(11159, '', '2128617XXX', 'SUPPORT TUYAU D\'ENTREE', '0'),
 (11160, '', '2139296XXX', 'TUBE PITOT CINTRE JLR', 'DK 023'),
 (11161, '', '2150230XXX', 'PSA4383 LIGNE COMPLETE A9 DV6 E6.2', '0'),
 (11162, '', '2171553XXX', 'TSFR 1,4510  D80 - 1 ,0 - 158,4', '0'),
@@ -12776,9 +12851,9 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (11166, '', '1720387X70', 'TUY X62 E4 TRAC D1-D2 <>517', '0'),
 (11167, '', '1720411X70', 'TUY AR X62 E5 TRAC <>485', '0'),
 (11168, '', '1720421X70', 'TUY AR X62 E5 PROP <>485', '0'),
-(11169, '', '1720583X70', 'TUY AR X62 E4 PROP <>486', '0'),
-(11170, '', '1720615X70', 'TUY AR X62 E4 TRAC <>486', '0');
+(11169, '', '1720583X70', 'TUY AR X62 E4 PROP <>486', '0');
 INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `adresse`) VALUES
+(11170, '', '1720615X70', 'TUY AR X62 E4 TRAC <>486', '0'),
 (11171, '', '1721550X70', 'TUY AR X62 E5 PROP <>561', '0'),
 (11172, '', '1721551X70', 'TUY AR X62 E5 TRAC <>561', '0'),
 (11173, '', '2180989XXX', 'BR  1,4513 BOB 425,5 X 1,5', '0'),
@@ -12807,7 +12882,7 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (11196, '', '2126563XXX', 'TUBE JLR D32 x 1,0         1.4509', '0'),
 (11197, '', '2209433XXX', 'TSFR 1,4509 D32 - 1  - 6400', '0'),
 (11198, '', '2209558XXX', 'TSFR 1,4509 D30 - 1  - 6400', '0'),
-(11199, '', '2205013XXX', 'SCR MONOLITH 4''''', '0'),
+(11199, '', '2205013XXX', 'SCR MONOLITH 4\'\'', '0'),
 (11200, '', '2167577XXX', 'Coupelle int?rieur  Thk 1 Sil Av', 'AB 11'),
 (11201, '', '2167608XXX', 'Fibre Sil AV JLR', 'AA 33'),
 (11202, '', '2167586XXX', 'Tube diam 55 Sil Av JLR', 'AB 12'),
@@ -12985,12 +13060,14 @@ INSERT INTO `logistique_pieces` (`id`, `sebango`, `reference`, `description`, `a
 (11374, '', '2307751XXX', 'BR  1,4510  BOB 641 X 0,5', '0'),
 (11375, '', '2303702X', 'SUPPORT SONDE AUSTENETIQUE DV5RC', '0'),
 (11376, '', '2049268MXX', 'Silencieux AR assy', '0'),
-(11377, '', '2049265MXX', 'sous- ens AV', '0');
+(11377, '', '2049265MXX', 'sous- ens AV', '0'),
+(11391, 'test', '123456abc', 'test de valentin', 'Bouygues\n'),
+(11392, 'salut', '654321abc', 'test2 de valentin', 'eiffel\n');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `logistique_reponse_jaune`
+-- Table structure for table `logistique_reponse_jaune`
 --
 
 CREATE TABLE `logistique_reponse_jaune` (
@@ -13000,13 +13077,13 @@ CREATE TABLE `logistique_reponse_jaune` (
   `piece_masse_storage` tinyint(4) NOT NULL DEFAULT '0',
   `quantite_SAP` int(11) NOT NULL DEFAULT '0',
   `fournisseur` varchar(255) NOT NULL DEFAULT 'non defini',
-  `prochaine_livraison` timestamp NOT NULL DEFAULT 0,
+  `prochaine_livraison` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `couverture_ligne` tinyint(4) NOT NULL DEFAULT '0',
   `commentaire` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `logistique_reponse_jaune`
+-- Dumping data for table `logistique_reponse_jaune`
 --
 
 INSERT INTO `logistique_reponse_jaune` (`id`, `alerte`, `date`, `piece_masse_storage`, `quantite_SAP`, `fournisseur`, `prochaine_livraison`, `couverture_ligne`, `commentaire`) VALUES
@@ -13028,8 +13105,8 @@ INSERT INTO `logistique_reponse_jaune` (`id`, `alerte`, `date`, `piece_masse_sto
 (29, 40, '2017-08-31 08:46:14', 0, 85, 'Koenig', '2017-09-04 08:46:14', 1, '45 en PR10 \r\n'),
 (30, 35, '2017-08-31 08:48:11', 0, 591, 'non defini', '0000-00-00 00:00:00', 1, 'ACN : Pour 8088 fin de vie\r\nHBR : Vérifier le statut de cette ref  (Obs ??) '),
 (31, 39, '2017-08-31 08:49:20', 0, 0, 'non defini', '2017-08-31 08:49:20', 0, 'attention douane'),
-(32, 47, '2017-09-06 13:57:17', 0, 506, 'non defini', '2017-09-19 22:00:00', 1, 'd''après Marcel nous avons retrouvé des pièces 08/09, prochain livraison 20/09 (Alena)'),
-(33, 44, '2017-09-06 13:58:21', 0, 0, 'non defini', '2017-09-15 13:58:21', 0, 'Faire l''inventaire'),
+(32, 47, '2017-09-06 13:57:17', 0, 506, 'non defini', '2017-09-19 22:00:00', 1, 'd\'après Marcel nous avons retrouvé des pièces 08/09, prochain livraison 20/09 (Alena)'),
+(33, 44, '2017-09-06 13:58:21', 0, 0, 'non defini', '2017-09-15 13:58:21', 0, 'Faire l\'inventaire'),
 (34, 48, '2017-09-08 12:25:44', 0, 1400, 'non defini', '2017-09-08 12:25:44', 0, 'Inventaire ?'),
 (35, 51, '2017-09-11 11:44:05', 0, 0, 'non defini', '2017-09-11 11:44:05', 0, ''),
 (36, 52, '2017-09-11 11:46:36', 0, 37, 'Socat', '2017-09-13 11:46:36', 1, 'LM : Pièces dispo en EX 20 si besoin '),
@@ -13051,7 +13128,7 @@ INSERT INTO `logistique_reponse_jaune` (`id`, `alerte`, `date`, `piece_masse_sto
 (52, 66, '2017-09-12 15:20:55', 0, 52, 'non defini', '2017-09-12 14:00:00', 1, ''),
 (53, 67, '2017-09-14 15:48:16', 0, 0, 'non defini', '2017-09-14 15:48:16', 0, ''),
 (54, 68, '2017-09-15 11:45:39', 0, 547, 'reinz', '2017-09-15 11:45:39', 0, 'taxi à 20h LE 15/09 21H'),
-(55, 71, '2017-09-18 08:22:46', 0, 1912, 'Mercier', '2017-09-18 14:00:00', 0, 'ACN : Proto ?\r\nOKZ : Pièce jusqu''a 13h'),
+(55, 71, '2017-09-18 08:22:46', 0, 1912, 'Mercier', '2017-09-18 14:00:00', 0, 'ACN : Proto ?\r\nOKZ : Pièce jusqu\'a 13h'),
 (56, 69, '2017-09-18 08:25:07', 0, 976, 'non defini', '2017-09-18 11:00:00', 1, ''),
 (57, 70, '2017-09-18 08:26:08', 0, 576, 'non defini', '2017-09-18 14:00:00', 1, ''),
 (58, 72, '2017-09-18 08:31:22', 0, 821, 'Victora', '2017-09-20 04:00:00', 0, 'OKZ : Rien au magasin'),
@@ -13104,7 +13181,7 @@ INSERT INTO `logistique_reponse_jaune` (`id`, `alerte`, `date`, `piece_masse_sto
 -- --------------------------------------------------------
 
 --
--- Structure de la table `logistique_reponse_orange`
+-- Table structure for table `logistique_reponse_orange`
 --
 
 CREATE TABLE `logistique_reponse_orange` (
@@ -13117,7 +13194,7 @@ CREATE TABLE `logistique_reponse_orange` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `logistique_reponse_orange`
+-- Dumping data for table `logistique_reponse_orange`
 --
 
 INSERT INTO `logistique_reponse_orange` (`id`, `alerte`, `date`, `prochaine_livraison`, `couverture_ligne`, `actions`) VALUES
@@ -13132,9 +13209,8 @@ INSERT INTO `logistique_reponse_orange` (`id`, `alerte`, `date`, `prochaine_livr
 (18, 72, '2017-09-18 10:06:20', '2017-09-19 03:06:20', 0, 'Livraison en taxi   B29TNY'),
 (21, 77, '2017-09-19 05:50:09', '2017-09-19 05:50:09', 1, '1440 pcs reçu le 25.09 et 1440 prévu le 28.09'),
 (22, 76, '2017-09-20 02:08:59', '2017-09-20 02:08:59', 1, ''),
-(25, 52, '2017-09-20 12:04:50', '2017-09-20 12:04:50', 0, ''),
 (27, 83, '2017-09-21 02:28:05', '2017-09-21 02:28:05', 0, ''),
-(28, 84, '2017-09-21 07:35:33', '2017-09-21 07:35:33', 1, ' LMN : LIVRAISON LE 21/09 après midi    reste 980 en ligne à 10h30t\r\n\r\nFaire vérifier les nomenclatures 1150 dans SAP 140 en physique alors que l''on à déjà corrigé le stock de 2100 pieces le 30/08\r\n\r\n\r\n '),
+(28, 84, '2017-09-21 07:35:33', '2017-09-21 07:35:33', 1, ' LMN : LIVRAISON LE 21/09 après midi    reste 980 en ligne à 10h30t\r\n\r\nFaire vérifier les nomenclatures 1150 dans SAP 140 en physique alors que l\'on à déjà corrigé le stock de 2100 pieces le 30/08\r\n\r\n\r\n '),
 (29, 96, '2017-09-21 16:07:04', '2017-09-22 03:00:04', 0, 'taxi va arriver cette nuit avec 2400 pcs'),
 (30, 47, '2017-09-21 18:38:49', '2017-09-20 05:38:49', 1, 'livraison 20/09 400 pcs'),
 (31, 75, '2017-09-21 18:42:37', '2017-09-22 03:00:37', 1, 'Livraison par Vecatel à 5/00 1000 PCS'),
@@ -13143,17 +13219,17 @@ INSERT INTO `logistique_reponse_orange` (`id`, `alerte`, `date`, `prochaine_livr
 (34, 106, '2017-09-22 11:13:01', '2017-09-22 11:13:01', 0, ' LMN :   Avance camion Italie à lundi matin 5h\r\n\r\ninventaire composants à faire \r\n'),
 (35, 105, '2017-09-22 11:14:18', '2017-09-22 11:14:18', 0, 'LMN : Avance camion Italie à LUNDI MATIN 5H\r\n\r\nInventaire composant à faire \r\n\r\n\r\n '),
 (36, 108, '2017-09-22 11:16:24', '2017-09-22 11:16:24', 1, 'LMN : prochaine livraison le 27/09 \r\nPièces en EX20 si besoin \r\n\r\n\r\nSAP 3158 pieces INVENTAIRE A FAIRE Merci\r\n '),
-(37, 122, '2017-09-26 09:32:11', '2017-09-27 04:00:11', 0, 'camion de Uzice 27/09 6/00 350 pcs  -> camion est en retard, arrive à 10/00\r\n\r\n+ organization de taxi, liaison 29/09'),
 (38, 130, '2017-09-27 06:00:50', '2017-09-27 08:00:50', 0, 'camion avec48 pcs à 10/00'),
 (39, 134, '2017-09-27 06:15:19', '2017-09-27 06:15:19', 0, 'LM : LIvraison demain matin\r\nvoir possibilité de produire un convoi en interne\r\n\r\n'),
 (40, 135, '2017-09-27 07:09:53', '2017-09-28 03:09:53', 1, 'livraison dans le régulier Vecatel de 440 pcs le 28/09 5h00 am'),
 (41, 128, '2017-09-27 07:53:34', '2017-09-27 07:53:34', 0, ''),
-(42, 121, '2017-09-27 10:56:26', '2017-09-27 22:00:00', 1, 'lm : livraison le 28/09');
+(42, 121, '2017-09-27 10:56:26', '2017-09-27 22:00:00', 1, 'lm : livraison le 28/09'),
+(43, 122, '2017-12-06 00:04:39', '2017-12-06 00:04:39', 0, '');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `logistique_reponse_rouge`
+-- Table structure for table `logistique_reponse_rouge`
 --
 
 CREATE TABLE `logistique_reponse_rouge` (
@@ -13166,7 +13242,7 @@ CREATE TABLE `logistique_reponse_rouge` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `logistique_reponse_rouge`
+-- Dumping data for table `logistique_reponse_rouge`
 --
 
 INSERT INTO `logistique_reponse_rouge` (`id`, `alerte`, `taxi`, `compagnie`, `prochaine_livraison`, `rupture`) VALUES
@@ -13174,12 +13250,14 @@ INSERT INTO `logistique_reponse_rouge` (`id`, `alerte`, `taxi`, `compagnie`, `pr
 (3, 1, 0, '', '2017-07-17 15:07:42', '2017-07-17 15:07:42'),
 (7, 28, 0, '', '2017-07-26 08:05:51', '2017-07-26 08:05:51'),
 (8, 17, 1, 'flash', '2017-07-25 22:00:00', '2017-07-27 11:49:00'),
-(9, 39, 1, '', '2017-09-01 19:00:00', '0000-00-00 00:00:00');
+(9, 39, 1, '', '2017-09-01 19:00:00', '0000-00-00 00:00:00'),
+(10, 77, 0, '', '2017-12-04 16:31:50', '2017-12-04 16:31:50'),
+(11, 128, 0, '', '2017-12-06 00:02:16', '2017-12-06 00:02:16');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `profil`
+-- Table structure for table `profil`
 --
 
 CREATE TABLE `profil` (
@@ -13189,25 +13267,99 @@ CREATE TABLE `profil` (
   `uap` varchar(255) NOT NULL,
   `mo` varchar(255) NOT NULL,
   `tournee` varchar(255) NOT NULL,
-  `supprime` tinyint(4) NOT NULL DEFAULT '0'
+  `supprime` tinyint(4) NOT NULL DEFAULT '0',
+  `password` varchar(140) NOT NULL,
+  `identifiant` varchar(140) NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT '0',
+  `qualite` tinyint(1) NOT NULL DEFAULT '0',
+  `hse` tinyint(1) NOT NULL DEFAULT '0',
+  `rr` tinyint(1) NOT NULL DEFAULT '0',
+  `kamishibai` tinyint(1) NOT NULL DEFAULT '0',
+  `logistique` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `profil`
+-- Dumping data for table `profil`
 --
 
-INSERT INTO `profil` (`id`, `nom`, `prenom`, `uap`, `mo`, `tournee`, `supprime`) VALUES
-(20, 'BOURAS', 'Khaoula', 'UAP1', 'MOI', 'A', 0),
-(21, 'ger', 'ergezrg', 'UAP1', 'MOD', 'A', 1),
-(22, 'BRUGUET', 'Ludovic', 'Support', 'MOI', 'J', 0),
-(23, 'XHUKOLI', 'Ismet', 'UAP1', 'MOD', 'A', 0),
-(24, 'CLERC', 'Léopold', 'Support', 'MOI', 'J', 0),
-(25, 'TEST', 'TEST', 'UAP1', 'MOI', 'A', 0);
+INSERT INTO `profil` (`id`, `nom`, `prenom`, `uap`, `mo`, `tournee`, `supprime`, `password`, `identifiant`, `admin`, `qualite`, `hse`, `rr`, `kamishibai`, `logistique`) VALUES
+(20, 'BOURAS', 'Khaoula', 'UAP1', 'MOI', 'A', 0, 'faKe4mGE6Q9PA', 'BOURAS.Khaoula', 0, 0, 0, 0, 1, 0),
+(21, 'ger', 'ergezrg', 'UAP1', 'MOD', 'A', 1, '', '', 0, 0, 0, 0, 0, 0),
+(22, 'BRUGUET', 'Ludovic', 'Support', 'MOI', 'J', 0, '', '', 0, 0, 0, 0, 0, 0),
+(23, 'XHUKOLI', 'Ismet', 'UAP1', 'MOD', 'A', 0, '', '', 0, 0, 0, 0, 0, 0),
+(24, 'CLERC', 'Léopold', 'Support', 'MOD', 'J', 0, '', 'CLERC.Léopold', 0, 0, 0, 0, 0, 0),
+(25, 'TEST', 'TEST', 'UAP1', 'MOD', 'A', 0, '', '', 0, 0, 0, 0, 0, 0),
+(26, 'test', 'prenom', 'UAP1', 'MOI', 'A', 0, 'fa1OPec/0im/A', 'test.prenom', 1, 1, 1, 1, 1, 0),
+(27, 'gonsolin', 'Valentin', 'UAP1', 'MOD', 'A', 0, 'fa1OPec/0im/A', 'gonsolin.Valentin', 0, 0, 0, 0, 0, 0),
+(28, 'testeur', 'test', 'UAP1', 'MOD', 'A', 0, '', 'testeur.test', 0, 0, 0, 0, 0, 0),
+(29, 'administrateur', 'faurecia', 'UAP2', 'MOD', 'N', 0, 'fa1OPec/0im/A', 'admin', 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `qualite_quiz_question`
+-- Table structure for table `qualite_hse_question`
+--
+
+CREATE TABLE `qualite_hse_question` (
+  `id` int(11) NOT NULL,
+  `type` tinyint(4) NOT NULL COMMENT '0 pr MOD 1 pr reste',
+  `titre` text NOT NULL,
+  `question` text NOT NULL,
+  `reponse_1` text NOT NULL,
+  `reponse_2` text NOT NULL,
+  `reponse_3` text NOT NULL,
+  `reponse_4` text NOT NULL,
+  `corrige_1` tinyint(1) NOT NULL,
+  `corrige_2` tinyint(1) NOT NULL,
+  `corrige_3` tinyint(1) NOT NULL,
+  `corrige_4` tinyint(1) NOT NULL,
+  `ordre` int(11) DEFAULT NULL,
+  `image_correction` int(11) DEFAULT NULL,
+  `commentaire` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `qualite_hse_question`
+--
+
+INSERT INTO `qualite_hse_question` (`id`, `type`, `titre`, `question`, `reponse_1`, `reponse_2`, `reponse_3`, `reponse_4`, `corrige_1`, `corrige_2`, `corrige_3`, `corrige_4`, `ordre`, `image_correction`, `commentaire`) VALUES
+(1, 0, '', '', '', '', '', '', 0, 0, 0, 0, 0, NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qualite_hse_reponse`
+--
+
+CREATE TABLE `qualite_hse_reponse` (
+  `id` int(11) NOT NULL,
+  `session` int(11) NOT NULL,
+  `question` int(11) NOT NULL,
+  `vrai_1` int(11) NOT NULL,
+  `vrai_2` int(11) NOT NULL,
+  `vrai_3` int(11) NOT NULL,
+  `vrai_4` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qualite_hse_session`
+--
+
+CREATE TABLE `qualite_hse_session` (
+  `id` int(11) NOT NULL,
+  `personne` int(11) NOT NULL,
+  `debut` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fin` timestamp NULL DEFAULT NULL,
+  `valide` int(11) NOT NULL,
+  `type` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qualite_quiz_question`
 --
 
 CREATE TABLE `qualite_quiz_question` (
@@ -13222,77 +13374,83 @@ CREATE TABLE `qualite_quiz_question` (
   `corrige_1` tinyint(1) NOT NULL,
   `corrige_2` tinyint(1) NOT NULL,
   `corrige_3` tinyint(1) NOT NULL,
-  `corrige_4` tinyint(1) NOT NULL
+  `corrige_4` tinyint(1) NOT NULL,
+  `ordre` int(11) DEFAULT NULL,
+  `image_correction` int(11) DEFAULT NULL,
+  `commentaire` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `qualite_quiz_question`
+-- Dumping data for table `qualite_quiz_question`
 --
 
-INSERT INTO `qualite_quiz_question` (`id`, `type`, `titre`, `question`, `reponse_1`, `reponse_2`, `reponse_3`, `reponse_4`, `corrige_1`, `corrige_2`, `corrige_3`, `corrige_4`) VALUES
-(0, 0, 'OK FIRST PART  ', '1.	Pourquoi faisons-nous une Ok première pièce ?\r\n\r\n', 'a-	Pour garantir de produire des pièces bonnes au moins au début de la production.\r\n\r\n', 'b-	Pour vérifier si toutes les machines, les outillages, les gabarits et les équipements sont aptes à produire des pièces bonnes.\r\n', 'c-	Pour s’assurer que la première pièce produite correspond bien aux exigences client ?conforme au plan.\r\n\r\n', 'd-	Aucun des choix ci-dessus.', 1, 1, 1, 0),
-(1, 0, 'OK FIRST PART  ', '2.	Sur le document DCS (ok 1st part) on trouve ?\r\n\r\n', 'a-	Les Poka-yoke à vérifier.\r\n', 'b-	Le nombre d’opérateurs par ligne à vérifier.\r\n', 'c-	Les caractéristiques du plan à vérifier.\r\n', 'd-	Les points réglementaires à vérifier.', 1, 0, 1, 1),
-(2, 0, 'OK FIRST PART  ', '3.	Quelles sont les raisons principales du ok 1st part ?\r\n\r\n', 'a-	Début d’équipe.\r\n', 'b-	Suite à un changement de référence et de géométrie.\r\n', 'c-	Suite à un problème qualité et une panne machine.\r\n', 'd-	Fin de poste.', 1, 1, 1, 0),
-(3, 0, 'POKE-YOKE', '1.	Quel est  le rôle d’un poka-yoke ?\r\n \r\n', 'a-	Bloquer les opérations suivantes de fabrication une fois qu''une erreur est repérée.\r\n', 'b-	Interdire qu’une erreur envisageable ne puisse se produire, qu’elle soit d’origine humaine ou machine.\r\n ', 'c-	Bloquer le départ cycle et informer les opérateurs en cas d’erreurs.\r\n', 'd-	Tester la capacité de la machine.', 0, 1, 1, 0),
-(4, 0, 'POKE-YOKE', '2.	Comment les vignettes devront-elles être affichées au poste? Choisissez la bonne combinaison !\r\n\r\n', '<img src="ressources/reponse  1.png" style="height: 128px; margin: 20px auto;" class="center-block">\r\n\r\n', '<img src="ressources/Reponse 2.png" style="height: 128px; margin: 20px auto;" class="center-block">\r\n', '<img src="ressources/Reponse3.png" style="height: 128px; margin: 20px auto;" class="center-block">\r\n', '<img src="ressources/Reponse 4.png" style="height: 128px; margin: 20px auto;" class="center-block">\r\n', 0, 1, 0, 0),
-(5, 0, 'POKE-YOKE', '3.	Qui est le responsable du bon fonctionnement du poka-yoke au niveau d’une ligne de production ?\r\n\r\n', 'a-	Les qualiticiens.\r\n', 'b-	Un opérateur qualifié.\r\n', 'c-	Tous les opérateurs de la ligne.\r\n', 'd-	Le GAP Leader.', 0, 0, 0, 1),
-(6, 0, 'SELF INSPECTION', '1.	Qu’est-ce qu’un autocontrôle ?\r\n\r\n', 'a-	Vérification par l’opérateur du résultat du travail de son collègue.\r\n', 'b-	Mode de fonctionnement où chacun, à son niveau, contrôle immédiatement et à 100% la qualité des pièces qu’il produit.\r\n', 'c-	Contrôle des pièces en fin de ligne.\r\n', 'd-	Vérification des outillages et équipements avant de démarrer son poste.', 0, 1, 0, 0),
-(7, 0, 'SELF INSPECTION', '2.	Pourquoi avons-nous besoin de l’autocontrôle ?\r\n\r\n', 'a-	Eviter que les mauvaises pièces se retrouvent chez le client.\r\n', 'b-	Responsabiliser chaque opérateur sur la qualité de son propre travail.\r\n', 'c-	Eviter que les mauvaises pièces se retrouvent au poste de contrôle final.\r\n', 'd-	Aucun des choix cités ci-dessus.', 1, 1, 1, 0),
-(8, 0, 'SELF INSPECTION', '3.	Que se passe-t-il si je ne respecte pas un standard de contrôle (autocontrôle)?\r\n\r\n', 'a-	Faurecia risque d''avoir une réclamation clients.\r\n', 'b-	  Le risque est minime.\r\n', 'c-	Faurecia et moi serons impactés.\r\n', 'd-	Il ne se passe rien.', 1, 0, 1, 0),
-(9, 0, 'RED BINS', '1.	À quoi servent les bacs rouges?\r\n\r\n', 'a-	Pour retirer les pièces non-conformes du flux de production normal.\r\n', 'b-	  Pour éviter que les pièces mauvaises aillent chez le client.\r\n', 'c-	Pour se servir des pièces mauvaises comme des échantillons à analyser afin d’éviter la reproduction des mêmes défauts.\r\n', 'd-	Pour réduire le taux de rebut.', 1, 1, 1, 0),
-(10, 0, 'RED BINS', '2.	Que doit-on avoir au niveau d’une ligne de production pour gérer les pièces défectueuses ?\r\n', 'a-	Existence d’emplacement « Bacs, goulottes, Rolls,…. » jaunes et  rouges.\r\n', 'b-	Flux des non-conforme bien défini, affiché et compris par tous les opérateurs.\r\n', 'c-	Etiquette pour identifier les pièces à retoucher/ rebuter.\r\n\r\n', 'd-	Bac blanc où toutes les pièces sont mises en quarantaine en attente d’analyse.', 1, 1, 1, 0),
-(11, 0, 'RED BINS', '3.	Comment une pièce défectueuse est-elle identifiée ?\r\n', 'a-	Par une étiquette jaune.\r\n\r\n', 'b-	Par une étiquette rouge qui précise l''emplacement du défaut et sur laquelle on note: la Référence du produit, le défaut détecté, le GAP leader de la tournée ainsi que la date.\r\n', 'c-	Par un coup de feutre sur le défaut.\r\n', 'd-	Par une étiquette "SCRAP TICKET".', 0, 1, 0, 0),
-(12, 0, 'REWORK UNDER CONTROL', '1.	Pourquoi est-il important de maîtriser les retouches?\r\n', 'a-	Pour éviter de rebuter les pièces.\r\n', 'b-	Pour séparer les pièces suspectes du flux de production normal.\r\n', 'c-	  Pour inspecter les pièces défectueuses suivant un processus spécifique.\r\n', 'd-	  Pour évaluer le niveau des retoucheurs.\r\n', 0, 1, 1, 0),
-(13, 0, 'REWORK UNDER CONTROL', '2.	Qui est autorisé à faire des retouches?\r\n', 'a-	   L’opérateur.\r\n\r\n', 'b-	Le GAP Leader.\r\n', 'c-	Une personne qui est habilitée à faire la retouche, donc qui a le niveau L dans la polyvalence au poste « Retoucheur ».\r\n', 'd-	Le superviseur.', 0, 0, 1, 0),
-(14, 0, 'REWORK UNDER CONTROL', '3.	Comment peut-on maîtriser les retouches ?\r\n', 'a-	Les mauvaises pièces doivent être clairement identifiées et immédiatement séparées du flux des pièces bonnes.\r\n\r\n', 'b-	S’assurer de la présence des éléments suivants : les bacs jaune et rouge/ aide à la décision/ étiquette/ stylo.\r\n', 'c-	Respecter le flux : Toute pièce RETOUCHÉE doit être identifiée avec l''étiquette RETOUCHE et réinsérée dans la ligne par le GAP LEADER (ou le retoucheur) AU POSTE OU ELLE A ÉTÉ EXTRAITE afin d''être RECONTRÔLÉE.\r\n', 'd-	Il suffit d’avoir les bacs rouges et jaunes.', 1, 1, 1, 0),
-(15, 0, 'FINAL INSPECTION', '1.	Qu’est-ce qu’un contrôle final ?\r\n\r\n', 'a-	Contrôle d’un ensemble de caractéristiques essentielles réalisé sur 100% des pièces pour que le client puisse les utiliser sans avoir de problème.\r\n', 'b-	Mode de fonctionnement où chacun, à son niveau, contrôle à la fin la qualité de son travail.\r\n', 'c-	Contrôle des pièces après toutes les opérations de fabrication, c’est la dernière étape avant la livraison au client.\r\n', 'd-	Contrôle selon une gamme standard disponible au poste de contrôle final devant les yeux de l’opérateur.', 1, 0, 1, 1),
-(16, 0, 'FINAL INSPECTION', '2.	Qui est autorisé à effectuer le contrôle final ?\r\n\r\n', 'a-	Le GAP Leader.\r\n', 'b-	Un opérateur spécifique validé par le service qualité.\r\n', 'c-	Tous les opérateurs de la ligne.\r\n', 'd-	Le qualiticien.', 0, 1, 0, 0),
-(17, 0, 'FINAL INSPECTION', '3.	Que se passe-t-il si je ne respecte pas un standard de contrôle (contrôleur final)?\r\n\r\n', 'a-	Faurecia risque d''avoir une réclamation clients.\r\n', 'b-	Le risque est minime.\r\n', 'c-	Faurecia et moi serons impactés.\r\n', 'd-	Il ne se passe rien.', 1, 0, 1, 0),
-(18, 0, 'QRCI', '1.	A quoi sert un QRCI ?\r\n\r\n', 'a-	À traiter un problème de manière structurée basée sur des faits et des données.\r\n', 'b-	C''est un simple moyen d''archivage.\r\n', 'c-	À résoudre les problèmes de façon systématique.\r\n', 'd-	À analyser un problème en comparant les conditions de création et de non détection de défauts par rapport aux standards, en trouvant la ou les causes et en mettant en place des actions immédiates et à moyen terme.', 1, 0, 1, 1),
-(19, 0, 'QRCI', '2.	Quand est-ce qu’on utilise un QRCI ?\r\n', 'a-	Lors d’une panne machine.\r\n\r\n', 'b-	Lors de la détection d’un défaut unique sur une pièce.\r\n', 'c-	Lors d’arrêt de lignes répétitifs.\r\n', 'd-	Lors de l’apparition de tout type de dysfonctionnement / situations inhabituelles au niveau de l’usine.', 1, 0, 1, 1),
-(20, 1, 'OK FIRST PART  ', '1.	Pourquoi faisons-nous une Ok première pièce ?\r\n\r\n', 'a-	Pour garantir de produire des pièces bonnes au moins au début de la production.\r\n', 'b-	Pour vérifier si toutes les machines, les outillages, les gabarits et les équipements sont aptes à produire des pièces bonnes.\r\n', 'c-	Pour s’assurer que la première pièce produite correspond bien aux exigences client ?conforme au plan.\r\n', 'd-	Aucun des choix ci-dessus.', 1, 1, 1, 0),
-(21, 1, 'OK FIRST PART  ', '2.	Sur le document DCS (ok 1st part) on trouve ?\r\n', 'a-	Les Poka-yoke à vérifier.\r\n', 'b-	Le nombre d’opérateurs par ligne à vérifier.\r\n\r\n', 'c-	Les caractéristiques du plan à vérifier.\r\n', 'd-	Les points réglementaires à vérifier.', 1, 0, 1, 1),
-(22, 1, 'OK FIRST PART  ', '3.	Quelles sont les raisons principales du ok 1st part ?\r\n\r\n', 'a-	Début d’équipe\r\n', 'b-	Suite à un changement de référence et de géométrie.\r\n', 'c-	Suite à un problème qualité et une panne machine.\r\n', 'd-	Fin de poste.', 1, 1, 1, 0),
-(23, 1, 'OK FIRST PART  ', '4.	Qui en est responsable ?\r\n\r\n', 'a-	GAP Leader.\r\n', 'b-	Opérateur qualifié.\r\n', 'c-	Les qualiticiens.\r\n', 'd-	Tout opérateur travaillant sur la ligne.', 1, 1, 0, 0),
-(24, 1, 'OK FIRST PART  ', '5.	Au niveau d’une ligne de production tournant 24h, combien de DCS remplies doit-on trouver ?\r\n\r\n', 'a-	1.\r\n', 'b-	4.\r\n', 'c-	3 Minimum.\r\n', 'd-	Aucun des choix précédents.', 0, 0, 1, 0),
-(25, 1, 'Poka-yoke', '1.	Quel est  le rôle d’un poka-yoke ?\r\n\r\n', 'a-	Bloquer les opérations suivantes de fabrication une fois qu''une erreur est repérée.\r\n  ', 'b-	Interdire qu’une erreur envisageable ne puisse se produire, qu’elle soit d’origine humaine ou machine.\r\n', 'c-	Bloquer le départ cycle et informer les opérateurs en cas d’erreurs.\r\n', 'd-	Tester la capacité de la machine.', 0, 1, 1, 0),
-(26, 1, 'Poka-yoke', '2.	Comment les vignettes devront-elles être affichées au poste? Choisissez la bonne combinaison.', '<img src="ressources/reponse  1.png" style="height: 128px; margin: 20px auto;" class="center-block">\r\n', '<img src="ressources/Reponse 2.png" style="height: 128px; margin: 20px auto;" class="center-block">\r\n', '<img src="ressources/Reponse3.png" style="height: 128px; margin: 20px auto;" class="center-block">\r\n', '<img src="ressources/Reponse 4.png" style="height: 128px; margin: 20px auto;" class="center-block">\r\n', 0, 1, 0, 0),
-(27, 1, 'Poka-yoke', '3.	Qui est le responsable du bon fonctionnement du poka-yoke au niveau d’une ligne de production ?\r\n\r\n', 'a-	Les qualiticiens.\r\n', 'b-	Un opérateur qualifié.\r\n', 'c-	Tous les opérateurs de la ligne.\r\n', 'd-	Le GAP Leader.', 0, 0, 0, 1),
-(28, 1, 'Poka-yoke', '4.	Quand est-ce qu’on vérifie les poka-yoke ?\r\n', 'a-	Début de chaque équipe.\r\n\r\n', 'b-	En cas de changement de référence.\r\n', 'c-	Suite à une panne machine / un problème qualité.\r\n', 'd-	Fin de chaque équipe.', 1, 1, 1, 0),
-(29, 1, 'Poka-yoke', '5.	Que doit-on faire au cas où un poka-yoke n’est pas validé ?\r\n', 'a-	Produire quand même.\r\n\r\n', 'b-	Appliquer le mode dégradé s’il en existe un en respectant les contrôles supplémentaires demandés.\r\n', 'c-	Faire une demande d’intervention immédiate et avertir le GAP et le Superviseur.\r\n', 'd-	Ouvrir un QRCI ligne.', 0, 1, 1, 1),
-(30, 1, 'Poka-yoke', '1.	En cas d’existence du mode dégradé, il faut ?\r\n\r\n', 'a-	Ouvrir un QRCI ligne.\r\n', 'b-	Tourner les padlocks côté vert.\r\n', 'c-	Alerter le superviseur, la qualité et faire une demande d’intervention immédiate.\r\n', 'd-	Arrêter la production.', 1, 0, 1, 0),
-(31, 1, 'Poka-yoke', '6.	Parmi les exemples ci-dessous, lequel est considéré comme un poka-yoke ?\r\n', 'a-	Risque de heurter un objet/ une personne fixe /en mouvement: Radar de recul d''un véhicule.\r\n\r\n', 'b-	Sens d''insertion de la carte bancaire dans un distributeur de billet: Logement carte.\r\n', 'c-	Risque d''avoir une batterie vide en cas de phares allumés en quittant son véhicule: Détecteur phares allumés.\r\n', 'd-	Sens d''insertion d''une carte SIM dans un téléphone: Logement carte SIM.', 0, 1, 0, 1),
-(32, 1, 'Self Inspection', '1.	Qu’est-ce qu’un autocontrôle ?\r\n\r\n', 'a-	Vérification par l’opérateur du résultat du travail de son collègue.\r\n', 'b-	Mode de fonctionnement où chacun, à son niveau, contrôle immédiatement et à 100% la qualité des pièces qu’il produit.\r\n', 'c-	Contrôle des pièces en fin de ligne.\r\n', 'd-	Vérification des outillages et équipements avant de démarrer son poste.', 0, 1, 0, 0),
-(33, 1, 'Self Inspection', '2.	Pourquoi avons-nous besoin de l’autocontrôle ?\r\n\r\n', 'a-	Eviter que les mauvaises pièces se retrouvent chez le client.\r\n', 'b-	Responsabiliser chaque opérateur sur la qualité de son propre travail.\r\n', 'c-	Eviter que les mauvaises pièces se retrouvent au poste de contrôle final.\r\n', 'd-	Aucun des choix cités ci-dessus.', 1, 1, 1, 0),
-(34, 1, 'Self Inspection', '3.	Pourquoi doit-on enregistrer les défauts sur la feuille de batônnage?\r\n\r\n', 'a-	C’est un simple document sans utilité.  \r\n', 'b-	Pour enregistrer les résultats des défauts trouvés en autocontrôle.\r\n', 'c-	Pour permettre d''analyser les défauts détectés et proposer des actions correctives pour améliorer la situation.\r\n', 'd-	Pour mesurer  la capacité de notre système de production à fournir des pièces bonnes.', 0, 1, 1, 1),
-(35, 1, 'Self Inspection', '4.	Quel est le principe d’un arrêt au défaut ?\r\n\r\n', 'a-	L’arrêt de la production suite à une intervention de maintenance préventive.\r\n', 'b-	L’arrêt de la production après un nombre défini de défauts (qui varie selon la nature du défaut) similaires nécessitant une réaction et/ou une correction.\r\n', 'c-	L’arrêt de la production suite à une panne machine.\r\n', 'd-	L’arrêt de production suite à un incident sécurité.', 0, 1, 0, 0),
-(36, 1, 'Self Inspection', '5.	A quoi sert l’arrêt au défaut ?\r\n\r\n', 'a-	Eviter le cumul de grande quantité de rebut.\r\n', 'b-	Eviter l’entassement des pièces à retoucher.\r\n', 'c-	Trouver rapidement les causes des défaillances en se basant sur des faits et des données  et les corriger.  \r\n', 'd-	Donner du temps pour qu''une intervention soit faite sur la machine.', 1, 1, 1, 0),
-(37, 1, 'Self Inspection', '6.	Que se passe-t-il si je ne respecte pas un standard de contrôle (autocontrôle)?\r\n', 'a-	Faurecia risque d''avoir une réclamation clients.\r\n\r\n', 'b-	  Le risque est minime.\r\n', 'c-	Faurecia et moi serons impactés.\r\n', 'd-	Il ne se passe rien.', 1, 0, 1, 0),
-(38, 1, 'RED BINS', '1.	À quoi servent les bacs rouges?\r\n\r\n', 'a-	Pour retirer les pièces non-conformes du flux de production normal.\r\n', 'b-	  Pour éviter que les pièces mauvaises aillent chez le client.\r\n', 'c-	Pour se servir des pièces mauvaises comme des échantillons à analyser afin d’éviter la reproduction des mêmes défauts.\r\n', 'd-	Pour réduire le taux de rebut.', 1, 1, 1, 0),
-(39, 1, 'RED BINS', '2.	Que doit-on avoir au niveau d’une ligne de production pour gérer les pièces défectueuses ?\r\n\r\n', 'a-	Existence d’emplacement « Bacs, goulottes, Rolls,…. » jaunes et  rouges.\r\n', 'b-	Flux des non-conforme bien défini, affiché et compris par tous les opérateurs.\r\n', 'c-	Etiquette pour identifier les pièces à retoucher/ rebuter.\r\n', 'd-	Bac blanc où toutes les pièces sont mises en quarantaine en attente d’analyse.', 1, 1, 1, 0),
-(40, 1, 'RED BINS', '3.	Comment une pièce défectueuse est-elle identifiée ?\r\n\r\n', 'a-	Par une étiquette jaune.\r\n', 'b-	Par une étiquette rouge qui précise l''emplacement du défaut et sur laquelle on note: la Référence du produit, le défaut détecté, le GAP leader de la tournée ainsi que la date.\r\n', 'c-	Par un coup de feutre sur le défaut.\r\n', 'd-	Par une étiquette "SCRAP TICKET".', 0, 1, 0, 0),
-(41, 1, 'RED BINS', '4.	Quelles sont les règles de réaction si un défaut est détecté au  niveau du poste final ?\r\n', 'a-	Identifier la pièce mauvaise en collant une étiquette rouge.\r\n', 'b-	Noter le défaut dans la feuille de batônnage.\r\n', 'c-	Informer le GAP Leader pour passer l''information au poste créateur du défaut.\r\n\r\n', 'd-	Rebuter la pièce automatiquement.', 1, 1, 1, 0),
-(42, 1, 'RED BINS', '5.	Quand est-ce qu’on vide les bacs rouges, et qui en est responsable ?\r\n\r\n', 'a-	Tous les opérateurs au début de chaque équipe.\r\n', 'b-	Le GAP Leader à la fin de chaque équipe (avec mise en place de Scrap Ticket).\r\n', 'c-	Le GAP Leader au début de chaque équipe.\r\n', 'd-	Un opérateur qualifié à la fin de chaque équipe.', 0, 1, 0, 0),
-(43, 1, 'REWORK UNDER CONTROL', '1.	Pourquoi est-il important de maîtriser les retouches?\r\n\r\n', 'a-	Pour éviter de rebuter les pièces.\r\n', 'b-	Pour séparer les pièces suspectes du flux de production normal.\r\n', 'c-	  Pour inspecter les pièces défectueuses suivant un processus spécifique.\r\n', 'd-	  Pour évaluer le niveau des retoucheurs.', 0, 1, 1, 0),
-(44, 1, 'REWORK UNDER CONTROL', '2.	Qui est autorisé à faire des retouches?\r\n\r\n', 'a-	   L’opérateur.\r\n', 'b-	Le GAP Leader.\r\n', 'c-	Une personne qui est habilitée à faire la retouche, donc qui a le niveau L dans la polyvalence au poste « Retoucheur ».\r\n', 'd-	Le superviseur.', 0, 0, 1, 0),
-(45, 1, 'REWORK UNDER CONTROL', '3.	Comment peut-on maîtriser les retouches ?\r\n', 'a-	Les mauvaises pièces doivent être clairement identifiées et immédiatement séparées du flux des pièces bonnes.\r\n', 'b-	S’assurer de la présence des éléments suivants : les bacs jaune et rouge/ aide à la décision/ étiquette/ stylo.\r\n\r\n', 'c-	Respecter le flux : Toute pièce RETOUCHÉE doit être identifiée avec l''étiquette RETOUCHE et réinsérée dans la ligne par le GAP LEADER (ou le retoucheur) AU POSTE OU ELLE A ÉTÉ EXTRAITE afin d''être RECONTRÔLÉE.\r\n', 'd-	Il suffit d’avoir les bacs rouges et jaunes.', 1, 1, 1, 0),
-(46, 1, 'REWORK UNDER CONTROL', '4.	Quand est-ce qu’une retouche est autorisée?\r\n\r\n', 'a-	Quand la retouche est techniquement possible.\r\n', 'b-	Quand le personnel est officiellement autorisé à la faire.\r\n', 'c-	Quand les dimensions de la retouche sont inférieures aux limites précisées dans les instructions de retouches.\r\n', 'd-	Quand les trois conditions citées ci-dessus sont réunies.', 0, 0, 0, 1),
-(47, 1, 'REWORK UNDER CONTROL', '5.	Pourquoi la présence d’une  aide à la décision est-elle nécessaire au niveau d’un poste de retouche ?\r\n', 'a-	Elle présente en détails la majorité de défauts qu’un retoucheur peut rencontrer.\r\n\r\n', 'b-	Elle définit pour chacun des défauts si la retouche est autorisée ou non.\r\n', 'c-	Elle précise le procédé à utiliser pour chacun des défauts.\r\n', 'd-	   Elle définit qui est apte à effectuer les retouches.', 1, 1, 1, 0),
-(48, 1, 'FINAL INSPECTION', '1.	Qu’est-ce qu’un contrôle final ?\r\n', 'a-	Contrôle d’un ensemble de caractéristiques essentielles réalisé sur 100% des pièces pour que le client puisse les utiliser sans avoir de problème.\r\n\r\n', 'b-	Mode de fonctionnement où chacun, à son niveau, contrôle à la fin la qualité de son travail.\r\n', 'c-	Contrôle des pièces après toutes les opérations de fabrication, c’est la dernière étape avant la livraison au client.\r\n', 'd-	Contrôle selon une gamme standard disponible au poste de contrôle final devant les yeux de l’opérateur.', 1, 0, 1, 1),
-(49, 1, 'FINAL INSPECTION', '2.	Pourquoi avons-nous besoin du contrôle final?\r\n', 'a-	Eviter que les mauvaises pièces se retrouvent chez le client.\r\n\r\n', 'b-	Certaines caractéristiques peuvent être dégradées au cours des différentes opérations de fabrication même si elles étaient conformes au départ.\r\n', 'c-	Livrer des pièces 100% bonnes, telles que le client va les utiliser.\r\n', 'd-	Remplacer les autocontrôles non faits dans la ligne.', 1, 1, 1, 0),
-(50, 1, 'FINAL INSPECTION', '3.	Quels sont les types de contrôle existant au poste de contrôle final?\r\n', 'a-	Les contrôles manuels et avec des outils.\r\n', 'b-	Les contrôles visuels et avec les outils.\r\n\r\n', 'c-	Les contrôles manuels et visuels.\r\n', 'd-	Les Contrôles manuels, visuels et avec les outils.', 0, 0, 0, 1),
-(51, 1, 'FINAL INSPECTION', '4.	Qui est autorisé à effectuer le contrôle final ?\r\n\r\n', 'a-	Le GAP Leader.\r\n', 'b-	Un opérateur spécifique validé par le service qualité.\r\n', 'c-	Tous les opérateurs de la ligne.\r\n', 'd-	Le qualiticien.', 0, 1, 0, 0),
-(52, 1, 'FINAL INSPECTION', '5.	Que doit-on faire en cas d’absence de contrôleur final validé par la qualité ?\r\n\r\n', 'a-	Mettre en place un mur qualité.\r\n', 'b-	Avertir le superviseur.\r\n', 'c-	Produire quand même.\r\n', 'd-	  Avertir la qualité.', 1, 1, 0, 1),
-(53, 1, 'FINAL INSPECTION', '6.	Que se passe-t-il si je ne respecte pas un standard de contrôle (contrôleur final)?\r\n', 'a-	Faurecia risque d''avoir une réclamation clients.\r\n\r\n', 'b-	Le risque est minime.\r\n', 'c-	Faurecia et moi serons impactés.\r\n', 'd-	Il ne se passe rien.', 1, 0, 1, 0),
-(54, 1, 'QRCI', '1.	A quoi sert un QRCI ?\r\n\r\n', 'a-	À traiter un problème de manière structurée basée sur des faits et des données.\r\n', 'b-	C''est un simple moyen d''archivage.\r\n', 'c-	À résoudre les problèmes de façon systématique.\r\n', 'd-	À analyser un problème en comparant les conditions de création et de non détection de défauts par rapport aux standards, en trouvant la ou les causes et en mettant en place des actions immédiates et à moyen terme.', 1, 0, 1, 1),
-(55, 1, 'QRCI', '2.	Quand est-ce qu’on utilise un QRCI ?\r\n', 'a-	Lors d’une panne machine.\r\n', 'b-	Lors de la détection d’un défaut unique sur une pièce.\r\n', 'c-	Lors d’arrêt de lignes répétitifs.\r\n\r\n', 'd-	Lors de l’apparition de tout type de dysfonctionnement / situations inhabituelles au niveau de l’usine.', 1, 0, 1, 1),
-(56, 1, 'QRCI', '3.	Qui peut ouvrir un QRCI ?\r\n', 'a-	Le GAP Leader.\r\n\r\n', 'b-	Les opérateurs.\r\n', 'c-	Le responsable qualité.\r\n', 'd-	Toute personne ayant rencontré un dysfonctionnement pouvant pénaliser le processus de fabrication.', 0, 0, 0, 1),
-(57, 1, 'QRCI', '4.	Quels sont les types de QRCI existant au niveau de l’usine ?\r\n\r\n', 'a-	QRCI ligne.\r\n', 'b-	QRCI tournée.\r\n', 'c-	QRCI usine.\r\n', 'd-	QRCI UAP.', 1, 0, 1, 1);
+INSERT INTO `qualite_quiz_question` (`id`, `type`, `titre`, `question`, `reponse_1`, `reponse_2`, `reponse_3`, `reponse_4`, `corrige_1`, `corrige_2`, `corrige_3`, `corrige_4`, `ordre`, `image_correction`, `commentaire`) VALUES
+(0, 0, 'OK FIRST PART  ', '1.	Pourquoi faisons-nous une Ok première pièce ?', 'a-	Pour garantir de produire des pièces bonnes au moins au début de la production.', 'b-	Pour vérifier si toutes les machines, les outillages, les gabarits et les équipements sont aptes à produire des pièces bonnes.', 'c-	Pour s’assurer que la première pièce produite correspond bien aux exigences client ?conforme au plan.', 'd-	Aucun des choix ci-dessus.', 0, 0, 0, 0, 0, 56, 'Ceci est un text de commentaire sur la question. Il peut tout de même être assez long car il s\'agit d\'un commentaire en cas de réponse fausse ! Il n\'st pas affiché si la réponse est juste'),
+(1, 0, 'OK FIRST PART  ', '2.	Sur le document DCS (ok 1st part) on trouve ?', 'a-	Les Poka-yoke à vérifier.', 'b-	Le nombre d’opérateurs par ligne à vérifier.', 'c-	Les caractéristiques du plan à vérifier.', 'd-	Les points réglementaires à vérifier.', 1, 0, 1, 1, 2, NULL, ''),
+(2, 0, 'OK FIRST PART  ', '3.	Quelles sont les raisons principales du ok 1st part ?', 'a-	Début d’équipe.', 'b-	Suite à un changement de référence et de géométrie.', 'c-	Suite à un problème qualité et une panne machine.', 'd-	Fin de poste.', 1, 1, 1, 0, 3, NULL, ''),
+(3, 0, 'POKE-YOKE', '1.	Quel est  le rôle d’un poka-yoke ? ', 'a-	Bloquer les opérations suivantes de fabrication une fois qu\'une erreur est repérée.', 'b-	Interdire qu’une erreur envisageable ne puisse se produire, qu’elle soit d’origine humaine ou machine. ', 'c-	Bloquer le départ cycle et informer les opérateurs en cas d’erreurs.', 'd-	Tester la capacité de la machine.', 0, 0, 0, 0, 4, NULL, ''),
+(4, 0, 'POKE-YOKE', '2.	Comment les vignettes devront-elles être affichées au poste? Choisissez la bonne combinaison !\r\n\r\n', '<img src=\"ressources/reponse  1.png\" style=\"height: 128px; margin: 20px auto;\" class=\"center-block\">\r\n\r\n', '<img src=\"ressources/Reponse 2.png\" style=\"height: 128px; margin: 20px auto;\" class=\"center-block\">\r\n', '<img src=\"ressources/Reponse3.png\" style=\"height: 128px; margin: 20px auto;\" class=\"center-block\">\r\n', '<img src=\"ressources/Reponse 4.png\" style=\"height: 128px; margin: 20px auto;\" class=\"center-block\">\r\n', 0, 1, 0, 0, 5, NULL, ''),
+(5, 0, 'POKE-YOKE', '3.	Qui est le responsable du bon fonctionnement du poka-yoke au niveau d’une ligne de production ?', 'a-	Les qualiticiens.', 'b-	Un opérateur qualifié.', 'c-	Tous les opérateurs de la ligne.', 'd-	Le GAP Leader.', 0, 0, 0, 0, 6, NULL, ''),
+(6, 0, 'SELF INSPECTION', '1.	Qu’est-ce qu’un autocontrôle ?\r\n\r\n', 'a-	Vérification par l’opérateur du résultat du travail de son collègue.\r\n', 'b-	Mode de fonctionnement où chacun, à son niveau, contrôle immédiatement et à 100% la qualité des pièces qu’il produit.\r\n', 'c-	Contrôle des pièces en fin de ligne.\r\n', 'd-	Vérification des outillages et équipements avant de démarrer son poste.', 0, 1, 0, 0, 7, NULL, ''),
+(7, 0, 'SELF INSPECTION', '2.	Pourquoi avons-nous besoin de l’autocontrôle ?\r\n\r\n', 'a-	Eviter que les mauvaises pièces se retrouvent chez le client.\r\n', 'b-	Responsabiliser chaque opérateur sur la qualité de son propre travail.\r\n', 'c-	Eviter que les mauvaises pièces se retrouvent au poste de contrôle final.\r\n', 'd-	Aucun des choix cités ci-dessus.', 1, 1, 1, 0, 8, NULL, ''),
+(8, 0, 'SELF INSPECTION', '3.	Que se passe-t-il si je ne respecte pas un standard de contrôle (autocontrôle)?\r\n\r\n', 'a-	Faurecia risque d\'avoir une réclamation clients.\r\n', 'b-	  Le risque est minime.\r\n', 'c-	Faurecia et moi serons impactés.\r\n', 'd-	Il ne se passe rien.', 1, 0, 1, 0, 9, NULL, ''),
+(9, 0, 'RED BINS', '1.	À quoi servent les bacs rouges?\r\n\r\n', '', 'b-	  Pour éviter que les pièces mauvaises aillent chez le client.\r\n', 'c-	Pour se servir des pièces mauvaises comme des échantillons à analyser afin d’éviter la reproduction des mêmes défauts.\r\n', 'd-	Pour réduire le taux de rebut.', 1, 1, 1, 0, 10, NULL, ''),
+(10, 0, 'RED BINS', '2.	Que doit-on avoir au niveau d’une ligne de production pour gérer les pièces défectueuses ?\r\n', 'a-	Existence d’emplacement « Bacs, goulottes, Rolls,…. » jaunes et  rouges.\r\n', 'b-	Flux des non-conforme bien défini, affiché et compris par tous les opérateurs.\r\n', 'c-	Etiquette pour identifier les pièces à retoucher/ rebuter.\r\n\r\n', 'd-	Bac blanc où toutes les pièces sont mises en quarantaine en attente d’analyse.', 1, 1, 1, 0, 11, NULL, ''),
+(11, 0, 'RED BINS', '3.	Comment une pièce défectueuse est-elle identifiée ?\r\n', 'a-	Par une étiquette jaune.\r\n\r\n', 'b-	Par une étiquette rouge qui précise l\'emplacement du défaut et sur laquelle on note: la Référence du produit, le défaut détecté, le GAP leader de la tournée ainsi que la date.\r\n', 'c-	Par un coup de feutre sur le défaut.\r\n', 'd-	Par une étiquette \"SCRAP TICKET\".', 0, 1, 0, 0, 12, NULL, ''),
+(12, 0, 'REWORK UNDER CONTROL', '1.	Pourquoi est-il important de maîtriser les retouches?\r\n', 'a-	Pour éviter de rebuter les pièces.\r\n', 'b-	Pour séparer les pièces suspectes du flux de production normal.\r\n', 'c-	  Pour inspecter les pièces défectueuses suivant un processus spécifique.\r\n', 'd-	  Pour évaluer le niveau des retoucheurs.\r\n', 0, 1, 1, 0, 13, NULL, ''),
+(13, 0, 'REWORK UNDER CONTROL', '2.	Qui est autorisé à faire des retouches?\r\n', 'a-	   L’opérateur.\r\n\r\n', 'b-	Le GAP Leader.\r\n', 'c-	Une personne qui est habilitée à faire la retouche, donc qui a le niveau L dans la polyvalence au poste « Retoucheur ».\r\n', 'd-	Le superviseur.', 0, 0, 1, 0, 14, NULL, ''),
+(14, 0, 'REWORK UNDER CONTROL', '3.	Comment peut-on maîtriser les retouches ?\r\n', 'a-	Les mauvaises pièces doivent être clairement identifiées et immédiatement séparées du flux des pièces bonnes.\r\n\r\n', 'b-	S’assurer de la présence des éléments suivants : les bacs jaune et rouge/ aide à la décision/ étiquette/ stylo.\r\n', 'c-	Respecter le flux : Toute pièce RETOUCHÉE doit être identifiée avec l\'étiquette RETOUCHE et réinsérée dans la ligne par le GAP LEADER (ou le retoucheur) AU POSTE OU ELLE A ÉTÉ EXTRAITE afin d\'être RECONTRÔLÉE.\r\n', 'd-	Il suffit d’avoir les bacs rouges et jaunes.', 1, 1, 1, 0, 15, NULL, ''),
+(15, 0, 'FINAL INSPECTION', '1.	Qu’est-ce qu’un contrôle final ?\r\n\r\n', 'a-	Contrôle d’un ensemble de caractéristiques essentielles réalisé sur 100% des pièces pour que le client puisse les utiliser sans avoir de problème.\r\n', 'b-	Mode de fonctionnement où chacun, à son niveau, contrôle à la fin la qualité de son travail.\r\n', 'c-	Contrôle des pièces après toutes les opérations de fabrication, c’est la dernière étape avant la livraison au client.\r\n', 'd-	Contrôle selon une gamme standard disponible au poste de contrôle final devant les yeux de l’opérateur.', 1, 0, 1, 1, 16, NULL, ''),
+(16, 0, 'FINAL INSPECTION', '2.	Qui est autorisé à effectuer le contrôle final ?\r\n\r\n', 'a-	Le GAP Leader.\r\n', 'b-	Un opérateur spécifique validé par le service qualité.\r\n', 'c-	Tous les opérateurs de la ligne.\r\n', 'd-	Le qualiticien.', 0, 1, 0, 0, 17, NULL, ''),
+(17, 0, 'FINAL INSPECTION', '3.	Que se passe-t-il si je ne respecte pas un standard de contrôle (contrôleur final)?\r\n\r\n', 'a-	Faurecia risque d\'avoir une réclamation clients.\r\n', 'b-	Le risque est minime.\r\n', 'c-	Faurecia et moi serons impactés.\r\n', 'd-	Il ne se passe rien.', 1, 0, 1, 0, 18, NULL, ''),
+(18, 0, 'QRCI', '1.	A quoi sert un QRCI ?\r\n\r\n', 'a-	À traiter un problème de manière structurée basée sur des faits et des données.\r\n', 'b-	C\'est un simple moyen d\'archivage.\r\n', 'c-	À résoudre les problèmes de façon systématique.\r\n', 'd-	À analyser un problème en comparant les conditions de création et de non détection de défauts par rapport aux standards, en trouvant la ou les causes et en mettant en place des actions immédiates et à moyen terme.', 1, 0, 1, 1, 19, NULL, ''),
+(19, 0, 'QRCI', '2.	Quand est-ce qu’on utilise un QRCI ?\r\n', 'a-	Lors d’une panne machine.\r\n\r\n', 'b-	Lors de la détection d’un défaut unique sur une pièce.\r\n', 'c-	Lors d’arrêt de lignes répétitifs.\r\n', 'd-	Lors de l’apparition de tout type de dysfonctionnement / situations inhabituelles au niveau de l’usine.', 1, 0, 1, 1, 20, NULL, ''),
+(20, 1, 'OK FIRST PART  ', '1.	Pourquoi faisons-nous une Ok première pièce ?\r\n\r\n', 'a-	Pour garantir de produire des pièces bonnes au moins au début de la production.\r\n', 'b-	Pour vérifier si toutes les machines, les outillages, les gabarits et les équipements sont aptes à produire des pièces bonnes.\r\n', 'c-	Pour s’assurer que la première pièce produite correspond bien aux exigences client ?conforme au plan.\r\n', 'd-	Aucun des choix ci-dessus.', 1, 1, 1, 0, 21, NULL, ''),
+(21, 1, 'OK FIRST PART  ', '2.	Sur le document DCS (ok 1st part) on trouve ?\r\n', 'a-	Les Poka-yoke à vérifier.\r\n', 'b-	Le nombre d’opérateurs par ligne à vérifier.\r\n\r\n', 'c-	Les caractéristiques du plan à vérifier.\r\n', 'd-	Les points réglementaires à vérifier.', 1, 0, 1, 1, 22, NULL, ''),
+(22, 1, 'OK FIRST PART  ', '3.	Quelles sont les raisons principales du ok 1st part ?\r\n\r\n', 'a-	Début d’équipe\r\n', 'b-	Suite à un changement de référence et de géométrie.\r\n', 'c-	Suite à un problème qualité et une panne machine.\r\n', 'd-	Fin de poste.', 1, 1, 1, 0, 23, NULL, ''),
+(23, 1, 'OK FIRST PART  ', '4.	Qui en est responsable ?\r\n\r\n', 'a-	GAP Leader.\r\n', 'b-	Opérateur qualifié.\r\n', 'c-	Les qualiticiens.\r\n', 'd-	Tout opérateur travaillant sur la ligne.', 1, 1, 0, 0, 24, NULL, ''),
+(24, 1, 'OK FIRST PART  ', '5.	Au niveau d’une ligne de production tournant 24h, combien de DCS remplies doit-on trouver ?\r\n\r\n', 'a-	1.\r\n', 'b-	4.\r\n', 'c-	3 Minimum.\r\n', 'd-	Aucun des choix précédents.', 0, 0, 1, 0, 25, NULL, ''),
+(25, 0, 'Poka-yoke', '1.	Quel est  le rôle d’un poka-yoke ?', 'a-	Bloquer les opérations suivantes de fabrication une fois qu\'une erreur est repérée.  ', 'b-	Interdire qu’une erreur envisageable ne puisse se produire, qu’elle soit d’origine humaine ou machine.', 'c-	Bloquer le départ cycle et informer les opérateurs en cas d’erreurs.', 'd-	Tester la capacité de la machine.', 0, 0, 0, 0, 26, NULL, 'Tu es un sgeg de pas avoir réussi cette question !'),
+(26, 1, 'Poka-yoke', '2.	Comment les vignettes devront-elles être affichées au poste? Choisissez la bonne combinaison.', '<img src=\"ressources/reponse  1.png\" style=\"height: 128px; margin: 20px auto;\" class=\"center-block\">\r\n', '<img src=\"ressources/Reponse 2.png\" style=\"height: 128px; margin: 20px auto;\" class=\"center-block\">\r\n', '<img src=\"ressources/Reponse3.png\" style=\"height: 128px; margin: 20px auto;\" class=\"center-block\">\r\n', '<img src=\"ressources/Reponse 4.png\" style=\"height: 128px; margin: 20px auto;\" class=\"center-block\">\r\n', 0, 1, 0, 0, 27, NULL, ''),
+(27, 1, 'Poka-yoke', '3.	Qui est le responsable du bon fonctionnement du poka-yoke au niveau d’une ligne de production ?\r\n\r\n', 'a-	Les qualiticiens.\r\n', 'b-	Un opérateur qualifié.\r\n', 'c-	Tous les opérateurs de la ligne.\r\n', 'd-	Le GAP Leader.', 0, 0, 0, 1, 28, NULL, ''),
+(28, 1, 'Poka-yoke', '4.	Quand est-ce qu’on vérifie les poka-yoke ?\r\n', 'a-	Début de chaque équipe.\r\n\r\n', 'b-	En cas de changement de référence.\r\n', 'c-	Suite à une panne machine / un problème qualité.\r\n', 'd-	Fin de chaque équipe.', 1, 1, 1, 0, 29, NULL, ''),
+(29, 1, 'Poka-yoke', '5.	Que doit-on faire au cas où un poka-yoke n’est pas validé ?\r\n', 'a-	Produire quand même.\r\n\r\n', 'b-	Appliquer le mode dégradé s’il en existe un en respectant les contrôles supplémentaires demandés.\r\n', 'c-	Faire une demande d’intervention immédiate et avertir le GAP et le Superviseur.\r\n', 'd-	Ouvrir un QRCI ligne.', 0, 1, 1, 1, 30, NULL, ''),
+(30, 1, 'Poka-yoke', '1.	En cas d’existence du mode dégradé, il faut ?\r\n\r\n', 'a-	Ouvrir un QRCI ligne.\r\n', 'b-	Tourner les padlocks côté vert.\r\n', 'c-	Alerter le superviseur, la qualité et faire une demande d’intervention immédiate.\r\n', 'd-	Arrêter la production.', 1, 0, 1, 0, 31, NULL, ''),
+(31, 1, 'Poka-yoke', '6.	Parmi les exemples ci-dessous, lequel est considéré comme un poka-yoke ?\r\n', 'a-	Risque de heurter un objet/ une personne fixe /en mouvement: Radar de recul d\'un véhicule.\r\n\r\n', 'b-	Sens d\'insertion de la carte bancaire dans un distributeur de billet: Logement carte.\r\n', 'c-	Risque d\'avoir une batterie vide en cas de phares allumés en quittant son véhicule: Détecteur phares allumés.\r\n', 'd-	Sens d\'insertion d\'une carte SIM dans un téléphone: Logement carte SIM.', 0, 1, 0, 1, 32, NULL, ''),
+(32, 1, 'Self Inspection', '1.	Qu’est-ce qu’un autocontrôle ?\r\n\r\n', 'a-	Vérification par l’opérateur du résultat du travail de son collègue.\r\n', 'b-	Mode de fonctionnement où chacun, à son niveau, contrôle immédiatement et à 100% la qualité des pièces qu’il produit.\r\n', 'c-	Contrôle des pièces en fin de ligne.\r\n', 'd-	Vérification des outillages et équipements avant de démarrer son poste.', 0, 1, 0, 0, 33, NULL, ''),
+(33, 1, 'Self Inspection', '2.	Pourquoi avons-nous besoin de l’autocontrôle ?\r\n\r\n', 'a-	Eviter que les mauvaises pièces se retrouvent chez le client.\r\n', 'b-	Responsabiliser chaque opérateur sur la qualité de son propre travail.\r\n', 'c-	Eviter que les mauvaises pièces se retrouvent au poste de contrôle final.\r\n', 'd-	Aucun des choix cités ci-dessus.', 1, 1, 1, 0, 34, NULL, ''),
+(34, 1, 'Self Inspection', '3.	Pourquoi doit-on enregistrer les défauts sur la feuille de batônnage?\r\n\r\n', 'a-	C’est un simple document sans utilité.  \r\n', 'b-	Pour enregistrer les résultats des défauts trouvés en autocontrôle.\r\n', 'c-	Pour permettre d\'analyser les défauts détectés et proposer des actions correctives pour améliorer la situation.\r\n', 'd-	Pour mesurer  la capacité de notre système de production à fournir des pièces bonnes.', 0, 1, 1, 1, 35, NULL, ''),
+(35, 1, 'Self Inspection', '4.	Quel est le principe d’un arrêt au défaut ?\r\n\r\n', 'a-	L’arrêt de la production suite à une intervention de maintenance préventive.\r\n', 'b-	L’arrêt de la production après un nombre défini de défauts (qui varie selon la nature du défaut) similaires nécessitant une réaction et/ou une correction.\r\n', 'c-	L’arrêt de la production suite à une panne machine.\r\n', 'd-	L’arrêt de production suite à un incident sécurité.', 0, 1, 0, 0, 36, NULL, ''),
+(36, 1, 'Self Inspection', '5.	A quoi sert l’arrêt au défaut ?\r\n\r\n', 'a-	Eviter le cumul de grande quantité de rebut.\r\n', 'b-	Eviter l’entassement des pièces à retoucher.\r\n', 'c-	Trouver rapidement les causes des défaillances en se basant sur des faits et des données  et les corriger.  \r\n', 'd-	Donner du temps pour qu\'une intervention soit faite sur la machine.', 1, 1, 1, 0, 37, NULL, ''),
+(37, 1, 'Self Inspection', '6.	Que se passe-t-il si je ne respecte pas un standard de contrôle (autocontrôle)?\r\n', 'a-	Faurecia risque d\'avoir une réclamation clients.\r\n\r\n', 'b-	  Le risque est minime.\r\n', 'c-	Faurecia et moi serons impactés.\r\n', 'd-	Il ne se passe rien.', 1, 0, 1, 0, 38, NULL, ''),
+(38, 1, 'RED BINS', '1.	À quoi servent les bacs rouges?\r\n\r\n', 'a-	Pour retirer les pièces non-conformes du flux de production normal.\r\n', 'b-	  Pour éviter que les pièces mauvaises aillent chez le client.\r\n', 'c-	Pour se servir des pièces mauvaises comme des échantillons à analyser afin d’éviter la reproduction des mêmes défauts.\r\n', 'd-	Pour réduire le taux de rebut.', 1, 1, 1, 0, 39, NULL, ''),
+(39, 1, 'RED BINS', '2.	Que doit-on avoir au niveau d’une ligne de production pour gérer les pièces défectueuses ?\r\n\r\n', 'a-	Existence d’emplacement « Bacs, goulottes, Rolls,…. » jaunes et  rouges.\r\n', 'b-	Flux des non-conforme bien défini, affiché et compris par tous les opérateurs.\r\n', 'c-	Etiquette pour identifier les pièces à retoucher/ rebuter.\r\n', 'd-	Bac blanc où toutes les pièces sont mises en quarantaine en attente d’analyse.', 1, 1, 1, 0, 40, NULL, ''),
+(40, 1, 'RED BINS', '3.	Comment une pièce défectueuse est-elle identifiée ?\r\n\r\n', 'a-	Par une étiquette jaune.\r\n', 'b-	Par une étiquette rouge qui précise l\'emplacement du défaut et sur laquelle on note: la Référence du produit, le défaut détecté, le GAP leader de la tournée ainsi que la date.\r\n', 'c-	Par un coup de feutre sur le défaut.\r\n', 'd-	Par une étiquette \"SCRAP TICKET\".', 0, 1, 0, 0, 41, NULL, ''),
+(41, 1, 'RED BINS', '4.	Quelles sont les règles de réaction si un défaut est détecté au  niveau du poste final ?\r\n', 'a-	Identifier la pièce mauvaise en collant une étiquette rouge.\r\n', 'b-	Noter le défaut dans la feuille de batônnage.\r\n', 'c-	Informer le GAP Leader pour passer l\'information au poste créateur du défaut.\r\n\r\n', 'd-	Rebuter la pièce automatiquement.', 1, 1, 1, 0, 42, NULL, ''),
+(42, 1, 'RED BINS', '5.	Quand est-ce qu’on vide les bacs rouges, et qui en est responsable ?\r\n\r\n', 'a-	Tous les opérateurs au début de chaque équipe.\r\n', 'b-	Le GAP Leader à la fin de chaque équipe (avec mise en place de Scrap Ticket).\r\n', 'c-	Le GAP Leader au début de chaque équipe.\r\n', 'd-	Un opérateur qualifié à la fin de chaque équipe.', 0, 1, 0, 0, 43, NULL, ''),
+(43, 1, 'REWORK UNDER CONTROL', '1.	Pourquoi est-il important de maîtriser les retouches?\r\n\r\n', 'a-	Pour éviter de rebuter les pièces.\r\n', 'b-	Pour séparer les pièces suspectes du flux de production normal.\r\n', 'c-	  Pour inspecter les pièces défectueuses suivant un processus spécifique.\r\n', 'd-	  Pour évaluer le niveau des retoucheurs.', 0, 1, 1, 0, 44, NULL, ''),
+(44, 1, 'REWORK UNDER CONTROL', '2.	Qui est autorisé à faire des retouches?\r\n\r\n', 'a-	   L’opérateur.\r\n', 'b-	Le GAP Leader.\r\n', 'c-	Une personne qui est habilitée à faire la retouche, donc qui a le niveau L dans la polyvalence au poste « Retoucheur ».\r\n', 'd-	Le superviseur.', 0, 0, 1, 0, 45, NULL, ''),
+(45, 1, 'REWORK UNDER CONTROL', '3.	Comment peut-on maîtriser les retouches ?\r\n', 'a-	Les mauvaises pièces doivent être clairement identifiées et immédiatement séparées du flux des pièces bonnes.\r\n', 'b-	S’assurer de la présence des éléments suivants : les bacs jaune et rouge/ aide à la décision/ étiquette/ stylo.\r\n\r\n', 'c-	Respecter le flux : Toute pièce RETOUCHÉE doit être identifiée avec l\'étiquette RETOUCHE et réinsérée dans la ligne par le GAP LEADER (ou le retoucheur) AU POSTE OU ELLE A ÉTÉ EXTRAITE afin d\'être RECONTRÔLÉE.\r\n', 'd-	Il suffit d’avoir les bacs rouges et jaunes.', 1, 1, 1, 0, 46, NULL, ''),
+(46, 1, 'REWORK UNDER CONTROL', '4.	Quand est-ce qu’une retouche est autorisée?\r\n\r\n', 'a-	Quand la retouche est techniquement possible.\r\n', 'b-	Quand le personnel est officiellement autorisé à la faire.\r\n', 'c-	Quand les dimensions de la retouche sont inférieures aux limites précisées dans les instructions de retouches.\r\n', 'd-	Quand les trois conditions citées ci-dessus sont réunies.', 0, 0, 0, 1, 47, NULL, ''),
+(47, 1, 'REWORK UNDER CONTROL', '5.	Pourquoi la présence d’une  aide à la décision est-elle nécessaire au niveau d’un poste de retouche ?\r\n', 'a-	Elle présente en détails la majorité de défauts qu’un retoucheur peut rencontrer.\r\n\r\n', 'b-	Elle définit pour chacun des défauts si la retouche est autorisée ou non.\r\n', 'c-	Elle précise le procédé à utiliser pour chacun des défauts.\r\n', 'd-	   Elle définit qui est apte à effectuer les retouches.', 1, 1, 1, 0, 48, NULL, ''),
+(48, 1, 'FINAL INSPECTION', '1.	Qu’est-ce qu’un contrôle final ?\r\n', 'a-	Contrôle d’un ensemble de caractéristiques essentielles réalisé sur 100% des pièces pour que le client puisse les utiliser sans avoir de problème.\r\n\r\n', 'b-	Mode de fonctionnement où chacun, à son niveau, contrôle à la fin la qualité de son travail.\r\n', 'c-	Contrôle des pièces après toutes les opérations de fabrication, c’est la dernière étape avant la livraison au client.\r\n', 'd-	Contrôle selon une gamme standard disponible au poste de contrôle final devant les yeux de l’opérateur.', 1, 0, 1, 1, 49, NULL, ''),
+(49, 1, 'FINAL INSPECTION', '2.	Pourquoi avons-nous besoin du contrôle final?\r\n', 'a-	Eviter que les mauvaises pièces se retrouvent chez le client.\r\n\r\n', 'b-	Certaines caractéristiques peuvent être dégradées au cours des différentes opérations de fabrication même si elles étaient conformes au départ.\r\n', 'c-	Livrer des pièces 100% bonnes, telles que le client va les utiliser.\r\n', 'd-	Remplacer les autocontrôles non faits dans la ligne.', 1, 1, 1, 0, 50, NULL, ''),
+(50, 1, 'FINAL INSPECTION', '3.	Quels sont les types de contrôle existant au poste de contrôle final?\r\n', 'a-	Les contrôles manuels et avec des outils.\r\n', 'b-	Les contrôles visuels et avec les outils.\r\n\r\n', 'c-	Les contrôles manuels et visuels.\r\n', 'd-	Les Contrôles manuels, visuels et avec les outils.', 0, 0, 0, 1, 51, NULL, ''),
+(51, 1, 'FINAL INSPECTION', '4.	Qui est autorisé à effectuer le contrôle final ?\r\n\r\n', 'a-	Le GAP Leader.\r\n', 'b-	Un opérateur spécifique validé par le service qualité.\r\n', 'c-	Tous les opérateurs de la ligne.\r\n', 'd-	Le qualiticien.', 0, 1, 0, 0, 52, NULL, ''),
+(52, 1, 'FINAL INSPECTION', '5.	Que doit-on faire en cas d’absence de contrôleur final validé par la qualité ?\r\n\r\n', 'a-	Mettre en place un mur qualité.\r\n', 'b-	Avertir le superviseur.\r\n', 'c-	Produire quand même.\r\n', 'd-	  Avertir la qualité.', 1, 1, 0, 1, 53, NULL, ''),
+(53, 1, 'FINAL INSPECTION', '6.	Que se passe-t-il si je ne respecte pas un standard de contrôle (contrôleur final)?\r\n', 'a-	Faurecia risque d\'avoir une réclamation clients.\r\n\r\n', 'b-	Le risque est minime.\r\n', 'c-	Faurecia et moi serons impactés.\r\n', 'd-	Il ne se passe rien.', 1, 0, 1, 0, 54, NULL, ''),
+(54, 1, 'QRCI', '1.	A quoi sert un QRCI ?\r\n\r\n', 'a-	À traiter un problème de manière structurée basée sur des faits et des données.\r\n', 'b-	C\'est un simple moyen d\'archivage.\r\n', 'c-	À résoudre les problèmes de façon systématique.\r\n', 'd-	À analyser un problème en comparant les conditions de création et de non détection de défauts par rapport aux standards, en trouvant la ou les causes et en mettant en place des actions immédiates et à moyen terme.', 1, 0, 1, 1, 55, NULL, ''),
+(55, 1, 'QRCI', '2.	Quand est-ce qu’on utilise un QRCI ?\r\n', 'a-	Lors d’une panne machine.\r\n', 'b-	Lors de la détection d’un défaut unique sur une pièce.\r\n', 'c-	Lors d’arrêt de lignes répétitifs.\r\n\r\n', 'd-	Lors de l’apparition de tout type de dysfonctionnement / situations inhabituelles au niveau de l’usine.', 1, 0, 1, 1, 56, NULL, ''),
+(56, 1, 'QRCI', '3.	Qui peut ouvrir un QRCI ?\r\n', 'a-	Le GAP Leader.\r\n\r\n', 'b-	Les opérateurs.\r\n', 'c-	Le responsable qualité.\r\n', 'd-	Toute personne ayant rencontré un dysfonctionnement pouvant pénaliser le processus de fabrication.', 0, 0, 0, 1, 57, NULL, ''),
+(57, 1, 'QRCI', '4.	Quels sont les types de QRCI existant au niveau de l’usine ?\r\n\r\n', 'a-	QRCI ligne.\r\n', 'b-	QRCI tournée.\r\n', 'c-	QRCI usine.\r\n', 'd-	QRCI UAP.', 1, 0, 1, 1, 58, NULL, ''),
+(82, 1, 'test', '', '', '', '', '', 1, 1, 0, 1, 1, 55, ''),
+(83, 0, '', '', '', '', '', '', 0, 0, 0, 0, NULL, NULL, ''),
+(84, 0, 'photo', '', 'img=77', '', '', '', 0, 0, 0, 0, 59, NULL, '');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `qualite_quiz_reponse`
+-- Table structure for table `qualite_quiz_reponse`
 --
 
 CREATE TABLE `qualite_quiz_reponse` (
@@ -13306,7 +13464,7 @@ CREATE TABLE `qualite_quiz_reponse` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `qualite_quiz_reponse`
+-- Dumping data for table `qualite_quiz_reponse`
 --
 
 INSERT INTO `qualite_quiz_reponse` (`id`, `session`, `question`, `vrai_1`, `vrai_2`, `vrai_3`, `vrai_4`) VALUES
@@ -13803,12 +13961,87 @@ INSERT INTO `qualite_quiz_reponse` (`id`, `session`, `question`, `vrai_1`, `vrai
 (491, 62, 26, 0, 0, 0, 0),
 (492, 62, 27, 0, 0, 0, 0),
 (493, 62, 28, 0, 0, 0, 0),
-(494, 62, 29, 0, 0, 0, 0);
+(494, 62, 29, 0, 0, 0, 0),
+(495, 62, 30, 0, 1, 0, 0),
+(496, 75, 82, 0, 1, 0, 0),
+(497, 75, 27, 0, 0, 0, 1),
+(498, 75, 28, 0, 0, 0, 1),
+(499, 75, 29, 0, 0, 0, 0),
+(500, 75, 30, 0, 0, 0, 0),
+(501, 75, 31, 0, 0, 0, 0),
+(502, 75, 32, 0, 0, 0, 0),
+(503, 75, 33, 0, 0, 0, 0),
+(504, 75, 34, 0, 0, 0, 0),
+(505, 75, 35, 0, 0, 0, 0),
+(506, 75, 36, 0, 0, 0, 0),
+(507, 75, 37, 0, 0, 0, 0),
+(508, 75, 38, 0, 0, 0, 0),
+(509, 75, 39, 0, 0, 0, 0),
+(510, 75, 40, 0, 0, 0, 0),
+(511, 75, 41, 0, 0, 0, 0),
+(512, 75, 42, 0, 0, 0, 0),
+(513, 75, 43, 0, 0, 0, 0),
+(514, 75, 44, 0, 0, 0, 0),
+(515, 75, 45, 0, 0, 0, 0),
+(516, 75, 46, 0, 0, 0, 0),
+(517, 75, 47, 0, 0, 0, 0),
+(518, 75, 48, 0, 0, 0, 0),
+(519, 75, 49, 0, 0, 0, 0),
+(520, 75, 50, 0, 0, 0, 0),
+(521, 75, 51, 0, 0, 0, 0),
+(522, 75, 52, 0, 0, 0, 0),
+(523, 75, 53, 0, 0, 0, 0),
+(524, 75, 54, 0, 0, 0, 0),
+(525, 75, 55, 0, 0, 0, 0),
+(526, 75, 56, 0, 0, 0, 0),
+(527, 75, 57, 0, 0, 0, 0),
+(528, 62, 82, 0, 0, 1, 0),
+(529, 62, 31, 0, 0, 0, 0),
+(530, 78, 82, 0, 0, 0, 0),
+(531, 78, 20, 0, 0, 0, 0),
+(532, 78, 21, 0, 0, 0, 0),
+(533, 78, 22, 0, 0, 0, 0),
+(534, 78, 23, 0, 0, 0, 0),
+(535, 78, 24, 0, 0, 0, 0),
+(536, 78, 26, 0, 0, 0, 0),
+(537, 78, 27, 0, 0, 0, 0),
+(538, 78, 28, 0, 0, 0, 0),
+(539, 78, 29, 0, 0, 0, 0),
+(540, 78, 30, 0, 0, 0, 0),
+(541, 78, 31, 0, 0, 0, 0),
+(542, 78, 32, 0, 0, 0, 0),
+(543, 78, 33, 0, 0, 0, 0),
+(544, 78, 34, 0, 0, 0, 0),
+(545, 78, 35, 0, 0, 0, 0),
+(546, 78, 36, 0, 0, 0, 0),
+(547, 78, 37, 0, 0, 0, 0),
+(548, 78, 38, 0, 0, 0, 0),
+(549, 78, 39, 0, 0, 0, 0),
+(550, 78, 40, 0, 0, 0, 0),
+(551, 78, 41, 0, 0, 0, 0),
+(552, 78, 42, 0, 0, 0, 0),
+(553, 78, 43, 0, 0, 0, 0),
+(554, 78, 44, 0, 0, 0, 0),
+(555, 78, 45, 0, 0, 0, 0),
+(556, 78, 46, 0, 0, 0, 0),
+(557, 78, 47, 0, 1, 0, 0),
+(558, 78, 48, 0, 0, 0, 0),
+(559, 78, 49, 0, 0, 0, 0),
+(560, 78, 50, 0, 0, 0, 0),
+(561, 78, 51, 0, 0, 0, 0),
+(562, 78, 52, 0, 0, 0, 0),
+(563, 78, 53, 0, 0, 0, 0),
+(564, 78, 54, 0, 0, 0, 1),
+(565, 78, 55, 0, 0, 0, 0),
+(566, 78, 56, 0, 0, 0, 0),
+(567, 78, 57, 0, 0, 0, 0),
+(568, 79, 83, 0, 0, 0, 0),
+(569, 79, 83, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `qualite_quiz_session`
+-- Table structure for table `qualite_quiz_session`
 --
 
 CREATE TABLE `qualite_quiz_session` (
@@ -13821,7 +14054,7 @@ CREATE TABLE `qualite_quiz_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `qualite_quiz_session`
+-- Dumping data for table `qualite_quiz_session`
 --
 
 INSERT INTO `qualite_quiz_session` (`id`, `personne`, `debut`, `fin`, `valide`, `type`) VALUES
@@ -13845,14 +14078,156 @@ INSERT INTO `qualite_quiz_session` (`id`, `personne`, `debut`, `fin`, `valide`, 
 (72, 20, '2017-08-31 11:13:33', '2017-09-01 14:48:11', 0, 1),
 (73, 24, '2017-09-01 11:29:24', NULL, 0, 1),
 (74, 23, '2017-09-01 11:30:05', '2017-09-01 12:58:28', 0, 0),
-(75, 20, '2017-09-01 14:48:18', NULL, 0, 1),
+(75, 20, '2017-09-01 14:48:18', '2017-12-04 16:19:25', 0, 1),
 (76, 23, '2017-09-01 14:51:54', NULL, 0, 0),
-(77, 25, '2017-09-13 05:16:11', NULL, 0, 1);
+(77, 25, '2017-09-13 05:16:11', NULL, 0, 1),
+(78, 26, '2017-12-28 14:20:51', '2017-12-28 14:22:04', 0, 1),
+(79, 27, '2017-12-28 14:23:02', NULL, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `table_11`
+-- Table structure for table `qualite_RR_question`
+--
+
+CREATE TABLE `qualite_RR_question` (
+  `id` int(11) NOT NULL,
+  `type` tinyint(4) NOT NULL COMMENT '0 pr MOD 1 pr reste',
+  `titre` text NOT NULL,
+  `question` text NOT NULL,
+  `image` text NOT NULL,
+  `valide` tinyint(1) NOT NULL,
+  `ordre` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `qualite_RR_question`
+--
+
+INSERT INTO `qualite_RR_question` (`id`, `type`, `titre`, `question`, `image`, `valide`, `ordre`) VALUES
+(9, 1, 'test2', '', '68', 1, 0),
+(16, 0, '', 'Y a t il un chien sur cette image ?', '74', 1, 1),
+(17, 0, '', 'Y a t il une femme sur cette image ?', '75', 0, 2),
+(18, 0, '', 'ESt ce u  chamois ?', '76', 0, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qualite_RR_reponse`
+--
+
+CREATE TABLE `qualite_RR_reponse` (
+  `id` int(11) NOT NULL,
+  `session` int(11) NOT NULL,
+  `question` int(11) NOT NULL,
+  `vrai_1` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `qualite_RR_reponse`
+--
+
+INSERT INTO `qualite_RR_reponse` (`id`, `session`, `question`, `vrai_1`) VALUES
+(1, 2, 4, 1),
+(2, 2, 6, 1),
+(3, 2, 8, 1),
+(4, 1, 9, 0),
+(5, 6, 9, 1),
+(6, 4, 9, 0),
+(7, 7, 9, 1),
+(8, 2, 11, 1),
+(9, 2, 11, 1),
+(10, 8, 9, 0),
+(11, 9, 9, 0),
+(12, 10, 9, 1),
+(13, 11, 9, 0),
+(14, 12, 9, 0),
+(15, 13, 9, 1),
+(16, 2, 12, 1),
+(17, 2, 13, 0),
+(18, 2, 14, 1),
+(19, 14, 16, 1),
+(20, 14, 17, 0),
+(21, 14, 18, 0),
+(22, 15, 16, 1),
+(23, 15, 17, 1),
+(24, 15, 18, 0),
+(25, 3, 9, 1),
+(26, 3, 9, 1),
+(27, 16, 9, 1),
+(28, 17, 16, 1),
+(29, 17, 17, 0),
+(30, 17, 18, 0),
+(31, 5, 9, 0),
+(32, 21, 16, 1),
+(33, 21, 17, 0),
+(34, 21, 18, 0),
+(35, 22, 16, 0),
+(36, 22, 17, 1),
+(37, 22, 18, 0),
+(38, 23, 16, 0),
+(39, 23, 17, 1),
+(40, 23, 18, 0),
+(41, 24, 16, 0),
+(42, 24, 17, 0),
+(43, 24, 18, 0),
+(44, 25, 16, 1),
+(45, 25, 17, 0),
+(46, 25, 18, 0),
+(47, 20, 16, 1),
+(48, 20, 17, 0),
+(49, 20, 18, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qualite_RR_session`
+--
+
+CREATE TABLE `qualite_RR_session` (
+  `id` int(11) NOT NULL,
+  `personne` int(11) NOT NULL,
+  `debut` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fin` timestamp NULL DEFAULT NULL,
+  `succes` int(11) NOT NULL,
+  `type` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `qualite_RR_session`
+--
+
+INSERT INTO `qualite_RR_session` (`id`, `personne`, `debut`, `fin`, `succes`, `type`) VALUES
+(1, 20, '2017-11-30 23:59:44', '2017-12-07 11:49:23', 0, 1),
+(2, 23, '2017-11-30 23:59:54', '2017-12-07 18:35:27', 0, 0),
+(3, 24, '2017-12-03 15:59:23', '2017-12-13 14:50:59', 1, 1),
+(4, 22, '2017-12-04 23:32:52', '2017-12-07 11:56:14', 0, 1),
+(5, 25, '2017-12-04 23:47:30', '2017-12-13 15:55:14', 0, 1),
+(6, 20, '2017-12-07 11:54:18', '2017-12-07 11:54:22', 1, 1),
+(7, 20, '2017-12-07 17:16:06', '2017-12-07 17:16:12', 1, 1),
+(8, 22, '2017-12-07 18:31:27', '2017-12-07 18:31:31', 0, 1),
+(9, 22, '2017-12-07 18:31:44', '2017-12-07 18:31:47', 0, 1),
+(10, 22, '2017-12-07 18:31:56', '2017-12-07 18:32:00', 1, 1),
+(11, 22, '2017-12-07 18:33:15', '2017-12-07 18:33:40', 0, 1),
+(12, 22, '2017-12-07 18:33:50', '2017-12-07 18:34:10', 0, 1),
+(13, 22, '2017-12-07 18:34:20', '2017-12-07 18:34:23', 1, 1),
+(14, 23, '2017-12-07 18:37:29', '2017-12-07 18:37:40', 1, 0),
+(15, 23, '2017-12-07 18:56:45', '2017-12-07 18:56:57', 0, 0),
+(16, 24, '2017-12-13 15:52:22', '2017-12-13 15:52:26', 1, 1),
+(17, 23, '2017-12-13 15:52:38', '2017-12-13 15:52:47', 1, 0),
+(18, 26, '2017-12-13 15:55:30', NULL, 0, 1),
+(19, 23, '2017-12-13 15:55:40', NULL, 0, 0),
+(20, 24, '2017-12-13 15:55:59', '2017-12-28 14:15:27', 1, 0),
+(21, 27, '2017-12-13 15:56:36', '2017-12-13 15:56:55', 1, 0),
+(22, 27, '2017-12-13 15:58:01', '2017-12-13 15:58:07', 0, 0),
+(23, 28, '2017-12-13 15:59:19', '2017-12-13 15:59:27', 0, 0),
+(24, 28, '2017-12-13 16:00:43', '2017-12-13 16:00:50', 0, 0),
+(25, 28, '2017-12-13 16:00:57', '2017-12-13 16:01:05', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_11`
 --
 
 CREATE TABLE `table_11` (
@@ -13867,7 +14242,7 @@ CREATE TABLE `table_11` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Contenu de la table `table_11`
+-- Dumping data for table `table_11`
 --
 
 INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, `ligne`, `quantite`, `code_barres`) VALUES
@@ -13900,7 +14275,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (28, '3110140500', 'PATTE M9R ( petite )', '1405', 'E 099', 'M9R', '500', 'S12680001959'),
 (29, '3110220400', 'M9R Clamshell Lower', '2204', 'E 089', 'M9R', '24', 'S12680001958'),
 (30, '3110140300', 'M9R Clamshell Upper', '1403', 'E 093', 'M9R', '24', 'S12680001957'),
-(31, '3110157400', 'Bride d''entr?e M9R  ( grande )', '1574', 'E 091', 'M9R', '12', 'S12680001956'),
+(31, '3110157400', 'Bride d\'entr?e M9R  ( grande )', '1574', 'E 091', 'M9R', '12', 'S12680001956'),
 (32, '3110017400', 'BRIDE EGR   M9R', '174', 'E 101', 'M9R', '35', 'S12680001955'),
 (33, '3110182500', 'PATTE M9R ( grande )', '1825', 'E 097', 'M9R', '330', 'S12680001954'),
 (34, '1531261XXX', 'TSFR 1,4512 D80 -1,20 - 214', '1261', '770', 'COMAS', '12', 'S12680001953'),
@@ -13935,7 +14310,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (63, '1006934XXX', 'COUP 140X306 INT', '6934', 'B 014', 'LO2', '36', 'S12680001924'),
 (64, '1667922XXX', 'COUPELLE INT.', '7922', 'B 001', 'LO2', '30', 'S12680001923'),
 (65, '1276878XXX', 'TUBO INTERIOR ENTRADA DV6', '6878', 'AK 03', 'LO2', '28', 'S12680001922'),
-(66, '1832368XXX', 'TUBE D''ENTREE CMF1', '2368', 'AD 15', 'LO3', '12', 'S12680001921'),
+(66, '1832368XXX', 'TUBE D\'ENTREE CMF1', '2368', 'AD 15', 'LO3', '12', 'S12680001921'),
 (67, '1087456XXX', 'OUTSIDE BAFFLE', '7456', 'AJ 02', 'LO2', '44', 'S12680001920'),
 (68, '1128424XXX', 'Tube Perfo', '8424', 'AB 25', 'LO3', '24', 'S12680001919'),
 (69, '1881164XXX', 'TUBE ENTREE CMF1 ?55 EP 0,8MM', '1164', 'AI 02', 'LO3', '12', 'S12680001918'),
@@ -13973,7 +14348,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (101, '1127576XXX', 'Tube Perfo', '7576', 'Y 035', 'LO3', '10', 'S12680001886'),
 (102, '1387618XXX', 'Perforated pipe 1 A7 DV6C', '7618', 'Y 034', 'LO3', '21', 'S12680001885'),
 (103, '1612006XXX', 'TUBE SORTIE T7 DV6 ?5 60,00', '2006', 'Y 033', 'LO2', '10', 'S12680001884'),
-(104, '1660565XXX', 'TUBE D''ENTREE', '565', 'Y 032', 'LO2', '21', 'S12680001883'),
+(104, '1660565XXX', 'TUBE D\'ENTREE', '565', 'Y 032', 'LO2', '21', 'S12680001883'),
 (105, 'E4049989XX', 'COUPELLE INT?RIEURE', '9989', 'Y 031', 'LO2', '20', 'S12680001882'),
 (106, 'E4054542XX', 'TUBE SORTIE T7 DV6 ?5 60,00', '4542', 'Y 030', 'LO2', '25', 'S12680001881'),
 (107, 'E4054545XX', 'COUPELLE INT?RIEURE', '4545', 'Y 029', 'LO2', '25', 'S12680001880'),
@@ -13999,7 +14374,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (127, '1788755XXX', 'COUPELLE INTERIEUR CMF1', '8755', 'AF 23', 'LO3', '20', 'S12680001860'),
 (128, '1789224XXX', 'COUPELLE SORTIE CMF1', '9224', 'AF 22', 'LO3', '14', 'S12680001859'),
 (129, '1620893XXX', 'TUBE SORTIE CMF1', '893', 'AF 21', 'LO3', '16', 'S12680001858'),
-(130, '1620894XXX', 'TUBE D''ENTREE', '894', 'AE 25', 'LO3', '12', 'S12680001857'),
+(130, '1620894XXX', 'TUBE D\'ENTREE', '894', 'AE 25', 'LO3', '12', 'S12680001857'),
 (131, '1620892XXX', 'COUPELLE INTERIEURE CMF1', '892', 'AE 21', 'LO3', '14', 'S12680001856'),
 (132, '1620891XXX', 'COUPELLE INTERIEURE CMF1', '891', 'AE 24', 'LO3', '14', 'S12680001855'),
 (133, '1620895XXX', 'COUPELLE INTERIEURE CMF1', '895', 'AE 22', 'LO3', '18', 'S12680001854'),
@@ -14029,7 +14404,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (157, '3140501570', 'COUPELLE A7', '5015', 'AF 12', 'LO3', '44', 'S12680001830'),
 (158, '3140381070', 'COUPELLE A7', '3810', 'AE 15', 'LO3', '24', 'S12680001829'),
 (159, '3140380970', 'COUPELLE A7', '3809', 'AE 14', 'LO3', '24', 'S12680001828'),
-(66, '1832368XXX', 'TUBE D''ENTREE CMF1', '2368', 'AD 15', 'LO3', '12', 'S12680001827'),
+(66, '1832368XXX', 'TUBE D\'ENTREE CMF1', '2368', 'AD 15', 'LO3', '12', 'S12680001827'),
 (161, '1832366XXX', 'COUPELLE CMF1', '2366', 'AE 13', 'LO3', '15', 'S12680001826'),
 (162, '1832365XXX', 'COUPELLE CMF1', '2365', 'AE 12', 'LO3', '15', 'S12680001825'),
 (163, '1832370XXX', 'COUPELLE CMF1', '2370', 'AE 11', 'LO3', '15', 'S12680001824'),
@@ -14043,7 +14418,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (171, '3140983400', 'COUPELLE EXT. SORTIE    T87', '9834', 'AB 14', 'LO2', '24', 'S12680001816'),
 (172, '3140874700', 'COUPELLE EXT. SORTIE   T87', '8747', 'AB 13', 'LO2', '24', 'S12680001815'),
 (173, '1762180XXX', 'TUBE DE SORTIE', '2180', 'AB 12', 'LO2', '28', 'S12680001814'),
-(174, '1762182XXX', 'TUBE D''ENTREE', '2182', 'AB 11', 'LO2', '38', 'S12680001813'),
+(174, '1762182XXX', 'TUBE D\'ENTREE', '2182', 'AB 11', 'LO2', '38', 'S12680001813'),
 (175, '1762181XXX', 'COUPELLE INT.', '2181', 'AA 15', 'LO2', '44', 'S12680001812'),
 (176, '1762179XXX', 'COUPELLE INT.', '2179', 'AA 14', 'LO2', '44', 'S12680001811'),
 (177, '1764396XXX', 'COUPELLE INT.', '4396', 'AA 13', 'LO2', '44', 'S12680001810'),
@@ -14097,7 +14472,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (225, '3140914670', 'TUBE ENTREE T7 EP6 ?5 50,00', '9146', 'B 049', 'LO2', '20', 'S12680001762'),
 (226, '3140914770', 'TUBE SORTIE T7 EP6 ?5 50,00', '9147', 'B 059', 'LO2', '14', 'S12680001761'),
 (227, '1134404XXX', 'TUBE INT.', '4404', 'B 016', 'LO2', '36', 'S12680001760'),
-(228, '1924175XXX', 'TUBE D''ENTREE', '4175', 'B 026', 'LO2', '42', 'S12680001759'),
+(228, '1924175XXX', 'TUBE D\'ENTREE', '4175', 'B 026', 'LO2', '42', 'S12680001759'),
 (229, '3140913900', 'A- FIBRE DE VERRE', '9139', 'B 032', 'LO2', '40', 'S12680001758'),
 (56, '1095445XXX', 'TUBE SORTIE T7 DV6 ?5 60,00', '5445', 'B 036', 'LO2', '18', 'S12680001757'),
 (51, '1620999XXX', 'TUBE ENTREE', '999', 'B 042', 'LO3', '24', 'S12680001756'),
@@ -14299,7 +14674,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (427, '1458790XXX', 'TUBE', '8790', 'F 242', 'EAGLE', '300', 'S12680001449'),
 (428, '1594467XXX', 'COUPELLE INT LAND ROVER', '4467', 'E 49', 'EAGLE', '32', 'S12680001448'),
 (429, '2001766XXX', 'TUBE PERFO  55 x 1 x 285   1.4510', '1766', 'D 05', 'JLR', '15', 'S12680001447'),
-(430, '1385841XXX', 'BRIDE D '' ENTREE', '5841', 'F 413', 'T9 GTI', '30', 'S12680001445'),
+(430, '1385841XXX', 'BRIDE D \' ENTREE', '5841', 'F 413', 'T9 GTI', '30', 'S12680001445'),
 (431, '1727970XXX', 'Patte turbo 1', '7970', 'F 141', 'T9 GTI', '200', 'S12680001444'),
 (432, '1794666XXX', 'Rondelle 15 X 4,5', '4666', 'F 239', 'T9 GTI', '1 000,00', 'S12680001443'),
 (433, '1406516XXX', 'ECROU AUTOFREINE M6 X 1', '6516', 'F 344', 'T9 GTI', '200', 'S12680001442'),
@@ -14316,8 +14691,8 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (444, '1533378XXX', 'HC CATA 30Gr 5G - BASF', '3378', 'G 15', '?5 CATA', '12', 'S12680001426'),
 (445, '1476470XDP', 'DPF Ceramic 6p NGK', '6470', 'G 07', '?5 FAP', '4', 'S12680001425'),
 (445, '1476470XDP', 'DPF Ceramic 6p NGK', '6470', 'G 07', 'SCR?6', '4', 'S12680001424'),
-(447, '1210048XXX', 'SCR Ceramic LG.152,4 (6")', '48', 'G 04', 'SCR?6', '6', 'S12680001423'),
-(448, '1702773XXX', 'DPF FILTRE lg 6"', '2773', 'G 02', '?5 FAP', '6', 'S12680001421'),
+(447, '1210048XXX', 'SCR Ceramic LG.152,4 (6\")', '48', 'G 04', 'SCR?6', '6', 'S12680001423'),
+(448, '1702773XXX', 'DPF FILTRE lg 6\"', '2773', 'G 02', '?5 FAP', '6', 'S12680001421'),
 (449, 'E4051424', 'CERAMIQUE', '5142', 'G 21', 'PRINCE', '36', 'S12680001417'),
 (440, '1273460XXX', 'CEARAMIQUE D110 X 125', '3460', 'G 34', 'PRINCE', '12', 'S12680001415'),
 (451, 'E4056500', 'CEARAMIQUE D110 X 98.7', '5650', 'G 19', 'PRINCE', '12', 'S12680001414'),
@@ -14327,7 +14702,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (455, '3141149200', 'DPF Ceramic 6p Ibiden', '1149', 'G 14', '?5 FAP', '10', 'S12680001405'),
 (456, '1533380XXX', 'HC CATA 50Gr 5G - BASF', '3380', 'G 25', '?5 CATA', '12', 'S12680001404'),
 (457, '1116915XXX', 'HC CATA 70 Gr - UMICORE 5593', '6915', 'G 04', '?5 CATA', '12', 'S12680001403'),
-(458, '1697777XXX', 'TUBE D''ENTREE T7/B81', '7777', 'A 12', 'CHASSIS PO', '10', 'S12680001400'),
+(458, '1697777XXX', 'TUBE D\'ENTREE T7/B81', '7777', 'A 12', 'CHASSIS PO', '10', 'S12680001400'),
 (459, 'E4072131', 'CROCHET INTER B81 EP6CDTX', '7213', 'F 213', 'CHASSIS PO', '20', 'S12680001399'),
 (460, 'E4049581', 'A-CROCHET DOUBLE T76 EP6CDT', '4958', 'A 56', 'CHASSIS PO', '50', 'S12680001398'),
 (461, '18G2470000', 'CROCHET INTER T52.', '2470', 'DEBORD', 'CHASSIS PO', '200', 'S12680001397'),
@@ -14373,7 +14748,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (501, '1423244XXX', 'Outlet Tube - UC DV6 E5 3mm', '3244', 'A 22', '?5 FAP', '30', 'S12680001349'),
 (502, '1154739XXX', 'Outlet Tube - C/D DV6 E5 3mm', '4739', 'D 19', '?5 FAP', '30', 'S12680001348'),
 (503, '1249305XXX', 'Pressure Sensor Boss', '9305', 'F 415', '?5 FAP', '200', 'S12680001347'),
-(504, '1006615XXX', 'NAPA FAP DV6E5 6"', '6615', 'B 75', '?5 FAP', '75', 'S12680001346'),
+(504, '1006615XXX', 'NAPA FAP DV6E5 6\"', '6615', 'B 75', '?5 FAP', '75', 'S12680001346'),
 (505, '1859345XXX', 'Prise de sonde SCR VICTORA', '9345', 'A 26', 'SCR?6', '140', 'S12680001345'),
 (506, '1348290XXX', 'SCR Outlet Sensor Boss', '8290', 'F 206', 'SCR?6', '200', 'S12680001344'),
 (507, '3140329200', 'BOUCHON SUPPORT PRESSION BLANC', 'P005', 'F 124', 'SCR?6', '1 000,00', 'S12680001343'),
@@ -14418,7 +14793,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (546, '9624037080', 'COLLIER CAILLAU DIAM 61', '4037', 'E 32', 'SYNCHRONE', '100', 'S12680001296'),
 (547, '9624037280', 'COLLIER CAILLAU DIAM 74,5', '372', 'C 52', 'SYNCHRONE', '100', 'S12680001295'),
 (548, '9624037180', 'COLLIER CAILLAU DIAM 66', '371', 'F 129', 'SYNCHRONE', '100', 'S12680001294'),
-(458, '1697777XXX', 'TUBE D''ENTREE T7/B81', '7777', 'A 12', 'ICEMI 0', '10', 'S12680001293'),
+(458, '1697777XXX', 'TUBE D\'ENTREE T7/B81', '7777', 'A 12', 'ICEMI 0', '10', 'S12680001293'),
 (550, 'E4072226', 'COUPELLE', '2226', '', 'JLR', '25', 'S12680001292'),
 (551, '1162573XXX', 'Ecran thermique T7 DW10C', '2573', 'C 57', 'T7 DW10', '40', 'S12680001291'),
 (552, '1162639XXX', 'Crochet assembl? T7 DW10 C', '2639', 'C 40', 'T7 DW10', '350', 'S12680001290'),
@@ -14428,8 +14803,8 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (555, '1160014XXX', 'frette entr?e T7 DW10 C', '14', 'C 43', 'T7 DW10', '65', 'S12680001287'),
 (556, '1384052XXF', 'SCR -  cone de sortie', '4052', 'B 33', 'SCR E6', '12', 'S12680001284'),
 (557, '1641388XXX', 'tuyau de pression AV', '1388', 'C 37', 'SCR E6', '110', 'S12680001283'),
-(558, '1002612XXX', 'TUBE (INTERIEUR) - TUBE D''ENTREE D55 T1.', '2612', '', 'L550', '20', 'S12680001281'),
-(559, 'E4055504', 'TUBE D''ENTREE', '5504', 'B 31', 'EAGLE', '13', 'S12680001280'),
+(558, '1002612XXX', 'TUBE (INTERIEUR) - TUBE D\'ENTREE D55 T1.', '2612', '', 'L550', '20', 'S12680001281'),
+(559, 'E4055504', 'TUBE D\'ENTREE', '5504', 'B 31', 'EAGLE', '13', 'S12680001280'),
 (560, '1345028XXH', 'SCR - Inlet cone BVH2/2P/3', '5028', 'B 19', 'SCR?6', '12', 'S12680001279'),
 (561, 'E4076457', 'COUPELLE INTERIEURE GAUCHE pos 1', '6457', '', 'JLR', '20', 'S12680001277'),
 (562, 'E4072227', 'COUPELLE INT LANDROVER GAUCHE pos 2', '2227', '', 'JLR', '28', 'S12680001273'),
@@ -14473,8 +14848,8 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (600, '1523534XXX', 'COUPELLE INT LANDROVER GAUCHE pos 2', '3534', '', 'EAGLE', '26', 'S12680001213'),
 (601, '1560455XXX', 'tuyau pression AR', '455', 'A 61', 'SCR?6', '64', 'S12680001209'),
 (602, '1560437XXX', 'TUYAU FRETTE DIA 45 EP 1.2', '437', '', 'SCR?6', '12', 'S12680001207'),
-(603, '1396099XXX', 'TUBE PRESSION ARRIERE LONG SCR BVH2''', '6099', 'B 72', 'SCR?6', '72', 'S12680001206'),
-(604, '1396101XXX', 'TUBE PRESSION AVANT COURT SCR BVH2''', '6101', 'B 74', 'SCR?6', '140', 'S12680001205'),
+(603, '1396099XXX', 'TUBE PRESSION ARRIERE LONG SCR BVH2\'', '6099', 'B 72', 'SCR?6', '72', 'S12680001206'),
+(604, '1396101XXX', 'TUBE PRESSION AVANT COURT SCR BVH2\'', '6101', 'B 74', 'SCR?6', '140', 'S12680001205'),
 (605, '1195985XXX', 'S/E CROCHET SCR BVH', '5985', 'B 18', 'SCR?6', '27', 'S12680001204'),
 (606, '1348331XXX', 'Pressure Pipe Downstream - BVH2', '8331', '', 'SCR?6', '80', 'S12680001203'),
 (607, '1348309XXX', 'Pressure Pipe Upstream - BVH2', '8309', '', 'SCR?6', '140', 'S12680001202'),
@@ -14526,8 +14901,8 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (531, '9658492980', 'SUSPENTE ARG BLEUE', '4929', 'A 29', 'ICEMI 0', '60', 'S12680001136'),
 (485, 'E4068423', 'SANGLE ASSEMBLEE T75 EP6CDT', '6842', 'B 05', 'ICEMI 0', '10', 'S12680001134'),
 (655, 'E3024586', 'D HANGER AND BELT ASSY.', '2458', 'D 17', 'ICEMI 0', '10', 'S12680001132'),
-(656, '1528346ST', 'TUBE D''ENTREE T7 EP6CDT    60.00', '8346', 'D 21', 'ICEMI 0', '20', 'S12680001130'),
-(657, 'E4040916ST', 'TUBE D''ENTREE T7 EP3        45.00', '4091', '', 'ICEMI 0', '100', 'S12680001129'),
+(656, '1528346ST', 'TUBE D\'ENTREE T7 EP6CDT    60.00', '8346', 'D 21', 'ICEMI 0', '20', 'S12680001130'),
+(657, 'E4040916ST', 'TUBE D\'ENTREE T7 EP3        45.00', '4091', '', 'ICEMI 0', '100', 'S12680001129'),
 (658, 'E4043712', 'CROCHET DOUBLE T7 EP6', '4371', 'F 345', 'ICEMI 0', '30', 'S12680001128'),
 (659, 'E4060340', 'CROCHET INTER T7 EP6CDTX', '6034', 'F 308', 'ICEMI 0', '100', 'S12680001127'),
 (460, 'E4049581', 'A-CROCHET DOUBLE T76 EP6CDT', '4958', 'A 56', 'ICEMI 0', '50', 'S12680001126'),
@@ -14587,16 +14962,16 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (714, '1700403XXX', 'COUPELLE JLR', '403', 'E 16', 'L550', '10', 'S12680001059'),
 (715, '1714795XXX', 'COUPELLE JLR', '4795', 'B 51', 'L550', '10', 'S12680001058'),
 (716, '1536725XXX', 'TUBE RESONATEUR JLR        35.00', '6725', '', 'L550', '75', 'S12680001057'),
-(717, '1451824XXX', 'SUPPORT TUYAU D''ENTREE', '1824', 'A 25', 'L550', '70', 'S12680001056'),
+(717, '1451824XXX', 'SUPPORT TUYAU D\'ENTREE', '1824', 'A 25', 'L550', '70', 'S12680001056'),
 (718, '1714810XXX', 'COUPELLE JLR', '4810', 'B 53', 'L550', '10', 'S12680001055'),
-(719, '1412122XXX', 'TUYAU D''ENTREE JLR        45.00', '2122', '', 'L550', '30', 'S12680001054'),
+(719, '1412122XXX', 'TUYAU D\'ENTREE JLR        45.00', '2122', '', 'L550', '30', 'S12680001054'),
 (720, '1706611KXX', 'SOURDINE ASSEMBLEE JLR L550 GTDI - D65', '6611', '', 'L550', '32', 'S12680001053'),
 (721, '1412121XXX', 'TUYAU DE SORTIE JLR      45.00', '2121', '', 'L550', '30', 'S12680001052'),
 (722, '1002314XXX', 'COUPELLE INT - D# T1.2 3T+200 PATTERN F2', '2314', 'E 42', 'L550', '20', 'S12680001049'),
 (723, '1002301XXX', 'DEMI-COQUILLE - DEMI-COQUILLE TUBE INTER', '2301', 'A 47', 'L550', '60', 'S12680001048'),
 (724, '1002607XXX', 'ISOLATION ACOUSTIQUE - INOX MANCHON', '2607', 'F 106', 'L550', '40', 'S12680001047'),
 (725, '1002310XXX', 'TUBE (INTERIEUR) - TUBE D50 T1 #R# L195', '2310', 'F 04', 'L550', '32', 'S12680001046'),
-(726, '1277103XXX', 'TUYAU D''ENTREE T7 EP6  50,00', '7103', '', 'T9', '11', 'S12680001044'),
+(726, '1277103XXX', 'TUYAU D\'ENTREE T7 EP6  50,00', '7103', '', 'T9', '11', 'S12680001044'),
 (727, '1382290XXX', 'HOOK', '2290', 'C 34', 'T9', '100', 'S12680001042'),
 (728, '1191533XXX', 'CROCHET DOUBLE ASS T9', '1533', 'D 43', 'T9', '30', 'S12680001041'),
 (729, '1727972XXX', 'Patte turbo 2', '7972', 'F 339', 'T9 GTI', '200', 'S12680001039'),
@@ -14633,7 +15008,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (760, 'E4051421', 'CONO DE ENTRADA HOT-END PSA EP6', '5142', 'E 02', 'PRINCE', '40', 'S12680000998'),
 (738, '1462891', 'CONO DE SALIDA HOT-END PSA EP6', '2891', 'E 01', 'PRINCE', '50', 'S12680000997'),
 (482, '1463034', '? COQUILLE AV. AVEC TROU', '3034', 'D 23', 'PRINCE', '38', 'S12680000993'),
-(763, 'E4083938XX', 'Tube de sortie 60 ep1.5 / 1.4509 BVH2''', '8393', '', 'PRINCE', '10', 'S12680000992'),
+(763, 'E4083938XX', 'Tube de sortie 60 ep1.5 / 1.4509 BVH2\'', '8393', '', 'PRINCE', '10', 'S12680000992'),
 (764, '1463047', 'TUBE DE SORTIE D60 ep1.5-1.4509', '3047', '', 'PRINCE', '28', 'S12680000991'),
 (765, '1660217XXX', 'PATTE SUPPORT', '217', 'B 07', 'PRINCE', '35', 'S12680000990'),
 (766, 'E4029748', 'TAPA PLASTICA BRIDA HOT-END PSA EP6', '2974', 'E 39', 'PRINCE', '300', 'S12680000987'),
@@ -14698,10 +15073,10 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 (825, '3141057400', 'FRETTE ENTREE DV6EURO5', '1057', '', 'FAP EURO 5', '40', 'S12680000903'),
 (826, '1013663XXX', 'SEMI COQUILHA ENTRADA AR', '3663', 'D 41', 'FAP EURO 5', '24', 'S12680000901'),
 (827, '1071330XXX', 'Semi-coquilha sup av', '1330', 'E 10', 'FAP EURO 5', '20', 'S12680000900'),
-(828, '1148418XXX', 'Collier d''assemblage', '8418', 'D 52', 'FAP EURO 5', '40', 'S12680000897'),
+(828, '1148418XXX', 'Collier d\'assemblage', '8418', 'D 52', 'FAP EURO 5', '40', 'S12680000897'),
 (829, '1016012XXX', 'A JOINT DE MAINTIEN', '6012', 'A 68', 'FAP EURO 5', '500', 'S12680000894'),
 (830, '1213259XXX', 'Turbo Bracket', '3259', 'F 119', 'FAP EURO 5', '200', 'S12680000893'),
-(831, '1176755X00', 'TUBE D''ENTREE P87', '6755', 'DE 01', 'L550', '15', 'S12680001990'),
+(831, '1176755X00', 'TUBE D\'ENTREE P87', '6755', 'DE 01', 'L550', '15', 'S12680001990'),
 (832, '1176758X00', 'TUBE DE SORTIE P87', '6758', 'DE 02', 'L550', '18', 'S12680001991'),
 (833, '1176767XXX', 'COUPELLE INTERIEURE', '6767', 'F 065', 'L550', '25', 'S12680001992'),
 (834, '1176770XXX', 'COUPELLE INTERIEURE', '6770', 'F 067', 'L550', '25', 'S12680001993'),
@@ -14710,7 +15085,7 @@ INSERT INTO `table_11` (`id`, `reference`, `description`, `sebango`, `adresse`, 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `table_12`
+-- Table structure for table `table_12`
 --
 
 CREATE TABLE `table_12` (
@@ -14720,7 +15095,7 @@ CREATE TABLE `table_12` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Contenu de la table `table_12`
+-- Dumping data for table `table_12`
 --
 
 INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
@@ -14739,7 +15114,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G10451T0', '0', 'A NAPPE SAFFIL OBM'),
 ('18G1050000', '0', 'ENV.ASS.MARQUEE BRESIL'),
 ('18G10501T0', '0', 'ENV ASS 150X85 MARQ.BRESIL'),
-('18G10511J0', '0', 'TUBE D''ENTREE          45,00'),
+('18G10511J0', '0', 'TUBE D\'ENTREE          45,00'),
 ('18G1051500', '0', 'BRB AS120.06  BOB0141,2X1,45'),
 ('18G1051600', '0', 'TSBR AS120.06  R45-1,50-6358'),
 ('18G10531J0', '0', 'TUBE DE SORTIE         45,00'),
@@ -14846,7 +15221,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('10696', '0', '1/2 coquil inf 1225329-B'),
 ('10706', '0', 'tube 409 38x1.5 lg 2624'),
 ('10707', '0', 'tube 409 42x1.5 lg 1768'),
-('10708', '0', 'bride d''entr?e 1256 048'),
+('10708', '0', 'bride d\'entr?e 1256 048'),
 ('10710', '0', 'Crochet AR TU1  1 255 879'),
 ('10712', '0', 'tube 409 42 x 1.5 lg 539'),
 ('10714', '0', 'Crochet AR TU3  1 255 996'),
@@ -14936,7 +15311,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('11231', '0', 'PC ET3 A8 9653157280'),
 ('11266', '0', 'PF A6 TU5JP4S 9651956580'),
 ('11292', '0', 'JEU 1/2 coq. 1250744/731'),
-('11313', '0', 'Bride d''entr?e ET3 T1 ,T5'),
+('11313', '0', 'Bride d\'entr?e ET3 T1 ,T5'),
 ('11327', '0', 'ecran 1462384 non marque'),
 ('11328', '0', 'PC ET3 A8  9680088980'),
 ('11336', '0', 'ETIQUET PSA IMAGE PEUGEOT'),
@@ -15096,7 +15471,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('11915', '0', 'Ens. carton+calage F4RT'),
 ('54799', '0', 'A7  HC X M2 V05 G61330 (OCTTOP)'),
 ('1497861', '0', 'BICONE T7 EP6CDT'),
-('1528346', '0', 'TUBE D''ENTREE T7 EP6CDT    60.00'),
+('1528346', '0', 'TUBE D\'ENTREE T7 EP6CDT    60.00'),
 ('1552422', '0', 'SIL. ARRIERE T76 EP6CDTX  PSA3166'),
 ('31400970', '0', 'COUPELLE EXT. SORTIE    X62'),
 ('314061909', '0', 'FLAN ENVEL 493X176x1,2'),
@@ -15125,8 +15500,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1108839719', '0', 'SIL AV 505'),
 ('1108841795', '0', 'BRP AS120-04  BOB0126,2X1,20'),
 ('1108841796', '0', 'AS120 04 R40,0-1,20-P.P'),
-('1108855416', '0', '172128 SIL D44 "APACAT3102"XU XUD'),
-('1108855499', '0', 'SIL D44 "APACAT3102"XU XUD'),
+('1108855416', '0', '172128 SIL D44 \"APACAT3102\"XU XUD'),
+('1108855499', '0', 'SIL D44 \"APACAT3102\"XU XUD'),
 ('1108864595', '0', 'BRP AS120-06  BOB0131,8X1,45'),
 ('1108864596', '0', 'TSP AS120-06 R42.0-1,50-6314'),
 ('1108871400', '0', 'BRIDE XC8'),
@@ -15769,7 +16144,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1821298000', '0', 'FRETTE CINTREE XM      60,00'),
 ('1821298900', '0', 'TUYAU AR TRONC         60,00'),
 ('1821299000', '0', 'FRETTE                 60,00'),
-('1821300000', '0', 'SIL ZX  "PSA  4076"'),
+('1821300000', '0', 'SIL ZX  \"PSA  4076\"'),
 ('1821301900', '0', 'FLAN 1/2 COQUILLE SUP'),
 ('1821302900', '0', 'FLAN 1/2 COQUILLE INF'),
 ('1821303000', '0', 'COUPELLE EMBOUTIE'),
@@ -15816,7 +16191,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1821436900', '0', 'CANULE TRONC           60,00'),
 ('1821437000', '0', 'CROCHET AV'),
 ('1821438000', '0', 'CROCHET AR'),
-('1821439000', '0', 'SIL AR  "PSA 3342 **Y"'),
+('1821439000', '0', 'SIL AR  \"PSA 3342 **Y\"'),
 ('1821440900', '0', 'FLAN SUP'),
 ('1821441900', '0', 'FLAN INF'),
 ('1821442070', '0', 'COUPELLE 1  217G84'),
@@ -15851,7 +16226,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1821537600', '0', 'TSB AS120-04   R45-1,20-6130'),
 ('1821537700', '0', '45 TSB AS120-04 EP 1,2'),
 ('1821554000', '0', 'TUBE ENTREE            48,00'),
-('1821557100', '0', 'CANULE N2 "AUTRICHE".'),
+('1821557100', '0', 'CANULE N2 \"AUTRICHE\".'),
 ('1821561000', '0', 'SOURDINE               80,00'),
 ('1821608000', '0', 'TUBE ENTREE            48,00'),
 ('1821624032', '0', 'SOURDINE                 64,00'),
@@ -15954,7 +16329,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1822677999', 'E 028', 'BOUCHON EXTREMITE'),
 ('1822692000', '0', 'A MANCHON INOX'),
 ('1822735000', '0', 'TUYAU FRETTE AR        48,00'),
-('1822736000', '0', 'SIL INT "PSA 3125"  170X100'),
+('1822736000', '0', 'SIL INT \"PSA 3125\"  170X100'),
 ('1822737000', '0', 'ENVELOPPE EXT ASS.'),
 ('1822738000', '0', 'R COUPELLE EXTERIEURE'),
 ('1822738070', '0', 'COUPELLE EXTERIEURE'),
@@ -16064,7 +16439,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1823497000', '0', '1/2 CONES INT AV INF.'),
 ('1823501000', '0', '1/2 CONE  INT AR SUP.'),
 ('1823502000', '0', '1/2 CONE  INT AR INF.'),
-('1823525000', '0', '406  SIL  D83 "PSA 3135"'),
+('1823525000', '0', '406  SIL  D83 \"PSA 3135\"'),
 ('1823527000', '0', 'TUBE ENTREE AVEC RESTRICTEUR'),
 ('1823528070', '0', 'COUPELLE INT.'),
 ('1823529070', '0', 'COUPELLE INTERIEUR'),
@@ -16097,7 +16472,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1823548100', '0', 'COUPELLE INT.'),
 ('1823549070', '0', 'COUPELLE INT.'),
 ('1823549100', '0', 'COUPELLE INT.'),
-('1823550000', '0', 'TUBE D''ENTREE          54,00'),
+('1823550000', '0', 'TUBE D\'ENTREE          54,00'),
 ('1823550500', '0', 'BRB AS120-06  BOB0168,3X1,90'),
 ('1823550600', '0', 'TSBR AS120-06  R54-2,00-6366'),
 ('1823552000', '0', 'TUBE RESONATEUR D83    38,00'),
@@ -16146,7 +16521,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1823629070', 'MESSEI', 'CROCHET TUBE'),
 ('1823630000', 'MESSEI', 'CANULE + ENJOLIVEUR D82'),
 ('1823631000', 'MESSEI', 'PATTE SUPPORT CROCHET DROIT'),
-('1823632000', '0', 'SIL AR  "PSA  3137"  D82'),
+('1823632000', '0', 'SIL AR  \"PSA  3137\"  D82'),
 ('1823634000', '0', '406         SIL D82 PSA 3135'),
 ('1823635000', '0', 'SIL AR ASSEMBLE D82 PSA 3135'),
 ('1823663000', '0', 'TUBE TRONC. OPEL       50,00'),
@@ -16162,7 +16537,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1823750000', '0', 'TUYAUTERIE AR.ASS.'),
 ('1823751000', '0', 'CANULE D83 XUD9 ASD    48,00'),
 ('1823751900', '0', 'CANULE D83 XUD9 TRONC. 48,00'),
-('1823770100', '0', 'TUYAU D''ENTREE.         45,00'),
+('1823770100', '0', 'TUYAU D\'ENTREE.         45,00'),
 ('1823770500', '0', 'R BRB 1.4512    BOB0142,4X1,00'),
 ('1823770600', '0', 'TSBR 1.4512  R45,0-1,00-6378'),
 ('1823770700', '0', '45 TSBR 1.4512  EP 1'),
@@ -16208,7 +16583,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1824042900', '0', 'CANULE D82 XUD9 TRONC  48,00'),
 ('1824049000', '0', 'ENSEMBLE CABLE ET AGRAFES'),
 ('1824056000', '0', 'SIL AR ASSEMBLE D95 PSA 3137'),
-('1824057000', '0', 'SIL AR  "PSA 3137"'),
+('1824057000', '0', 'SIL AR  \"PSA 3137\"'),
 ('1824060000', 'MESSEI', 'CANULE + ENJOLIVEUR D85'),
 ('1824101000', '0', 'TUBE ENTREE 2 AS120 06 50,00'),
 ('1824101500', '0', 'BRB AS120-06  BOB0155,8X1,90'),
@@ -16260,7 +16635,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1824284100', '0', 'R COUPELLE EXT. X70 MERCOSUR'),
 ('1824285070', '0', 'R COUP. INT. X70 MERCOSUR'),
 ('1824285100', '0', 'R COUP. INT. X70 MERCOSUR'),
-('1824286000', '0', 'TUBE D''ENTREE 1,50     60,00'),
+('1824286000', '0', 'TUBE D\'ENTREE 1,50     60,00'),
 ('1824286500', '0', 'BRB AS120-06  BOB0188,8X1,45'),
 ('1824286600', '0', 'TSBR AS120-06  R60-1,50-6194'),
 ('1824287500', '0', 'BRB AS120-06  BOB0188,8X1,45'),
@@ -16467,7 +16842,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1825780000', '0', 'PALETTE ETUVEE  1200X1000'),
 ('1825783000', '0', 'INTERCAL. CARTON SC 1050X700'),
 ('1825785000', '0', 'SEPARATEUR CENTRAL'),
-('1825786000', '0', 'INTERCALAIRE CALE D''ANGLE'),
+('1825786000', '0', 'INTERCALAIRE CALE D\'ANGLE'),
 ('1825787000', '0', 'CARTON  CONDITIONNEMNT COLL'),
 ('1825788000', '0', 'CARTON MODU3P 1140X950X850'),
 ('1825789000', 'DD 15', 'POCHETTE ADHESIVE/EMBALLAGE'),
@@ -16581,7 +16956,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1827965000', '0', 'NAPPE DE MAINTIEN'),
 ('1827986000', '0', 'COUPELLE INTERIEURE.'),
 ('1827986100', '0', 'COUPELLE INTERIEURE.'),
-('1828039070', '0', 'SIL INT "PSA 3357 Y" 200X130'),
+('1828039070', '0', 'SIL INT \"PSA 3357 Y\" 200X130'),
 ('1828086000', '0', 'ELEMENT CATA'),
 ('1828193000', '0', 'NAPPE ISOLATION (3M)'),
 ('1828207000', '0', 'EBAUCHE SOURDINE  72,00'),
@@ -16618,7 +16993,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1828387000', '0', 'ISOLATION CENTRALE THERMO EX'),
 ('1828388000', '0', 'ELEMENT CATA 114636108'),
 ('1828395000', '0', 'SIL AR ASSEMBLE D93 PSA 3137'),
-('1828396000', '0', 'SIL AR  "PSA 3137"'),
+('1828396000', '0', 'SIL AR  \"PSA 3137\"'),
 ('1828397000', '0', 'CANULE + ENJOLIVEUR D93'),
 ('1828439000', '0', 'ENVELOPPE ASS.'),
 ('1828449500', '0', 'BRB 1_4512 BOB 0142,4X1,00'),
@@ -16662,7 +17037,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1828772000', '0', 'C PAIN CATA 6198'),
 ('1828773000', '0', 'C PAIN CATA 6120'),
 ('1828779000', '0', 'TUBE ENTREE E16 TRONC. 45,00'),
-('1828779100', '0', 'TUBE D''ENTREE TRONC.   45,00'),
+('1828779100', '0', 'TUBE D\'ENTREE TRONC.   45,00'),
 ('1828780100', '0', 'TUBE SORTIE TRONC.     45,00'),
 ('1828780500', '0', 'BRB AS120-06  BOB0141,2X1,45'),
 ('1828780600', '0', 'TSBR AS120-06  R45-1,50-6338'),
@@ -16946,7 +17321,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1882719000', '0', 'TUBE ENTR?E SONDE D4FT'),
 ('1882720000', '0', 'TUBE SORTIE SONDE D4FT'),
 ('1882721000', '0', 'TUBE ENTR?E AVEC BRIDE D4FT'),
-('1882722000', '0', 'BOITE ET TUBE D''ENTR?E D4FT'),
+('1882722000', '0', 'BOITE ET TUBE D\'ENTR?E D4FT'),
 ('1882723000', '0', 'TUBE SORTIE ET BRIDE  D4FT'),
 ('1882724000', '0', 'BOITE AVEC TUBES  D4FT'),
 ('1882725000', '0', 'BOITE TUB PONTET SOUD?S D4FT'),
@@ -17432,13 +17807,13 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140068900', '0', 'TYT KTA.R. T1 TU5 -15,0-K181'),
 ('3140068920', '0', 'TYT KTA.R. T1 TU5 -15,0-K181'),
 ('3140069000', '0', 'CATA S/COLLECTEUR TU5   K181'),
-('3140070000', '0', 'TYT T5 TU5K'' 5BE  BLEU  3060'),
-('3140070010', '0', 'TYT T5 TU5K'' 5BE  BLEU  3060'),
+('3140070000', '0', 'TYT T5 TU5K\' 5BE  BLEU  3060'),
+('3140070010', '0', 'TYT T5 TU5K\' 5BE  BLEU  3060'),
 ('3140070100', '0', 'CATA S/COLLECTEUR TU5   3060'),
-('3140070200', '0', 'TYT T5 TU5K'' 5AL VIOLET 3060'),
-('3140070210', '0', 'TYT T5 TU5K'' 5AL VIOLET 3060'),
-('3140070300', '0', 'TYT T5 TU5K''     JAUNE  3060'),
-('3140070310', '0', 'TYT T5 TU5K''     JAUNE  3060'),
+('3140070200', '0', 'TYT T5 TU5K\' 5AL VIOLET 3060'),
+('3140070210', '0', 'TYT T5 TU5K\' 5AL VIOLET 3060'),
+('3140070300', '0', 'TYT T5 TU5K\'     JAUNE  3060'),
+('3140070310', '0', 'TYT T5 TU5K\'     JAUNE  3060'),
 ('3140070500', '0', 'TYT T5 TU5  5BE  BLEU   K181'),
 ('3140070510', '0', 'TYT T5 TU5  5BE  BLEU   K181'),
 ('3140070700', '0', 'TYT T5 TU5  5AL  VIOLET K181'),
@@ -17450,9 +17825,9 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140083200', '0', 'A MANCHON INOX'),
 ('3140083300', '0', 'COUPELLE RENFORT X73 PH2'),
 ('3140083800', '0', 'TYT KTA. N7 TU5US83BVM  K181'),
-('3140083900', '0', 'TYT KTA.R. N7 TU5K'' BVA 3060'),
-('3140083910', '0', 'TYT KTA.R. N7 TU5K'' BVA 3060'),
-('3140084000', '0', 'TYT KTA.R. N7 TU5K''BVM  3060'),
+('3140083900', '0', 'TYT KTA.R. N7 TU5K\' BVA 3060'),
+('3140083910', '0', 'TYT KTA.R. N7 TU5K\' BVA 3060'),
+('3140084000', '0', 'TYT KTA.R. N7 TU5K\'BVM  3060'),
 ('3140084500', 'DG 11', '1/2 COQUILLE ISOLANTE SUP'),
 ('3140084600', 'DG 12', '1/2 COQUILLE ISOLANTE INF'),
 ('3140085900', '0', 'C CERAM D143,8X88,9 140G 6569'),
@@ -17465,7 +17840,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140087300', '0', 'TYT CATA ASS DV6EURO4TT K346'),
 ('3140087310', '0', 'TYT CATA ASS DV6EURO4TT K346'),
 ('3140087500', '0', 'PAIN CATA 120G'),
-('3140087700', '0', 'TYT KTA.R. N7 TU5 BVA "K181"'),
+('3140087700', '0', 'TYT KTA.R. N7 TU5 BVA \"K181\"'),
 ('3140088900', '0', 'PROTECTEUR DE VANNE Z9.'),
 ('3140089100', '0', 'CONE DE SORTIE'),
 ('3140089110', '0', 'CONE DE SORTIE'),
@@ -17502,8 +17877,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140094400', '0', 'CORPS CATALYSEUR K299'),
 ('3140094500', '0', 'ETIQUETTE CODE  BARRE VERTE'),
 ('3140094600', '0', 'ETIQUETTE CODE BARRE BLANCHE'),
-('3140095100', '0', 'TUBE D''ENTR?E D4FT'),
-('3140095190', '0', 'TUBE D''ENTR?E EBAUCHE  D4FT'),
+('3140095100', '0', 'TUBE D\'ENTR?E D4FT'),
+('3140095190', '0', 'TUBE D\'ENTR?E EBAUCHE  D4FT'),
 ('3140095290', '0', 'TUBE DE SORTIE EBAUCHE D4FT'),
 ('3140096650', '0', 'BRB 1.4510    BOB0189,7X1,00'),
 ('3140096660', '0', 'TSBR 1.4510  R60,0-1,00-6365'),
@@ -17873,7 +18248,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140221690', '0', 'CANULE T72 TRONC.      55,00'),
 ('3140221700', '0', 'TYT INTER T7 EP6     PSA3093'),
 ('3140221710', '0', 'TYT INTER T7 EP6     PSA3093'),
-('3140221800', '0', 'TUYAU D''ENTREE T7 EP6  50,00'),
+('3140221800', '0', 'TUYAU D\'ENTREE T7 EP6  50,00'),
 ('3140221900', '0', 'SIL. INTER T7 EP6    PSA3093'),
 ('3140221970', '0', 'SIL. INTER T7 EP6    PSA3093'),
 ('3140222000', '0', 'COUPELLES EXT.T7 D=145'),
@@ -17926,8 +18301,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140234900', '0', 'ECRAN THERMIQUE CATA T6.'),
 ('3140235000', '0', 'ENS TYT ASS. T1 TU1JPL4 K179'),
 ('3140235010', '0', 'ENS TYT ASS. T1 TU1JPL4 K179'),
-('3140235100', '0', 'ENS TYT ASS. T1 TU1JPK'' 3056'),
-('3140235110', '0', 'ENS TYT ASS. T1 TU1JPK'' 3056'),
+('3140235100', '0', 'ENS TYT ASS. T1 TU1JPK\' 3056'),
+('3140235110', '0', 'ENS TYT ASS. T1 TU1JPK\' 3056'),
 ('3140235300', '0', 'ENS TYT ASS. T1 TU3 BVM K208'),
 ('3140235310', '0', 'ENS TYT ASS. T1 TU3 BVM K208'),
 ('3140235400', '0', 'ENS TYT ASS. T1 TU3 BVA K208'),
@@ -17965,7 +18340,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140244200', 'AG 25', 'COUPELLE INTERIEURE X91 K4M'),
 ('3140244300', 'AH 21', 'COUPELLE INTERIEURE X91 K4M'),
 ('3140245200', '0', 'TUYAU CINTRE T5 TU3'),
-('3140245300', '0', 'TUYAU CINTRE T5 TU3 K'''),
+('3140245300', '0', 'TUYAU CINTRE T5 TU3 K\''),
 ('3140245400', '0', 'TUYAU CINTRE  T5 TU5 (5 BE)'),
 ('3140245500', '0', 'TUYAU CINTRE  T5 TU5 (5 AL)'),
 ('3140245700', '0', 'TUYAU CINTRE   T5 TU5 MA'),
@@ -18171,8 +18546,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140326900', 'DEBORD', 'A BRIDE FLOTTANTE  LYNX YK'),
 ('3140327100', '0', 'TYT KTA.R. A7 TU3A E3   K385'),
 ('3140327110', '0', 'TYT KTA.R. A7 TU3A E3   K385'),
-('3140327200', '0', 'TYT KTA.R. A7 TU3A K''   3054'),
-('3140327210', '0', 'TYT KTA.R. A7 TU3A K''   3054'),
+('3140327200', '0', 'TYT KTA.R. A7 TU3A K\'   3054'),
+('3140327210', '0', 'TYT KTA.R. A7 TU3A K\'   3054'),
 ('3140327300', '0', 'TUYAU CINTRE TU3A E3-1.0L-'),
 ('3140327390', '0', 'TUYAU TRONCONNE 1-4509-45,00'),
 ('3140327400', 'I 014', 'COUPELLE EXTERIEURE X91 V4Y'),
@@ -18244,7 +18619,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140353800', '0', 'SIL AR ASS A7 EP6DTS PSA4258'),
 ('3140354200', '0', 'EMBASE TUBE DE PRESSION'),
 ('3140354270', '==>G5931', 'EMBASE TUBE DE PRESSION AFS'),
-('3140355200', '0', 'MONO 6" C375/6 (ELEMENT CATA D7F 2E PAIN'),
+('3140355200', '0', 'MONO 6\" C375/6 (ELEMENT CATA D7F 2E PAIN'),
 ('3140355870', '0', 'KTA ACC T5B5 DW10BTED4  K216'),
 ('3140355970', '0', 'KTA T6 DW10BTED4 COSM.  K216'),
 ('3140356010', '0', 'KTAFAP T6DW10BTED4 K216 F015'),
@@ -18311,7 +18686,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140372300', '0', 'CERAMIQUE AFS 140G'),
 ('3140372400', '0', 'CORPS CATALYSEUR T5/B5 AFS'),
 ('3140373800', '0', 'POT KTA M2S F9Q        <>026'),
-('3140373810', '0', 'POT KTA M2S F9Q "758" <>026'),
+('3140373810', '0', 'POT KTA M2S F9Q \"758\" <>026'),
 ('3140374700', '0', 'TYT CATA ASS DV6        K394'),
 ('3140374710', '0', 'TYT CATA ASS/E3 K394'),
 ('3140375100', '0', 'HC CERAMIQUE 120GR DF88P'),
@@ -18527,7 +18902,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140456410', '0', 'TYT CATA ASS DV6 T5./B5 K410'),
 ('3140456500', '0', 'TYT CATA ASS DV6 T5./B5 K411'),
 ('3140456510', '0', 'TYT CATA ASS DV6 T5./B5 K411'),
-('3140456600', '0', 'FRETTE D''ENTREE     FAP I3I4'),
+('3140456600', '0', 'FRETTE D\'ENTREE     FAP I3I4'),
 ('3140457100', '0', 'MANTEAU D159X1.2    FAP I3I4'),
 ('3140457190', '0', 'FLAN ENVEL 493X395x1,2'),
 ('3140457300', '0', 'BAGUE FENDUE        FAP I3I4'),
@@ -18663,10 +19038,10 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3140505800', '0', 'TYT CATA G9 K411 GRD EXP'),
 ('3140505810', '0', 'TYT CATA G9 K411 GRD EXP'),
 ('3140506100', '1021021XXX', 'S/ENS CROCHET / PATTE T72.'),
-('3140512200', 'DEBORD', 'TUBE D''ENTREE      CATA I3I4'),
+('3140512200', 'DEBORD', 'TUBE D\'ENTREE      CATA I3I4'),
 ('3140512300', '0', 'PATTE FIXATION SUP CATA I3I4'),
 ('3140512600', '0', 'A CALE EN L           FAP I3I4'),
-('3140517900', 'DEBORD', 'CONE D''ENTREE       FAP I3I4'),
+('3140517900', 'DEBORD', 'CONE D\'ENTREE       FAP I3I4'),
 ('3140518100', '0', 'SOURDINE X73 D.        70,00'),
 ('3140518200', '0', 'SOURDINE ASSEMBLEE X73 70,00'),
 ('3140519500', '0', 'TUBE PRESS AMONT    FAP I3I4'),
@@ -19518,12 +19893,12 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3141070510', '0', 'TYT ASS T76  DW10BTED4 90G'),
 ('3141073200', 'IN38', 'S/ENS ENV CATA AFS PH2 K497'),
 ('3141073400', '0', 'S/ENS ENV CATA AFS PH2 K497'),
-('3141074500', '0', 'TUYAU D''ENTREE T7 EP6  50,00'),
+('3141074500', '0', 'TUYAU D\'ENTREE T7 EP6  50,00'),
 ('3141076810', '0', 'TYT ASS T76/T84 DW10C BVM'),
 ('3141077000', '0', 'TUYAUTERIE MONOBLOC T76 DW10  PSA3179'),
 ('3141077110', '0', 'TYT ASS T76/T84 DW10C BVA'),
 ('3141078600', 'F 054', 'BICONE FAP'),
-('3141078800', '1148418XXX', 'Collier d''assemblage'),
+('3141078800', '1148418XXX', 'Collier d\'assemblage'),
 ('3141079500', '0', 'pontet G9'),
 ('3141082500', '0', 'A ENS.BRIDE D.62 USINEE C1 FAP'),
 ('3141082600', '0', 'A ENS.BRIDE D.62 USINEE C1 FAP'),
@@ -19596,7 +19971,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('7903234103', 'DC 11', 'NUT M8X1,25'),
 ('7903602025', '0', 'BOLT M8X1,25 LG30'),
 ('7903602077', 'DE 21', 'VIS EMB HM6 LG20MM'),
-('9150917480', '0', 'CUVETTE D''APPUI RESSORT'),
+('9150917480', '0', 'CUVETTE D\'APPUI RESSORT'),
 ('9150951680', '0', 'BALL JOINT KIT BOSS 1498680-A IVECO'),
 ('9151444980', '0', 'BRIDE'),
 ('9603895480', 'POUR EXPED', 'BALL JOINT KIT GASKET 1498706-A'),
@@ -19723,7 +20098,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1004830XXX', '0', 'S/ENS PH2 K494  MOULURE'),
 ('1005142XXX', 'G 032', 'SEMI-COQUILHA ISOLA SUP AV'),
 ('1006540XXX', '0', 'ETIQ CODE BARRE VERT/BLANC/VERT'),
-('1006615XXX', 'F 028', 'NAPA FAP DV6E5 6"'),
+('1006615XXX', 'F 028', 'NAPA FAP DV6E5 6\"'),
 ('1007514XXX', '0', 'CATA IMPREGNEE 400X6,5'),
 ('10075631XX', '0', 'TYT ECH ASS T87 EP6C      EMCON'),
 ('1007623XXX', '0', 'CANULE A ENJOLIVEUR A51'),
@@ -19819,7 +20194,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1061764XXX', 'DG 25', 'AGRAFE X62 POUR ISOLATION COL DE CYGNE'),
 ('10678ST', '0', 'Soutraitance10678'),
 ('1068038XXX', 'B 061', 'BAFFLE'),
-('1069151XXX', '0', 'ELEMENT FAP NGK 8"'),
+('1069151XXX', '0', 'ELEMENT FAP NGK 8\"'),
 ('10693ST', '0', 'Soutraitance10693'),
 ('1069581XXX', '0', 'CATA-FAP B58/T87 DW10C-RTE K553 F023'),
 ('1069584XXX', '0', 'Pain kta'),
@@ -20213,7 +20588,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('11450ST', '0', 'Soutraitance11450'),
 ('1147986XXX', '0', 'ECRAN ENJOLIVEUR GAUCHE B81'),
 ('11483ST', '0', 'Soutraitance11483'),
-('1148418XXX', 'G 040', 'Collier d''assemblage'),
+('1148418XXX', 'G 040', 'Collier d\'assemblage'),
 ('11484ST', '0', 'Soutraitance11484'),
 ('1148665XXX', '0', 'TYT ECH ASS T87 DV6C'),
 ('11487ST', '0', 'Soutraitance11487'),
@@ -20291,7 +20666,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('11607ST', '0', 'Soutraitance11607'),
 ('1162576XXX', '720', '63.5  TSFR AS120-06 R63,5 - 1,50 - 6405'),
 ('11625ST', '0', 'Soutraitance11625'),
-('1162823XXX', '0', 'CATA-FAP B585 DW10C K553 60g 8"'),
+('1162823XXX', '0', 'CATA-FAP B585 DW10C K553 60g 8\"'),
 ('1162834AXX', '0', 'TYT ECH ASS T87 DW10C K553'),
 ('11631ST', '0', 'Soutraitance11631'),
 ('1163448AXX', '0', 'TYT ECH ASS T76 DW10C K568'),
@@ -20395,7 +20770,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('11914ST', '0', 'Soutraitance11914'),
 ('1191533XXX', 'E 052', 'CROCHET DOUBLE ASS T9'),
 ('1193952XXX', '0', 'CATA-FAP B58/T87/B81 DW10C-RTE K553 F023'),
-('1193953AXX', '0', 'TYT ECH ASS T87 DW10C RTE K553 F010 (8")'),
+('1193953AXX', '0', 'TYT ECH ASS T87 DW10C RTE K553 F010 (8\")'),
 ('1195890XXX', '720', 'TSFR 1.4512 D63,5-1,00- 6380'),
 ('1195910XXX', '0', 'TSFR 1.4512 D80-1,00- 6180'),
 ('1203949XXX', '770', 'TSFR 1.4510 D42,0-1,20-5100'),
@@ -20418,7 +20793,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1246725XXX', '760', 'BR BOB 432,0X0,6'),
 ('1246854XXX', '720', 'TSFR 1,4510 D50 -1,20 - 6200'),
 ('1251688XXX', '720', 'TSFR 1,4512 D48 -1,50 - 6150'),
-('1528346ST', 'F 050', 'TUBE D''ENTREE T7 EP6CDT    60.00'),
+('1528346ST', 'F 050', 'TUBE D\'ENTREE T7 EP6CDT    60.00'),
 ('1712 44', '0', 'A  ROTULE    1896612R00/T00'),
 ('1712 82', '0', 'A  ROTULE        1896931R00'),
 ('1712 90', '0', 'A  ROTULE        1824899R00'),
@@ -20495,7 +20870,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1821381R00', '0', 'TUYAU DE SORTIE ASS POLI CDT'),
 ('18213831C0', '0', 'SUPPORT  217G74'),
 ('1821434R00', '0', 'SIL AR PSA 3342 **Y'),
-('18214391C0', '0', 'SIL AR  "PSA 3342 **Y"'),
+('18214391C0', '0', 'SIL AR  \"PSA 3342 **Y\"'),
 ('18214401C0', '0', '1/2 COQUILLE SUP.'),
 ('18214411C0', '0', '1/2 COQUILLE INF'),
 ('18214501C0', '0', 'SOURDINE               80,00'),
@@ -20524,7 +20899,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18220321C0', '0', 'COUP EXT  DEPANNAGE MESSEI'),
 ('1822076T00', '0', 'SIL. ASSEMBLE ZX    PSA 4094'),
 ('1822103R00', '0', 'SIL AR ASS 106      PSA 3024'),
-('182210400B', '0', 'SIL AR  "PSA 3024"'),
+('182210400B', '0', 'SIL AR  \"PSA 3024\"'),
 ('18221241C0', '0', 'SOURDINE               64,00'),
 ('1822197R00', '0', 'SIL AR ASS N37 XU10 PSA 4078'),
 ('18222540C0', '0', 'ENVELOPPE ASS.'),
@@ -20584,7 +20959,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18233450C0', '0', 'COUPELLE INT.(260X150)'),
 ('18233460C0', '0', 'COUPELLE INT.(260X150)'),
 ('1823441R00', '0', '171782 TX INTER ASS D82  PSA 3125'),
-('182346290B', '0', 'SIL AR D82   "PSA 3133"'),
+('182346290B', '0', 'SIL AR D82   \"PSA 3133\"'),
 ('1823462R00', '0', 'SIL AR ASSEMBLE D82 PSA 3133'),
 ('18234771C0', '0', 'FRETTE + RESTRICTEUR    48,00'),
 ('1823486R00', '0', 'SIL ASS PSA 3135  D83 XU10.'),
@@ -20593,11 +20968,11 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18235011C0', '0', '1/2 CONE  INT AR SUP.'),
 ('18235021C0', '0', '1/2 CONE  INT AR INF.'),
 ('18235381C0', '0', 'SOURDINE PERFO         80,00'),
-('18235501C0', '0', 'TUBE D''ENTREE          54,00'),
+('18235501C0', '0', 'TUBE D\'ENTREE          54,00'),
 ('18235521C0', '0', 'TUBE RESONATEUR D83    38,00'),
 ('1823553W00', '0', 'R BICONE                 80,00'),
 ('18235591C0', '0', 'TUBE RESONATEUR        40,00'),
-('18235851C0', '0', 'TUBE D''ENTREE          60,00'),
+('18235851C0', '0', 'TUBE D\'ENTREE          60,00'),
 ('18235860RP', '0', 'TUBE DE SORTIE         60,00'),
 ('18235861C0', '0', 'TUBE DE SORTIE         60,00'),
 ('1823603T00', '0', 'TUYAUTERIE ASS'),
@@ -20606,7 +20981,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1823635R00', '0', '1726P9 SIL AR ASSEMBLE D82 PSA 3135'),
 ('1823670T00', '0', 'SIL AR ASSEMBLE X1  PSA 4121'),
 ('1823747R00', '0', 'SIL AR ASS N52 XU10 PSA 4078'),
-('1823750R0B', '0', 'TUY AR  (PD) "PSA 3133"'),
+('1823750R0B', '0', 'TUY AR  (PD) \"PSA 3133\"'),
 ('18237511C0', '0', 'CANULE D83 XUD9 ASD    48,00'),
 ('18237650PA', '0', 'COUPELLE ENTREE MESSEI'),
 ('18237671J0', '0', 'COUPELLE SORTIE VIGO'),
@@ -20760,7 +21135,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18293251T0', '0', 'CONE'),
 ('18293981C0', '0', 'S/ENS.SOURD.+ MANCHON  80,00'),
 ('18294091C0', '0', '1/2 COQUILLE SUP. ASS.'),
-('18294791C0', '0', 'TUBE D''ENTREE X65      50,00'),
+('18294791C0', '0', 'TUBE D\'ENTREE X65      50,00'),
 ('18294821C0', '0', '1/2 COQUILLE SUP.'),
 ('18294891C0', '0', 'CATA.X65 F4R SPORT <> C125'),
 ('18294901C0', '0', 'CATA.X65 F4R SPORT <> C124'),
@@ -21057,8 +21432,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G0109000', '0', 'A MANCHON INOX'),
 ('18G0114000', '0', 'COUPELLE INTERIEURE'),
 ('18G0119000', '0', 'A MANCHON INOX'),
-('18G0147000', '0', 'SIL INT "PSA 3042" 170X100'),
-('18G01471C0', '0', 'SIL INT "PSA 3042" 170X100'),
+('18G0147000', '0', 'SIL INT \"PSA 3042\" 170X100'),
+('18G01471C0', '0', 'SIL INT \"PSA 3042\" 170X100'),
 ('18G0148000', '0', 'TUBE ENTREE            54,00'),
 ('18G01481C0', '0', 'TUBE ENTREE            54,00'),
 ('18G0149900', '0', 'TUBE EBAU. AS120/06    60,00'),
@@ -21068,7 +21443,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G0189000', '0', 'BOUCHON PROTECTION ENTREE'),
 ('18G01891T0', '0', 'TAPON DE ENTRADA'),
 ('18G0189999', '0', 'BOUCHON PROTECTION ENTREE'),
-('18G0208000', '0', 'SIL INT "PSA 3042" 170X100'),
+('18G0208000', '0', 'SIL INT \"PSA 3042\" 170X100'),
 ('18G02081C0', '0', 'SIL N68 EW7        PSA 3042'),
 ('18G0215000', '0', 'TUBE  ENTREE           54,00'),
 ('18G02151C0', '0', 'TUBE  ENTREE           54,00'),
@@ -21082,10 +21457,10 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G0300070', '0', 'COUP.INT.PERF.'),
 ('18G0300500', '0', 'FEUILLARD PERFORE / COUPELLE'),
 ('18G0333070', 'AC 43', 'COUP. INT Z8  (150X85) 217F41'),
-('18G0335000', '0', 'S/ENS D''ENTREE  Z8 EW10'),
+('18G0335000', '0', 'S/ENS D\'ENTREE  Z8 EW10'),
 ('18G0336000', '0', 'S/ENS DE SORTIE Z8 EW10'),
 ('18G0337070', 'AC 45', 'COUP. INT Z8  (150X85)'),
-('18G0346000', '0', 'S/ENS D''ENTREE  Z8 ES9'),
+('18G0346000', '0', 'S/ENS D\'ENTREE  Z8 ES9'),
 ('18G0347000', '0', 'S/ENS DE SORTIE Z8 ES9'),
 ('18G0360000', '0', 'C ELEMENT CATA 5101'),
 ('18G0363000', '0', 'A MANCHON INOX'),
@@ -21250,14 +21625,14 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G1280R00', '0', 'TUYAUTERIE PRIMAIRE'),
 ('18G1280R70', '0', 'TUYAUTERIE PRIMAIRE'),
 ('18G1283070', '0', 'COUP. EXT 150X85'),
-('18G12841J0', '0', 'TUBE D''ENTREE          45,00'),
+('18G12841J0', '0', 'TUBE D\'ENTREE          45,00'),
 ('18G1284500', '0', 'BRB AS120-06  BOB0141,2X1,45'),
 ('18G1284600', '0', 'TSBR AS120.06  R45-1,50-6177'),
 ('18G1284700', '0', 'Tube perfo'),
 ('18G1310000', '0', 'A COLLIER ASSEMBLE'),
 ('18G1312070', '0', 'TUY CATA D93 ES9J4S ASS K161'),
 ('18G1312R70', '0', '1731K1 TUY CATA D93 ES9J4S ASS K161'),
-('18G1313000', '0', 'CONE D''ENTREE'),
+('18G1313000', '0', 'CONE D\'ENTREE'),
 ('18G1314000', 'DF 12', 'CONE DE SORTIE'),
 ('18G13141T0', '0', 'CONE DE SORTIE'),
 ('18G1317000', '0', 'MANTEAU CATA ASS Z8DW12'),
@@ -21296,7 +21671,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G1372R70', '0', '1731J9 TUY CATA Z8 ES9J4S ASS. K161'),
 ('18G13990PA', '0', 'COUP. SORT.Z8 200X130'),
 ('18G14000PA', '0', 'COUP. BOR. Z8 200X130'),
-('18G14191J0', '0', 'TUBE D''ENTREE PERFORE  54,00'),
+('18G14191J0', '0', 'TUBE D\'ENTREE PERFORE  54,00'),
 ('18G1419500', '0', 'BRB AS120-06  BOB0168,3X1,90'),
 ('18G1419600', '0', 'TSBR AS120-06  R54-2,00-5878'),
 ('18G1448000', '0', 'COUPELLE REDUCTEUR MEGANE.'),
@@ -21402,7 +21777,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G1892000', '0', 'SIL AR ASSEMBLE D92 PSA 3158'),
 ('18G1892R00', '0', 'SIL AR ASSEMBLE D92 PSA 3158'),
 ('18G1893000', '0', 'SIL AR EMBOUTI D92  PSA 3158'),
-('18G1898000', '0', 'TUBE D''ENTREE  PERFORE 60,00'),
+('18G1898000', '0', 'TUBE D\'ENTREE  PERFORE 60,00'),
 ('18G1898500', '0', 'BRB 1.4512    BOB0188,8X1,45'),
 ('18G1898600', '0', 'TSBR 1.4512  R60,0-1,50-6162'),
 ('18G1899000', '0', 'A MANCHON INOX'),
@@ -21434,9 +21809,9 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G1988070', '0', 'COUPELLE INTERIEURE 150X85'),
 ('18G19881C0', '0', 'S-COUPELLE INTERIEURE 150X85'),
 ('18G1989000', '0', 'S/ENS INTERIEUR'),
-('18G1991000', '0', 'SIL INT T5 "PSA 3049"'),
-('18G1991070', '0', 'SIL INT T5 "PSA 3049"'),
-('18G19911C0', '0', 'SIL INT T5 "PSA 3049"'),
+('18G1991000', '0', 'SIL INT T5 \"PSA 3049\"'),
+('18G1991070', '0', 'SIL INT T5 \"PSA 3049\"'),
+('18G19911C0', '0', 'SIL INT T5 \"PSA 3049\"'),
 ('18G1992000', '0', 'ENVELOPPE PRE CATA 117X1,2'),
 ('18G1993000', '0', 'PAIN CERAMIQUE'),
 ('18G1994000', '0', 'NAPPE DE MAINTIEN'),
@@ -21460,10 +21835,10 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G2141000', '0', 'ELEMENT CATA D97X150     TU1'),
 ('18G2144000', '0', 'CATA S/COLLECTEUR TU1   3056'),
 ('18G2160000', '0', 'SANGLE T1 TU.'),
-('18G2166000', '0', 'TUYAU D''ENTREE + REDUC. X64'),
-('18G2166100', '0', 'TUYAU D''ENTREE + REDUC. X64'),
+('18G2166000', '0', 'TUYAU D\'ENTREE + REDUC. X64'),
+('18G2166100', '0', 'TUYAU D\'ENTREE + REDUC. X64'),
 ('18G2172000', '0', 'TUYAU ENTREE CATA X64  55,00'),
-('18G2172800', '0', 'TUYAU D''ENTREE TRONC.  55,00'),
+('18G2172800', '0', 'TUYAU D\'ENTREE TRONC.  55,00'),
 ('18G2317000', '0', 'ETIQUETTE CODE BARRE JAUNE'),
 ('18G2337500', '0', 'BRB 1.4510    BOB0173,4X1,20'),
 ('18G2337600', '0', 'TSBR 1.4510  R55,0-1,20-6326'),
@@ -21602,7 +21977,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G3282000', 'DEBORD', 'SUPPORT ECRAN ASS.    P5 V4Y'),
 ('18G3284000', '0', 'DESCENTE ECHAPT ARR.  P5 V4Y'),
 ('18G3284R00', '0', 'DESCENTE ECHAPT ARR.  P5 V4Y'),
-('18G3285000', '0', 'A BRIDE D''ENTREE'),
+('18G3285000', '0', 'A BRIDE D\'ENTREE'),
 ('18G3286070', '0', 'PRE CATA ASS C203'),
 ('18G3288000', '0', 'TUYAU AVANT   D.45    P5 V4Y'),
 ('18G3288900', '0', 'TUYAU AV. TRONC P5 V4Y 45,00'),
@@ -21637,8 +22012,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G34011C0', '0', 'CATALYSEUR CYLINDRIQUE K220'),
 ('18G3403000', '0', 'A NAPPE DE FIBRE'),
 ('18G3404000', '0', 'C ELEMENT CATA'),
-('18G3405000', '0', 'TYT KTA.R. T5 TU3 K''    3054'),
-('18G3405R00', '0', '1731T8 TYT KTA.R. T5 TU3 K'' 3054'),
+('18G3405000', '0', 'TYT KTA.R. T5 TU3 K\'    3054'),
+('18G3405R00', '0', '1731T8 TYT KTA.R. T5 TU3 K\' 3054'),
 ('18G3411000', 'BRAGANCA', 'TUBE DE LIAISON D9     50,00'),
 ('18G3411900', 'BRAGANCA', 'TUBE DE LIAISON TRONC. 50,00'),
 ('18G3412000', '0', 'TUBE DE LIAISON D9     50,00'),
@@ -21706,7 +22081,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G3599000', '0', 'TUYAU CINTRE   45X2,0_1-4512'),
 ('18G3600000', '0', 'TYT KTA. N7 TU5US83 BVA K181'),
 ('18G3600T00', '0', 'TYT KTA. N7 TU5US83 BVA K181'),
-('18G3601000', '0', 'TUYAU AVANT N7 TU5K'''),
+('18G3601000', '0', 'TUYAU AVANT N7 TU5K\''),
 ('18G3602000', 'DEBORD', 'ECRAN THERMIQUE'),
 ('18G3604000', '0', 'PRISE SONDE'),
 ('18G3626070', '0', 'COUPELLE INT. T12    260X150'),
@@ -21792,9 +22167,9 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G3843000', '0', 'PATTE SUPPORT   P5 V4Y'),
 ('18G3844000', 'IN08', 'SUPPORT ECRAN ASS.    P5 V4Y'),
 ('18G3847000', 'CONT V4Y', 'GOUJON          P5 V4Y'),
-('18G3849000', '0', 'TYT KTA.R. T5 TU5 BVM K''3060'),
-('18G3849C00', '0', 'TYT KTA.R T5TU5 K''3060 JAUNE'),
-('18G3853000', '0', 'TUYAU CINTRE   T5 TU5 JP4 K'''),
+('18G3849000', '0', 'TYT KTA.R. T5 TU5 BVM K\'3060'),
+('18G3849C00', '0', 'TYT KTA.R T5TU5 K\'3060 JAUNE'),
+('18G3853000', '0', 'TUYAU CINTRE   T5 TU5 JP4 K\''),
 ('18G3864000', '0', 'ECRAN THERMIQUE P5 V4Y'),
 ('18G3892000', '0', 'CROCHET AVANT X70.'),
 ('18G38921T0', '0', 'FRONT BRACKET'),
@@ -22104,8 +22479,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G4832000', 'AC 44', 'COUP. EXT. Z8(150X85) 217F40'),
 ('18G4833000', '0', 'TYT INTER Z8 EW10   PSA 3364'),
 ('18G4833R00', '0', '1717W3 TYT INTER Z8 EW10 PSA 3364'),
-('18G4835000', '0', 'TUBE D''ENTREE Z8       60,00 R90'),
-('18G4835900', '0', '60 TUBE D''ENTREE Z8 TRONC 60,00'),
+('18G4835000', '0', 'TUBE D\'ENTREE Z8       60,00 R90'),
+('18G4835900', '0', '60 TUBE D\'ENTREE Z8 TRONC 60,00'),
 ('18G4836000', '0', 'SUPPORT TUBE DE PRESSION'),
 ('18G4837000', '0', 'TYT AR Z8 DW10TD    PSA 3355'),
 ('18G4837070', '0', 'SIL. ARRIERE ASS Z9 PSA3355'),
@@ -22251,7 +22626,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G5285C00', '0', '1717Z1 TYT INTER T5 TU5 PSA 3049'),
 ('18G5287000', '0', 'TYT INTER T52 TU5   PSA 3049'),
 ('18G5287R00', '0', '1717Z2 TYT INTER T52 TU5 PSA 3049'),
-('18G5290000', '0', 'SIL INT "PSA 3356" Z8 150X85'),
+('18G5290000', '0', 'SIL INT \"PSA 3356\" Z8 150X85'),
 ('18G5291000', '0', 'S/ENS AR TRANSV Z8  PSA 3357'),
 ('18G5308000', '0', 'BICONE                 72,00'),
 ('18G5308900', '0', 'BICONE EBAUCHE         72,00'),
@@ -22263,10 +22638,10 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G5315000', '0', 'S/ENS.(SOURD.+MANCHON) 80,00'),
 ('18G5316000', '0', 'S/ENS. SOURDINEMANCHON 80,00'),
 ('18G53161C0', '0', 'S/ENS. SOURDINEMANCHON 80,00'),
-('18G5317000', '0', 'SIL-EMBOUTI Z8ES9 "PSA 3360"'),
-('18G5318000', '0', 'SIL-EMBOUTI Z8EW  "PSA 3358"'),
-('18G5319000', '0', 'SIL INT "PSA 3364" Z8 150X85'),
-('18G5320000', '0', 'SIL-EMB Z8 "PSA 3355"'),
+('18G5317000', '0', 'SIL-EMBOUTI Z8ES9 \"PSA 3360\"'),
+('18G5318000', '0', 'SIL-EMBOUTI Z8EW  \"PSA 3358\"'),
+('18G5319000', '0', 'SIL INT \"PSA 3364\" Z8 150X85'),
+('18G5320000', '0', 'SIL-EMB Z8 \"PSA 3355\"'),
 ('18G5321000', '0', 'S/ENS.FAISCEAU'),
 ('18G5322000', '0', 'S/ENS.FAISCEAU'),
 ('18G5324000', '0', 'POT CATA K178'),
@@ -22336,8 +22711,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G5665000', '0', 'COUPELLE INT. T1     260X150'),
 ('18G5665070', '0', 'COUPELLE INT. T1     260X150'),
 ('18G56650C0', '0', 'COUPELLE INT. T1     260X150'),
-('18G5686000', '0', 'SIL INT T1 "PSA 3049" 150X85'),
-('18G56861C0', '0', 'SIL INT T1 "PSA 3049" 150X85'),
+('18G5686000', '0', 'SIL INT T1 \"PSA 3049\" 150X85'),
+('18G56861C0', '0', 'SIL INT T1 \"PSA 3049\" 150X85'),
 ('18G5688070', '0', 'COUPELLE ENTREE.'),
 ('18G5695000', '770', 'TUBE ENT PERFO    45,00'),
 ('18G5695500', '0', 'BRB 1.4512    BOB0141,2X1,50'),
@@ -22397,7 +22772,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G5759500', '0', 'BRB 1.4509    BOB0170X1,20'),
 ('18G5759600', '0', 'TSBR 1.4509  R54,0-1,20-6445'),
 ('18G5776000', '0', 'SUPPORT CROCHET ARRIERE T5.'),
-('18G5805000', '0', 'TUYAU T1 TU3 K''-D45-1.4512'),
+('18G5805000', '0', 'TUYAU T1 TU3 K\'-D45-1.4512'),
 ('18G5805900', '0', 'TUYAU TRONCONNE        45,00'),
 ('18G5809000', '0', 'TUYAU T1 TU5-IRAN- NON PERCE'),
 ('18G5823000', '0', 'CROCHET AVANT T1 DV6.'),
@@ -22485,7 +22860,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G5932000', '0', 'EMBASE TUBE DE PRESSION'),
 ('18G5940000', '0', 'NAPPE DE MAINTIEN CERAMIQUE'),
 ('18G5943000', '3140931100', 'A JOINT DE MAINTIEN'),
-('18G5944000', '0', 'A JOINT D''ETANCHEITE'),
+('18G5944000', '0', 'A JOINT D\'ETANCHEITE'),
 ('18G5946000', '0', 'TUBE ARRIERE'),
 ('18G5947000', '0', 'FAP DV6 TED4'),
 ('18G5989000', 'DJ 21', 'SUPPORT ECRAN THERMIQUE'),
@@ -22537,13 +22912,13 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G6118R00', '0', '1731EV TYT KTA.R. T1 TU1-FLUO- K179'),
 ('18G6119000', '0', 'TUYAU T1 TU1-D45-FLUO-1.4512'),
 ('18G6119900', '0', 'TUYAU TRONCONNE        45,00'),
-('18G6121000', '0', 'TYT KTA.R. T1 TU1K/K''   3056'),
-('18G6121R00', '0', '1731EW TYT KTA.R. T1 TU1K/K'''),
-('18G6122000', '0', 'TUYAU T1 TU1 K''-D45-1.4512'),
+('18G6121000', '0', 'TYT KTA.R. T1 TU1K/K\'   3056'),
+('18G6121R00', '0', '1731EW TYT KTA.R. T1 TU1K/K\''),
+('18G6122000', '0', 'TUYAU T1 TU1 K\'-D45-1.4512'),
 ('18G6123000', '0', 'TYT AV AVAL  ASS. T1 TU1JPL4'),
 ('18G6123R00', '0', '1705ZV TYT AV AVAL  ASS. T1 TU1JPL4'),
 ('18G6128000', '0', 'TYT KTA.R. T1 TU3 ASS.  3054'),
-('18G6128R00', '0', '1731EX TYT KTA.R. T1 TU3 CDT "3054"'),
+('18G6128R00', '0', '1731EX TYT KTA.R. T1 TU3 CDT \"3054\"'),
 ('18G6130000', '0', 'ENS TYT ASS. T1 TU3 BVM K208'),
 ('18G6130100', '0', 'S-TYT ASS. T1 TU3 BVM  K208'),
 ('18G6131000', '0', 'TYT KTA.R. T1 TU3-FLUO- K208'),
@@ -22614,7 +22989,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G6246W00', '0', 'TYT INTER T5 TU5    PSA 3077'),
 ('18G6247000', '0', 'TUBE AVANT T5/B5 TU5   45,00'),
 ('18G6247900', '0', 'TUYAU AVANT T5 TRONC.  45,00'),
-('18G6248000', '0', 'SIL INT T5 FLUO "PSA 3077"'),
+('18G6248000', '0', 'SIL INT T5 FLUO \"PSA 3077\"'),
 ('18G6248LAS', '0', 'TUBE SOUD. LAS. D120X1,0X342'),
 ('18G6248MAR', '0', 'TUBE MARQUE'),
 ('18G6249000', '0', 'TUBE ARRIERE T5 TU5    45,00'),
@@ -22680,8 +23055,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G6322000', '0', 'SIL EMBOUTI N7'),
 ('18G63221C0', '0', 'SIL EMBOUTI N7'),
 ('18G63221T0', '0', 'SILENCER'),
-('18G6331000', '0', 'SIL INT "PSA 3042" 170X100'),
-('18G63311C0', '0', 'SIL INT "PSA 3042" 170X100'),
+('18G6331000', '0', 'SIL INT \"PSA 3042\" 170X100'),
+('18G63311C0', '0', 'SIL INT \"PSA 3042\" 170X100'),
 ('18G6332000', '0', 'S/ENS  COUP/BICONE T1 EW10J4'),
 ('18G63321C0', '0', 'S/ENS  COUP/BICONE T1 EW10J4'),
 ('18G6333000', '0', 'ENVELOPPE ASS.'),
@@ -22779,7 +23154,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G6481R00', '0', '1726WP PSA3369 SIL AR ASS Z9 DT17'),
 ('18G6481W00', '0', 'SIL AR ASS Z9 DT17   PSA3369'),
 ('18G6482000', '0', 'SIL-EMBOUTI Z9DT17   PSA3369'),
-('18G6484000', '0', 'TUBE D''ENTREE Z9       64,00 R120'),
+('18G6484000', '0', 'TUBE D\'ENTREE Z9       64,00 R120'),
 ('18G6484900', '0', '64 TUBE ENTREE Z9         64,00'),
 ('18G6487000', '0', 'FLEXIBLE Z9'),
 ('18G6488000', 'DK 11', 'TUBE AVANT Z9 ES9'),
@@ -22920,9 +23295,9 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G6744000', '0', 'POT CATA ACOUSTIQUE T5  K331'),
 ('18G6746000', '0', 'TUYAU ENTREE T5 EW10   55,00'),
 ('18G6746900', '0', 'FRETTE AVANT EBAU T5  55,00'),
-('18G6748000', '0', 'CONE D''ENTREE'),
+('18G6748000', '0', 'CONE D\'ENTREE'),
 ('18G6748070', 'DEBORD', 'COUPELLE INT T7'),
-('18G67480PA', '0', 'CONE D''ENTREE'),
+('18G67480PA', '0', 'CONE D\'ENTREE'),
 ('18G6749000', 'PAL', 'ENVELOPPE D 159 LG453 EP1.2 1.4509'),
 ('18G6749900', '0', 'FLAN  LG453 EP1.2 1.4509'),
 ('18G6750000', '0', 'C CERAMIQUE 162CM2 LG101.6'),
@@ -23030,15 +23405,15 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('31400657C0', '0', 'TUBE ENTREE            55,00'),
 ('31400671C0', '0', '170675 FLEXIBLE ASS. B5/T5 EW10A'),
 ('31400689R0', '0', '1731HF TYT KTA.R. T1 TU5 -15,0-K181'),
-('31400700C0', '0', 'TYT T5 TU5K'' 5BE  BLEU  3060'),
-('31400702C0', '0', 'TYT T5 TU5K'' 5AL VIOLET 3060'),
+('31400700C0', '0', 'TYT T5 TU5K\' 5BE  BLEU  3060'),
+('31400702C0', '0', 'TYT T5 TU5K\' 5AL VIOLET 3060'),
 ('31400705C0', '0', '1731HP TYT T5 TU5  5BE  BLEU   K181'),
 ('31400707C0', '0', '1731HQ TYT T5 TU5  5AL  VIOLET K181'),
 ('31400709C0', '0', '1731HR TYT T5 TU5 JAUNE  K181'),
 ('31400833C0', '0', 'COUPELLE RENFORT X73 PH2'),
 ('31400838T0', '0', 'TYT KTA.N7 TU5US83 BVM  K181'),
-('31400839T0', '0', 'TYT KTA.R. N7 TU5K'' BVA 3060'),
-('31400840T0', '0', 'TYT KTA.R. N7 TU5K''BVM  3060'),
+('31400839T0', '0', 'TYT KTA.R. N7 TU5K\' BVA 3060'),
+('31400840T0', '0', 'TYT KTA.R. N7 TU5K\'BVM  3060'),
 ('31400860T0', '0', 'TUYAU INTERIEUR D55   1.4509'),
 ('31400870C0', '0', '1706F0 TYT CATA ASS DV6EURO4TT K345'),
 ('31400870W0', '0', 'TYT CATA ASS DV6EURO4TT K345'),
@@ -23055,9 +23430,9 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('31400915T0', '0', 'BICONO T1 TU3'),
 ('31400937T0', '0', '1706A6 KTA ASS A86 DV4TD K300'),
 ('31400941C0', '0', '1731.LA KTA ASS A86 DV4TD K299'),
-('31400960J0', '0', 'ENVELOPPE MARQUEE PSA3085'),
-('31400966J0', '0', 'TUBE SORTIE            60,00');
+('31400960J0', '0', 'ENVELOPPE MARQUEE PSA3085');
 INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
+('31400966J0', '0', 'TUBE SORTIE            60,00'),
 ('31400967J0', '0', 'TUBE SORTIE            50,00'),
 ('31400974J0', '0', 'TUBE ENTREE            55,00'),
 ('31400975J0', '0', 'TUBE SORTIE            60,00'),
@@ -23080,7 +23455,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('31401230B0', '0', 'S/ENS.(SOURD.+MANCHON) 80,00'),
 ('31401230J0', '0', 'S/ENS.(SOURD.+MANCHON) 80,00'),
 ('31401230W0', '0', 'S/ENS.(SOURD.+MANCHON) 80,00'),
-('31401232J0', '0', 'TUBE D''ENTREE          42,00'),
+('31401232J0', '0', 'TUBE D\'ENTREE          42,00'),
 ('31401239T0', '0', '1731JS TYT KTA.R. A8 TU3JP GNV K352'),
 ('31401240J0', '0', 'CATA S/COLLECTEUR TU3   K352'),
 ('31401277PA', '0', 'CONE ENTREE'),
@@ -23251,7 +23626,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('31403265LA', '0', 'ENV CATA DV6 D159X1,2 L145'),
 ('31403269T0', '0', 'A BRIDA FLOTTANTE  LYNX YK'),
 ('31403271R0', '0', 'TYT KTA.R. A7 TU3A E3   K385'),
-('31403272R0', '0', '1731PE TYT KTA.R. A7 TU3A K'' 3054'),
+('31403272R0', '0', '1731PE TYT KTA.R. A7 TU3A K\' 3054'),
 ('31403296J0', '0', 'CONE SORTIE KTAFAPII DV6 AFS'),
 ('31403307T0', '0', 'TUBO PINZON'),
 ('31403351J0', '0', 'FRETTE'),
@@ -23587,8 +23962,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('E3024585', 'E 054', 'C HANGER AND STIFFNER ASSY.'),
 ('E3024586', 'F 048', 'D HANGER AND BELT ASSY.'),
 ('E3024589', '0', 'REAR MUFFLER ASSY.'),
-('E4040916', '0', 'TUBE D''ENTREE T7 EP3        45.00'),
-('E4040916ST', '0', 'TUBE D''ENTREE T7 EP3        45.00'),
+('E4040916', '0', 'TUBE D\'ENTREE T7 EP3        45.00'),
+('E4040916ST', '0', 'TUBE D\'ENTREE T7 EP3        45.00'),
 ('E4042700', 'DH 24', 'CROCHET INTERMEDIAIRE T7 DW10'),
 ('E4042711', '0', 'CROCHET DOUBLE T7 EP3'),
 ('E4042719', 'IN03', 'CROCHET COUPELLE T72 DW10'),
@@ -23599,7 +23974,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('E4043953', 'DD 34', 'CROCHET ASSEMBLE T7 EP6CDTX'),
 ('E4048626', 'DE 33', 'CROCHET COUPELLE T7 DW10'),
 ('E4049250', 'E 124', 'SANGLE ASSEMBLEE'),
-('E4049580', '0', 'TUBE D''ENTREE T76 EP6CDT      60.00'),
+('E4049580', '0', 'TUBE D\'ENTREE T76 EP6CDT      60.00'),
 ('E4049581', '0', 'A-CROCHET DOUBLE T76 EP6CDT'),
 ('E4049988XX', '0', 'A-TUBE ENTREE'),
 ('E4049989XX', 'AF 15', 'COUPELLE INT?RIEURE'),
@@ -24050,9 +24425,9 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('T023561400', '0', 'BR  AS120.04  BOB0189,1X1,20'),
 ('T023581570', '0', 'R BR  AS120.04  BOB0201,4X1,20'),
 ('T023581800', '0', 'BR  AS120.04  BOB0266,0X1,20'),
-('T023621100', '0', 'BR  AS120.04  BOB0125,4X1,45'),
-('T023621170', '0', 'BR  AS120.04  BOB0136,0X1,45');
+('T023621100', '0', 'BR  AS120.04  BOB0125,4X1,45');
 INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
+('T023621170', '0', 'BR  AS120.04  BOB0136,0X1,45'),
 ('T023621371', '0', 'R BR  AS120.04  BOB0176,0X1,45'),
 ('T023621470', '0', 'R BR  AS120.04  BOB0198,0X1,45'),
 ('T023621474', '0', 'BR  AS120.04  BOB0185,0X1,45'),
@@ -24266,7 +24641,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('E4076459', 'DD 43', 'PROTECTION CAP'),
 ('1463073', 'DD 31', 'PATTE DE FIXATION GAUCHE EP.4 mm 1.4301'),
 ('1463086', 'DD 41', 'PATTE DE FIXATION DROITE EP.4mm 1.4301'),
-('1123882XXX', '0', 'Envolvente FAP 6'''''),
+('1123882XXX', '0', 'Envolvente FAP 6\'\''),
 ('1161506XXX', 'CAVE', 'Restricteur dia 37 Ver DUM'),
 ('1279469XXX', '0', 'MIG UGI A439 STANDARD PAY-OFF-PACK'),
 ('20801 9Y100', '0', 'CATALYST 20801 BH45A LADRILLO CERAMICO'),
@@ -24294,7 +24669,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1249627XXX', '0', 'KTA-FAP T7 DW10C K628 40G'),
 ('1215575XXX', '0', 'PAIN CATA 40G /FT3 DCF95'),
 ('1249626XXX', '0', 'S/ENS.CANING / CONES ASS. DW10 C'),
-('18G6248J00', '0', 'SIL INT T5 FLUO "PSA 3077"'),
+('18G6248J00', '0', 'SIL INT T5 FLUO \"PSA 3077\"'),
 ('1299751XXX', '0', 'COL DE CYGNE T73 RUSSIE     50,00'),
 ('1302245XXX', '770', 'TSFR 1,4512 D50 -1,50 - 2300'),
 ('1302225XXX', '770', 'TSFR 1,4512 D50 -1,20 - 5950'),
@@ -24353,8 +24728,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1882999000', '0', 'KIT CONDITI.KTAFAP DV6 EURO 5 MONDE'),
 ('1112210PNG', '0', 'SIL ASS T84 HYBRIDE PEINT+GRENAILLAGE'),
 ('9804666880', '0', 'Ligne EB2 T91       TENECCO'),
-('1353834XXX', '770', 'TUBE D''ENTREE D60 X62 LG 514'),
-('1353836XXX', '770', 'TUBE D''ENTREE D60 X62 LG 434'),
+('1353834XXX', '770', 'TUBE D\'ENTREE D60 X62 LG 514'),
+('1353836XXX', '770', 'TUBE D\'ENTREE D60 X62 LG 434'),
 ('1889461070', '0', 'S/ENS BICONE-FLEXIBLE A8DV6ATE'),
 ('1889698070', '0', 'S/ENS  BICONE-FLEXIBLE  A9  EB0-EB2'),
 ('1218850RXX', '0', 'TYT AR RECHANGE  T91'),
@@ -24443,7 +24818,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1254725XXX', 'G 008', '3mm Outlet Cone'),
 ('1227153XXX', 'F 098', 'Outlet Tube - CM/DM DV6 E5 3mm'),
 ('1209886XXX', 'G 010', 'Side Heat-Shield'),
-('1210048XXX', 'MONO 49', 'DV6E6 SCR Ceramic LG.152,4 (6")'),
+('1210048XXX', 'MONO 49', 'DV6E6 SCR Ceramic LG.152,4 (6\")'),
 ('1212238XXX', 'DEBORD', 'MAT SCR 1200gr/m? FCL OBM'),
 ('1212240XXX', 'F 021', 'NAPPE FAP 1200gr/m? FCL OBM'),
 ('1348901XXX', 'DE 42', 'Crochet avant B81 DW10 ?6'),
@@ -24472,7 +24847,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1448870XXX', '770', 'TSFR 1,4510 D45 -1,00 - 2560'),
 ('9804663980', '0', 'Ligne EC5 T91       TENECCO'),
 ('1825790000', '0', 'CARTON MODU3P ECO'),
-('1296787XXX', '0', 'TYT CATA ASS EP6  BVH2''   FDT (prince 3)'),
+('1296787XXX', '0', 'TYT CATA ASS EP6  BVH2\'   FDT (prince 3)'),
 ('1092265XXX', '0', 'Support sonde M16X1.5'),
 ('1213259XXX', 'DD 14', 'Turbo Bracket'),
 ('1458911XXX', '720', 'TSFR 1,4512 D70 -1,00 - 6300'),
@@ -24508,7 +24883,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1468055XXX', '720', 'TSFR 1,4512 D63,5 -1,50 - 6130'),
 ('1857519XXX', '0', 'TSFR 1,4301 D55 - 1,20 - 6180'),
 ('1380277XXX', '0', 'MANCHON FIBRE D68X50.5X72'),
-('1277409RXX', '0', '9803421880 FAP DV6 6" F026I'),
+('1277409RXX', '0', '9803421880 FAP DV6 6\" F026I'),
 ('2428740116', '0', 'Halbschale + Loch + PSA-Pr?gung'),
 ('1423244XXX', 'E 096', 'Outlet Tube - UC DV6 E5 3mm'),
 ('1481607XXX', '760', 'BR 1.4509 BOB 733,0 X 0,8'),
@@ -24533,7 +24908,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('9807120280', '0', 'Ligne EB2 T91       TENECCO'),
 ('1385840XXX', 'F 020', '? COQUILLE AV. SANS TROU'),
 ('1385842XXX', 'F 018', '? COQUILLE AV. AVEC TROU'),
-('1385841XXX', 'DC 43', 'BRIDE D '' ENTREE'),
+('1385841XXX', 'DC 43', 'BRIDE D \' ENTREE'),
 ('1416556XXX', 'DE 24', 'AXE EPAULE M6 X 1  1.4301'),
 ('1397769XXX', 'DF 34', 'COUPELLE RESSORT'),
 ('1397767XXX', 'DF 44', 'RESSORT'),
@@ -24542,12 +24917,12 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1406516XXX', 'DH 32', 'ECROU AUTOFREINE M6 X 1'),
 ('1271042XXX', '0', 'TYT ECH ASS   DV6 T91?6'),
 ('1393902XXX', 'G 002', 'SS/ENS CLARINETTE + SONDE T9 BVH2P'),
-('1396101XXX', 'F 011', 'TUBE PRESSION AVANT COURT SCR BVH2'''),
-('1396099XXX', 'F 013', 'TUBE PRESSION ARRIERE LONG SCR BVH2'''),
+('1396101XXX', 'F 011', 'TUBE PRESSION AVANT COURT SCR BVH2\''),
+('1396099XXX', 'F 013', 'TUBE PRESSION ARRIERE LONG SCR BVH2\''),
 ('1455385XXX', '0', 'Subassy OP20 - SCR BVH2P'),
 ('1382290XXX', 'E 056', 'HOOK'),
 ('1396102XXX', '0', 'KTA-FAP T7 DW10C K568'),
-('1528346STI', 'F 050', 'TUBE D''ENTREE T7 EP6CDT    60.00'),
+('1528346STI', 'F 050', 'TUBE D\'ENTREE T7 EP6CDT    60.00'),
 ('E4040916STI', '0', 'TUBE AVANT EP3 T7 11645'),
 ('11742ST', '0', 'TUBE INTER EP6 DT  T72 11740'),
 ('11723ST', '0', 'TUBE INTER EP6 DTS T72 11719'),
@@ -24655,8 +25030,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1523536XXX', '0', 'COUPELLE INT LANDROVER GAUCHE pos 2'),
 ('1509267XXX', '0', 'DW10C - Monolith 20GR  BASF'),
 ('1536497XXX', '0', 'FIBRE COTE DROIT'),
-('1486971XXX', '0', 'SCR T9 BVH2'' ASS 6"'),
-('1486970XXX', '0', 'SCR FAP 6p BVH2'' SANS TUBE PRESSION'),
+('1486971XXX', '0', 'SCR T9 BVH2\' ASS 6\"'),
+('1486970XXX', '0', 'SCR FAP 6p BVH2\' SANS TUBE PRESSION'),
 ('9806475180', 'SYN', 'Ligne EB2DT  T91  TENECCO'),
 ('9806916580', 'SYN', 'Ligne EB2DT  T92  TENECCO'),
 ('1557033XXX', '0', 'TSFR 1,4512 D64 -1,00 - 457,5'),
@@ -24702,10 +25077,10 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('3141165999', '0', 'CUELLO CISNE B58 EP6DT  9680514680'),
 ('1413778XXX', 'F 070', 'DEMI-COQUILLE SUPERIEURE'),
 ('1413779XXX', '0', 'DEMI-COQUILLE INFERIEURE'),
-('1412122XXX', '0', 'TUYAU D''ENTREE JLR        45.00'),
+('1412122XXX', '0', 'TUYAU D\'ENTREE JLR        45.00'),
 ('1412121XXX', '0', 'TUYAU DE SORTIE JLR      45.00'),
 ('1536725XXX', '0', 'TUBE RESONATEUR JLR        35.00'),
-('1451824XXX', 'E 080', 'SUPPORT TUYAU D''ENTREE'),
+('1451824XXX', 'E 080', 'SUPPORT TUYAU D\'ENTREE'),
 ('1429634XXX', '0', 'COUPELLE JLR'),
 ('1414138XXX', 'F 076', 'DEMI-COQUILLE SUPERIEURE'),
 ('1430630XXX', '0', 'COUPELLE JLR'),
@@ -24771,7 +25146,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('E4053806', '0', 'ENVELOPPE INT.'),
 ('E4055506', 'F 079', 'TUBE DE SORTIE'),
 ('E4055505', 'F 077', 'TUBE DE SORTIE'),
-('E4055504', 'F 075', 'TUBE D''ENTREE'),
+('E4055504', 'F 075', 'TUBE D\'ENTREE'),
 ('E4053804', 'F 107', 'BAFLE SILENCIADOR PSA EP6'),
 ('E3024589XB', '0', 'SILENCIEUX AR. T7EP6'),
 ('TEN_5002569', '0', 'CONT-E05-1580X980X920'),
@@ -24790,7 +25165,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('E4059241', '0', 'ENVELOPPE EXT.'),
 ('E4059242', '0', 'ENVELOPPE INT.'),
 ('E4059244', '0', 'TUBE DE SORTIE'),
-('E4059243', '0', 'TUBE D''ENTREE'),
+('E4059243', '0', 'TUBE D\'ENTREE'),
 ('E4056949', 'E 021', 'COUPELLE INT.'),
 ('E4038689', '0', 'SOURDINE'),
 ('E40591562X', '0', 'SILENCIEUX ARRIERE T7EP3 PSA3184'),
@@ -24983,7 +25358,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('E4056132XXX', 'F 073', 'TUBE PERFORE SORTIE'),
 ('E4056143XXX', 'F 069', 'TUBE PERFORE ENTREE'),
 ('E4057139XXX', 'F 071', 'TUBE PERFORE'),
-('E4059243XXX', 'E 010', 'TUBE D''ENTREE'),
+('E4059243XXX', 'E 010', 'TUBE D\'ENTREE'),
 ('E4059244XXX', 'E 008', 'TUBE DE SORTIE'),
 ('E4060385XXX', 'DEBORD', 'TUBE PERFORE'),
 ('1635822XXX', 'E 033', 'COUP. INT.'),
@@ -25058,7 +25433,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1663794XXX', 'DF 32', 'BICONE TUBE T7 EP6'),
 ('1712651XXX', '0', 'BR  1.4509 2B BOB 227,7 X 1,2'),
 ('1095128RXX', '0', 'DEMI-COLLIER INF.ASS. R9M'),
-('1702773XXX', 'MONO 01', 'DPF FILTRE lg 6"'),
+('1702773XXX', 'MONO 01', 'DPF FILTRE lg 6\"'),
 ('1621000XXX', 'B 012', 'COUPELLE SORTIE CMF1'),
 ('1620997XXX', 'B 008', 'COUPELLE INT.'),
 ('1621001XXX', 'B 010', 'COUPELLE INT.'),
@@ -25083,9 +25458,9 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1667474XXX', 'G 082', 'COUPELLE INT LANDROVER GAUCHE pos 3'),
 ('1667472XXX', 'G 078', 'COUPELLE INT LANDROVER GAUCHE pos 2'),
 ('1667471XXX', 'G 080', 'COUPELLE  INT LANDROVER DROIT pos 1'),
-('1668552XXX', 'G 066', 'COUPELLE INT LANDROVER GAUCHE pos 1'),
-('1671210XXX', '0', 'COUPELLE INT LANDROVER DROITE pos 2');
+('1668552XXX', 'G 066', 'COUPELLE INT LANDROVER GAUCHE pos 1');
 INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
+('1671210XXX', '0', 'COUPELLE INT LANDROVER DROITE pos 2'),
 ('1669286XXX', 'G 070', 'COUPELLE INT LANDROVER GAUCHE pos 2'),
 ('1669285XXX', 'G 074', 'COUPELLE INT LANDROVER GAUCHE pos 2'),
 ('1669283XXX', 'G 076', 'COUPELLE INT LANDROVER GAUCHE pos 2'),
@@ -25120,7 +25495,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1685011XXX', 'DA 35', 'Grosse patte'),
 ('1614045XXX', 'DA 41', 'pontet sur tube de sortie'),
 ('1388245XXX', 'DA 42', 'Rivet 4,8x8,8 H4H5'),
-('1660565XXX', 'AG 11', 'TUBE D''ENTREE'),
+('1660565XXX', 'AG 11', 'TUBE D\'ENTREE'),
 ('1729913XXX', '0', 'BR 1.4512 BOB 445 X 1.0'),
 ('1729914XXX', '0', 'BR 1.4512 BOB 472 X 0.6'),
 ('1296787RXX', '0', '9803403380 TYT CATA ASS BVH2 EP6 FDT P3'),
@@ -25129,7 +25504,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1620769XXX', 'C 056', 'COUPELLE INT.'),
 ('1620768XXX', 'C 058', 'COUPELLE ENTREE  CMF1'),
 ('1620767XXX', 'C 060', 'COUPELLE SORTIE CMF1'),
-('1620765XXX', '0', 'TUBE D''ENTRE'),
+('1620765XXX', '0', 'TUBE D\'ENTRE'),
 ('1620766XXX', 'C 054', 'TUBE DE ENTREE CMF1'),
 ('1750937XXX', '0', 'TSFR 1,4512 D50 -1,20 - 1760'),
 ('1746515XXX', '0', 'BR 1.4509 BOB 221.0 X 1.5'),
@@ -25292,7 +25667,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1620891XXX', 'B 080', 'COUPELLE INTERIEURE CMF1'),
 ('1620892XXX', 'B 086', 'COUPELLE INTERIEURE CMF1'),
 ('1620893XXX', 'B 076', 'TUBE SORTIE CMF1'),
-('1620894XXX', 'B 078', 'TUBE D''ENTREE'),
+('1620894XXX', 'B 078', 'TUBE D\'ENTREE'),
 ('1624003XXX', 'B 009', 'COUPELLE INT.'),
 ('1134404XXX', 'B 007', 'TUBE INT.'),
 ('1134403XXX', 'B 011', 'TUBE INT.'),
@@ -25320,11 +25695,11 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1195985XXX', 'G 022', 'S/E CROCHET SCR BVH'),
 ('1348295XXX', 'G 026', 'Tube avant SCR BVH 2'),
 ('1176753AXX', '0', 'PSA3386    SILENCIEUX EMBOUTI P87'),
-('1176755X00', 'DE 01', 'TUBE D''ENTREE P87'),
+('1176755X00', 'DE 01', 'TUBE D\'ENTREE P87'),
 ('1176767XXX', 'F 065', 'COUPELLE INTERIEURE'),
 ('1176770XXX', 'F 067', 'COUPELLE INTERIEURE'),
 ('1384019XXX', 'DE 03', 'SOURDINE ASSEMBLEE'),
-('1486971HXX', '0', 'SCR T9 BVH2'' ASS 6"'),
+('1486971HXX', '0', 'SCR T9 BVH2\' ASS 6\"'),
 ('1791924XXX', '0', 'DEMI-COQUILLE SUPERIEURE P87'),
 ('1176754XXX', '0', 'DEMI-COQUILLE INFERIEURE P87'),
 ('1317712XXX', 'F 027', 'SCR Hanger - BVH2'),
@@ -25355,7 +25730,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1784731XXX', '0', 'SILENCIEUX EMBOUTI RENAULT <>589'),
 ('1794666XXX', 'DG 32', 'Rondelle 15 X 4,5'),
 ('1780867XXX', '0', 'CANULE GAUCHE JLR          D55'),
-('1715699XXX', '0', 'TUBE D''ENTREE JLR          D55'),
+('1715699XXX', '0', 'TUBE D\'ENTREE JLR          D55'),
 ('1827392XXX', '0', 'CANULE GAUCHE JLR          D55'),
 ('1782635XXX', '0', 'CANULE DROITE JLR          D55'),
 ('1782094XXX', '0', 'MANCHON JLR'),
@@ -25383,7 +25758,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1382788XXF', '0', 'DV6E6 SCR BVH1 Inlet cone'),
 ('1805700XXX', 'F 019', 'DV6E6 SCR MAT 1200gr/m2 FCL OBM'),
 ('1805699XXX', 'F 025', 'SCR MAP scr cata 6pol'),
-('1788150XXX', '0', 'TUBE D''ENTREE'),
+('1788150XXX', '0', 'TUBE D\'ENTREE'),
 ('1788149XXX', '0', 'TUBE DE SORTIE'),
 ('1623498XXX', 'B 018', 'COUPELLE SORTIE CMF1'),
 ('1788151XXX', 'B 020', 'COUPELLE INTERIEUR CMF1'),
@@ -25393,7 +25768,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1832369XXX', '0', 'DEMI-COQUILLE INF CMF1'),
 ('1832370XXX', 'B 092', 'COUPELLE CMF1'),
 ('1832365XXX', 'B 090', 'COUPELLE CMF1'),
-('1832368XXX', 'B 094', 'TUBE D''ENTREE CMF1'),
+('1832368XXX', 'B 094', 'TUBE D\'ENTREE CMF1'),
 ('1832367XXX', 'B 096', 'TUBE DE SORTIE CMF1'),
 ('1832366XXX', 'B 088', 'COUPELLE CMF1'),
 ('1698946TXX', '0', 'DAM039 XBFM0 SIL EMB DROIT JLR'),
@@ -25422,7 +25797,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1898541XXX', '0', 'TSFR 1,4512 D50 - 1 - 2288'),
 ('1823960XXX', 'AH 34', 'COUPELLE DE SORTIE'),
 ('1762460XXX', 'AH 35', 'ABSORBANT 100G/L'),
-('1762182XXX', 'AI 34', 'TUBE D''ENTREE'),
+('1762182XXX', 'AI 34', 'TUBE D\'ENTREE'),
 ('1762180XXX', 'AI 35', 'TUBE DE SORTIE'),
 ('1764396XXX', 'AI 31', 'COUPELLE INT.'),
 ('1762179XXX', 'AI 32', 'COUPELLE INT.'),
@@ -25431,7 +25806,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1772278X00', 'E 072', 'TUYAU AVANT A9 EC5  45,00'),
 ('1132400XXX', 'DH 34', 'CROCHET ASS AVT GAUCHE'),
 ('1132401XXX', 'DH 35', 'HANGER'),
-('1697777XXX', '0', 'TUBE D''ENTREE T7/B81'),
+('1697777XXX', '0', 'TUBE D\'ENTREE T7/B81'),
 ('1840738XXX', '0', 'Manchon D58-D40.5 -L90 -A55 EB2DTS'),
 ('1391419BXX', '0', 'TSFR 1,4512 D50 -2,00 - 5900'),
 ('1655866BXX', '0', 'TSFR 1,4512 D65  - 1,00 - 6320'),
@@ -25470,7 +25845,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('9818135880', 'SYN', 'TYT RED CATA FAP P84 DW10'),
 ('9818245580', '0', 'TYT ASS P84 DW10FD'),
 ('1963822XXX', '0', 'BR 1.4510 2B BOB 296.0 X 1.2'),
-('3110157400', 'E 091', 'Bride d''entr?e M9R  ( grande )'),
+('3110157400', 'E 091', 'Bride d\'entr?e M9R  ( grande )'),
 ('3110140300', 'E 093', 'M9R Clamshell Upper'),
 ('3110220400', 'E 089', 'M9R Clamshell Lower'),
 ('3110140400', 'E 095', 'M9R Outlet Flange'),
@@ -25562,7 +25937,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1994385XXX', '0', 'BR 1.4509 2D MAT BOB 163,8 X 1,2'),
 ('1994399XXX', '0', 'BR 1.4509 2D MAT BOB 119,3 X 1,2'),
 ('1904092XXX', '0', 'TUBE DE SORTIE CMF1'),
-('1904142XXX', '0', 'TUBE D''ENTREE CMF1'),
+('1904142XXX', '0', 'TUBE D\'ENTREE CMF1'),
 ('1996078XXX', '0', 'TSFR 1,4510 D60 -1,00 - 990'),
 ('1996082XXX', '0', 'TSFR 1,4510 D60 -1,00 - 1120'),
 ('1883129000', '0', 'KIT DE SUBSTITUTION X62'),
@@ -25587,7 +25962,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1825702000', '0', 'BR AS120-04 BOB 584,0 X 1,0'),
 ('2018341XXX', '0', 'BR 1.4509 BOB 457,0 X 1,0'),
 ('1844408XXX', 'B 003', 'SACHETS DE FIBRE'),
-('1924175XXX', 'B 040', 'TUBE D''ENTREE'),
+('1924175XXX', 'B 040', 'TUBE D\'ENTREE'),
 ('2016456XXX', '0', 'TUBE DE SORTIE'),
 ('1883142TXX', '0', 'DAM110 XBMF0 SIL EMB DROIT JLR'),
 ('2001766XXX', 'G 104', 'TUBE PERFO  55 x 1 x 285   1.4510'),
@@ -25618,7 +25993,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1806317AXX', '0', 'JLR D3C3L DAM186'),
 ('1984467XXX', '0', 'Isolation  657 gr  +/-15%'),
 ('1811394XXX', 'AB 15', 'COUPELLE DE SORTIE X7/R8'),
-('1811408XXX', 'AB 14', 'COUPELLE D''ENTREE X7/R8'),
+('1811408XXX', 'AB 14', 'COUPELLE D\'ENTREE X7/R8'),
 ('1964660XXX', '0', 'Ebauche Tube Perfor? D70-1-L80 - JLR D8'),
 ('1964660KXX', '0', 'S/ENSEMBLE SOURDINE JLR D8 AJ200D'),
 ('2037588XXX', '0', 'BR  AS120-02  BOB 508,0 X 0,60'),
@@ -25647,9 +26022,9 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('1088161X00', '0', 'CANULE A ENJOLIVEUR RESCIEE'),
 ('1811392XXX', 'AC 11', 'COUPELLE INTERIEURE'),
 ('1988302XXX', 'AB 13', 'TUBE DE SORTIE PERFORE'),
-('2016370XXX', 'AB 24', 'TUBE D''ENTREE PERFORE'),
+('2016370XXX', 'AB 24', 'TUBE D\'ENTREE PERFORE'),
 ('1986277XXX', 'AC 13', 'TUBE DE SORTIE PERFORE'),
-('1986276XXX', 'AC 12', 'TUBE D''ENTREE PERFORE'),
+('1986276XXX', 'AC 12', 'TUBE D\'ENTREE PERFORE'),
 ('2059161XXX', '0', 'BR  1,4512  BOB 103,5 X 1,50 -2D MAT'),
 ('2059230XXX', '0', 'TSFR 1,4512 D50 - 1,00 - 2180'),
 ('2061932XXX', '0', 'BR  AS120  BOB 569,0 X 0,40'),
@@ -25695,11 +26070,11 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('2009887XXX', '0', 'COUPELLE SORTIE  A9 EP6'),
 ('2009883XXX', '0', 'COUPELLE INTERIEURE A9 EP6'),
 ('2009884XXX', '0', 'COUPELLE INTERIEURE A9 EP6'),
-('3110025400', '0', 'M9R Inlet Flange "A"'),
-('3110017100', '0', 'M9R Clamshell Upper "A"'),
-('3110017200', '0', 'M9R Clamshell Lower "A"'),
-('3110017300', '0', 'M9R Outlet Flange "A"'),
-('3110023600', '0', 'M9R Bracket "A"'),
+('3110025400', '0', 'M9R Inlet Flange \"A\"'),
+('3110017100', '0', 'M9R Clamshell Upper \"A\"'),
+('3110017200', '0', 'M9R Clamshell Lower \"A\"'),
+('3110017300', '0', 'M9R Outlet Flange \"A\"'),
+('3110023600', '0', 'M9R Bracket \"A\"'),
 ('2122145XXX', '0', 'BR  1,4510  BOB 416,4 X 1'),
 ('1796381XXX', 'AC 25', 'COUPELLE INTERIEURE'),
 ('1796385XXX', 'AC 24', 'TUBE ENTREE PERFORE'),
@@ -25751,8 +26126,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('18G0494070', '0', '1731N9 TYT KTA.R. S8/S20 TU1 K179'),
 ('18G6103X70', '0', '1731EZ TYT KTA.R. T1 TU3 ECO   K285'),
 ('18G6118X70', '0', '1731EV TYT KTA.R. T1 TU1-FLUO- K179'),
-('18G6121X70', '0', '1731EW TYT KTA.R. T1 TU1K/K'''),
-('18G6128X70', '0', '1731EX TYT KTA.R. T1 TU3 CDT "3054"'),
+('18G6121X70', '0', '1731EW TYT KTA.R. T1 TU1K/K\''),
+('18G6128X70', '0', '1731EX TYT KTA.R. T1 TU3 CDT \"3054\"'),
 ('18G6131X70', '0', '1731EY TYT KTA.R. T1 TU3-FLUO- K208'),
 ('3140068970', '0', '1731HF TYT KTA.R. T1 TU5 -15,0-K181'),
 ('3140070770', '0', '1731HQ TYT T5 TU5  5AL  VIOLET K181'),
@@ -25786,8 +26161,8 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('2126582XXX', '0', 'COUPELLE JLR'),
 ('2125909XXX', '0', 'COUPELLE JLR'),
 ('2086014XXX', '0', 'SUPPORT TUYAU DE SORTIE'),
-('2126578XXX', '0', 'SUPPORT TUYAU D''ENTREE'),
-('2128617XXX', '0', 'SUPPORT TUYAU D''ENTREE'),
+('2126578XXX', '0', 'SUPPORT TUYAU D\'ENTREE'),
+('2128617XXX', '0', 'SUPPORT TUYAU D\'ENTREE'),
 ('2139296XXX', 'DK 023', 'TUBE PITOT CINTRE JLR'),
 ('2150230XXX', '0', 'PSA4383 LIGNE COMPLETE A9 DV6 E6.2'),
 ('2171553XXX', '0', 'TSFR 1,4510  D80 - 1 ,0 - 158,4'),
@@ -25827,7 +26202,7 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('2126563XXX', '0', 'TUBE JLR D32 x 1,0         1.4509'),
 ('2209433XXX', '0', 'TSFR 1,4509 D32 - 1  - 6400'),
 ('2209558XXX', '0', 'TSFR 1,4509 D30 - 1  - 6400'),
-('2205013XXX', '0', 'SCR MONOLITH 4'''''),
+('2205013XXX', '0', 'SCR MONOLITH 4\'\''),
 ('2167577XXX', 'AB 11', 'Coupelle int?rieur  Thk 1 Sil Av'),
 ('2167608XXX', 'AA 33', 'Fibre Sil AV JLR'),
 ('2167586XXX', 'AB 12', 'Tube diam 55 Sil Av JLR'),
@@ -26008,145 +26383,266 @@ INSERT INTO `table_12` (`reference`, `adresse`, `description`) VALUES
 ('2049265MXX', '0', 'sous- ens AV');
 
 --
--- Index pour les tables exportées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `codir_kamishibai`
+-- Indexes for table `codir_kamishibai`
 --
 ALTER TABLE `codir_kamishibai`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `codir_kamishibai_reponse`
+-- Indexes for table `codir_kamishibai_reponse`
 --
 ALTER TABLE `codir_kamishibai_reponse`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `logistique_alerte`
+-- Indexes for table `equipe`
+--
+ALTER TABLE `equipe`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `files`
+--
+ALTER TABLE `files`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `launchboard`
+--
+ALTER TABLE `launchboard`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `logistique_alerte`
 --
 ALTER TABLE `logistique_alerte`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `logistique_e_kanban`
+-- Indexes for table `logistique_e_kanban`
 --
 ALTER TABLE `logistique_e_kanban`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `logistique_pieces`
+-- Indexes for table `logistique_pieces`
 --
 ALTER TABLE `logistique_pieces`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `logistique_reponse_jaune`
+-- Indexes for table `logistique_reponse_jaune`
 --
 ALTER TABLE `logistique_reponse_jaune`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `logistique_reponse_orange`
+-- Indexes for table `logistique_reponse_orange`
 --
 ALTER TABLE `logistique_reponse_orange`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `logistique_reponse_rouge`
+-- Indexes for table `logistique_reponse_rouge`
 --
 ALTER TABLE `logistique_reponse_rouge`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `profil`
+-- Indexes for table `profil`
 --
 ALTER TABLE `profil`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `qualite_quiz_question`
+-- Indexes for table `qualite_hse_question`
+--
+ALTER TABLE `qualite_hse_question`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `qualite_hse_reponse`
+--
+ALTER TABLE `qualite_hse_reponse`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `qualite_hse_session`
+--
+ALTER TABLE `qualite_hse_session`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `qualite_quiz_question`
 --
 ALTER TABLE `qualite_quiz_question`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `qualite_quiz_reponse`
+-- Indexes for table `qualite_quiz_reponse`
 --
 ALTER TABLE `qualite_quiz_reponse`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `qualite_quiz_session`
+-- Indexes for table `qualite_quiz_session`
 --
 ALTER TABLE `qualite_quiz_session`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- Indexes for table `qualite_RR_question`
+--
+ALTER TABLE `qualite_RR_question`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `qualite_RR_reponse`
+--
+ALTER TABLE `qualite_RR_reponse`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `qualite_RR_session`
+--
+ALTER TABLE `qualite_RR_session`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `codir_kamishibai`
+-- AUTO_INCREMENT for table `codir_kamishibai`
 --
 ALTER TABLE `codir_kamishibai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=571;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=573;
+
 --
--- AUTO_INCREMENT pour la table `codir_kamishibai_reponse`
+-- AUTO_INCREMENT for table `codir_kamishibai_reponse`
 --
 ALTER TABLE `codir_kamishibai_reponse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
 --
--- AUTO_INCREMENT pour la table `logistique_alerte`
+-- AUTO_INCREMENT for table `equipe`
+--
+ALTER TABLE `equipe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `files`
+--
+ALTER TABLE `files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+
+--
+-- AUTO_INCREMENT for table `launchboard`
+--
+ALTER TABLE `launchboard`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `logistique_alerte`
 --
 ALTER TABLE `logistique_alerte`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+
 --
--- AUTO_INCREMENT pour la table `logistique_e_kanban`
+-- AUTO_INCREMENT for table `logistique_e_kanban`
 --
 ALTER TABLE `logistique_e_kanban`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=837;
+
 --
--- AUTO_INCREMENT pour la table `logistique_pieces`
+-- AUTO_INCREMENT for table `logistique_pieces`
 --
 ALTER TABLE `logistique_pieces`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11378;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11393;
+
 --
--- AUTO_INCREMENT pour la table `logistique_reponse_jaune`
+-- AUTO_INCREMENT for table `logistique_reponse_jaune`
 --
 ALTER TABLE `logistique_reponse_jaune`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
 --
--- AUTO_INCREMENT pour la table `logistique_reponse_orange`
+-- AUTO_INCREMENT for table `logistique_reponse_orange`
 --
 ALTER TABLE `logistique_reponse_orange`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
 --
--- AUTO_INCREMENT pour la table `logistique_reponse_rouge`
+-- AUTO_INCREMENT for table `logistique_reponse_rouge`
 --
 ALTER TABLE `logistique_reponse_rouge`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
--- AUTO_INCREMENT pour la table `profil`
+-- AUTO_INCREMENT for table `profil`
 --
 ALTER TABLE `profil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
 --
--- AUTO_INCREMENT pour la table `qualite_quiz_question`
+-- AUTO_INCREMENT for table `qualite_hse_question`
+--
+ALTER TABLE `qualite_hse_question`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `qualite_hse_reponse`
+--
+ALTER TABLE `qualite_hse_reponse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `qualite_hse_session`
+--
+ALTER TABLE `qualite_hse_session`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `qualite_quiz_question`
 --
 ALTER TABLE `qualite_quiz_question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+
 --
--- AUTO_INCREMENT pour la table `qualite_quiz_reponse`
+-- AUTO_INCREMENT for table `qualite_quiz_reponse`
 --
 ALTER TABLE `qualite_quiz_reponse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=495;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=570;
+
 --
--- AUTO_INCREMENT pour la table `qualite_quiz_session`
+-- AUTO_INCREMENT for table `qualite_quiz_session`
 --
 ALTER TABLE `qualite_quiz_session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT for table `qualite_RR_question`
+--
+ALTER TABLE `qualite_RR_question`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `qualite_RR_reponse`
+--
+ALTER TABLE `qualite_RR_reponse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT for table `qualite_RR_session`
+--
+ALTER TABLE `qualite_RR_session`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
