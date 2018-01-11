@@ -8,6 +8,7 @@ drawMenu('les_idees');
 
 $recherche = "";
 $debut=0;
+$a_vote=-1;
 
 if (isset($_GET["recherche"])){
     $recherche = $_GET["recherche"];
@@ -15,11 +16,21 @@ if (isset($_GET["recherche"])){
 
 if(isset($_GET['nb'])){
   $debut=$_GET['nb'];
+  if
+}
+
+if(isset($_GET['vote'])){
+  $a_vote=$_GET['vote'];
+  if($a_vote>0){
+      $Qy = $bdd->prepare('SELECT FROM votes_idees WHERE personne= ? AND idee= ?')
+      $Qy->execute(array('%'.$SESSION['id'].'%',  '%'.$a_vote.'%'));
+      if($Qy->fetch()){warning("ERREUR","vous avez deja voté pour cette idée");}else{$bdd->exec(INSERT INTO votes_idees(id, personne, idee) VALUES('','%'.$SESSION['id'].'%','%'.$a_vote.'%')); success("SUCCES","Le vote a bien été pris en compte");}
+  }
 }
 
 if(empty($_SESSION['login']))
 { ?>
-  <h2>Idees</h2>
+  <h2>Idées</h2>
   <h4>Vous devez être connecté pour accéder à cette partie.</h4>
   <a href="/moncompte/identification.php?redirection=RH/idees_ameliorations"><button class="btn btn-default">Se connecter</button></a>
   <a href="<?php echo $url; ?>" class="btn btn-default">Accueil</a>
@@ -29,7 +40,7 @@ else
 {
 ?>
 
-<h2>Idees</h2>
+<h2>Idées du mois</h2>
 
   <form class="form-inline">
   <div class="form-group">
@@ -38,7 +49,7 @@ else
   </div>
   <button type="submit" class="btn btn-default">Rechercher</button>
   <a href="ajout.php" class="btn btn-default pull-right">Modifier/Supprimer</a>
-  <a href="classement.php" class="btn btn-default pull-right">Classement du mois</a>
+  <a href="idees_tot.php" class="btn btn-default pull-right">Toutes les idées</a>
 </form>
 
 
@@ -62,7 +73,7 @@ else
 
   $Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
       ON idees_ameliorations.personne = profil.id
-      WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 LIMIT 40 OFFSET ?  ') ;
+      WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 ORDER BY vote LIMIT 40 OFFSET ? WHERE MONTH(date)==MONTH(CURDATE()) ') ;
       $Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%', '%'.$debut.'%'));
 
 
@@ -75,8 +86,8 @@ while ($Data = $Query->fetch()) {
         <td><?php echo $Data['titre']; ?></td>
         <td><?php echo $Data['date']; ?></td>
         <td><?php echo $Data['vote']; ?></td>
-        <td><?php if($Data['vote']){echo "oui";}else{echo "non";} ?></td>
-        <td class="clickable" title="Cliquez pour accéder au details" onclick="window.location='details.php?id=<?php echo $Data['idees_ameliorations.id']; ?>'">Details</td>
+        <td><?php if($Data['vote']){echo "x";}else{echo "";} ?></td>
+        <td class="clickable" title="Cliquez voter pour cette idée" onclick="window.location='index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-40;?>&amp;vote=<?php echo $Data['idees_ameliorations.id'] ;?>'">Details</td>
 
 
     </tr>
@@ -91,7 +102,7 @@ while ($Data = $Query->fetch()) {
 <?php
 if($debut > 39){
   ?>
-  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-40;?>" class="btn btn-default">Elements précédents</a>
+  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-40;?>&amp;vote=<?php echo $a_vote;?>" class="btn btn-default">Elements précédents</a>
 <?php
 }
 $test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
@@ -99,7 +110,7 @@ $test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
     WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 LIMIT 40 OFFSET ?  ');
 $test->execute(array('%'.$recherche.'%', '%'.$recherche.'%', '%'.($debut+40).'%'));
 if($test -> fetch()){ ?>
-  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+40;?>" class="btn btn-default">Elements suivants</a>
+  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+40;?>&amp;vote=<?php echo $a_vote;?>" class="btn btn-default">Elements suivants</a>
 <?php
 }
 }
