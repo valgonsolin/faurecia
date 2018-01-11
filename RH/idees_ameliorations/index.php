@@ -62,7 +62,7 @@ else
 
   $Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
       ON idees_ameliorations.personne = profil.id
-      WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 LIMIT 50 OFFSET ?  ') ;
+      WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 LIMIT 40 OFFSET ?  ') ;
       $Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%', '%'.$debut.'%'));
 
 
@@ -89,6 +89,19 @@ while ($Data = $Query->fetch()) {
 </table>
 
 <?php
+if($debut > 39){
+  ?>
+  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-40;?>" class="btn btn-default">Elements précédents</a>
+<?php
+}
+$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
+    ON idees_ameliorations.personne = profil.id
+    WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 LIMIT 40 OFFSET ?  ');
+$test->execute(array('%'.$recherche.'%', '%'.$recherche.'%', '%'.($debut+40).'%'));
+if($test -> fetch()){ ?>
+  <a href="pieces.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+40;?>" class="btn btn-default">Elements suivants</a>
+<?php
+}
 }
 drawFooter();
  ?>
