@@ -41,6 +41,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'ta
 function drawHeader($selected='')
 {
 global $url;
+global $bdd;
 ?>
 <body>
 	<div id="page">
@@ -95,13 +96,39 @@ global $url;
       <div class="dropdown">
 			<a href="<?php echo $url; ?>" class="bouton_menu <?php if($selected=='methode'){echo ' bouton_menu_selected';} ?>">Méthode</a>
 				<div class="dropdown-content">
-                    <a href="<?php echo $url; ?>/methode/launchboard" class="bouton_dropdown" >LaunchBoard</a>
-                    <a href="<?php echo $url; ?>" class="bouton_dropdown">Formation PPTL</a>
-                    <a href="<?php echo $url; ?>" class="bouton_dropdown">Charge</a>
-                </div>
+            <a href="<?php echo $url; ?>/methode/launchboard" class="bouton_dropdown" >LaunchBoard</a>
+            <a href="<?php echo $url; ?>" class="bouton_dropdown">Formation PPTL</a>
+            <a href="<?php echo $url; ?>" class="bouton_dropdown">Charge</a>
+        </div>
 			</div>
-			<a href="/codir/kamishibai/index.php" class="bouton_menu <?php if($selected=='codir'){echo ' bouton_menu_selected';} ?>">Codir</a>
-            <a class="bouton_menu <?php if($selected=='moncompte'){echo ' bouton_menu_selected';} ?>"" href=<?php if(!empty($_SESSION['login'])){echo "/moncompte";}else{echo "/moncompte/identification.php";} ?>><?php if(!empty($_SESSION['login'])){echo "Mon Compte";}else{echo "Connexion";} ?></a>
+      <div class="dropdown">
+			     <a href="/codir/kamishibai/index.php" class="bouton_menu <?php if($selected=='codir'){echo ' bouton_menu_selected';} ?>">Codir</a>
+           <div class="dropdown-content">
+             <?php    if(isset($_SESSION['login'])){
+               $Query = $bdd -> prepare('SELECT * FROM profil
+                                   LEFT JOIN (SELECT id as id_reponse, profil as id_profil FROM codir_kamishibai_reponse WHERE cloture = 0 GROUP BY id_profil) AS reponse
+                                   ON reponse.id_profil = profil.id
+                                   WHERE supprime = 0 and profil.id = ?');
+               $Query->execute(array($_SESSION['id']));
+               $Data = $Query -> fetch();
+               if (is_null($Data['id_reponse'])) {
+                   ?>
+                   <a href="<?php echo $url; ?>/codir/kamishibai/tirer_carte.php?profil=<?php echo $Data['id']; ?>" class="bouton_dropdown">Tirer une carte</a>
+                   <?php
+               }else {
+                   ?>
+                   <a href="<?php echo $url; ?>/codir/kamishibai/reponse.php?id=<?php echo $Data['id_reponse']; ?>" class="bouton_dropdown">Voir ma carte</a>
+                   <?php
+               }
+             }?>
+
+             <a href="<?php echo $url; ?>/codir/kamishibai" class="bouton_dropdown">Kamishibai</a>
+             <?php if((isset($_SESSION['login'])) && $_SESSION['kamishibai']){ ?>
+             <a href="<?php echo $url; ?>/codir/kamishibai/gestion.php" class="bouton_dropdown">Gestion Cartes</a>
+               <?php } ?>
+           </div>
+      </div>
+      <a class="bouton_menu <?php if($selected=='moncompte'){echo ' bouton_menu_selected';} ?>"" href=<?php if(!empty($_SESSION['login'])){echo "/moncompte";}else{echo "/moncompte/identification.php";} ?>><?php if(!empty($_SESSION['login'])){echo "Mon Compte";}else{echo "Connexion";} ?></a>
 		</div>
     </div>
 
