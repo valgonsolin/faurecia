@@ -25,7 +25,6 @@
           $_SESSION['kamishibai'] = $Data['kamishibai'];
           $_SESSION['logistique'] = $Data['logistique'];
           $_SESSION['idees'] = $Data['idees'];
-            $_SESSION['vote'] = $Data['vote_idees'];
           ob_end_clean();
 
           if(isset($_GET['redirection'])){
