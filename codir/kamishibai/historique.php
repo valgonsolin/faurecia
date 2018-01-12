@@ -126,10 +126,10 @@ else
                 <div id="modal<?php echo $id; ?>" class="modal fade" role="dialog">
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                      <div class="modal-header" style="padding-bottom:0;">
+                      <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title" style="text-align:center;">Carte de <?php echo $row['nom']."  ".$row['prenom']; ?></h4>
-                        <h4 style="margin-bottom:5px;"><a target=_blank class="btn btn-default" href="imprimer_fiche.php?id=<?php echo $row['7']; ?>">Imprimer</a><small style=" float:right;"><?php echo $row['date_cloture']; ?></small></h4>
+                        <h4><small style=" float:right;"><?php echo $row['date_cloture']; ?></small></h4>
                       </div>
                       <div class="modal-body" style="padding:20px;">
                         <div class="row">
