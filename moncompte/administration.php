@@ -5,16 +5,16 @@ echo "<h2>Gestion des Profils</h2>";
 
 if (isset($_POST['modifier'])){
     if (isset($_POST['id'])){
-        $Query = $bdd->prepare('UPDATE profil SET nom = ?, prenom = ?,identifiant = ?, mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ? WHERE id = ?');
-        if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['identifiant'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['admin'],$_POST['qualite'],$_POST['rr'],$_POST['hse'],$_POST['kamishibai'],$_POST['logistique'],$_POST['id']))){
+        $Query = $bdd->prepare('UPDATE profil SET nom = ?, prenom = ?,identifiant = ?, mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ?, idees = ? WHERE id = ?');
+        if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['identifiant'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['admin'],$_POST['qualite'],$_POST['rr'],$_POST['hse'],$_POST['kamishibai'],$_POST['logistique'],$_POST['idees'],$_POST['id']))){
           success('Modifié',"Le profil a été modifié.");
         }else{
           warning("Erreur","Veuillez réessayer.");
         }
     }else{
         if($_POST['new1'] == $_POST['new2']){
-          $Query = $bdd->prepare('INSERT INTO profil SET nom = ?, prenom = ?,identifiant = ?, mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ?,password = ?');
-          if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['identifiant'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['admin'],$_POST['qualite'],$_POST['rr'],$_POST['hse'],$_POST['kamishibai'],$_POST['logistique'], crypt($_POST['new1'],"faureciabeaulieu")))){
+          $Query = $bdd->prepare('INSERT INTO profil SET nom = ?, prenom = ?,identifiant = ?, mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ?, idees = ?,password = ?');
+          if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['identifiant'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['admin'],$_POST['qualite'],$_POST['rr'],$_POST['hse'],$_POST['kamishibai'],$_POST['logistique'],$_POST['idees'], crypt($_POST['new1'],"faureciabeaulieu")))){
             success("Ajouté","Le profil a bien été ajouté.");
           }else{
             warning("Erreur","Veuillez réessayer.");

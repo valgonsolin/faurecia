@@ -14,6 +14,7 @@ if(empty($_SESSION['login'])){ ?>
   }else{
 if(isset($_GET['id'])){
 ?>
+
     <h2>Modifier le profil</h2>
 
 <?php
@@ -33,6 +34,7 @@ if(isset($_GET['id'])){
     $kamishibai = $Data['kamishibai'];
     $logistique = $Data['logistique'];
     $qualite= $Data['qualite'];
+    $idees=$Data['idees'];
 }else{
 ?>
     <h2>Ajouter un profil</h2>
@@ -48,6 +50,7 @@ if(isset($_GET['id'])){
     $qualite=0;
     $hse=0;
     $rr=0;
+    $idees=0;
     $kamishibai=0;
     $logistique=0;
 }
@@ -119,6 +122,7 @@ if(isset($_GET['id'])){
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="rr" <?php if($rr){echo "checked";} ?>>R&amp;R</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="hse" <?php if($hse){echo "checked";} ?>>HSE</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="kamishibai" <?php if($kamishibai){echo "checked";} ?>>Kamishibai</label>
+            <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="idees" <?php if($idees){echo "checked";} ?>>Idées améliorations</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="logistique" <?php if($logistique){echo "checked";} ?>>Logistique</label>
           </div>
         </div>
