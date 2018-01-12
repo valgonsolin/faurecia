@@ -176,5 +176,3 @@ $Data = $Query->fetch();
 <script>
     window.print();
 </script>
-
-

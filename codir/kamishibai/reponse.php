@@ -9,6 +9,14 @@ drawMenu("carte");
 
 
 if (isset($_POST['submit_cloturer'])){
+  $Query = $bdd->prepare('UPDATE codir_kamishibai_reponse SET
+    reponse1 = ?, reponse2 = ?, reponse3 = ?, reponse4 = ? ,
+    commentaire1 = ?, commentaire2 = ?, commentaire3 = ?, commentaire4 = ?
+    WHERE id = ?');
+  $Query->execute(array(
+      $_POST['reponse1'], $_POST['reponse2'], $_POST['reponse3'], $_POST['reponse4'],
+      $_POST['commentaire1'], $_POST['commentaire2'], $_POST['commentaire3'], $_POST['commentaire4'],
+      $_GET['id']));
     $Query = $bdd->prepare('UPDATE codir_kamishibai_reponse SET cloture=1, date_cloture=NOW()
       WHERE id = ?');
     $Query->execute(array(
@@ -60,8 +68,8 @@ $Data = $Query->fetch();
 <h4><?php echo $Data['titre']?></h4>
 
 <form method="post">
-
-    <div class="form-group">
+  <div class="row">
+    <div class="form-group col-md-6">
         <label class="control-label col-sm-2" for="reponse1"><?php echo $Data['question1']; ?></label>
         <div class="radio">
             <label><input value="1" type="radio" name="reponse1" <?php if($Data['reponse1'] == 1){echo 'checked';}?>>Oui</label>
@@ -70,7 +78,7 @@ $Data = $Query->fetch();
 
         <textarea name="commentaire1" placeholder="Commentaire"><?php echo $Data['commentaire1']?></textarea>
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label class="control-label col-sm-2" for="reponse2"><?php echo $Data['question2']; ?></label>
         <div class="radio">
             <label><input value="1" type="radio" name="reponse2" <?php if($Data['reponse2'] == 1){echo 'checked';}?>>Oui</label>
@@ -78,7 +86,9 @@ $Data = $Query->fetch();
         </div>
         <textarea name="commentaire2" placeholder="Commentaire"><?php echo $Data['commentaire2']?></textarea>
     </div>
-    <div class="form-group">
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
         <label class="control-label col-sm-2" for="reponse3"><?php echo $Data['question3']; ?></label>
         <div class="radio">
             <label><input value="1" type="radio" name="reponse3" <?php if($Data['reponse3'] == 1){echo 'checked';}?>>Oui</label>
@@ -87,7 +97,7 @@ $Data = $Query->fetch();
 
         <textarea name="commentaire3" placeholder="Commentaire"><?php echo $Data['commentaire3']?></textarea>
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label class="control-label col-sm-2" for="reponse4"><?php echo $Data['question4']; ?></label>
         <div class="radio">
             <label><input value="1" type="radio" name="reponse4" <?php if($Data['reponse4'] == 1){echo 'checked';}?>>Oui</label>
@@ -96,23 +106,20 @@ $Data = $Query->fetch();
 
         <textarea name="commentaire4" placeholder="Commentaire"><?php echo $Data['commentaire4']?></textarea>
     </div>
-
-
+  </div>
 
     <button type="submit" name="submit" id="submit" class="btn btn-default">Enregistrer
     </button>
 
     <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir clôturer cette fiche ? ')" name="submit_cloturer" id="submit_cloturer" class="btn btn-default">Clôturer
     </button>
+    <a target=_blank href="imprimer_fiche.php?id=<?php echo $_GET["id"]; ?>" class="btn btn-default pull-right">Imprimer la fiche</a>
 
 
 </form>
 
 
 
-<div class="col-md text-center" style="margin: 50px;">
-    <a href="imprimer_fiche.php?id=<?php echo $_GET["id"]; ?>" class="btn btn-default">Imprimer la fiche</a>
-</div>
 
 
 <?php

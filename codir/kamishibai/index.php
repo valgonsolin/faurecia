@@ -24,7 +24,6 @@ $recherche = "";
     <tr>
         <th style="width:90%;">Titre</th>
         <th>Tirages</th>
-        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -39,10 +38,9 @@ $recherche = "";
     $Query -> execute();
     while ($Data = $Query->fetch()) {
         ?>
-        <tr>
+        <tr class="clickable" onclick="window.location='historique.php?id=<?php echo$Data['0']; ?>'">
           <td><?php echo $Data['titre']; ?></td>
           <td style="text-align:center;"><?php if(is_null($Data['kamishibai'])){echo "0";}else{echo $Data['s'];}; ?></td>
-          <td align=right><a href="historique.php?id=<?php echo$Data['0']; ?>" class="btn btn-default" style="width:50px;">Voir</a></td>
         </tr>
 
         <?php
