@@ -6,6 +6,16 @@ include_once "../needed.php";
 drawheader('codir');
 drawMenu("kamishibai");
 
+if(empty($_SESSION['login']))
+{ ?>
+  <h2>Kamishibai</h2>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
+  <a href="/moncompte/identification.php?redirection=codir/kamishibai"><button class="btn btn-default">Se connecter</button></a>
+  <a href="<?php echo $url; ?>" class="btn btn-default">Accueil</a>
+<?php
+}
+else
+{
 $recherche = "";
 ?>
     <h2>Historique kamishibai</h2>
@@ -64,4 +74,5 @@ $recherche = "";
       </form>
 
 <?php
+}
 drawFooter();

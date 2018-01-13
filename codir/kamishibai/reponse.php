@@ -7,7 +7,16 @@ drawheader('codir');
 drawMenu("carte");
 
 
-
+if(empty($_SESSION['login']))
+{ ?>
+  <h2>Kamishibai</h2>
+  <h4>Vous devez être connecté pour accéder à cette partie.</h4>
+  <a href="/moncompte/identification.php?redirection=codir/kamishibai"><button class="btn btn-default">Se connecter</button></a>
+  <a href="<?php echo $url; ?>" class="btn btn-default">Accueil</a>
+<?php
+}
+else
+{
 if (isset($_POST['submit_cloturer'])){
   $Query = $bdd->prepare('UPDATE codir_kamishibai_reponse SET
     reponse1 = ?, reponse2 = ?, reponse3 = ?, reponse4 = ? ,
@@ -120,9 +129,9 @@ $Data = $Query->fetch();
 
 
 
-
-
 <?php
+}
+
 drawFooter()
 
 ?>

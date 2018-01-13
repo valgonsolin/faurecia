@@ -25,9 +25,6 @@ if(empty($_SESSION['login']))
 else
 {
     echo "<h2>kamishibai</h2>";
-    if(!$_SESSION['kamishibai']){
-        echo "<p>Vous n'avez pas les droits pour accéder à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
-    }else{
       if(! isset($_GET['id'])){
         ?>
         <h4>Oups.. Votre session est inconnue.</h4>
@@ -184,13 +181,7 @@ else
 
         <?php
       }
+    }
 
-?>
-
-<?php    }}
-?>
-
-
-<?php
 }
 drawFooter();
