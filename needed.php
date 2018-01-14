@@ -28,7 +28,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'ta
 
 
         <link rel="stylesheet" href="/css/base.css"/>
-		<link rel="stylesheet" href="/css/dropdown.css"/>
+		    <link rel="stylesheet" href="/css/dropdown.css"/>
 
 
         <title>Faurecia Beaulieu</title>
@@ -97,8 +97,7 @@ global $bdd;
 			<a href="<?php echo $url; ?>" class="bouton_menu <?php if($selected=='methode'){echo ' bouton_menu_selected';} ?>">Méthode</a>
 				<div class="dropdown-content">
             <a href="<?php echo $url; ?>/methode/launchboard" class="bouton_dropdown" >LaunchBoard</a>
-            <a href="<?php echo $url; ?>" class="bouton_dropdown">Formation PPTL</a>
-            <a href="<?php echo $url; ?>" class="bouton_dropdown">Charge</a>
+            <a class="bouton_dropdown">Formation PPTL</a>
         </div>
 			</div>
       <div class="dropdown">

@@ -139,10 +139,10 @@ else{
           $query -> execute(array($tableau[$article]));
           $value=$query->fetch();
           if($value){
-            if($tableau[$description]==''){$description=$value['description'];}else{$description=$tableau[$description];}
+            if($tableau[$description]==''){$descr=$value['description'];}else{$descr=$tableau[$description];}
             if($tableau[$emplacement]==''){$adresse=$value['adresse'];}else{$adresse=$tableau[$emplacement];}
             $update = $bdd -> prepare('UPDATE logistique_pieces SET description= ?,adresse= ? WHERE reference=?');
-            if( ! $update -> execute(array($description,$adresse,$tableau[$article]))){
+            if( ! $update -> execute(array($descr,$adresse,$tableau[$article]))){
               $erreur += 1;
             }
           }else{
