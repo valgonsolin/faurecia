@@ -70,13 +70,8 @@ else
 <tbody>
 
 <?php
-
-
-  $Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
-      ON idees_ameliorations.emmetteur = profil.id
-      WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 ORDER BY vote LIMIT 40 OFFSET ? WHERE MONTH(date)==MONTH(CURDATE()) ') ;
-      $Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%', '%'.$debut.'%'));
-
+$Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations  ON idees_ameliorations.emmetteur = profil.id  WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0  ORDER BY vote LIMIT 40 OFFSET ?  ') ;
+$Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%','%'.$debut.'%'));
 
 while ($Data = $Query->fetch()) {
     ?>
@@ -90,12 +85,12 @@ while ($Data = $Query->fetch()) {
         <td><?php
 
         $Qy = $bdd->prepare('SELECT FROM votes_idees WHERE personne= ? AND idee= ?');
-        $Qy->execute(array('%'.$_SESSION['id'].'%',  '%'.$Data['idees_ameliorations.id'].'%'));
+        $Qy->execute(array('%'.$_SESSION['id'].'%',  '%'.$Data['id'].'%'));
 
         if($Qy->fetch()){echo "X";}else{echo "";} ?>
       </td>
 
-        <td class="clickable" title="Cliquez pour voter/voir le detail " onclick="window.location='details.php?idee=<?php echo $Data['idees_ameliorations.id'] ;?>'">Details</td>
+        <td class="clickable" title="Cliquez pour voter/voir le detail " onclick="window.location='details.php?idee=<?php echo $Data['id'] ;?>'">Details</td>
 
 
     </tr>
