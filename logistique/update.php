@@ -6,6 +6,8 @@ drawHeader('logistique');
 drawMenu('update');
 
 echo "<h2>Mise à jour de la base de données des pièces</h2>";
+echo "<div id='message' style='text-align:center; display:none;'><h1>Chargement...</h1><h4>Veuillez patienter. Cette opération peut prendre plusieurs minutes.</h4></div>";
+
 if(empty($_SESSION['login'])){ ?>
   <h4>Vous devez être connecté pour accéder à cette partie.</h4>
   <a href="/moncompte/identification.php?redirection=logistique/update.php"><button class="btn btn-default">Se connecter</button></a>
@@ -87,6 +89,10 @@ drawform();
 }
 else{
   if(isset($_FILES['inventaire'])){
+    echo "<script>document.getElementById('message').style.display = 'block';</script>";
+    ob_flush();
+    flush();
+    ob_flush();
     $ext = strtolower(substr(strrchr($_FILES['inventaire']['name'],'.'),1));
     if($ext != "csv"){
       warning('Mauvais fichier','Le fichier doit être un fichier CSV.');
@@ -157,6 +163,10 @@ else{
       }
     }
   }elseif(isset($_FILES['sebango'])){
+    echo "<script>document.getElementById('message').style.display = 'block';</script>";
+    ob_flush();
+    flush();
+    ob_flush();
     $ext = strtolower(substr(strrchr($_FILES['sebango']['name'],'.'),1));
     if($ext != "csv"){
       warning('Mauvais fichier','Le fichier doit être un fichier CSV.');
@@ -222,6 +232,10 @@ else{
       }
     }
   }elseif(isset($_FILES['kanban'])){
+    echo "<script>document.getElementById('message').style.display = 'block';</script>";
+    ob_flush();
+    flush();
+    ob_flush();
     $ext = strtolower(substr(strrchr($_FILES['kanban']['name'],'.'),1));
     if($ext != "csv"){
       warning('Mauvais fichier','Le fichier doit être un fichier CSV.');
@@ -315,10 +329,6 @@ else{
 }}}
 
 
-
-
-
-
-
+echo "<script>document.getElementById('message').style.display = 'none';</script>";
 
 drawFooter(); ?>
