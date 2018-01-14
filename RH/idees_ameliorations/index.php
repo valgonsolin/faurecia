@@ -70,8 +70,10 @@ else
 <tbody>
 
 <?php
-$Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations  ON idees_ameliorations.emmetteur = profil.id  WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0  ORDER BY vote LIMIT 40 OFFSET ?  ') ;
-$Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%','%'.$debut.'%'));
+
+
+$Query = $bdd->prepare('SELECT * FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and idees_ameliorations.id >= ?  ORDER BY vote LIMIT 40  ') ;
+$Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%',$debut));
 
 while ($Data = $Query->fetch()) {
     ?>
