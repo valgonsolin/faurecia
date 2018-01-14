@@ -35,7 +35,9 @@ else
 
     $respo=$Query2->fetch();
 
-  $query = $bdd -> prepare('INSERT INTO idees_ameliorations(emmetteur, superviseur,type,transversalisation,retenue,respo_rea,date_rea,situation_actuelle,situation_proposee) VALUES (:emmetteur, :superviseur,:type,:transversalisation,:retenue,:respo_rea,:date_rea ,:situation_actuelle,:situation_proposeee)');
+    $datetime = date("Y-m-d");
+
+  $query = $bdd -> prepare('INSERT INTO idees_ameliorations(emmetteur, superviseur,type,transversalisation,retenue,respo_rea,date_rea,situation_actuelle,situation_proposee) VALUES (:emmetteur, :superviseur,:type,:transversalisation,:retenue,:respo_rea,:date_rea ,:situation_actuelle,:situation_proposee)');
     $query -> execute(array(
       'emmetteur' => $_SESSION['id'],
       'superviseur' => $sup['id'],
@@ -43,9 +45,9 @@ else
       'transversalisation' => $_POST['transversalisation'],
       'retenue' =>$_POST['retenue'],
       'respo_rea' => $respo['id'],
-      'date_rea'=>CURDATE(),
+      'date_rea'=>$datetime,
       'situation_actuelle' => $_POST['situation_actuelle'],
-      'situation_proposee' => $_POST['situation_proposee'],
+      'situation_proposee' => $_POST['situation_proposee']
     ));
 
     if($query ==false){
