@@ -6,8 +6,17 @@ drawHeader('RH');
 drawMenu('les_idees');
 
 
+
 $recherche = "";
 $debut=0;
+$datetime = date("Y-m-d");
+
+    $date = date_parse($datetime);
+    $jour = $date['day'];
+    $mois = $date['month'];
+    $annee = $date['year'];
+
+
 
 
 if (isset($_GET["recherche"])){
@@ -19,14 +28,6 @@ if(isset($_GET['nb'])){
 }
 
 
-if(isset($_GET['vote'])){
-  $a_vote=$_GET['vote'];
-  if($a_vote>0){
-      $Qy = $bdd->prepare('SELECT FROM votes_idees WHERE personne= ? AND idee= ?');
-      $Qy -> execute(array('%'.$SESSION['id'].'%',  '%'.$a_vote.'%'));
-      if($Qy->fetch()){warning("ERREUR","vous avez deja voté pour cette idée");}else{$bdd->exec('INSERT INTO votes_idees(id, personne, idee) VALUES("","".$SESSION["id"]."%","%".$a_vote."%")'); success("SUCCES","Le vote a bien été pris en compte");}
-  }
-}
 
 
 if(empty($_SESSION['login']))
@@ -49,8 +50,7 @@ else
     <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="Nom, Prénom" value="<?php echo $recherche;?>">
   </div>
   <button type="submit" class="btn btn-default">Rechercher</button>
-  <a href="ajout.php" class="btn btn-default pull-right">Modifier/Supprimer</a>
-  <a href="idees_tot.php" class="btn btn-default pull-right">Toutes les idées</a>
+  <a href="ajout.php" class="btn btn-default pull-right">Espace administration</a>
 </form>
 
 
@@ -72,8 +72,8 @@ else
 <?php
 
 
-$Query = $bdd->prepare('SELECT * FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and idees_ameliorations.id >= ?  ORDER BY vote LIMIT 40  ') ;
-$Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%',$debut));
+$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote LIMIT 40  ') ;
+$Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%',$debut,$mois));
 
 while ($Data = $Query->fetch()) {
     ?>
@@ -86,13 +86,13 @@ while ($Data = $Query->fetch()) {
         <td><?php echo $Data['vote']; ?></td>
         <td><?php
 
-        $Qy = $bdd->prepare('SELECT FROM votes_idees WHERE personne= ? AND idee= ?');
-        $Qy->execute(array('%'.$_SESSION['id'].'%',  '%'.$Data['id'].'%'));
+        $Qy = $bdd->prepare('SELECT * FROM votes_idees WHERE personne= ? AND idee= ?');
+        $Qy->execute(array($_SESSION['id'],  $Data['id1']));
 
-        if($Qy->fetch()){echo "X";}else{echo "";} ?>
+        if($Qy->fetch()){echo "oui";}else{echo "non";} ?>
       </td>
 
-        <td class="clickable" title="Cliquez pour voter/voir le detail " onclick="window.location='details.php?idee=<?php echo $Data['id'] ;?>'">Details</td>
+        <td class="clickable" title="Cliquez pour voter/voir le detail " onclick="window.location='details.php?idee=<?php echo $Data['id1'] ;?>'">Voter/Voir details</td>
 
 
     </tr>
@@ -112,8 +112,8 @@ if($debut > 39){
 }
 $test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
     ON idees_ameliorations.emmetteur = profil.id
-    WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 LIMIT 40 OFFSET ?  ');
-$test->execute(array('%'.$recherche.'%', '%'.$recherche.'%', '%'.($debut+40).'%'));
+    WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ? LIMIT 40 ');
+$test->execute(array('%'.$recherche.'%', '%'.$recherche.'%', ($debut+40), $mois));
 if($test -> fetch()){ ?>
   <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+40;?>" class="btn btn-default">Elements suivants</a>
 <?php

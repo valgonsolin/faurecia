@@ -8,8 +8,7 @@ function drawMenu($selected){
         <div id="boutons_nav">
 
             <a href="<?php echo $url; ?>/RH/idees_ameliorations/index.php"><div class="bouton_menu   <?php if($selected=='les_idees'){echo ' bouton_nav_selected';} ?>">Idées du mois</div></a>
-            <a href="<?php echo $url; ?>/RH/idees_ameliorations/ajout.php"><div class="bouton_menu     <?php if($selected=='ajouter'){echo ' bouton_nav_selected';} ?>">Ajouter</div></a>
-            <a href="<?php echo $url; ?>/RH/idees_ameliorations/suppression.php"><div class="bouton_menu     <?php if($selected=='supprimer'){echo ' bouton_nav_selected';} ?>">Supprimer/Modifier</div></a>
+            <a href="<?php echo $url; ?>/RH/idees_ameliorations/idees_tot.php"><div class="bouton_menu     <?php if($selected=='tot_idees'){echo ' bouton_nav_selected';} ?>">Toutes les idées</div></a>
        </div>
      </div>
 <?php
