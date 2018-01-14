@@ -43,15 +43,10 @@ if (isset($_POST['submit'])){
             }
 
         } else {
-            ?>
-            <p style="color: #ff0002">La référence ou le code barre choisi n'éxiste pas.</p>
-            <?php
+          warning("Erreur","La référence ou le code barre choisi n'éxiste pas.");
         }
-
     }else{
-        ?>
-        <p style="color: #ff0002">Une alerte est déjà en cours sur cette pièce</p>
-        <?php
+        warning("Erreur","Une alerte est déjà en cours sur cette pièce.");
     }
 }
 
@@ -64,7 +59,7 @@ $uc_en_ligne ="";
 
 if (isset($_GET['id'])){
     ?>
-        <h2>Modifier le profil</h2>
+        <h2>Modifier l'alerte</h2>
 
     <?php
     $Query = $bdd->prepare('SELECT * FROM logistique_alerte WHERE id = ?');

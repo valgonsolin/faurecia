@@ -6,6 +6,13 @@ include_once "needed.php";
 drawheader();
 drawMenu("pieces");
 
+echo "<h1 id='message' style='text-align:center; display:none;'>Chargement...</h1>";
+echo "<script>";
+echo "document.getElementById('message').style.display = 'block';";
+echo "</script>";
+ob_flush();
+flush();
+ob_flush();
 $recherche = "";
 if ( isset($_GET['recherche'])) {
     $recherche = $_GET['recherche'];
@@ -13,23 +20,16 @@ if ( isset($_GET['recherche'])) {
 ?>
 <h2>Pièces</h2>
 
-
-
-
-<a href="editer_piece.php">Ajouter une pièce</a>
-<div style="height: 20px;" class="spacer"></div>
-
 <form class="form-inline">
     <div class="form-group">
         <label for="recherche">Recherche :</label>
         <input style="width: 500px;" type="text" class="form-control" name = "recherche" id="recherche" placeholder="Sebango, référence, description, ligne" value="<?php echo $recherche;?>">
     </div>
     <button type="submit" class="btn btn-default">Rechercher</button>
+    <a class="btn btn-default pull-right" href="editer_piece.php">Ajouter une pièce</a>
 </form>
-
-<div style="height: 20px;" class="spacer"></div>
-
-<table class="table"
+<hr>
+<table class="table">
 <thead class="thead">
 <tr>
     <th style="width: 50px">Reference</th>
@@ -50,11 +50,17 @@ $Query ->bindValue(':description','%'.$recherche.'%');
 $Query ->bindValue(':ligne','%'.$recherche.'%');
 $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
 $Query->execute();
+echo "<script>";
+echo "document.getElementById('message').style.display = 'none';";
+echo "</script>";
+ob_flush();
+flush();
+ob_flush();
 while ($Data = $Query->fetch()) {
     ?>
 
-    <tr>
-        <td><a href="/logistique/fiche_piece.php?id=<?php echo $Data['id']; ?>"><?php echo $Data['reference']; ?></a></td>
+    <tr class="clickable" onclick="window.location='/logistique/fiche_piece.php?id=<?php echo $Data['id']; ?>'">
+        <td><?php echo $Data['reference']; ?></td>
         <td><?php echo $Data['sebango']; ?></td>
         <td><?php echo $Data['description']; ?></td>
     </tr>

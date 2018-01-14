@@ -109,7 +109,7 @@ $state = $Data['state'];
         <?php
 
         if ($state == -1){
-            echo '<p>Cette alerte a été suppimé.</p>';
+            echo '<p>Cette alerte a été supprimé.</p>';
             echo '<button name="supprimer" type="submit" class="btn btn-default">Restaurer</button>';
         }else{
 

@@ -23,6 +23,7 @@ if(isset($_GET['recherche'])){
 ?>
 <style>
     .conteneur_alerte{
+        margin-top:20px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -31,17 +32,22 @@ if(isset($_GET['recherche'])){
         color: #000 ;
         font-size: 15px;
         background-color: #e3e3e3;
-        border-color: #000000;
+        border-color: #ccc;
+        border-radius:6px;
         border-width: 1px;
         border-style: solid;
         margin: 5px;
+    }
+    .alerte:hover{
+      opacity:0.7;
     }
     .info_alerte{
         margin: 10px;
         width: 320px;
         padding: 10px;
+        border-radius:6px;
         background-color: #FFF;
-        border-color: #000000;
+        border-color: #ccc;
         border-width: 1px;
         border-style: solid;
     }
@@ -50,7 +56,8 @@ if(isset($_GET['recherche'])){
         margin: 10px;
         width: 320px;
         height: 20px;
-        border-color: #000000;
+        border-radius:3px;
+        border-color: #ccc;
         border-width: 1px;
         border-style: solid;
     }
@@ -63,7 +70,6 @@ if(isset($_GET['recherche'])){
 
 <h2>Alerte composant</h2>
 
-<a href="form_alerte.php">Ajouter une nouvelle alerte</a>
 
 <div class="spacer" style="height: 10px;"></div>
 <form class="form-inline">
@@ -88,29 +94,30 @@ if(isset($_GET['recherche'])){
         <select name='order' id="order" class="form-control">
             <option value="logistique_alerte.date" <?php if($order == "logistique_alerte.date" ){echo 'selected="selected"';}?> >Date</option>
             <option value="couleur" <?php if($order == "couleur" ){echo 'selected="selected"';}?> >Couleur</option>
-            <option value="logistique_e_kanban.ligne" <?php if($order == "logistique_e_kanban.ligne" ){echo 'selected="selected"';}?> >Ligne</option>
+            <option value="logistique_e_kanban.ligne" <?php if($order ==  "logistique_e_kanban.ligne" ){echo 'selected="selected"';}?> >Ligne</option>
         </select>
     </div>
     <button type="submit" class="btn btn-default">Rechercher</button>
+    <a class="btn btn-default pull-right" href="form_alerte.php">Ajouter une nouvelle alerte</a>
 </form>
 
 <div class="conteneur_alerte">
     <?php
 
-    $requete = 'SELECT 
-                (CASE 
+    $requete = 'SELECT
+                (CASE
                  WHEN logistique_alerte.id in (SELECT alerte FROM logistique_reponse_rouge) then 3
                  WHEN logistique_alerte.id in (SELECT alerte FROM logistique_reponse_orange) then 2
                  WHEN logistique_alerte.id in (SELECT alerte FROM logistique_reponse_jaune) then 1
                  ELSE 0 END) as couleur,
-                 
+
                 logistique_alerte.id as id_alerte,
                 logistique_alerte.state as state,
                 logistique_alerte.date ,
                 logistique_pieces.*,
                 logistique_e_kanban.ligne,
                 logistique_reponse_jaune.couverture_ligne as couverture_ligne
-                FROM logistique_alerte 
+                FROM logistique_alerte
                 LEFT JOIN logistique_pieces on logistique_alerte.piece=logistique_pieces.id
                 LEFT JOIN logistique_e_kanban on logistique_e_kanban.id=logistique_alerte.e_kanban
                 LEFT JOIN logistique_reponse_jaune on logistique_alerte.id=logistique_reponse_jaune.alerte
@@ -186,7 +193,7 @@ if(isset($_GET['recherche'])){
 </div>
 <meta http-equiv="Refresh" content="60">
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> -->
 
 <script>
 
