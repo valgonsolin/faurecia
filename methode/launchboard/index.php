@@ -65,29 +65,114 @@ drawMenu('launchboard');
 //equipe id vers une autre table equipe qui contient les noms et mails de l'equipe
 //kickoff
 
+
+echo "<h2>LaunchRoom</h2>";
+if(! empty($_POST)){
+  if(isset($_POST['ajout'])){
+    $img=upload($bdd,'img',"../../ressources","launchboard",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    if($img < 0){$img=NULL;}
+    $kickoff=upload($bdd,'kickoff',"../../ressources","launchboard",50485760,array( 'ppt' , 'pptx' , 'PPT' , 'PPTX' ));
+    if($kickoff < 0){$kickoff=NULL;}
+    $launchbook=upload($bdd,'launchbook',"../../ressources","launchboard",50485760,array( 'xls' , 'xlsx' , 'XLS' , 'XLSX' ));
+    if($launchbook < 0){$launchbook=NULL;}
+    $add = $bdd -> prepare('INSERT INTO launchboard(profil,code,titre,client,description,initial_date,link_plr,link_helios,date_updated,kickoff,img_presentation,launchbook) VALUES (:profil,:code,:titre,:client,:description,CURDATE(),:link_plr,:link_helios,CURDATE(),:kickoff,:img,:launchbook)');
+    if($add -> execute(array(
+      "profil" => $_POST['profil'],
+      "code" => $_POST['code'],
+      "titre" => $_POST['titre'],
+      "client" => $_POST['client'],
+      "description" => $_POST['description'],
+      "link_plr" => $_POST['plr'],
+      "link_helios" => $_POST['helios'],
+      "kickoff" => $kickoff,
+      "img" => $img,
+      "launchbook" => $launchbook
+    ))){
+      success('Ajouté','Le projet a bien été ajouté.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
+  if(isset($_POST['archive'])){
+    $archive = $bdd -> prepare('UPDATE launchboard SET archive="1" WHERE id= ?');
+    if($archive -> execute(array($_POST['id']))){
+      success('Archivé','Le projet a été archivé.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. VEuillez réessayer.');
+    }
+  }
+  if(isset($_POST['desarchive'])){
+    $desarchive = $bdd -> prepare('UPDATE launchboard SET archive="0" WHERE id= ?');
+    if($desarchive -> execute(array($_POST['id']))){
+      success('Restauré','Le projet a été restauré.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
+}
+
+
+
+
+
 $recherche = "";
 if (isset($_GET["recherche"])){
     $recherche = $_GET["recherche"];
 }
-$query = $bdd -> prepare('SELECT * FROM launchboard WHERE (nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre)');
+$supprime =false;
+if(isset($_GET['supprime'])){
+  $supprime=true;
+  $query = $bdd -> prepare('SELECT * FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE (nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) ORDER BY couleur DESC');
+}else{
+  $query = $bdd -> prepare('SELECT * FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE ((nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) AND archive = 0) ORDER BY couleur DESC');
+}
 $query ->bindValue(':titre','%'.$recherche.'%');
 $query ->bindValue(':nom','%'.$recherche.'%');
 $query ->bindValue(':prenom','%'.$recherche.'%');
+$query ->bindValue(':code','%'.$recherche.'%');
 $query ->execute();
 
 ?>
-<h2>LaunchRoom</h2>
+
+<style>
+.color1{
+  background-color:#ccffcc;
+  box-shadow: 1px 1px 3px #ccffcc;
+}
+.color1:hover{
+  background-color: #b3ffb3;
+}
+.color2{
+  background-color:#ffd699;
+  box-shadow: 1px 1px 3px #ffd699;
+
+}
+.color2:hover{
+  background-color: #ffcc80;
+}
+.color3{
+  background-color:#ff9999;
+  box-shadow: 1px 1px 3px #ff9999;
+}
+.color3:hover{
+  background-color: #ff8080;
+}
+</style>
 <form class="form-inline">
   <div class="form-group">
     <label for="recherche">Recherche :</label>
-    <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="Question" value="<?php echo $recherche;?>">
+    <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="Nom, Prenom,Titre,Code" value="<?php echo $recherche;?>">
+    <label style="margin-left: 30px;"><input type="checkbox" name="supprime" <?php if($supprime){echo "checked";} ?>> Archivé</label>
+
   </div>
+
   <button type="submit" class="btn btn-default">Rechercher</button>
+  <a href="ajout.php" class="btn btn-default pull-right">Ajouter</a>
 </form>
 <table class="table">
 <thead class="thead">
 <tr>
-    <th>Titre</th>
+    <th>Code</th>
     <th>Nom</th>
     <th>Prenom</th>
     <th>Description</th>
@@ -100,8 +185,8 @@ $query ->execute();
 while($Data = $query -> fetch()){
   $q = $bdd -> prepare('SELECT * FROM files WHERE id= ?');
   $q -> execute(array($Data['img_presentation']));?>
-<tr class="clickable" onclick="window.location='projet.php?id=<?php echo $Data['id']; ?>'">
-  <td><?php echo $Data['titre']; ?></td>
+<tr class="clickable color<?php echo $Data['couleur']; ?>" onclick="window.location='projet.php?id=<?php echo $Data['id']; ?>'">
+  <td><?php echo $Data['code']; ?></td>
   <td><?php echo $Data['nom']; ?></td>
   <td><?php echo $Data['prenom']; ?></td>
   <td><?php echo $Data['description']; ?></td>

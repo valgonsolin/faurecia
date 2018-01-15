@@ -10,15 +10,13 @@ body {
 td{
   vertical-align: middle !important;
 }
-
-}
 .btn-default{
-  border-color:#ccc;
-  background-color: #ccc;
+  border-color:#ddd;
+  /* background-color: #ddd; */
   margin: 1px;
 }
 .btn-default:hover{
-  border-color:#e6e6e6;
+  background-color:#e6e6e6;
 }
 a:hover {
   text-decoration: none;

@@ -57,13 +57,14 @@ if(empty($_SESSION['login'])){
   ?>
 <p>Connecté en tant que <?php echo $_SESSION['nom']."  ".$_SESSION['prenom']; ?></p>
 <p><h4>Droits :</h4><b>
-  &emsp;&emsp;Admin : <?php echo(img($_SESSION['admin'])); ?>&emsp;&emsp;
-  Dojo qualité : <?php echo(img($_SESSION['qualite'])); ?>&emsp;&emsp;
-  R&amp;R : <?php echo(img($_SESSION['rr'])); ?>&emsp;&emsp;
-  HSE : <?php echo(img($_SESSION['hse'])); ?>&emsp;&emsp;
-  Kamishibai : <?php echo(img($_SESSION['kamishibai'])); ?>
-  Idées améliorations : <?php echo(img($_SESSION['idees'])); ?>
-  Logistique : <?php echo(img($_SESSION['logistique'])); ?></b>
+  &emsp;Admin : <?php echo(img($_SESSION['admin'])); ?>&emsp;
+  Dojo qualité : <?php echo(img($_SESSION['qualite'])); ?>&emsp;
+  R&amp;R : <?php echo(img($_SESSION['rr'])); ?>&emsp;
+  HSE : <?php echo(img($_SESSION['hse'])); ?>&emsp;
+  Kamishibai : <?php echo(img($_SESSION['kamishibai'])); ?>&emsp;
+  Idées améliorations : <?php echo(img($_SESSION['idees'])); ?>&emsp;
+  Logistique : <?php echo(img($_SESSION['logistique'])); ?>&emsp;
+  Launchboard: <?php echo(img($_SESSION['launchboard'])); ?></b>
 </p>
 <div class="btn btn-default" data-toggle="modal" data-target="#modal">Modifier le mot de passe</div>
 <div data-toggle="modal" data-target="#modal2" class="btn btn-default">Modifier mon profil</div>

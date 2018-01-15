@@ -13,7 +13,7 @@ drawMenu('quiz');
 if (! isset($_GET["id"])){
     ?>
     <h2>Quiz</h2>
-    <h4>OUPS... Votre identité est inconnu.</h4>
+    <h4>Erreur... Votre identité est inconnu.</h4>
     <?php
 }else {
     $Query = $bdd->prepare('SELECT * FROM qualite_quiz_session WHERE personne = ? and fin is NULL');
