@@ -89,7 +89,7 @@ while ($Data = $Query->fetch()) {
         $Qy = $bdd->prepare('SELECT * FROM votes_idees WHERE personne= ? AND idee= ?');
         $Qy->execute(array($_SESSION['id'],  $Data['id1']));
 
-        if($Qy->fetch()){echo "oui";}else{echo "non";} ?>
+        if($Qy->fetch()){echo "<span style='font-size: 200%;'>&check;</span>";}else{echo "<span style='font-size: 150%;'>&#10008;</span>";} ?>
       </td>
 
         <td class="clickable" title="Cliquez pour voter/voir le detail " onclick="window.location='details.php?idee=<?php echo $Data['id1'] ;?>'">Voter/Voir details</td>
