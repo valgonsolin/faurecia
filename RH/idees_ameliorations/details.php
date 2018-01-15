@@ -76,8 +76,8 @@ if(isset($_GET['vote'])){
       <tr>  <td style="width: 50% ;">Nom superviseur</td> <td style="width: 50%;"> <?php echo $sup['nom_sup']; ?> </td></tr>
       <tr>  <td style="width: 50% ;">Prénom superviseur</td> <td style="width: 50%;"><?php echo $sup['prenom_sup']; ?></td></tr>
       <tr>  <td style="width: 50%;">Type</td><td style="width: 50%;"><?php echo $emm['type']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Transversalisation</td><td style="width: 50%;"><?php echo $emm['transversalisation']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Retenue</td> <td style="width: 50%;"><?php echo $emm['retenue']; ?></td></tr>
+      <tr>  <td style="width: 50%;">Transversalisation</td><td style="width: 50%;"><?php if($emm['transversalisation']){echo"oui";}else{echo "non";} ?></td></tr>
+      <tr>  <td style="width: 50%;">Retenue</td> <td style="width: 50%;"><?php if($emm['retenue']){echo"oui";}else{echo "non";}; ?></td></tr>
       <tr>  <td style="width: 50%;">Respo réalisation</td><td style="width: 50%;"><?php echo $respo['prenom_respo']; echo "  "; echo $respo['nom_respo']  ?></td></tr>
       <tr>  <td style="width: 50%;">Date réalisation</td> <td style="width: 50%;"><?php echo $emm['date_rea']; ?></td></tr>
       <tr>  <td style="width: 50%;">Score</td><td style="width: 50%;"><?php echo $emm['vote']; ?></td></tr>

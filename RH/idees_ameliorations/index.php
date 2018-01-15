@@ -72,7 +72,7 @@ else
 <?php
 
 
-$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote LIMIT 40  ') ;
+$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote DESC LIMIT 40  ') ;
 $Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%',$debut,$mois));
 
 while ($Data = $Query->fetch()) {

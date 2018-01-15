@@ -75,15 +75,15 @@ else
   	<div class="form-group">
   	<label>Type</label>
   	<select name="type" class="form-control">
-  		<option value="0" selected="selected">Communication</option>
-  		<option value="1">Qualite</option>
-      <option value="2">Rangement/5S</option>
-      <option value="3">Organisation</option>
-      <option value="4">Securite</option>
-      <option value="5">Production/Rendement</option>
-      <option value="6">Ergonomie</option>
-      <option value="7">Autre</option>
-      <option value="8">Challenge</option>
+  		<option value="Communication" selected="selected">Communication</option>
+  		<option value="Qualite">Qualite</option>
+      <option value="Rangement">Rangement/5S</option>
+      <option value="Organisation">Organisation</option>
+      <option value="Securite">Securite</option>
+      <option value="Production/Rendement">Production/Rendement</option>
+      <option value="Ergonomie">Ergonomie</option>
+      <option value="Autre">Autre</option>
+      <option value="Challenge">Challenge</option>
 
   </select>
   </div>
