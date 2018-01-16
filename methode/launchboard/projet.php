@@ -112,7 +112,7 @@ if(!isset($_GET['id'])){ ?>
         $file = $img -> fetch(); ?>
           <form method="post">
             <input type="hidden" name="kickoff" value="<?php echo $Data['kickoff']; ?>">
-            <a href="<?php echo $file['chemin']; ?>" class="btn btn-default">Télécharger le kickoff</a>
+            <a href="download.php?id=<?php echo $Data['kickoff']; ?>&amp;name=kickoff<?php echo $Data['id']; ?>" class="btn btn-default">Télécharger le kickoff</a>
             <input type="submit" name="delete_kickoff" class="btn btn-default" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le kickoff ?')">
           </form>
         <?php
@@ -124,13 +124,10 @@ if(!isset($_GET['id'])){ ?>
         <?php
       }
       echo "<br>";
-      if(! is_null($Data['launchbook'])){
-        $img = $bdd -> prepare('SELECT * FROM files WHERE id = ?');
-        $img -> execute(array($Data['launchbook']));
-        $file = $img -> fetch(); ?>
+      if(! is_null($Data['launchbook'])){?>
         <form method="post" >
           <input type="hidden" name="launchbook" value="<?php echo $Data['launchbook']; ?>">
-          <a href="<?php echo $file['chemin']; ?>" class="btn btn-default">Télécharger le launchbook</a>
+          <a href="download.php?name=launchbook<?php echo $Data['id']; ?>&amp;id=<?php echo $Data['launchbook']; ?>" class="btn btn-default">Télécharger le launchbook</a>
           <input type="submit" name="delete_launchbook" class="btn btn-default" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le launchbook ? ')" value="Supprimer">
         </form>
         <?php

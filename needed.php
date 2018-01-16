@@ -1,6 +1,5 @@
 <?php
 session_start();
-global $domain_name;
 $url = "http://faureciabeaulieu.fr";
 $bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'tavg', 'lacolloc');
 
@@ -48,14 +47,13 @@ global $bdd;
     <div id="header_banner">
         <a href="<?php echo $url; ?>/index.php" class="lien_accueil"><img src="<?php echo $url; ?>/images/logo.png"></a>
         <div id="menu">
-
             <div class="dropdown">
             <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_menu  <?php if($selected=='RH'){echo ' bouton_menu_selected';} ?> dropbtn" >RH</a>
                 <div class="dropdown-content">
                     <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Présentation Usine</a>
-                    <a href="<?php echo $url; ?>/RH/idees_ameliorations/index.php" class="bouton_dropdown" >Idées améliorations</a>
-                    <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Formations</a>
-                    <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Plan de rotation</a>
+                    <a class="bouton_dropdown" >Idées améliorations</a>
+                    <a class="bouton_dropdown" >Formations</a>
+                    <a class="bouton_dropdown" >Plan de rotation</a>
                     <?php if((isset($_SESSION['login'])) && $_SESSION['admin']){ ?>
                     <a href="<?php echo $url; ?>/moncompte/administration.php" class="bouton_dropdown" >Profils</a>
                   <?php } ?>
