@@ -24,7 +24,29 @@ function drawform(){ ?>
     padding:5px;
     border-radius:6px;
   }
+  #help{
+    position: fixed;
+    right: 100px;
+    bottom: 50px;
+    z-index: 2;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-align:center;
+    line-height: 50px;
+    border-radius: 50%;
+    behavior: url(PIE.htc);
+    width:50px;
+    height:50px;
+    background-color:black;
+    box-shadow: 2px 2px 3px grey;
+  }
+  #help:hover{
+    box-shadow: 1px 1px 2px grey;
+    cursor: pointer;
+  }
   </style>
+  <div class="pull-right" id="help" data-toggle="modal" data-target="#modal">?</div>
   <div class="row">
     <div class="col-md-6">
   <form method="post" enctype="multipart/form-data">
@@ -81,6 +103,21 @@ function drawform(){ ?>
   <figcaption style="font-size:25px; text-align:center; margin:5px;">Format du fichier</figcaption>
   </figure>
 </div>
+</div>
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Aide</h4>
+      </div>
+      <div class="modal-body">
+        <p>Les fichiers doivent toujours être au format CSV, les séparateurs peuvent être des virgules ou des point-virgules.</p>
+        <p>L'ordre des colonnes n'est pas important, cependant le titre de la colonne est détécté automatiquement par l'algorithme. Ainsi, bien que les petites erreurs soient acceptés, il faut s'approcher le plus possible du format sur la photo ("code article" au lieu de "article" ne fonctionnera pas).</p>
+        <p>Pour les mises à jour de Sebango et E-Kanban, il peut y avoir des pièces non trouvées. Cela signifie qu'elles n'étaient pas dans la base de données des pièces.</p>
+      </div>
+    </div>
+  </div>
 </div>
 <?php }
 

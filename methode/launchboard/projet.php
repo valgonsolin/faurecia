@@ -92,7 +92,8 @@ if(!isset($_GET['id'])){ ?>
 <div class="row" style="background-color: #efefef; margin-bottom:20px; padding: 10px; border-radius: 6px;">
   <div class="col-md-6">
     <h4>PPTL : <?php echo $Data['nom']; ?> <?php echo $Data['prenom']; ?>
-      <div class="btn btn-default pull-right" data-toggle="modal" data-target="#modal">Modifier le PPTL</div>
+      <?php if($_SESSION['launchboard']){ ?>
+      <div class="btn btn-default pull-right" data-toggle="modal" data-target="#modal">Modifier le PPTL</div><?php } ?>
 </h4>
     <h4>Code : <?php echo $Data['code']; ?></h4>
   </div>
@@ -112,7 +113,7 @@ if(!isset($_GET['id'])){ ?>
         $file = $img -> fetch(); ?>
           <form method="post">
             <input type="hidden" name="kickoff" value="<?php echo $Data['kickoff']; ?>">
-            <a href="<?php echo $file['chemin']; ?>" class="btn btn-default">Télécharger le kickoff</a>
+            <a href="download.php?id=<?php echo $Data['kickoff']; ?>&amp;name=kickoff<?php echo $Data['id']; ?>" class="btn btn-default">Télécharger le kickoff</a>
             <input type="submit" name="delete_kickoff" class="btn btn-default" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le kickoff ?')">
           </form>
         <?php
@@ -124,13 +125,10 @@ if(!isset($_GET['id'])){ ?>
         <?php
       }
       echo "<br>";
-      if(! is_null($Data['launchbook'])){
-        $img = $bdd -> prepare('SELECT * FROM files WHERE id = ?');
-        $img -> execute(array($Data['launchbook']));
-        $file = $img -> fetch(); ?>
+      if(! is_null($Data['launchbook'])){?>
         <form method="post" >
           <input type="hidden" name="launchbook" value="<?php echo $Data['launchbook']; ?>">
-          <a href="<?php echo $file['chemin']; ?>" class="btn btn-default">Télécharger le launchbook</a>
+          <a href="download.php?name=launchbook<?php echo $Data['id']; ?>&amp;id=<?php echo $Data['launchbook']; ?>" class="btn btn-default">Télécharger le launchbook</a>
           <input type="submit" name="delete_launchbook" class="btn btn-default" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le launchbook ? ')" value="Supprimer">
         </form>
         <?php

@@ -10,7 +10,7 @@
       $query = $bdd -> prepare('SELECT * FROM profil WHERE identifiant = ?');
       $query -> execute(array($_POST['login']));
       if($Data = $query -> fetch()){
-        if(crypt($_POST['password'],"faureciabeaulieu") == $Data['password']){
+        if(crypt(strtolower($_POST['password']),"faureciabeaulieu") == $Data['password']){
           session_start();
           $_SESSION['login'] = true;
           $_SESSION['id'] = $Data['id'];
@@ -26,6 +26,7 @@
           $_SESSION['logistique'] = $Data['logistique'];
           $_SESSION['idees'] = $Data['idees'];
           $_SESSION['launchboard'] = $Data['launchboard'];
+          $_SESSION['manager'] = $Data['manager'];
           ob_end_clean();
 
           if(isset($_GET['redirection'])){

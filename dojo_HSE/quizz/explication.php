@@ -13,7 +13,7 @@ drawMenu('quizz');
 if (! isset($_GET["id"])){
     ?>
     <h2>Quiz</h2>
-    <h4>OUPS... Votre identité est inconnu.</h4>
+    <h4>Erreur... Votre identité est inconnu.</h4>
     <a href="index.php"> Retourner au quiz</a>
     <?php
 }else {

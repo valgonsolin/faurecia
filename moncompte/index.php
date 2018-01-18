@@ -19,7 +19,7 @@ if(!empty($_POST)){
   if(crypt($_POST['old'],"faurecia_beaulieu") == $Data['password']){
     if($_POST['new1'] == $_POST['new2']){
       $q = $bdd -> prepare('UPDATE profil SET password = ? WHERE id = ?');
-      if($q -> execute(array(crypt($_POST['new1'],"faureciabeaulieu"),$_SESSION['id']))){
+      if($q -> execute(array(crypt(strtolower($_POST['new1']),"faureciabeaulieu"),$_SESSION['id']))){
         success('Modifié','Le mot de passe a été modifié.');
       }else{
         warning('Erreur','Erreur de session. Veuillez réessayez.');
@@ -32,9 +32,10 @@ if(!empty($_POST)){
   }
   }
   if(isset($_POST['submit'])){
-    $Query = $bdd->prepare('UPDATE profil SET nom = ?, prenom = ?, mo = ?, uap = ?, tournee = ? WHERE id = ?');
-    if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_SESSION["id"]))){
+    $Query = $bdd->prepare('UPDATE profil SET nom = ?, prenom = ?, mo = ?, uap = ?, tournee = ?, manager = ? WHERE id = ?');
+    if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['manager'],$_SESSION["id"]))){
       success('Modifié','Le profil a bien été modifié');
+      $_SESSION['manager']=$_POST['manager'];
     }else{
       warning('Erreur','Erreur de session. Veuillez réessayer.');
     }
@@ -110,6 +111,19 @@ if(empty($_SESSION['login'])){
                 <div class="col-sm-10">
                     <input type="text" name="prenom" class="form-control" id="prenom" placeholder="Entrer le prénom"  value="<?php echo $prenom; ?>">
                 </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="nom">Manager :</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="manager">
+                  <option value="-1">Aucun</option>
+                  <?php
+                  $profil = $bdd -> query('SELECT * FROM profil');
+                  while($personne = $profil -> fetch()){ ?>
+                    <option value="<?php echo $personne['id']; ?>" <?php if($_SESSION['manager'] == $personne['id']){echo "selected";} ?>><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+                <?php  } ?>
+                </select>              </div>
+
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="tournee">Tournée :</label>
