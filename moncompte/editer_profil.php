@@ -36,6 +36,7 @@ if(isset($_GET['id'])){
     $qualite= $Data['qualite'];
     $idees=$Data['idees'];
     $launchboard=$Data['launchboard'];
+    $manager=$Data['manager'];
 }else{
 ?>
     <h2>Ajouter un profil</h2>
@@ -55,6 +56,7 @@ if(isset($_GET['id'])){
     $kamishibai=0;
     $logistique=0;
     $launchboard=0;
+    $manager=-1;
 }
 ?>
     <form class="form-horizontal" method="post" action="administration.php">
@@ -77,6 +79,19 @@ if(isset($_GET['id'])){
             <div class="col-sm-10">
                 <input type="text" readonly class="form-control" name="identifiant" id="identifiant" value="<?php echo $identifiant; ?>">
             </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="tournee">Manager :</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="manager">
+              <option value="-1">Aucun</option>
+              <?php
+              $profil = $bdd -> query('SELECT * FROM profil');
+              while($personne = $profil -> fetch()){ ?>
+                <option value="<?php echo $personne['id']; ?>" <?php if($manager == $personne['id']){echo "selected";} ?>><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+              <?php  } ?>
+            </select>
+          </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="tournee">Tournée :</label>

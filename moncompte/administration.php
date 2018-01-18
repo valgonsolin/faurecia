@@ -20,16 +20,16 @@ if(empty($_SESSION['login'])){ ?>
   }else{
     if (isset($_POST['modifier'])){
         if (isset($_POST['id'])){
-            $Query = $bdd->prepare('UPDATE profil SET nom = ?, prenom = ?,identifiant = ?, mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ?, idees = ?, launchboard = ? WHERE id = ?');
-            if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['identifiant'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['admin'],$_POST['qualite'],$_POST['rr'],$_POST['hse'],$_POST['kamishibai'],$_POST['logistique'],$_POST['idees'],$_POST['launchboard'],$_POST['id']))){
+            $Query = $bdd->prepare('UPDATE profil SET nom = ?, prenom = ?,identifiant = ?, mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ?, idees = ?, launchboard = ?, manager = ? WHERE id = ?');
+            if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['identifiant'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['admin'],$_POST['qualite'],$_POST['rr'],$_POST['hse'],$_POST['kamishibai'],$_POST['logistique'],$_POST['idees'],$_POST['launchboard'],$_POST['manager'],$_POST['id']))){
               success('Modifié',"Le profil a été modifié.");
             }else{
               warning("Erreur","Veuillez réessayer.");
             }
         }else{
             if($_POST['new1'] == $_POST['new2']){
-              $Query = $bdd->prepare('INSERT INTO profil SET nom = ?, prenom = ?,identifiant = ?, mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ?, idees = ?, launchboard = ?,password = ?');
-              if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['identifiant'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['admin'],$_POST['qualite'],$_POST['rr'],$_POST['hse'],$_POST['kamishibai'],$_POST['logistique'],$_POST['idees'],$_POST['launchboard'],crypt($_POST['new1'],"faureciabeaulieu")))){
+              $Query = $bdd->prepare('INSERT INTO profil SET nom = ?, prenom = ?,identifiant = ?, mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ?, idees = ?, launchboard = ?, manager = ?,password = ?');
+              if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['identifiant'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['admin'],$_POST['qualite'],$_POST['rr'],$_POST['hse'],$_POST['kamishibai'],$_POST['logistique'],$_POST['idees'],$_POST['launchboard'],$_POST['manager'],crypt(strtolower($_POST['new1']),"faureciabeaulieu")))){
                 success("Ajouté","Le profil a bien été ajouté.");
               }else{
                 warning("Erreur","Veuillez réessayer.");
@@ -64,13 +64,13 @@ if(empty($_SESSION['login'])){ ?>
     if(isset($_POST['password'])){
       if($_POST['new1'] == $_POST['new2']){
         $q = $bdd -> prepare('UPDATE profil SET password = ? WHERE id = ?');
-        if($q -> execute(array(crypt($_POST['new1'],"faureciabeaulieu"),$_POST['id']))){
+        if($q -> execute(array(crypt(strtolower($_POST['new1']),"faureciabeaulieu"),$_POST['id']))){
           success('Modifié','Le mot de passe a été modifié.');
         }else{
           warning('Erreur','Erreur de session. Veuillez réessayez.');
         }
       }else{
-        warning('Erreur','Les mots de passe ne sont pas identiques');
+        warning('Erreur','Les mots de passe ne sont pas identiques.');
       }
     }
     $recherche = "";
