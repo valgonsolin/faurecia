@@ -51,9 +51,9 @@ global $bdd;
             <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_menu  <?php if($selected=='RH'){echo ' bouton_menu_selected';} ?> dropbtn" >RH</a>
                 <div class="dropdown-content">
                     <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Présentation Usine</a>
-                    <a class="bouton_dropdown" >Idées améliorations</a>
+                    <a href="<?php echo $url; ?>/RH/idees_ameliorations" class="bouton_dropdown" >Idées améliorations</a>
                     <a class="bouton_dropdown" >Formations</a>
-                    <a class="bouton_dropdown" >Plan de rotation</a>
+                    <!-- <a class="bouton_dropdown" >Plan de rotation</a> -->
                     <?php if((isset($_SESSION['login'])) && $_SESSION['admin']){ ?>
                     <a href="<?php echo $url; ?>/moncompte/administration.php" class="bouton_dropdown" >Profils</a>
                   <?php } ?>

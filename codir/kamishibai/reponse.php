@@ -17,37 +17,48 @@ if(empty($_SESSION['login']))
 }
 else
 {
-if (isset($_POST['submit_cloturer'])){
-  $Query = $bdd->prepare('UPDATE codir_kamishibai_reponse SET
-    reponse1 = ?, reponse2 = ?, reponse3 = ?, reponse4 = ? ,
-    commentaire1 = ?, commentaire2 = ?, commentaire3 = ?, commentaire4 = ?
-    WHERE id = ?');
-  $Query->execute(array(
-      $_POST['reponse1'], $_POST['reponse2'], $_POST['reponse3'], $_POST['reponse4'],
-      $_POST['commentaire1'], $_POST['commentaire2'], $_POST['commentaire3'], $_POST['commentaire4'],
-      $_GET['id']));
-    $Query = $bdd->prepare('UPDATE codir_kamishibai_reponse SET cloture=1, date_cloture=NOW()
-      WHERE id = ?');
-    $Query->execute(array(
-            $_GET['id']));
-
-    header('Location: '.$url."/codir/kamishibai/index.php");
-
-}
 
 if (isset($_POST['submit'])){
     $Query = $bdd->prepare('UPDATE codir_kamishibai_reponse SET
       reponse1 = ?, reponse2 = ?, reponse3 = ?, reponse4 = ? ,
       commentaire1 = ?, commentaire2 = ?, commentaire3 = ?, commentaire4 = ?
       WHERE id = ?');
-    $Query->execute(array(
+    if($Query->execute(array(
         $_POST['reponse1'], $_POST['reponse2'], $_POST['reponse3'], $_POST['reponse4'],
         $_POST['commentaire1'], $_POST['commentaire2'], $_POST['commentaire3'], $_POST['commentaire4'],
-        $_GET['id']));
+        $_GET['id']))){
+          success('Enregistré','Votre réponse a été enregistrée.');
+        }else{
+          warning('Erreur','Veuillez réessayer.');
+        }
 
 }
 
 
+if (isset($_POST['submit_cloturer'])){
+  $Query = $bdd->prepare('UPDATE codir_kamishibai_reponse SET
+    reponse1 = ?, reponse2 = ?, reponse3 = ?, reponse4 = ? ,
+    commentaire1 = ?, commentaire2 = ?, commentaire3 = ?, commentaire4 = ?
+    WHERE id = ?');
+    $Query->execute(array(
+      $_POST['reponse1'], $_POST['reponse2'], $_POST['reponse3'], $_POST['reponse4'],
+      $_POST['commentaire1'], $_POST['commentaire2'], $_POST['commentaire3'], $_POST['commentaire4'],
+      $_GET['id']));
+      $Query = $bdd->prepare('UPDATE codir_kamishibai_reponse SET cloture=1, date_cloture=NOW()
+      WHERE id = ?');
+      if($Query->execute(array($_GET['id']))){
+      success('Cloturée','La carte a été cloturée.'); ?>
+        <a href="index.php" class="btn btn-default">Kamishibai</a>
+        <a href="<?php echo $url; ?>" class="btn btn-default pull-right">Accueil</a>
+    <?php  }else{
+      warning('Erreur','Veuillez réessayer.'); ?>
+      <a href="reponse.php?id=<?php echo $_GET['id']; ?>" class="btn btn-default">Réessayer</a>
+      <a href="<?php echo $url; ?>" class="btn btn-default pull-right">Accueil</a>
+      <?php
+    }
+
+
+}else{
 
 $Query = $bdd->prepare('SELECT codir_kamishibai_reponse.id as id_reponse,
     codir_kamishibai_reponse.reponse1 as reponse1, codir_kamishibai_reponse.reponse2 as reponse2,
@@ -130,7 +141,7 @@ $Data = $Query->fetch();
 
 
 <?php
-}
+}}
 
 drawFooter()
 

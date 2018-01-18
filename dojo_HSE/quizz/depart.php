@@ -22,7 +22,7 @@ if ($Data = $Query->fetch()) {
     ob_end_clean();
     header('Location: '.$url."/dojo_HSE/quizz/question.php?id=".$Data['id']);
 }else{
-    $Query = $bdd->prepare('INSERT INTO qualite_hse_question_session SET personne = ?, qualite_hse_session.type = ?');
+    $Query = $bdd->prepare('INSERT INTO qualite_hse_session SET personne = ?, qualite_hse_session.type = ?');
     $Query->execute(array($_GET["id_personne"],$type));
     ob_end_clean();
     header('Location: '.$url."/dojo_HSE/quizz/question.php?id=".$bdd->lastInsertId());

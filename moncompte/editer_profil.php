@@ -140,7 +140,7 @@ if(isset($_GET['id'])){
           <label class="control-label col-sm-2">Confirmation :</label>
           <div id="print" class="col-sm-10">
             <input type="password" name="new2" id="confirm_password" class="form-control" value="faurecia">
-            <small class="form-text text-muted">Par défault : Faurecia</small>
+            <small class="form-text text-muted">Par défault : faurecia</small>
           </div>
         </div>
 

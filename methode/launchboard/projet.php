@@ -92,7 +92,8 @@ if(!isset($_GET['id'])){ ?>
 <div class="row" style="background-color: #efefef; margin-bottom:20px; padding: 10px; border-radius: 6px;">
   <div class="col-md-6">
     <h4>PPTL : <?php echo $Data['nom']; ?> <?php echo $Data['prenom']; ?>
-      <div class="btn btn-default pull-right" data-toggle="modal" data-target="#modal">Modifier le PPTL</div>
+      <?php if($_SESSION['launchboard']){ ?>
+      <div class="btn btn-default pull-right" data-toggle="modal" data-target="#modal">Modifier le PPTL</div><?php } ?>
 </h4>
     <h4>Code : <?php echo $Data['code']; ?></h4>
   </div>

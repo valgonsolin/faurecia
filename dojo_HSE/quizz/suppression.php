@@ -139,7 +139,7 @@ else
       <th>Titre</th>
       <th>Type</th>
       <th>Question</th>
-      <th></th>
+      <th style="width:60px;"></th>
   </tr>
   </thead>
   <tbody>
