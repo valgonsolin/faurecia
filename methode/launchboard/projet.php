@@ -9,17 +9,19 @@ drawMenu('launchboard');
 
 function color($field){
   global $Data;
+  $class="";
+  if( (($Data['profil'] == $_SESSION['id']) || ($_SESSION['launchboard'] && ! $Data[$field] && ! is_null($Data[$field.'_r'])) ) && (! is_null($Data[$field.'_f']))){
+    $class="clickable";
+    echo "data-toggle='modal' data-target='#".$field."_r'";
+  }
   if(! is_null($Data[$field.'_r'])){
     if(strtotime($Data[$field.'_r']) <= strtotime($Data[$field.'_f']) && $Data[$field]){
-      echo "class='green' title='Validé'";
+      echo "class='green ".$class."green' title='Validé'";
     }elseif($Data[$field]){
-      echo "class='red' title='Validé'";
+      echo "class='red ".$class."red' title='Validé'";
     }else{
-      echo "class='notvalid' title='Non validé'";
+      echo "class='notvalid ".$class."yellow' title='Non validé'";
     }
-  }
-  if( (($Data['profil'] == $_SESSION['id']) || ($_SESSION['launchboard'] && ! $Data[$field] && ! is_null($Data[$field.'_r'])) ) && (! is_null($Data[$field.'_f']))){
-    echo "data-toggle='modal' data-target='#".$field."_r'";
   }
 }
 function forecast($field){
@@ -27,7 +29,7 @@ function forecast($field){
   global $_SESSION;
   global $Data;
   if($Data['profil'] == $_SESSION['id']){
-    echo "data-toggle='modal' data-target='#".$field."'";
+    echo "data-toggle='modal' class='clickable' data-target='#".$field."'";
   }
 }
 function choose($field){
@@ -198,6 +200,18 @@ if(!isset($_GET['id'])){ ?>
     $Data = $query -> fetch();
 ?>
 <style>
+  .clickable:hover{
+    background-color:#e0e0e0;
+  }
+  .clickablered:hover{
+    background-color: #df4529;
+  }
+  .clickablegreen:hover{
+    background-color: #73d273;
+  }
+  .clickableyellow:hover{
+    background-color: #d0b41c;
+  }
   .onglet
   {
      display:inline-block;
@@ -463,6 +477,8 @@ if(!isset($_GET['id'])){ ?>
         <?php
       }
       ?>
+      <h4>Lien HELIOS :</h4><a href="<?php echo $Data['link_helios']; ?>"><?php echo $Data['link_helios']; ?></a>
+      <h4>Lien PLR :</h4><a href="<?php echo $Data['link_plr']; ?>"><?php echo $Data['link_plr']; ?></a>
   </div>
   <div class="col-md-6">
     <?php
@@ -530,9 +546,9 @@ if(!isset($_GET['id'])){ ?>
   <a href="index.php" class="btn btn-default">Retour</a>
   <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" >
   <?php if($Data['archive']){
-    echo '<input type="submit" class="btn btn-default pull-right" value="Restaurer" name="desarchive">';
+    echo '<input type="submit" class="btn btn-default pull-right" value="Restaurer" name="desarchive" onclick="return confirm(\'Êtes-vous sûr de vouloir restaurer le projet ?\')">';
   }else{
-    echo '<input type="submit" class="btn btn-default pull-right" value="Archiver" name="archive">';
+    echo '<input type="submit" class="btn btn-default pull-right" value="Archiver" name="archive" onclick="return confirm(\'Êtes-vous sûr de vouloir archiver le projet ?\')">';
   }
   ?>
 </form>
