@@ -26,18 +26,18 @@ else
     success('Supprimé','La question a bien été supprimée.');
 
 }elseif(isset($_POST['modifier'])){
-
+  $datetime = date("Y-m-d");
   $queryy=$bdd->prepare('SELECT * FROM profil WHERE id= ?');
   $queryy->execute(array($_SESSION['id']));
   $Data=$queryy->fetch();
-  $query = $bdd -> prepare('UPDATE idees_ameliorations SET emmetteur = :emmetteur,superviseur= :superviseur ,type=;:type ,transversalisation = :transversalisation,retune= :retenue,respo_rea,=:respo_rea,date_rea=:date_rea,situation_actuelle= :situation_actuelle,situation_proposee= :situation_proposee WHERE id = :id');
+  $query = $bdd -> prepare('UPDATE idees_ameliorations SET superviseur= :superviseur ,type=;:type ,transversalisation = :transversalisation,retune= :retenue,respo_rea,=:respo_rea,date_rea=:date_rea,situation_actuelle= :situation_actuelle,situation_proposee= :situation_proposee WHERE id = :id');
   $query -> execute(array(
-    'emmetteur' => $_POST['emmetteur'],
+
     'superviseur' => $_POST['superviseur'],
     'type' => $_POST['type'],
     'transversalisation' => $_POST['transversalisation'],
     'retenue' => $_POST['retenue'],
-    'respo_rea' => $_POST['respo_rea'],
+    'respo_rea' => $datetime,
     'date_rea' => $_POST['date_rea'],
     'situation_actuelle' => $_POST['situation_actuelle'],
     'situation_proposee' => $_POST['situation_proposee']
@@ -66,7 +66,13 @@ else
   <form class="form-inline">
     <div class="form-group">
       <label for="recherche">Recherche :</label>
-      <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="Question" value="<?php echo $recherche;?>">
+      <select class="form-control" name="recherche" >
+        <?php
+        $profil = $bdd -> query('SELECT * FROM profil');
+        while($personne = $profil -> fetch()){ ?>
+          <option value="<?php echo $personne['id']; ?>" ><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+      <?php  } ?>
+      </select>
     </div>
     <button type="submit" class="btn btn-default">Rechercher</button>
   </form>
@@ -87,8 +93,8 @@ $nb=0;
 if(isset($_GET['nb'])){
 $nb=$_GET['nb'];
 }
-  $qyy= $bdd->prepare('SELECT * FROM profil JOIN idees_ameliorations ON  profil.id=idees_ameliorations.emmetteur WHERE (nom LIKE ? or prenom LIKE ? )  ORDER BY vote LIMIT 20 OFFSET ?');
-  $qyy->execute(array('%'.$recherche.'%','%'.$recherche.'%',$nb));
+  $qyy= $bdd->prepare('SELECT * FROM profil JOIN idees_ameliorations ON  profil.id=idees_ameliorations.emmetteur  ORDER BY vote LIMIT 20 OFFSET ?');
+  $qyy->execute(array($nb));
 
   while($Dat=$qyy->fetch()){
 
@@ -121,7 +127,7 @@ $test->execute(array($Dat['profil.id'],$nb+20) );
     if($test -> fetch()){ ?>
     <a href="suppression.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $nb+20;?>" class="btn btn-default">Elements suivants</a>
   <?php } ?>
-    <button type="submit" onclick="return confirm('Voulez-vous reinitialiser l\'ordre des questions ?');" class="btn btn-default pull-right" name="reset">Réinitialiser l'ordre des questions</button>
+
     <span class="clear" style="clear: both; display: block;"></span>
   </form>
 <?php

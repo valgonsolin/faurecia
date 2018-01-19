@@ -8,7 +8,7 @@ drawMenu('ajouter');
 
 if(empty($_SESSION['login']))
 { ?>
-  <h2>Quiz</h2>
+  <h2>Idées</h2>
   <h4>Vous devez être connecté pour accéder à cette partie.</h4>
   <a href="/moncompte/identification.php?redirection=dojo_HSE/quizz/ajout.php"><button class="btn btn-default">Se connecter</button></a>
   <a href="index.php" class="btn btn-default">Idées du mois</a>
@@ -23,28 +23,18 @@ else
 
 
   if(!empty($_POST)){
-    $Query = $bdd->prepare('SELECT id FROM profil
-        WHERE (nom LIKE ? or prenom LIKE ?) ') ;
-        $Query->execute(array($_POST['nom_sup'], $_POST['prenom_sup']));
 
-    $sup=$Query->fetch();
-
-    $Query2 = $bdd->prepare('SELECT id FROM profil
-        WHERE (nom LIKE ? or prenom LIKE ?) ') ;
-        $Query2->execute(array($_POST['nom_respo'], $_POST['prenom_respo']));
-
-    $respo=$Query2->fetch();
 
     $datetime = date("Y-m-d");
 
   $query = $bdd -> prepare('INSERT INTO idees_ameliorations(emmetteur, superviseur,type,transversalisation,retenue,respo_rea,date_rea,situation_actuelle,situation_proposee) VALUES (:emmetteur, :superviseur,:type,:transversalisation,:retenue,:respo_rea,:date_rea ,:situation_actuelle,:situation_proposee)');
     $query -> execute(array(
       'emmetteur' => $_SESSION['id'],
-      'superviseur' => $sup['id'],
+      'superviseur' => $_POST['superviseur'],
       'type' => $_POST['type'],
       'transversalisation' => $_POST['transversalisation'],
       'retenue' =>$_POST['retenue'],
-      'respo_rea' => $respo['id'],
+      'respo_rea' => $_POST['respo_rea'],
       'date_rea'=>$datetime,
       'situation_actuelle' => $_POST['situation_actuelle'],
       'situation_proposee' => $_POST['situation_proposee']
@@ -64,13 +54,16 @@ else
   </div>
 
   <form method="post" style="margin-top:20px;" enctype="multipart/form-data">
+
     <div class="form-group">
-      <label>Nom superviseur</label>
-      <input type="text" class="form-control" name="nom_sup" value="">
-    </div>
-    <div class="form-group">
-      <label>Prénom superviseur</label>
-      <input type="text" class="form-control" name="prenom_sup" value="">
+      <label>Superviseur</label>
+      <select class="form-control" name="superviseur" >
+        <?php
+        $profil = $bdd -> query('SELECT * FROM profil');
+        while($personne = $profil -> fetch()){ ?>
+          <option value="<?php echo $personne['id']; ?>" ><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+      <?php  } ?>
+      </select>
     </div>
   	<div class="form-group">
   	<label>Type</label>
@@ -104,8 +97,14 @@ else
     <input type="text" class="form-control" name="nom_respo" value="">
   </div>
   <div class="form-group">
-    <label>Prénom responsable réalisation</label>
-    <input type="text" class="form-control" name="prenom_respo" value="">
+    <label>Responsable réalisation</label>
+    <select class="form-control" name="respo_rea" >
+      <?php
+      $profil = $bdd -> query('SELECT * FROM profil');
+      while($personne = $profil -> fetch()){ ?>
+        <option value="<?php echo $personne['id']; ?>" ><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+    <?php  } ?>
+    </select>
   </div>
   	<div class="form-group">
   		<label>Situation actuelle :     </label>
