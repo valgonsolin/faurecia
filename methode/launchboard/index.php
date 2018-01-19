@@ -122,9 +122,9 @@ if (isset($_GET["recherche"])){
 $supprime =false;
 if(isset($_GET['supprime'])){
   $supprime=true;
-  $query = $bdd -> prepare('SELECT * FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE (nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) ORDER BY couleur DESC');
+  $query = $bdd -> prepare('SELECT *, launchboard.id as projet FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE (nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) ORDER BY couleur DESC');
 }else{
-  $query = $bdd -> prepare('SELECT * FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE ((nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) AND archive = 0) ORDER BY couleur DESC');
+  $query = $bdd -> prepare('SELECT *, launchboard.id as projet FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE ((nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) AND archive = 0) ORDER BY couleur DESC');
 }
 $query ->bindValue(':titre','%'.$recherche.'%');
 $query ->bindValue(':nom','%'.$recherche.'%');
@@ -184,8 +184,8 @@ $query ->execute();
 <tbody> <?php
 while($Data = $query -> fetch()){
   $q = $bdd -> prepare('SELECT * FROM files WHERE id= ?');
-  $q -> execute(array($Data['img_presentation']));?>
-<tr class="clickable color<?php echo $Data['couleur']; ?>" onclick="window.location='projet.php?id=<?php echo $Data['id']; ?>'">
+  $q -> execute(array($Data['img_presentation'])); ?>
+<tr class="clickable color<?php echo $Data['couleur']; ?>" onclick="window.location='projet.php?id=<?php echo $Data['projet']; ?>'">
   <td><?php echo $Data['code']; ?></td>
   <td><?php echo $Data['nom']; ?></td>
   <td><?php echo $Data['prenom']; ?></td>

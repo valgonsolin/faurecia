@@ -7,6 +7,105 @@ include_once "../needed.php";
 drawHeader('methode');
 drawMenu('launchboard');
 
+function color($field){
+  global $Data;
+  if(! is_null($Data[$field.'_r'])){
+    if(strtotime($Data[$field.'_r']) <= strtotime($Data[$field.'_f']) && $Data[$field]){
+      echo "class='green' title='Validé'";
+    }elseif($Data[$field]){
+      echo "class='red' title='Validé'";
+    }else{
+      echo "class='notvalid' title='Non validé'";
+    }
+  }
+  if( (($Data['profil'] == $_SESSION['id']) || ($_SESSION['launchboard'] && ! $Data[$field] && ! is_null($Data[$field.'_r'])) ) && (! is_null($Data[$field.'_f']))){
+    echo "data-toggle='modal' data-target='#".$field."_r'";
+  }
+}
+function forecast($field){
+
+  global $_SESSION;
+  global $Data;
+  if($Data['profil'] == $_SESSION['id']){
+    echo "data-toggle='modal' data-target='#".$field."'";
+  }
+}
+function choose($field){
+  global $_SESSION;
+  global $Data;
+  if($Data['profil'] == $_SESSION['id']){?>
+  <div id="<?php echo $field; ?>" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modifier la date</h4>
+        </div>
+        <div class="modal-body">
+          <form method="post">
+            <div class="form-group">
+              <input type="date" name="<?php echo $field; ?>value" class="form-control" value="<?php echo $Data[$field]; ?>">
+              <input type="submit" name="<?php echo $field; ?>" value="Valider" class="btn btn-default">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php
+}elseif($_SESSION['launchboard']){ ?>
+  <div id="<?php echo $field; ?>" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Valider la date ?</h4>
+        </div>
+        <div class="modal-body">
+          <form method="post">
+            <div class="form-group">
+              <input type="submit" name="<?php echo $field."val"; ?>" value="Valider" class="btn btn-default" style="display:block; margin: 0 auto;">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php  }
+}
+function treatForm($field){
+  global $_SESSION;
+  global $bdd;
+  global $Data;
+  if($Data['profil'] == $_SESSION['id']){
+    if(isset($_POST[$field.'_f'])){
+      $q = $bdd -> prepare('UPDATE launchboard SET '.$field.'_f = ? WHERE id = ?');
+      if($q -> execute(array($_POST[$field.'_fvalue'],$_GET['id']))){
+        success('Modifié','La date a bien été modifiée.');
+      }else{
+        warning('Erreur','Veuillez réessayer.');
+      }
+    }
+    if(isset($_POST[$field.'_r'])){
+      $q = $bdd -> prepare('UPDATE launchboard SET '.$field.'_r = ?, '.$field.'= 0 WHERE id = ?');
+      if($q -> execute(array($_POST[$field.'_rvalue'],$_GET['id']))){
+        success('Modifié','La date a bien été modifiée.');
+      }else{
+        warning('Erreur','Veuillez réessayer.');
+      }
+    }
+  }elseif($_SESSION['launchboard']){
+    if(isset($_POST[$field.'_rval'])){
+      $q = $bdd -> prepare('UPDATE launchboard SET '.$field.'= 1 WHERE id = ?');
+      if($q -> execute(array($_GET['id']))){
+        success('Validée','La date a bien été validée.');
+      }else{
+        warning('Erreur','Veuillez réessayer.');
+      }
+    }
+  }
+}
+
 if(!isset($_GET['id'])){ ?>
   <h2>LaunchBoard</h2>
   <h4>Erreur... Votre session est inconnue.</h4>
@@ -34,6 +133,14 @@ if(!isset($_GET['id'])){ ?>
     $q = $bdd -> prepare('UPDATE launchboard SET profil = ? WHERE id = ?');
     if($q -> execute(array($_POST['profil'],$_GET['id']))){
       success('Modifié','Le PPTL a été modifié.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
+  if(isset($_POST['descr'])){
+    $q = $bdd -> prepare('UPDATE launchboard SET description = ? WHERE id = ?');
+    if($q -> execute(array($_POST['description'],$_GET['id']))){
+      success('Modifiée','La description a été modifiée.');
     }else{
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
     }
@@ -80,16 +187,71 @@ if(!isset($_GET['id'])){ ?>
     }
   }
     $query = $bdd -> prepare('SELECT * FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE launchboard.id = ?');
-    $query -> execute(array($_GET['id']));
+    if($query -> execute(array($_GET['id'])))
     $Data = $query -> fetch();
-
+    $fields = array('2tct','2capacity','2equip','2pfmea','2mvp','2layout','2master','2pack','3equip','3pack','3supplier','3checklist1','3pt','3checklist2','3mpt','3samples','4checklist','4empt');
+    foreach ($fields as $key => $value) {
+      treatForm($value);
+    }
+    $query = $bdd -> prepare('SELECT * FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE launchboard.id = ?');
+    if($query -> execute(array($_GET['id'])))
+    $Data = $query -> fetch();
 ?>
+<style>
+  .onglet
+  {
+     display:inline-block;
+     margin-left:10px;
+     margin-right:10px;
+     padding:10px;
+     border-radius: 6px 6px 0 0;
+     cursor:pointer;
+   }
+   .onglet_0
+   {
+     background-color: #e0e0e0;
+   }
+   .onglet_1
+   {
+     background:#efefef;
+  }
+   .contenu_onglet
+   {
+     display:none;
+   }
+   .conteneur{
+     background-color: #efefef;
+     margin-bottom:20px;
+     padding: 10px;
+     border-radius: 6px;
+   }
+   .gate table, .gate th, .gate td{
+     border: 1px solid #d0d0d0;
+     text-align: center;
+   }
+   .gate th,.gate td{
+     width:6%;
+     padding: 5px;
+   }
+   .gate table{
+     width:100%;
+   }
+   .green{
+     background-color: #90EE90;
+   }
+   .red{
+     background-color: #FF6347;
+   }
+   .notvalid{
+     background-color: #FFD700;
+   }
+</style>
 <h2 style="margin-bottom:10px;">Projet : <?php echo $Data['titre']; ?></h2>
 <div class="boutons_nav" style="display: flex; justify-content: center;">
   <a href="projet.php?id=<?php echo $_GET['id']; ?>" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Projet</a>
   <a href="statistiques.php?id=<?php echo $_GET['id']; ?>" class="bouton_menu" >Statistiques</a>
 </div>
-<div class="row" style="background-color: #efefef; margin-bottom:20px; padding: 10px; border-radius: 6px;">
+<div class="row conteneur">
   <div class="col-md-6">
     <h4>PPTL : <?php echo $Data['nom']; ?> <?php echo $Data['prenom']; ?>
       <?php if($_SESSION['launchboard']){ ?>
@@ -100,6 +262,166 @@ if(!isset($_GET['id'])){ ?>
   <div class="col-md-6">
     <h4>Description :</h4>
     <p><?php echo $Data['description']; ?></p>
+    <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
+      <div class="btn btn-default pull-right" data-toggle="modal" data-target="#description">Modifier la description</div><?php } ?>
+  </div>
+</div>
+<div class="row">
+  <div >
+      <div class="onglets">
+          <span class="onglet_0 onglet" id="onglet_1" onclick="javascript:change_onglet('1');"><b>Gate 2B</b></span>
+          <span class="onglet_0 onglet" id="onglet_2" onclick="javascript:change_onglet('2');"><b>Gate 3</b></span>
+          <span class="onglet_0 onglet" id="onglet_3" onclick="javascript:change_onglet('3');"><b>Gate 4</b></span>
+          <span class="onglet_0 onglet" style="float:right;" id="onglet_4" onclick="javascript:change_onglet('4');"><b>Aide</b></span>
+      </div>
+      <div class="contenu_onglets conteneur">
+          <div class="contenu_onglet conteneur" id="contenu_onglet_1">
+              <table class="gate">
+              <thead>
+                  <tr>
+                      <th colspan="2">TCT / SWCT</th>
+                      <th colspan="2">Capacity</th>
+                      <th colspan="2">Eqpt & tooling list</th>
+                      <th colspan="2">PFMEA</th>
+                      <th colspan="2">MVP</th>
+                      <th colspan="2">Layout</th>
+                      <th colspan="2">Master schedule</th>
+                      <th colspan="2">Packaging incl. Shop stock</th>
+                  </tr>
+                  <tr>
+                      <th>F</th>
+                      <th>R</th>
+                      <th>F</th>
+                      <th>R</th>
+                      <th>F</th>
+                      <th>R</th>
+                      <th>F</th>
+                      <th>R</th>
+                      <th>F</th>
+                      <th>R</th>
+                      <th>F</th>
+                      <th>R</th>
+                      <th>F</th>
+                      <th>R</th>
+                      <th>F</th>
+                      <th>R</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td <?php forecast('2tct_f'); ?>><?php if(is_null($Data['2tct_f'])){echo "-";}else{$date = strtotime($Data['2tct_f']); echo date('j/m/y', $date);} ?></td><?php choose('2tct_f'); ?>
+                    <td <?php color('2tct'); ?>><?php if(is_null($Data['2tct_r'])){echo "-";}else{$date = strtotime($Data['2tct_r']); echo date('j/m/y', $date);} ?></td><?php choose('2tct_r'); ?>
+                    <td <?php forecast('2capacity_f'); ?>><?php if(is_null($Data['2capacity_f'])){echo "-";}else{$date = strtotime($Data['2capacity_f']); echo date('j/m/y', $date);} ?></td><?php choose('2capacity_f'); ?>
+                    <td <?php color('2capacity'); ?>><?php if(is_null($Data['2capacity_r'])){echo "-";}else{$date = strtotime($Data['2capacity_r']); echo date('j/m/y', $date);} ?></td><?php choose('2capacity_r'); ?>
+                    <td <?php forecast('2equip_f'); ?>><?php if(is_null($Data['2equip_f'])){echo "-";}else{$date = strtotime($Data['2equip_f']); echo date('j/m/y', $date);} ?></td><?php choose('2equip_f'); ?>
+                    <td <?php color('2equip'); ?>><?php if(is_null($Data['2equip_r'])){echo "-";}else{$date = strtotime($Data['2equip_r']); echo date('j/m/y', $date);} ?></td><?php choose('2equip_r'); ?>
+                    <td <?php forecast('2pfmea_f'); ?>><?php if(is_null($Data['2pfmea_f'])){echo "-";}else{$date = strtotime($Data['2pfmea_f']); echo date('j/m/y', $date);} ?></td><?php choose('2pfmea_f'); ?>
+                    <td <?php color('2pfmea'); ?>><?php if(is_null($Data['2pfmea_r'])){echo "-";}else{$date = strtotime($Data['2pfmea_r']); echo date('j/m/y', $date);} ?></td><?php choose('2pfmea_r'); ?>
+                    <td <?php forecast('2mvp_f'); ?>><?php if(is_null($Data['2mvp_f'])){echo "-";}else{$date = strtotime($Data['2mvp_f']); echo date('j/m/y', $date);} ?></td><?php choose('2mvp_f'); ?>
+                    <td <?php color('2mvp'); ?>><?php if(is_null($Data['2mvp_r'])){echo "-";}else{$date = strtotime($Data['2mvp_r']); echo date('j/m/y', $date);} ?></td><?php choose('2mvp_r'); ?>
+                    <td <?php forecast('2layout_f'); ?>><?php if(is_null($Data['2layout_f'])){echo "-";}else{$date = strtotime($Data['2layout_f']); echo date('j/m/y', $date);} ?></td><?php choose('2layout_f'); ?>
+                    <td <?php color('2layout'); ?>><?php if(is_null($Data['2layout_r'])){echo "-";}else{$date = strtotime($Data['2layout_r']); echo date('j/m/y', $date);} ?></td><?php choose('2layout_r'); ?>
+                    <td <?php forecast('2master_f'); ?>><?php if(is_null($Data['2master_f'])){echo "-";}else{$date = strtotime($Data['2master_f']); echo date('j/m/y', $date);} ?></td><?php choose('2master_f'); ?>
+                    <td <?php color('2master'); ?>><?php if(is_null($Data['2master_r'])){echo "-";}else{$date = strtotime($Data['2master_r']); echo date('j/m/y', $date);} ?></td><?php choose('2master_r'); ?>
+                    <td <?php forecast('2pack_f'); ?>><?php if(is_null($Data['2pack_f'])){echo "-";}else{$date = strtotime($Data['2pack_f']); echo date('j/m/y', $date);} ?></td><?php choose('2pack_f'); ?>
+                    <td <?php color('2pack'); ?>><?php if(is_null($Data['2pack_r'])){echo "-";}else{$date = strtotime($Data['2pack_r']); echo date('j/m/y', $date);} ?></td><?php choose('2pack_r'); ?>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="contenu_onglet conteneur" id="contenu_onglet_2">
+            <table class="gate">
+              <thead>
+                <tr>
+                    <th colspan="2">Eqpt & tooling reception</th>
+                    <th colspan="2">Packaging incl. Shop stock reception</th>
+                    <th colspan="2">Supplier PPAP</th>
+                    <th colspan="2">Launch book checklist</th>
+                    <th colspan="2">PT run@rate</th>
+                    <th colspan="2">Launch book checklist</th>
+                    <th colspan="2">MPT run@rate</th>
+                    <th colspan="2">Initial Samples Submitted</th>
+                </tr>
+                <tr>
+                    <th>F</th>
+                    <th>R</th>
+                    <th>F</th>
+                    <th>R</th>
+                    <th>F</th>
+                    <th>R</th>
+                    <th>F</th>
+                    <th>R</th>
+                    <th>F</th>
+                    <th>R</th>
+                    <th>F</th>
+                    <th>R</th>
+                    <th>F</th>
+                    <th>R</th>
+                    <th>F</th>
+                    <th>R</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td <?php forecast('3equip_f'); ?>><?php if(is_null($Data['3equip_f'])){echo "-";}else{$date = strtotime($Data['3equip_f']); echo date('j/m/y', $date);} ?></td><?php choose('3equip_f'); ?>
+                  <td <?php color('3equip'); ?>><?php if(is_null($Data['3equip_r'])){echo "-";}else{$date = strtotime($Data['3equip_r']); echo date('j/m/y', $date);} ?></td><?php choose('3equip_r'); ?>
+                  <td <?php forecast('3pack_f'); ?>><?php if(is_null($Data['3pack_f'])){echo "-";}else{$date = strtotime($Data['3pack_f']); echo date('j/m/y', $date);} ?></td><?php choose('3pack_f'); ?>
+                  <td <?php color('3pack'); ?>><?php if(is_null($Data['3pack_r'])){echo "-";}else{$date = strtotime($Data['3pack_r']); echo date('j/m/y', $date);} ?></td><?php choose('3pack_r'); ?>
+                  <td <?php forecast('3supplier_f'); ?>><?php if(is_null($Data['3supplier_f'])){echo "-";}else{$date = strtotime($Data['3supplier_f']); echo date('j/m/y', $date);} ?></td><?php choose('3supplier_f'); ?>
+                  <td <?php color('3supplier'); ?>><?php if(is_null($Data['3supplier_r'])){echo "-";}else{$date = strtotime($Data['3supplier_r']); echo date('j/m/y', $date);} ?></td><?php choose('3supplier_r'); ?>
+                  <td <?php forecast('3checklist1_f'); ?>><?php if(is_null($Data['3checklist1_f'])){echo "-";}else{$date = strtotime($Data['3checklist1_f']); echo date('j/m/y', $date);} ?></td><?php choose('3checklist1_f'); ?>
+                  <td <?php color('3checklist1'); ?>><?php if(is_null($Data['3checklist1_r'])){echo "-";}else{$date = strtotime($Data['3checklist1_r']); echo date('j/m/y', $date);} ?></td><?php choose('3checklist1_r'); ?>
+                  <td <?php forecast('3pt_f'); ?>><?php if(is_null($Data['3pt_f'])){echo "-";}else{$date = strtotime($Data['3pt_f']); echo date('j/m/y', $date);} ?></td><?php choose('3pt_f'); ?>
+                  <td <?php color('3pt'); ?>><?php if(is_null($Data['3pt_r'])){echo "-";}else{$date = strtotime($Data['3pt_r']); echo date('j/m/y', $date);} ?></td><?php choose('3pt_r'); ?>
+                  <td <?php forecast('3checklist2_f'); ?>><?php if(is_null($Data['3checklist2_f'])){echo "-";}else{$date = strtotime($Data['3checklist2_f']); echo date('j/m/y', $date);} ?></td><?php choose('3checklist2_f'); ?>
+                  <td <?php color('3checklist2'); ?>><?php if(is_null($Data['3checklist2_r'])){echo "-";}else{$date = strtotime($Data['3checklist2_r']); echo date('j/m/y', $date);} ?></td><?php choose('3checklist2_r'); ?>
+                  <td <?php forecast('3mpt_f'); ?>><?php if(is_null($Data['3mpt_f'])){echo "-";}else{$date = strtotime($Data['3mpt_f']); echo date('j/m/y', $date);} ?></td><?php choose('3mpt_f'); ?>
+                  <td <?php color('3mpt'); ?>><?php if(is_null($Data['3mpt_r'])){echo "-";}else{$date = strtotime($Data['3mpt_r']); echo date('j/m/y', $date);} ?></td><?php choose('3mpt_r'); ?>
+                  <td <?php forecast('3samples_f'); ?>><?php if(is_null($Data['3samples_f'])){echo "-";}else{$date = strtotime($Data['3samples_f']); echo date('j/m/y', $date);} ?></td><?php choose('3samples_f'); ?>
+                  <td <?php color('3samples'); ?>><?php if(is_null($Data['3samples_r'])){echo "-";}else{$date = strtotime($Data['3samples_r']); echo date('j/m/y', $date);} ?></td><?php choose('3samples_r'); ?>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="contenu_onglet conteneur" id="contenu_onglet_3">
+            <table class="gate">
+              <thead>
+                <tr>
+                    <th colspan="2">Launch book checklist</th>
+                    <th colspan="2">EMPT run@rate</th>
+                </tr>
+                <tr>
+                    <th>F</th>
+                    <th>R</th>
+                    <th>F</th>
+                    <th>R</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td <?php forecast('4checklist_f'); ?>><?php if(is_null($Data['4checklist_f'])){echo "-";}else{$date = strtotime($Data['4checklist_f']); echo date('j/m/y', $date);} ?></td><?php choose('4checklist_f'); ?>
+                  <td <?php color('4checklist'); ?>><?php if(is_null($Data['4checklist_r'])){echo "-";}else{$date = strtotime($Data['4checklist_r']); echo date('j/m/y', $date);} ?></td><?php choose('4checklist_r'); ?>
+                  <td <?php forecast('4empt_f'); ?>><?php if(is_null($Data['4empt_f'])){echo "-";}else{$date = strtotime($Data['4empt_f']); echo date('j/m/y', $date);} ?></td><?php choose('4empt_f'); ?>
+                  <td <?php color('4empt'); ?>><?php if(is_null($Data['4empt_r'])){echo "-";}else{$date = strtotime($Data['4empt_r']); echo date('j/m/y', $date);} ?></td><?php choose('4empt_r'); ?>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="contenu_onglet conteneur" id="contenu_onglet_4">
+            <div class="container row" style="margin:15px;">
+              <div class="col-md-1" style="background-color: #90EE90;height: 20px;"></div>
+              <div class="col-md-11">: Date de réalisation antérieure à la data prévue.</div>
+            </div>
+            <div class="container row" style="margin:15px;">
+              <div class="col-md-1" style="background-color: #FF6347;height: 20px;"></div>
+              <div class="col-md-11">: Date de réalisation postérieure à la data prévue.</div>
+            </div>
+            <div class="container row" style="margin:15px;">
+              <div class="col-md-1" style="background-color: #FFD700;height: 20px;"></div>
+              <div class="col-md-11">: Date de réalisation non validée par le responable PPTL.</div>
+            </div>
+          </div>
+      </div>
   </div>
 </div>
 <div class="row">
@@ -182,6 +504,27 @@ if(!isset($_GET['id'])){ ?>
     </div>
   </div>
 </div>
+<div id="description" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modifier le PPTL</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>Description :</label>
+              <textarea class="form-control" rows="3" name="description"><?php echo $Data['description']; ?></textarea>
+            </div>
+          </div>
+          <input type="submit" name="descr" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier la description ?')">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <br><br>
 <form method="post" action="index.php">
   <a href="index.php" class="btn btn-default">Retour</a>
@@ -193,6 +536,24 @@ if(!isset($_GET['id'])){ ?>
   }
   ?>
 </form>
+<script type="text/javascript">
+    //<!--
+            function change_onglet(name)
+            {
+                    document.getElementById('onglet_'+anc_onglet).className = 'onglet_0 onglet';
+                    document.getElementById('onglet_'+name).className = 'onglet_1 onglet';
+                    document.getElementById('contenu_onglet_'+anc_onglet).style.display = 'none';
+                    document.getElementById('contenu_onglet_'+name).style.display = 'block';
+                    anc_onglet = name;
+            }
+    //-->
+  </script>
+  <script type="text/javascript">
+    //<!--
+            var anc_onglet = '1';
+            change_onglet(anc_onglet);
+    //-->
+    </script>
 <?php
 }
 drawFooter();
