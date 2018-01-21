@@ -43,7 +43,11 @@ if(empty($_SESSION['login'])){ ?>
       <div class="row">
         <div class="form-group col-md-8">
           <label>Client :</label>
-          <input type="text" name="client" class="form-control">
+          <select name="client" class="form-control">
+            <option value="PSA">PSA</option>
+            <option value="JLR">JLR</option>
+            <option value="TOY/RENAULT">TOY/RENAULT</option>
+          </select>
         </div>
         <div class="form-group col-md-4">
           <label>Image de présentation :</label>
