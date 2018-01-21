@@ -88,6 +88,11 @@ if(! empty($_POST)){
       "img" => $img,
       "launchbook" => $launchbook
     ))){
+      $id = $bdd -> lastInsertId();
+      foreach($_POST['equipe'] as $prof) {
+        $q = $bdd ->prepare('INSERT INTO equipe(id_projet,id_profil) VALUES (?,?)');
+        $q-> execute(array($id,$prof));
+      }
       success('Ajouté','Le projet a bien été ajouté.');
     }else{
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');

@@ -92,10 +92,10 @@ global $bdd;
                 </div>
 			</div>
       <div class="dropdown">
-			<a href="<?php echo $url; ?>" class="bouton_menu <?php if($selected=='methode'){echo ' bouton_menu_selected';} ?>">Méthode</a>
+			<a href="<?php echo $url; ?>/methode/launchboard" class="bouton_menu <?php if($selected=='methode'){echo ' bouton_menu_selected';} ?>">Méthode</a>
 				<div class="dropdown-content">
             <a href="<?php echo $url; ?>/methode/launchboard" class="bouton_dropdown" >LaunchBoard</a>
-            <a class="bouton_dropdown">Formation PPTL</a>
+            <a href="<?php echo $url; ?>/methode/formation" class="bouton_dropdown">Formation PPTL</a>
         </div>
 			</div>
       <div class="dropdown">

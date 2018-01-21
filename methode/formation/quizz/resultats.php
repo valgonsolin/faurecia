@@ -1,5 +1,5 @@
 <?php
-include_once "../../needed.php";
+include_once "../../../needed.php";
 
 include_once "../needed.php";
 
@@ -15,12 +15,12 @@ function int_to_vrai_faux($int){
 
 
 
-drawHeader('dojo_hse');
+drawHeader('methode');
 drawMenu('quizz');
 
 
 
-$Query = $bdd->prepare('UPDATE qualite_hse_session SET fin = NOW() WHERE id = ? and fin is NULL');
+$Query = $bdd->prepare('UPDATE formation_session SET fin = NOW() WHERE id = ? and fin is NULL');
 $Query->execute(array($_GET["id"]));
 
 ?>
@@ -48,10 +48,11 @@ $bonne_reponse_cat = 0;
 $bonne_reponse = 0;
 $proportion_bonne_reponse_cat = [];
 
-$Query = $bdd->prepare('SELECT * FROM qualite_hse_reponse
-  LEFT JOIN qualite_hse_question ON qualite_hse_question.id = qualite_hse_reponse.question
-  WHERE qualite_hse_reponse.session = ? ORDER BY qualite_hse_question.ordre ASC');
+$Query = $bdd->prepare('SELECT * FROM formation_reponse
+  LEFT JOIN formation_question ON formation_question.id = formation_reponse.question
+  WHERE formation_reponse.session = ? ORDER BY formation_question.ordre ASC');
 $Query->execute(array($_GET["id"]));
+print_r($Query -> errorInfo());
 $i=0;
 while ($Data = $Query->fetch()) {
     ?>
@@ -165,7 +166,7 @@ $score = floatval($bonne_reponse)/$tot_reponse*100;
 <p style="text-align: center; font-size: 20px;">Vous avez obtenu un score de <?php echo  number_format($score, 1); ?> %.</p>
 <?php
 
-$Query = $bdd->prepare("SELECT * FROM qualite_hse_session WHERE id = ?");
+$Query = $bdd->prepare("SELECT * FROM formation_session WHERE id = ?");
 $Query->execute(array($_GET["id"]));
 
 if ($Query->fetch()['type'] == 0){
@@ -178,7 +179,7 @@ if ($score>$limite){?>
     <p style="text-align: center;">Vous avez passez le test avec succès.</p>
 
     <?php
-    $Query = $bdd->prepare("UPDATE qualite_hse_session SET valide=1 WHERE id = ?");
+    $Query = $bdd->prepare("UPDATE formation_session SET valide=1 WHERE id = ?");
     $Query->execute(array($_GET["id"]));
 
 }else{
@@ -187,7 +188,7 @@ if ($score>$limite){?>
     <p style="text-align: center;">Vous n'avez pas réussi le test. Vous pouvez consulter cette
         <a href="resultats_complet.php?id=<?php echo $_GET['id']?>">page</a> pour consulter vos erreurs.</p>
     <?php
-    $Query = $bdd->prepare("UPDATE qualite_hse_session SET valide=0 WHERE id = ?");
+    $Query = $bdd->prepare("UPDATE formation_session SET valide=0 WHERE id = ?");
     $Query->execute(array($_GET["id"]));
 }
 

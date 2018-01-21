@@ -57,6 +57,18 @@ if(empty($_SESSION['login'])){ ?>
         </div>
       </div>
       <div class="row">
+        <div class="form-group col-md-12">
+          <label>Equipe :</label>
+          <select class="form-control" name="equipe[]" multiple>
+            <?php
+            $profil = $bdd -> query('SELECT * FROM profil');
+            while($personne = $profil -> fetch()){ ?>
+              <option value="<?php echo $personne['id']; ?>"><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+            <?php  } ?>
+          </select>
+        </div>
+      </div>
+      <div class="row">
         <div class="form-group col-md-6">
           <label>Launchbook (xls) :</label>
           <input type="file" name="launchbook">

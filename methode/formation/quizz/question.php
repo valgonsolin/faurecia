@@ -2,7 +2,7 @@
 ob_start();
 
 
-include_once "../../needed.php";
+include_once "../../../needed.php";
 
 include_once "../needed.php";
 
@@ -19,7 +19,7 @@ if(isset($_POST['question'])){
         $rep_3 = 1;}
     if (isset($_POST['rep_4'])){
         $rep_4 = 1;}
-    $Query = $bdd->prepare('INSERT INTO qualite_hse_reponse SET vrai_1 = ?, vrai_2 = ?, vrai_3 = ?, vrai_4 = ?, question = ?, session = ?');
+    $Query = $bdd->prepare('INSERT INTO formation_reponse SET vrai_1 = ?, vrai_2 = ?, vrai_3 = ?, vrai_4 = ?, question = ?, session = ?');
     $Query->execute(array($rep_1, $rep_2, $rep_3, $rep_4, $_POST['question'], $_GET["id"]));
 }
 
@@ -30,17 +30,17 @@ drawMenu('quizz');
 if (! isset($_GET["id"])){
     ?>
     <h2>Quiz</h2>
-    <h4>OUPS... Votre session est inconnu.</h4>
+    <h4>Erreur... Votre session est inconnu.</h4>
     <a href="index.php"> Retourner au quiz</a>
     <?php
 }else {
 
-    $Query = $bdd->prepare('SELECT * FROM qualite_hse_session WHERE id = ?');
+    $Query = $bdd->prepare('SELECT * FROM formation_session WHERE id = ?');
     $Query->execute(array($_GET["id"]));
     $type = $Query->fetch()['type'];
 
-    $Query = $bdd->prepare('SELECT * FROM qualite_hse_question WHERE id NOT IN
-      (SELECT question FROM qualite_hse_reponse WHERE qualite_hse_reponse.session = ?) and type = ? ORDER BY ordre');
+    $Query = $bdd->prepare('SELECT * FROM formation_question WHERE id NOT IN
+      (SELECT question FROM formation_reponse WHERE formation_reponse.session = ?) and type = ? ORDER BY ordre');
     $Query->execute(array($_GET["id"],$type));
     if($Data = $Query->fetch()) {
         ?>
@@ -114,7 +114,7 @@ if (! isset($_GET["id"])){
       <?php
     }else{
         ob_end_clean();
-        header('Location: '.$url."/dojo_HSE/quizz/resultats.php?id=".$_GET['id']);
+        header('Location: '.$url."/methode/formation/quizz/resultats.php?id=".$_GET['id']);
     }
 }
 drawFooter();

@@ -37,6 +37,7 @@ if(isset($_GET['id'])){
     $idees=$Data['idees'];
     $launchboard=$Data['launchboard'];
     $manager=$Data['manager'];
+    $mail = $Data['mail'];
 }else{
 ?>
     <h2>Ajouter un profil</h2>
@@ -57,6 +58,7 @@ if(isset($_GET['id'])){
     $logistique=0;
     $launchboard=0;
     $manager=-1;
+    $mail="";
 }
 ?>
     <form class="form-horizontal" method="post" action="administration.php">
@@ -78,6 +80,12 @@ if(isset($_GET['id'])){
             <label class="control-label col-sm-2">Identifiant :</label>
             <div class="col-sm-10">
                 <input type="text" readonly class="form-control" name="identifiant" id="identifiant" value="<?php echo $identifiant; ?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="mail">Mail :</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" name="mail" id="mail" value="<?php echo $mail; ?>">
             </div>
         </div>
         <div class="form-group">
