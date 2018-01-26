@@ -57,7 +57,15 @@ if(empty($_SESSION['login'])){ ?>
       <div class="row">
         <div class="form-group col-md-12">
           <label>Description :</label>
-          <textarea class="form-control" rows="3" name="description"></textarea>
+          <select name="description" class="form-control">
+            <option value="Components">Components</option>
+            <option value="Stamped muffler">Stamped muffler</option>
+            <option value="Locked muffler">Locked muffler</option>
+            <option value="Swan neck">Swan neck</option>
+            <option value="Hot end">Hot end</option>
+            <option value="Final assy no jit">Final assy no jit</option>
+            <option value="Final assy jit">Final assy jit</option>
+          </select>
         </div>
       </div>
       <div class="row">

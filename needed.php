@@ -46,6 +46,7 @@ global $bdd;
 	<div id="page">
     <div id="header_banner">
         <a href="<?php echo $url; ?>/index.php" class="lien_accueil"><img src="<?php echo $url; ?>/images/logo.png"></a>
+        <a href="https://faurus.ww.faurecia.com/community/fcm/fcm-beaulieu" class="lien_accueil" style="float:right; margin-right:100px;"><img src="<?php echo $url; ?>/images/faurus.png" style=" height:35px;"></a>
         <div id="menu">
             <div class="dropdown">
             <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_menu  <?php if($selected=='RH'){echo ' bouton_menu_selected';} ?> dropbtn" >RH</a>
@@ -57,6 +58,7 @@ global $bdd;
                     <?php if((isset($_SESSION['login'])) && $_SESSION['admin']){ ?>
                     <a href="<?php echo $url; ?>/moncompte/administration.php" class="bouton_dropdown" >Profils</a>
                   <?php } ?>
+                  <a href="<?php echo $url; ?>/RH/news"  class="bouton_dropdown">News</a>
                 </div>
             </div>
             <div class="dropdown">

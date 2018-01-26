@@ -80,28 +80,6 @@ $query ->execute();
 ?>
 
 <style>
-.color1{
-  background-color:#ccffcc;
-  box-shadow: 1px 1px 3px #ccffcc;
-}
-.color1:hover{
-  background-color: #b3ffb3;
-}
-.color2{
-  background-color:#ffd699;
-  box-shadow: 1px 1px 3px #ffd699;
-
-}
-.color2:hover{
-  background-color: #ffcc80;
-}
-.color3{
-  background-color:#ff9999;
-  box-shadow: 1px 1px 3px #ff9999;
-}
-.color3:hover{
-  background-color: #ff8080;
-}
 .conteneur_projet{
     margin-top:20px;
     display: flex;
@@ -163,14 +141,25 @@ while($Data = $query -> fetch()){
     <div class="projet" >
       <div class="info_projet">
         <h4 style="margin-top: 0px; height:40px; font-size: 40px;"><?php echo $Data['code']; ?>
-            <img src="../ressources/attention.png" style="height: 40px; float:right;"></h4>
-
+            <?php if($Data['couleur'] == 3){echo '<img src="../ressources/attention.png" style="height: 40px; float:right;">';} ?>
+            </h4>
             <p><b>PPTL : </b><?php echo $Data['nom']." ".$Data['prenom']; ?><br>
             <b>Client : </b><?php echo $Data['client']; ?></p>
             <div style="padding:0;" class="container-fluid">
-              <div class="row" style="height:150px;">
+              <div class="row" style="height:120px;">
             <div class="col-md-6">
-              <b>Description : </b><?php echo substr($Data['description'],0,70);?><br>
+              <b>Description : </b><?php echo substr($Data['description'],0,70);?><br><br>
+              <?php
+              $gate="2B";
+              if($Data['2tct'] && $Data['2capacity'] && $Data['2equip'] && $Data['2pfmea'] && $Data['2mvp'] && $Data['2layout'] && $Data['2master'] && $Data['2pack']){
+                $gate="3";
+                if($Data['3equip'] && $Data['3pack'] && $Data['3supplier'] && $Data['3checklist1'] && $Data['3pt'] && $Data['3checklist2'] && $Data['3mpt'] && $Data['3samples']){
+                  $gate="4";
+                }
+              }
+              ?>
+              <p><b> Gate : </b><?php echo $gate; ?>&emsp;
+                <b>LB : </b>25 %</p>
             </div>
             <div class="col-md-6">
             <?php
@@ -183,19 +172,16 @@ while($Data = $query -> fetch()){
           </div>
         </div>
       </div>
-          <?php
-            $gate="2B";
-            if($Data['2tct'] && $Data['2capacity'] && $Data['2equip'] && $Data['2pfmea'] && $Data['2mvp'] && $Data['2layout'] && $Data['2master'] && $Data['2pack']){
-              $gate="3";
-              if($Data['3equip'] && $Data['3pack'] && $Data['3supplier'] && $Data['3checklist1'] && $Data['3pt'] && $Data['3checklist2'] && $Data['3mpt'] && $Data['3samples']){
-                $gate="4";
-              }
-            }
-          ?>
-          <p><b> Gate : </b><?php echo $gate; ?>&emsp;
-            <b>LB : </b>25 %</p>
       </div>
-      <div class="couleur" style="background-color: #2b669a;"></div>
+      <?php
+      if($Data['couleur'] == 3){
+        echo '<div class="couleur" style="background-color: #da090d;"></div>';
+      }elseif($Data['couleur'] == 2){
+        echo '<div class="couleur" style="background-color: #FF9C00;"></div>';
+      }else{
+        echo '<div class="couleur" style="background-color: #2b669a;"></div>';
+      }
+      ?>
 
     </div>
   </a>

@@ -52,7 +52,6 @@ $Query = $bdd->prepare('SELECT * FROM formation_reponse
   LEFT JOIN formation_question ON formation_question.id = formation_reponse.question
   WHERE formation_reponse.session = ? ORDER BY formation_question.ordre ASC');
 $Query->execute(array($_GET["id"]));
-print_r($Query -> errorInfo());
 $i=0;
 while ($Data = $Query->fetch()) {
     ?>

@@ -594,8 +594,15 @@ if(!isset($_GET['id'])){ ?>
           <div class="row">
             <div class="form-group col-md-12">
               <label>Description :</label>
-              <textarea class="form-control" rows="3" name="description"><?php echo $Data['description']; ?></textarea>
-            </div>
+              <select name="description" class="form-control">
+                <option value="Components">Components</option>
+                <option value="Stamped muffler">Stamped muffler</option>
+                <option value="Locked muffler">Locked muffler</option>
+                <option value="Swan neck">Swan neck</option>
+                <option value="Hot end">Hot end</option>
+                <option value="Final assy no jit">Final assy no jit</option>
+                <option value="Final assy jit">Final assy jit</option>
+              </select>            </div>
           </div>
           <input type="submit" name="descr" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier la description ?')">
         </form>
