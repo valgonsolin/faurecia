@@ -7,7 +7,7 @@ drawMenu('les_idees');
 
 
 
-$recherche = "";
+$recherche = -1;
 $debut=0;
 $datetime = date("Y-m-d");
 
@@ -28,8 +28,6 @@ if(isset($_GET['nb'])){
 }
 
 
-
-
 if(empty($_SESSION['login']))
 { ?>
   <h2>Idées</h2>
@@ -46,8 +44,14 @@ else
 
   <form class="form-inline">
   <div class="form-group">
-    <label for="recherche">Recherche :</label>
-    <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="Nom, Prénom" value="<?php echo $recherche;?>">
+    <label>Recherche</label>
+    <select class="form-control" name="recherche" >
+      <?php
+      $profil = $bdd -> query('SELECT * FROM profil');
+      while($personne = $profil -> fetch()){ ?>
+        <option value="<?php echo $personne['id']; ?>" ><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+    <?php  } ?>
+    </select>
   </div>
   <button type="submit" class="btn btn-default">Rechercher</button>
   <a href="ajout.php" class="btn btn-default pull-right">Espace administration</a>
@@ -71,11 +75,17 @@ else
 
 <?php
 
-
-$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote DESC LIMIT 40  ') ;
-$Query->execute(array('%'.$recherche.'%', '%'.$recherche.'%',$debut,$mois));
+if($recherche>0){
+$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= ? and supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote DESC LIMIT 40  ') ;
+$Query->execute(array($recherche,$debut,$mois));}
+else{$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote DESC LIMIT 40  ') ;
+$Query->execute(array($debut,$mois));}
 
 while ($Data = $Query->fetch()) {
+  $c=0;
+  $Qy = $bdd->prepare('SELECT * FROM votes_idees WHERE personne= ? AND idee= ?');
+  $Qy->execute(array($_SESSION['id'],  $Data['id1']));
+  if($Qy->fetch()){$c=1;}
     ?>
 
     <tr>
@@ -86,14 +96,11 @@ while ($Data = $Query->fetch()) {
         <td><?php echo $Data['vote']; ?></td>
         <td><?php
 
-        $Qy = $bdd->prepare('SELECT * FROM votes_idees WHERE personne= ? AND idee= ?');
-        $Qy->execute(array($_SESSION['id'],  $Data['id1']));
-
-        if($Qy->fetch()){echo "<span style='font-size: 200%;'>&check;</span>";}else{echo "<span style='font-size: 150%;'>&#10008;</span>";} ?>
+        if($c){echo "<span style='font-size: 200%;'>&check;</span>";}else{echo "<span style='font-size: 150%;'>&#10008;</span>";} ?>
       </td>
-
-        <td class="clickable" title="Cliquez pour voter/voir le detail " onclick="window.location='details.php?idee=<?php echo $Data['id1'] ;?>'">Voter/Voir details</td>
-
+      <?php if($c){ ?>
+        <td class="clickable" title="Vote/voir le detail " onclick="window.location='details.php?idee2= <?php echo $Data['id1'] ; ?>'" >Retirer vote</td>
+      <?php }else{ ?> <td class="clickable" title="Vote/voir le detail " onclick="window.location='details.php?idee= <?php echo $Data['id1'] ; ?>'" >Voter</td> <?php } ?>
 
     </tr>
 

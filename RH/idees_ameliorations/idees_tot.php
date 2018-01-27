@@ -70,11 +70,14 @@ else
 
 <?php
 
-if($recherche>=0){
-$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= ? and supprime = 0  ORDER BY date_rea LIMIT 40 OFFSET ? ') ;
-$Query->execute(array($recherche,$debut));}
-else{$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE supprime = 0  ORDER BY date_rea LIMIT 40 OFFSET ? ') ;
-$Query->execute(array($debut));}}
+if($recherche>0){
+$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :a and supprime = 0  ORDER BY date_rea DESC LIMIT 40  OFFSET :off ') ;
+$Query->bindValue('a', $recherche, PDO::PARAM_INT);
+$Query->bindValue('off', $debut, PDO::PARAM_INT);
+$Query->execute();}
+else{$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0  ORDER BY date_rea DESC LIMIT 40 OFFSET :off  ') ;
+  $Query->bindValue('off', $debut, PDO::PARAM_INT);
+  $Query->execute();}
 
 while ($Data = $Query->fetch()) {
     ?>
@@ -92,9 +95,9 @@ while ($Data = $Query->fetch()) {
 
         if($Qy->fetch()){echo "<span style='font-size: 200%;'>&check;</span>";}else{echo "<span style='font-size: 150%;'>&#10008;</span>";} ?>
       </td>
-      <?php
-        if($Qy->fetch()){echo "<td class="clickable" title="Cliquez pour voter/voir le detail " onclick="window.location='details.php?idee=<?php echo $Data['id1'] ;?>'">Voter/Voir details</td>";}
-        else{echo "<td class="clickable" title="Cliquez pour retirer vote/voir le detail " onclick="window.location='details.php?idee2=<?php echo $Data['id1'] ;?>'">Retirer vote/Voir details</td>";}?>
+      <?php if($Qy->fetch()){ ?>
+      <td class="clickable" title="Vote/voir le detail " onclick="window.location='details.php?idee2= <?php echo $Data['id1'] ; ?>'" >Retirer vote</td>
+    <?php }else{ ?> <td class="clickable" title="Vote/voir le detail " onclick="window.location='details.php?idee= <?php echo $Data['id1'] ; ?>'" >Voter</td> <?php } ?>
 
 
     </tr>

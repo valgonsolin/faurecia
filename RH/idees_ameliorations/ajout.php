@@ -27,10 +27,10 @@ else
 
     $datetime = date("Y-m-d");
 
-  $query = $bdd -> prepare('INSERT INTO idees_ameliorations(emmetteur, superviseur,type,transversalisation,retenue,respo_rea,date_rea,situation_actuelle,situation_proposee) VALUES (:emmetteur, :superviseur,:type,:transversalisation,:retenue,:respo_rea,:date_rea ,:situation_actuelle,:situation_proposee)');
+  $query = $bdd -> prepare('INSERT INTO idees_ameliorations(emmetteur, manager,type,transversalisation,retenue,respo_rea,date_rea,situation_actuelle,situation_proposee) VALUES (:emmetteur, :manager,:type,:transversalisation,:retenue,:respo_rea,:date_rea ,:situation_actuelle,:situation_proposee)');
     $query -> execute(array(
       'emmetteur' => $_SESSION['id'],
-      'superviseur' => $_POST['superviseur'],
+      'manager'=>$_SESSION['manager'],
       'type' => $_POST['type'],
       'transversalisation' => $_POST['transversalisation'],
       'retenue' =>$_POST['retenue'],
@@ -55,16 +55,6 @@ else
 
   <form method="post" style="margin-top:20px;" enctype="multipart/form-data">
 
-    <div class="form-group">
-      <label>Superviseur</label>
-      <select class="form-control" name="superviseur" >
-        <?php
-        $profil = $bdd -> query('SELECT * FROM profil');
-        while($personne = $profil -> fetch()){ ?>
-          <option value="<?php echo $personne['id']; ?>" ><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
-      <?php  } ?>
-      </select>
-    </div>
   	<div class="form-group">
   	<label>Type</label>
   	<select name="type" class="form-control">
@@ -91,10 +81,6 @@ else
       <input type="hidden" value="0" name="retenue">
       <input name="vrai1" type="checkbox" value="1"> Oui</label>
 
-  </div>
-  <div class="form-group">
-    <label>Nom responsable réalisation</label>
-    <input type="text" class="form-control" name="nom_respo" value="">
   </div>
   <div class="form-group">
     <label>Responsable réalisation</label>

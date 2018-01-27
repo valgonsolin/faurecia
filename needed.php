@@ -2,6 +2,7 @@
 session_start();
 $url = "http://faureciabeaulieu.fr";
 $bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'tavg', 'lacolloc');
+// array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 ?>
 

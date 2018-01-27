@@ -1,5 +1,5 @@
 <?php
-include_once "../needed.php";
+include_once "needed.php";
 include_once "../../needed.php";
 
 drawHeader('RH');
@@ -35,16 +35,8 @@ else
 
     <form action="suppression.php" method="post" style="margin-top:20px;" enctype="multipart/form-data">
 
-      <div class="form-group">
-        <label>Superviseur</label>
-        <select class="form-control" name="superviseur" <?php echo $Data['profil']; ?>>
-          <?php
-          $profil = $bdd -> query('SELECT * FROM profil');
-          while($personne = $profil -> fetch()){ ?>
-            <option value="<?php echo $personne['id']; ?>" <?php if($Data['profil'] == $personne['id']){echo "selected";} ?>><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
-        <?php  } ?>
-        </select>
-      </div>
+
+
     	<div class="form-group">
     	<label>Type</label>
     	<select name="type" class="form-control">
@@ -74,11 +66,11 @@ else
     </div>
     <div class="form-group">
       <label>Responsable réalisation</label>
-      <select class="form-control" name="respo_rea" <?php echo $Data['profil']; ?>>
+      <select class="form-control" name="respo_rea" <?php echo $Data['respo_rea']; ?>>
         <?php
-        $profil = $bdd -> query('SELECT * FROM profil');
+        $profil = $bdd -> query('SELECT * FROM profil ');
         while($personne = $profil -> fetch()){ ?>
-          <option value="<?php echo $personne['id']; ?>" <?php if($Data['profil'] == $personne['id']){echo "selected";} ?>><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+          <option value="<?php echo $personne['id']; ?>" <?php if($Data['respo_rea'] == $personne['id']){echo "selected";} ?>><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
       <?php  } ?>
       </select>
     </div>
