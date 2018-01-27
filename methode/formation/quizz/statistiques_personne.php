@@ -1,7 +1,7 @@
 <?php
 include_once "../needed.php";
-include_once "../../needed.php";
-drawheader('dojo_hse');
+include_once "../../../needed.php";
+drawheader('methode');
 drawMenu('quizz');
 
 if(empty($_SESSION['login']))
@@ -15,7 +15,7 @@ if(empty($_SESSION['login']))
 else
 {
   echo "<h2>Statistiques</h2>";
-  if(!$_SESSION['hse']){
+  if(!$_SESSION['launchboard']){
     echo "<p>Vous n'avez pas les droits pour accéder à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
   }else{ ?>
 <div id="lien_page">
@@ -49,10 +49,10 @@ while ($Data = $Query->fetch()) {
   $bonne_reponse_id = 0;
   $validation=false;
 
-  $Query2 = $bdd->prepare('SELECT * FROM qualite_hse_reponse
-  JOIN qualite_hse_question ON qualite_hse_question.id = qualite_hse_reponse.question
-  JOIN qualite_hse_session ON qualite_hse_reponse.session = qualite_hse_session.id
-  JOIN profil ON qualite_hse_session.personne = profil.id
+  $Query2 = $bdd->prepare('SELECT * FROM formation_reponse
+  JOIN formation_question ON formation_question.id = formation_reponse.question
+  JOIN formation_session ON formation_reponse.session = formation_session.id
+  JOIN profil ON formation_session.personne = profil.id
   WHERE profil.id = ? ');
 
   $Query2->execute(array($identifiant));
@@ -66,7 +66,7 @@ while ($Data = $Query->fetch()) {
       if ($valide){ $bonne_reponse_id =$bonne_reponse_id + 1; }
       $tot_reponse_id +=1;
     }
-    $Query3 = $bdd->prepare('SELECT * FROM qualite_quiz_session WHERE qualite_hse_session.personne = ? ');
+    $Query3 = $bdd->prepare('SELECT * FROM qualite_quiz_session WHERE formation_session.personne = ? ');
     $Query3->execute(array($identifiant));
     while ($Data3 = $Query3->fetch()) {
       $validation= $validation || ($Data3['valide']==1);

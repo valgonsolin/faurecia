@@ -151,7 +151,7 @@ array_push($proportion_bonne_reponse_cat, array($ancien_titre, $bonne_reponse_ca
             <td><?php echo $categorie[0];?></td>
             <td><?php echo $categorie[1];?></td>
             <td><?php echo $categorie[2];?></td>
-            <td><?php echo floatval($categorie[1])/$categorie[2];?></td>
+            <td><?php echo number_format(floatval(100*$categorie[1])/$categorie[2],1);?>%</td>
         </tr>
         <?php
         }

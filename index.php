@@ -2,9 +2,6 @@
 
 include_once "needed.php";
 
-
-
-
 drawheader();
 
 ?>
@@ -15,6 +12,8 @@ drawheader();
 	<a href="/dojo_HSE/mandatory_rules.php" class="bouton_principal"><img src="/dojo_HSE/ressources/hse.jpg"><figcaption>Dojo HSE</figcaption></a>
 	<a href="/logistique/index.php" class="bouton_principal"><img src="/logistique/ressources/logistique.jpg"><figcaption>Logistique</figcaption></a>
 	<a href="/codir/kamishibai/index.php" class="bouton_principal"><img src="/codir/kamishibai/ressources/codir.jpg"><figcaption>Codir</figcaption></a>
+</div>
+
 </div>
 
 <?php

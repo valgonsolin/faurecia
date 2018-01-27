@@ -1,8 +1,6 @@
 <?php
 include_once "../../needed.php";
 
-include_once "../needed.php";
-
 
 
 function int_to_vrai_faux($int){
@@ -13,33 +11,20 @@ function int_to_vrai_faux($int){
     }
 }
 
-
-
-drawHeader('dojo_hse');
-drawMenu('quizz');
-
-
-
-$Query = $bdd->prepare('UPDATE qualite_hse_session SET fin = NOW() WHERE id = ? and fin is NULL');
-$Query->execute(array($_GET["id"]));
-
 ?>
+<body>
+  <div style="width: 80%; margin: 0 auto;">
 <h2>Résultats Quiz</h2>
-<table class="table">
-<h4>Réponse aux questions<a href="imprimer_fiche.php?id=<?php echo $_GET['id']; ?>" target=_blank class="pull-right btn btn-default">Imprimer les résultats</a></h4>
-<a href="resultats_complet.php?id=<?php echo $_GET['id']?>">Voir les réponses détaillés</a>
-<div style="height: 30px"></div>
-<table class="table">
-<thead class="thead">
-<tr>
-    <th style="width: 150px;">Categorie</th>
-    <th>Question</th>
-    <th style="width: 70px;">Résultats</th>
-</tr>
-</thead>
-<tbody>
+
 
 <?php
+$q = $bdd -> prepare('SELECT * FROM qualite_hse_session as q JOIN profil ON profil.id = q.personne WHERE q.id= ?');
+$q -> execute(array($_GET['id']));
+$result = $q -> fetch();
+echo "<p>".$result['nom'];
+echo "   ".$result['prenom'];
+echo "&emsp;&emsp;&emsp;Type : ".$result['mo'];
+echo "<span style='float:right;'>".$result['fin']."</span></p>";
 
 $ancien_titre = "";
 $tot_reponse = 0;
@@ -54,13 +39,7 @@ $Query = $bdd->prepare('SELECT * FROM qualite_hse_reponse
 $Query->execute(array($_GET["id"]));
 $i=0;
 while ($Data = $Query->fetch()) {
-    ?>
-    <tr class="clickable" data-toggle="modal" data-target="#modal<?php echo $i; ?>" title="Cliquez pour voir le commentaire">
-        <td>
-        <?php
         if ($ancien_titre != $Data['titre']){
-            echo $Data['titre'];
-
             if ($ancien_titre != "") {
                 array_push($proportion_bonne_reponse_cat, array($ancien_titre, $bonne_reponse_cat, $tot_reponse_cat));
                 $tot_reponse_cat = 0;
@@ -79,42 +58,8 @@ while ($Data = $Query->fetch()) {
         }
         $tot_reponse_cat +=1;
         $tot_reponse +=1;
-
-        $query= $bdd -> prepare('SELECT * FROM files WHERE id=?');
-        $query -> execute(array($Data['image_correction']));
-        $img= $query -> fetch();
-
-        ?></td>
-
-        <td><?php echo $Data['question']; ?></td>
-        <td><?php echo int_to_vrai_faux($valide); ?></td>
+        ?>
     </tr>
-    <div id="modal<?php echo $i; ?>" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Commentaire</h4>
-          </div>
-          <div class="modal-body">
-            <div class="row" style="margin:2px;">
-              <div class="col-sm-6">
-                <p><?php echo $Data['commentaire']; ?></p>
-              </div>
-              <div class="col-sm-6">
-              <?php
-              if($img){ ?>
-                <img class="pull-right" src="../../images/<?php echo $img['chemin']; ?>" style="max-height:400px; max-width:100%;"> <?php } ?>
-              </div>
-          </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-
-
 
     <?php
     $i++;
@@ -122,13 +67,6 @@ while ($Data = $Query->fetch()) {
 
 array_push($proportion_bonne_reponse_cat, array($ancien_titre, $bonne_reponse_cat, $tot_reponse_cat));
 ?>
-
-
-</tbody>
-</table>
-
-
-<h4>Statistiques</h4>
 
 <table class="table">
     <thead class="thead">
@@ -151,7 +89,7 @@ array_push($proportion_bonne_reponse_cat, array($ancien_titre, $bonne_reponse_ca
             <td><?php echo $categorie[0];?></td>
             <td><?php echo $categorie[1];?></td>
             <td><?php echo $categorie[2];?></td>
-            <td><?php echo number_format(floatval(100*$categorie[1])/$categorie[2],1);?>%</td>
+            <td><?php echo number_format(floatval(100*$categorie[1])/$categorie[2],1);?> %</td>
         </tr>
         <?php
         }
@@ -184,11 +122,15 @@ if ($score>$limite){?>
 }else{
     ?>
     <img src="ressources/cancel.png" style="height: 128px; margin: 20px auto;" class="center-block">
-    <p style="text-align: center;">Vous n'avez pas réussi le test. Vous pouvez consulter cette
-        <a href="resultats_complet.php?id=<?php echo $_GET['id']?>">page</a> pour consulter vos erreurs.</p>
+    <p style="text-align: center;">Vous n'avez pas réussi le test.</p>
     <?php
     $Query = $bdd->prepare("UPDATE qualite_hse_session SET valide=0 WHERE id = ?");
     $Query->execute(array($_GET["id"]));
 }
 
-drawFooter();
+?>
+</div>
+</body>
+<script>
+    window.print();
+</script>

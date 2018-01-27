@@ -32,8 +32,8 @@ if(!empty($_POST)){
   }
   }
   if(isset($_POST['submit'])){
-    $Query = $bdd->prepare('UPDATE profil SET nom = ?, prenom = ?, mo = ?, uap = ?, tournee = ?, manager = ? WHERE id = ?');
-    if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['manager'],$_SESSION["id"]))){
+    $Query = $bdd->prepare('UPDATE profil SET nom = ?, prenom = ?,mail = ?, mo = ?, uap = ?, tournee = ?, manager = ? WHERE id = ?');
+    if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['manager'],$_SESSION["id"]))){
       success('Modifié','Le profil a bien été modifié');
       $_SESSION['manager']=$_POST['manager'];
     }else{
@@ -55,6 +55,7 @@ if(empty($_SESSION['login'])){
   $mo = $Data['mo'];
   $uap = $Data['uap'];
   $tournee = $Data['tournee'];
+  $mail = $Data['mail'];
   ?>
 <p>Connecté en tant que <?php echo $_SESSION['nom']."  ".$_SESSION['prenom']; ?></p>
 <p><h4>Droits :</h4><b>
@@ -110,6 +111,12 @@ if(empty($_SESSION['login'])){
                 <label class="control-label col-sm-2" for="prenom">Prénom :</label>
                 <div class="col-sm-10">
                     <input type="text" name="prenom" class="form-control" id="prenom" placeholder="Entrer le prénom"  value="<?php echo $prenom; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="mail">Mail :</label>
+                <div class="col-sm-10">
+                    <input type="email" name="mail" class="form-control" id="mail" placeholder="test@exemple.fr"  value="<?php echo $mail; ?>">
                 </div>
             </div>
             <div class="form-group">

@@ -9,17 +9,19 @@ drawMenu('launchboard');
 
 function color($field){
   global $Data;
+  $class="";
+  if( (($Data['profil'] == $_SESSION['id']) || ($_SESSION['launchboard'] && ! $Data[$field] && ! is_null($Data[$field.'_r'])) ) && (! is_null($Data[$field.'_f']))){
+    $class="clickable";
+    echo "data-toggle='modal' data-target='#".$field."_r'";
+  }
   if(! is_null($Data[$field.'_r'])){
     if(strtotime($Data[$field.'_r']) <= strtotime($Data[$field.'_f']) && $Data[$field]){
-      echo "class='green' title='Validé'";
+      echo "class='green ".$class."green' title='Validé'";
     }elseif($Data[$field]){
-      echo "class='red' title='Validé'";
+      echo "class='red ".$class."red' title='Validé'";
     }else{
-      echo "class='notvalid' title='Non validé'";
+      echo "class='notvalid ".$class."yellow' title='Non validé'";
     }
-  }
-  if( (($Data['profil'] == $_SESSION['id']) || ($_SESSION['launchboard'] && ! $Data[$field] && ! is_null($Data[$field.'_r'])) ) && (! is_null($Data[$field.'_f']))){
-    echo "data-toggle='modal' data-target='#".$field."_r'";
   }
 }
 function forecast($field){
@@ -27,7 +29,7 @@ function forecast($field){
   global $_SESSION;
   global $Data;
   if($Data['profil'] == $_SESSION['id']){
-    echo "data-toggle='modal' data-target='#".$field."'";
+    echo "data-toggle='modal' class='clickable' data-target='#".$field."'";
   }
 }
 function choose($field){
@@ -145,6 +147,21 @@ if(!isset($_GET['id'])){ ?>
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
     }
   }
+  if(isset($_POST['ajout_equipe'])){
+    foreach($_POST['equipe'] as $prof) {
+      $q = $bdd ->prepare('INSERT INTO equipe(id_projet,id_profil) VALUES (?,?)');
+      $q-> execute(array($_GET['id'],$prof));
+    }
+      success('Modifiée','L\'équipe a été modifiée.');
+  }
+  if(isset($_POST['remove_equipe'])){
+    $q = $bdd -> prepare('DELETE FROM equipe WHERE id = ?');
+    if($q -> execute(array($_POST['remove']))){
+      success('Modifiée','L\'équipe a été modifiée.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
   if(! empty($_FILES)){
     if(isset($_FILES['kickoff']) && $_FILES['kickoff']['name'] != ""){
       $kickoff=upload($bdd,'kickoff',"../../ressources","launchboard",50485760,array( 'ppt' , 'pptx' , 'PPT' , 'PPTX' ));
@@ -198,6 +215,18 @@ if(!isset($_GET['id'])){ ?>
     $Data = $query -> fetch();
 ?>
 <style>
+  .clickable:hover{
+    background-color:#e0e0e0;
+  }
+  .clickablered:hover{
+    background-color: #df4529;
+  }
+  .clickablegreen:hover{
+    background-color: #73d273;
+  }
+  .clickableyellow:hover{
+    background-color: #d0b41c;
+  }
   .onglet
   {
      display:inline-block;
@@ -427,6 +456,16 @@ if(!isset($_GET['id'])){ ?>
 <div class="row">
   <div class="col-md-6">
     <h4>Client : <?php echo $Data['client']; ?></h4>
+    <h4>Equipe :   <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
+        <div class="btn btn-default pull-right" data-toggle="modal" data-target="#equipe">Modifier l'équipe</div><?php } ?></h4>
+    <ul>
+      <?php
+      $team = $bdd -> prepare('SELECT * FROM profil JOIN equipe ON profil.id = equipe.id_profil WHERE equipe.id_projet = ?');
+      $team -> execute(array($_GET['id']));
+      while($pers = $team ->fetch()){
+        echo "<li>".$pers['nom']." ".$pers['prenom']." : <a href='mailto:".$pers['mail']."'>".$pers['mail']."</a></li>";
+      } ?>
+      </ul>
     <h4>Fichiers :</h4>
       <?php
       if(! is_null($Data['kickoff'])){
@@ -435,7 +474,7 @@ if(!isset($_GET['id'])){ ?>
         $file = $img -> fetch(); ?>
           <form method="post">
             <input type="hidden" name="kickoff" value="<?php echo $Data['kickoff']; ?>">
-            <a href="download.php?id=<?php echo $Data['kickoff']; ?>&amp;name=kickoff<?php echo $Data['id']; ?>" class="btn btn-default">Télécharger le kickoff</a>
+            <a href="download.php?id=<?php echo $Data['kickoff']; ?>&amp;name=kickoff<?php echo $_GET['id']; ?>" class="btn btn-default">Télécharger le kickoff</a>
             <input type="submit" name="delete_kickoff" class="btn btn-default" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le kickoff ?')">
           </form>
         <?php
@@ -450,7 +489,7 @@ if(!isset($_GET['id'])){ ?>
       if(! is_null($Data['launchbook'])){?>
         <form method="post" >
           <input type="hidden" name="launchbook" value="<?php echo $Data['launchbook']; ?>">
-          <a href="download.php?name=launchbook<?php echo $Data['id']; ?>&amp;id=<?php echo $Data['launchbook']; ?>" class="btn btn-default">Télécharger le launchbook</a>
+          <a href="download.php?name=launchbook<?php echo $Data['id']; ?>&amp;id=<?php echo $_GET['launchbook']; ?>" class="btn btn-default">Télécharger le launchbook</a>
           <input type="submit" name="delete_launchbook" class="btn btn-default" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le launchbook ? ')" value="Supprimer">
         </form>
         <?php
@@ -463,6 +502,8 @@ if(!isset($_GET['id'])){ ?>
         <?php
       }
       ?>
+      <h4>Lien HELIOS :</h4><a href="<?php echo $Data['link_helios']; ?>"><?php echo $Data['link_helios']; ?></a>
+      <h4>Lien PLR :</h4><a href="<?php echo $Data['link_plr']; ?>"><?php echo $Data['link_plr']; ?></a>
   </div>
   <div class="col-md-6">
     <?php
@@ -504,6 +545,43 @@ if(!isset($_GET['id'])){ ?>
     </div>
   </div>
 </div>
+<div id="equipe" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modifier l'équipe</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <select class="form-control" name="equipe[]" multiple>
+            <?php
+            $profil = $bdd -> query('SELECT * FROM profil');
+            while($personne = $profil -> fetch()){
+              $test = $bdd -> prepare('SELECT * FROM equipe WHERE id_profil =? AND id_projet = ?');
+              $test -> execute(array($personne['id'],$_GET['id']));
+              if(! $test -> fetch()){ ?>
+              <option value="<?php echo $personne['id']; ?>"><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+            <?php  }} ?>
+          </select>
+          <br>
+          <input type="submit" name="ajout_equipe" class="btn btn-default form-control" value="Ajouter" >
+          <br><br><br>
+          <select class="form-control" name="remove">
+            <?php
+            $remove = $bdd -> prepare('SELECT *,equipe.id as ref FROM profil JOIN equipe ON profil.id = equipe.id_profil WHERE equipe.id_projet = ?');
+            $remove -> execute(array($_GET['id']));
+            while($personne = $remove -> fetch()){ ?>
+              <option value="<?php echo $personne['ref']; ?>"><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+            <?php  } ?>
+          </select>
+          <br>
+          <input type="submit" name="remove_equipe" class="btn btn-default form-control" value="Supprimer" >
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <div id="description" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -516,8 +594,15 @@ if(!isset($_GET['id'])){ ?>
           <div class="row">
             <div class="form-group col-md-12">
               <label>Description :</label>
-              <textarea class="form-control" rows="3" name="description"><?php echo $Data['description']; ?></textarea>
-            </div>
+              <select name="description" class="form-control">
+                <option value="Components">Components</option>
+                <option value="Stamped muffler">Stamped muffler</option>
+                <option value="Locked muffler">Locked muffler</option>
+                <option value="Swan neck">Swan neck</option>
+                <option value="Hot end">Hot end</option>
+                <option value="Final assy no jit">Final assy no jit</option>
+                <option value="Final assy jit">Final assy jit</option>
+              </select>            </div>
           </div>
           <input type="submit" name="descr" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier la description ?')">
         </form>
@@ -530,9 +615,9 @@ if(!isset($_GET['id'])){ ?>
   <a href="index.php" class="btn btn-default">Retour</a>
   <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" >
   <?php if($Data['archive']){
-    echo '<input type="submit" class="btn btn-default pull-right" value="Restaurer" name="desarchive">';
+    echo '<input type="submit" class="btn btn-default pull-right" value="Restaurer" name="desarchive" onclick="return confirm(\'Êtes-vous sûr de vouloir restaurer le projet ?\')">';
   }else{
-    echo '<input type="submit" class="btn btn-default pull-right" value="Archiver" name="archive">';
+    echo '<input type="submit" class="btn btn-default pull-right" value="Archiver" name="archive" onclick="return confirm(\'Êtes-vous sûr de vouloir archiver le projet ?\')">';
   }
   ?>
 </form>

@@ -2,11 +2,11 @@
 ob_start();
 
 
-include_once "../../needed.php";
+include_once "../../../needed.php";
 
 include_once "../needed.php";
 
-drawHeader('dojo_hse');
+drawHeader('methode');
 drawMenu('quizz');
 
 
@@ -17,7 +17,7 @@ if (! isset($_GET["id"])){
     <a href="index.php"> Retourner au quiz</a>
     <?php
 }else {
-    $Query = $bdd->prepare('SELECT * FROM qualite_hse_session WHERE personne = ? and fin is NULL');
+    $Query = $bdd->prepare('SELECT * FROM formation_session WHERE personne = ? and fin is NULL');
     $Query->execute(array($_GET["id"]));
     if (! $Data = $Query->fetch()) {
         $Query = $bdd->prepare('SELECT * FROM profil WHERE id = ?');
@@ -52,7 +52,7 @@ if (! isset($_GET["id"])){
         <?php
     }else{
         ob_end_clean();
-        header('Location: '.$url."/dojo_HSE/quizz/depart.php?id_personne=".$_GET['id']);
+        header('Location: '.$url."/methode/formation/quiz/depart.php?id_personne=".$_GET['id']);
     }
 }
 drawFooter();

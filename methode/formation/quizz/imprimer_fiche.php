@@ -1,5 +1,5 @@
 <?php
-include_once "../../needed.php";
+include_once "../../../needed.php";
 
 
 
@@ -18,7 +18,7 @@ function int_to_vrai_faux($int){
 
 
 <?php
-$q = $bdd -> prepare('SELECT * FROM qualite_quiz_session as q JOIN profil ON profil.id = q.personne WHERE q.id= ?');
+$q = $bdd -> prepare('SELECT * FROM formation_session as q JOIN profil ON profil.id = q.personne WHERE q.id= ?');
 $q -> execute(array($_GET['id']));
 $result = $q -> fetch();
 echo "<p>".$result['nom'];
@@ -33,9 +33,9 @@ $bonne_reponse_cat = 0;
 $bonne_reponse = 0;
 $proportion_bonne_reponse_cat = [];
 
-$Query = $bdd->prepare('SELECT * FROM qualite_quiz_reponse
-  LEFT JOIN qualite_quiz_question ON qualite_quiz_question.id = qualite_quiz_reponse.question
-  WHERE qualite_quiz_reponse.session = ? ORDER BY qualite_quiz_question.ordre ASC');
+$Query = $bdd->prepare('SELECT * FROM formation_reponse
+  LEFT JOIN formation_question ON formation_question.id = formation_reponse.question
+  WHERE formation_reponse.session = ? ORDER BY formation_question.ordre ASC');
 $Query->execute(array($_GET["id"]));
 $i=0;
 while ($Data = $Query->fetch()) {
@@ -103,7 +103,7 @@ $score = floatval($bonne_reponse)/$tot_reponse*100;
 <p style="text-align: center; font-size: 20px;">Vous avez obtenu un score de <?php echo  number_format($score, 1); ?> %.</p>
 <?php
 
-$Query = $bdd->prepare("SELECT * FROM qualite_quiz_session WHERE id = ?");
+$Query = $bdd->prepare("SELECT * FROM formation_session WHERE id = ?");
 $Query->execute(array($_GET["id"]));
 
 if ($Query->fetch()['type'] == 0){
@@ -116,7 +116,7 @@ if ($score>$limite){?>
     <p style="text-align: center;">Vous avez passez le test avec succès.</p>
 
     <?php
-    $Query = $bdd->prepare("UPDATE qualite_quiz_session SET valide=1 WHERE id = ?");
+    $Query = $bdd->prepare("UPDATE formation_session SET valide=1 WHERE id = ?");
     $Query->execute(array($_GET["id"]));
 
 }else{
@@ -124,7 +124,7 @@ if ($score>$limite){?>
     <img src="ressources/cancel.png" style="height: 128px; margin: 20px auto;" class="center-block">
     <p style="text-align: center;">Vous n'avez pas réussi le test.</p>
     <?php
-    $Query = $bdd->prepare("UPDATE qualite_quiz_session SET valide=0 WHERE id = ?");
+    $Query = $bdd->prepare("UPDATE formation_session SET valide=0 WHERE id = ?");
     $Query->execute(array($_GET["id"]));
 }
 
