@@ -55,7 +55,7 @@ function choose($field){
     </div>
   </div>
   <?php
-}elseif($_SESSION['launchboard']){ ?>
+  }elseif($_SESSION['launchboard']){ ?>
   <div id="<?php echo $field; ?>" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -112,7 +112,7 @@ if(!isset($_GET['id'])){ ?>
   <h2>LaunchBoard</h2>
   <h4>Erreur... Votre session est inconnue.</h4>
   <a class="btn btn-default" href="<?php echo $url; ?>/methode/launchboard">Retourner au LaunchBoard</a>
-<?php }else{
+  <?php }else{
   if(isset($_POST['delete_kickoff'])){
     remove_file($bdd,$_POST['kickoff']);
     $q = $bdd -> prepare('UPDATE launchboard SET kickoff = NULL WHERE id= ?');
@@ -143,6 +143,14 @@ if(!isset($_GET['id'])){ ?>
     $q = $bdd -> prepare('UPDATE launchboard SET description = ? WHERE id = ?');
     if($q -> execute(array($_POST['description'],$_GET['id']))){
       success('Modifiée','La description a été modifiée.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
+  if(isset($_POST['ptg'])){
+    $q = $bdd -> prepare('INSERT INTO evolution_projet(id_projet,pourcentage,date) VALUES (?,?,NOW())');
+    if($q -> execute(array($_GET['id'],$_POST['pourcentage']))){
+      success('Modifiée','Le pourcentage a été modifiée.');
     }else{
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
     }
@@ -211,10 +219,19 @@ if(!isset($_GET['id'])){ ?>
       treatForm($value);
     }
     $query = $bdd -> prepare('SELECT * FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE launchboard.id = ?');
-    if($query -> execute(array($_GET['id'])))
+    $query -> execute(array($_GET['id']));
     $Data = $query -> fetch();
 ?>
 <style>
+  .couleur{
+    margin: 10px;
+    width: 400px;
+    height: 20px;
+    border-radius:3px;
+    border-color: #ccc;
+    border-width: 1px;
+    border-style: solid;
+  }
   .clickable:hover{
     background-color:#e0e0e0;
   }
@@ -295,6 +312,76 @@ if(!isset($_GET['id'])){ ?>
       <div class="btn btn-default pull-right" data-toggle="modal" data-target="#description">Modifier la description</div><?php } ?>
   </div>
 </div>
+<div class="row">
+  <?php
+  $gate="2B";
+  $total=0;
+  $avancement=0;
+  $retard=0;
+  $c = 3;
+  foreach ($fields as $key => $value) {
+    if(! is_null($Data[$value."_f"])){
+      $total +=1;
+      if($Data[$value]){
+        $avancement +=1;
+        if(strtotime($Data[$value."_f"]) < strtotime($Data[$value."_r"])){
+          $retard +=1;
+        }
+      }
+    }
+  }
+  if($total > 0){
+    if($Data['2tct'] && $Data['2capacity'] && $Data['2equip'] && $Data['2pfmea'] && $Data['2mvp'] && $Data['2layout'] && $Data['2master'] && $Data['2pack']){
+      $ptg = $bdd -> prepare('SELECT * FROM evolution_projet WHERE id_projet = ? ORDER BY date DESC' );
+      $ptg -> execute(array($_GET['id']));
+      if($res = $ptg -> fetch()){
+        $pourcentage=$res['pourcentage'];
+      }else{
+        $pourcentage="error";
+      }
+      if($pourcentage == "error"){
+        $pourcentage = NULL;
+      }else{
+        $date = strtotime($res['date']);
+      }
+      $gate="3";
+      if($Data['3equip'] && $Data['3pack'] && $Data['3supplier'] && $Data['3checklist1'] && $Data['3pt'] && $Data['3checklist2'] && $Data['3mpt'] && $Data['3samples']){
+        $gate="4";
+      }
+    }else{
+      $pourcentage = round((floatval($avancement/$total)*100),2);
+    }
+    $maj = $bdd -> prepare('UPDATE launchboard SET lb = ? WHERE id = ?');
+    $maj -> execute(array($pourcentage,$_GET['id']));
+    $Data['lb']=$pourcentage;
+    if($Data['lb'] < 75){
+      $couleur = "#da090d";
+    }elseif($Data['lb'] < 85){
+      $couleur = "#FF9C00";
+    }else{
+      $couleur = "#2b669a";
+    }
+    ?>
+    <div class="col-md-6">
+      <h4>Pourcentage : <?php if(isset($date)){ echo " <small>(".date('j/m/y', $date).")</small>"; }
+      if((($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ) && $gate != "2"){ ?>
+                  <div class="btn btn-default pull-right" data-toggle="modal" data-target="#pourcentage">Mettre à jour le pourcentage</div><?php
+      } ?></h4>
+    </div>
+    <div class="col-md-6">
+      <div class="progress" style="margin-top:15px; margin-bottom: 15px;">
+        <div class="progress-bar" role="progressbar" style="width: <?php echo $Data['lb']; ?>%; background-color: <?php echo $couleur; ?>;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $Data['lb']; ?>%</div>
+      </div>
+    </div>
+    <div class="col-md-6">Avancement : <?php echo round((floatval($avancement/$total)*100),2); ?>% &emsp; Retard : <?php echo round((floatval($retard/$total)*100),2); ?>%</div>
+    <div class="col-md-6">
+      <h4>Gate : <?php echo $gate; ?></h4>
+    </div>
+
+  <?php
+}?>
+</div>
+<br>
 <div class="row">
   <div >
       <div class="onglets">
@@ -489,7 +576,7 @@ if(!isset($_GET['id'])){ ?>
       if(! is_null($Data['launchbook'])){?>
         <form method="post" >
           <input type="hidden" name="launchbook" value="<?php echo $Data['launchbook']; ?>">
-          <a href="download.php?name=launchbook<?php echo $Data['id']; ?>&amp;id=<?php echo $_GET['launchbook']; ?>" class="btn btn-default">Télécharger le launchbook</a>
+          <a href="download.php?name=launchbook<?php echo $_GET['id']; ?>&amp;id=<?php echo $Data['launchbook']; ?>" class="btn btn-default">Télécharger le launchbook</a>
           <input type="submit" name="delete_launchbook" class="btn btn-default" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le launchbook ? ')" value="Supprimer">
         </form>
         <?php
@@ -587,7 +674,7 @@ if(!isset($_GET['id'])){ ?>
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modifier le PPTL</h4>
+        <h4 class="modal-title">Modifier la description</h4>
       </div>
       <div class="modal-body">
         <form method="post" class="form-group">
@@ -605,6 +692,22 @@ if(!isset($_GET['id'])){ ?>
               </select>            </div>
           </div>
           <input type="submit" name="descr" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier la description ?')">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="pourcentage" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mettre à jour le pourcentage</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <input type="number" name="pourcentage" class="form-control" min="0" max="100" value="<?php if($pourcentage == "error"){echo "0";}else{echo $pourcentage;} ?>">
+          <input type="submit" name="ptg" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le pourcentage ?')">
         </form>
       </div>
     </div>

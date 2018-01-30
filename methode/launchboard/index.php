@@ -67,9 +67,9 @@ if (isset($_GET["recherche"])){
 $supprime =false;
 if(isset($_GET['supprime'])){
   $supprime=true;
-  $query = $bdd -> prepare('SELECT *, launchboard.id as projet FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE (nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) ORDER BY couleur DESC');
+  $query = $bdd -> prepare('SELECT *, launchboard.id as projet FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE (nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) ORDER BY lb ASC');
 }else{
-  $query = $bdd -> prepare('SELECT *, launchboard.id as projet FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE ((nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) AND archive = 0) ORDER BY couleur DESC');
+  $query = $bdd -> prepare('SELECT *, launchboard.id as projet FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE ((nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) AND archive = 0) ORDER BY lb ASC');
 }
 $query ->bindValue(':titre','%'.$recherche.'%');
 $query ->bindValue(':nom','%'.$recherche.'%');
@@ -141,7 +141,7 @@ while($Data = $query -> fetch()){
     <div class="projet" >
       <div class="info_projet">
         <h4 style="margin-top: 0px; height:40px; font-size: 40px;"><?php echo $Data['code']; ?>
-            <?php if($Data['couleur'] == 3){echo '<img src="../ressources/attention.png" style="height: 40px; float:right;">';} ?>
+            <?php if($Data['lb'] < 50){echo '<img src="../ressources/attention.png" style="height: 40px; float:right;">';} ?>
             </h4>
             <p><b>PPTL : </b><?php echo $Data['nom']." ".$Data['prenom']; ?><br>
             <b>Client : </b><?php echo $Data['client']; ?></p>
@@ -159,7 +159,7 @@ while($Data = $query -> fetch()){
               }
               ?>
               <p><b> Gate : </b><?php echo $gate; ?>&emsp;
-                <b>LB : </b>25 %</p>
+                <b>LB : </b><?php if(is_null($Data['lb'])){echo "Inconnu";}else{echo $Data['lb']."%";} ?></p>
             </div>
             <div class="col-md-6">
             <?php
@@ -174,9 +174,9 @@ while($Data = $query -> fetch()){
       </div>
       </div>
       <?php
-      if($Data['couleur'] == 3){
+      if($Data['lb'] < 75){
         echo '<div class="couleur" style="background-color: #da090d;"></div>';
-      }elseif($Data['couleur'] == 2){
+      }elseif($Data['lb'] < 85){
         echo '<div class="couleur" style="background-color: #FF9C00;"></div>';
       }else{
         echo '<div class="couleur" style="background-color: #2b669a;"></div>';
