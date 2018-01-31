@@ -57,11 +57,62 @@ if(isset($_GET['vote'])){
   }
 
 }
-}
+} ?>
+
+<style>
+    .conteneur_alerte{
+        margin-top:20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .alerte{
+        color: #000 ;
+        font-size: 15px;
+        background-color: #e3e3e3;
+        border-color: #ccc;
+        border-radius:6px;
+        border-width: 1px;
+        border-style: solid;
+        margin: 5px;
+    }
+    .alerte:hover{
+      opacity:0.7;
+    }
+    .info_alerte{
+        margin: 10px;
+        width: 320px;
+        padding: 10px;
+        border-radius:6px;
+        background-color: #FFF;
+        border-color: #ccc;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    .couleur{
+        margin: 10px;
+        width: 320px;
+        height: 20px;
+        border-radius:3px;
+        border-color: #ccc;
+        border-width: 1px;
+        border-style: solid;
+    }
+    .date_et_titre{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+</style>
+
+
+<?php
 
 if(isset($_GET['idee'])){
   $idee=$_GET['idee'];
 ?>
+
 
 <h2>Idée n°<?php echo $idee ; ?> </h2>
 
@@ -69,7 +120,7 @@ if(isset($_GET['idee'])){
   <?php
 
 
-    $Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
+    $Query = $bdd->prepare('SELECT nom,prenom,type,vote,situation_actuelle,situation_proposee FROM profil LEFT JOIN idees_ameliorations
                             ON profil.id=idees_ameliorations.emmetteur
                             WHERE idees_ameliorations.id= ? ') ;
     $Query->execute(array($idee));
@@ -86,30 +137,28 @@ if(isset($_GET['idee'])){
       $sup=$Query2->fetch();
       $respo=$Query3->fetch();
       ?>
+    <a href="details.php?vote=<?php echo $idee;?>" class="btn btn-default"><div class="alerte" >
 
-      <table class="table" >
-      <tbody>
-      <tr>  <td style="width: 50%; ">Nom emmetteur</td> <td style="width: 50% "> <?php echo $emm['nom']; ?> </td></tr>
-      <tr>  <td style="width: 50% ;">Prénom emmetteur</td> <td style="width: 50% "><?php echo $emm['prenom']; ?></td></tr>
-      <tr>  <td style="width: 50% ;">Nom superviseur</td> <td style="width: 50%;"> <?php echo $sup['nom_sup']; ?> </td></tr>
-      <tr>  <td style="width: 50% ;">Prénom superviseur</td> <td style="width: 50%;"><?php echo $sup['prenom_sup']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Type</td><td style="width: 50%;"><?php echo $emm['type']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Transversalisation</td><td style="width: 50%;"><?php if($emm['transversalisation']){echo"oui";}else{echo "non";} ?></td></tr>
-      <tr>  <td style="width: 50%;">Retenue</td> <td style="width: 50%;"><?php if($emm['retenue']){echo"oui";}else{echo "non";}; ?></td></tr>
-      <tr>  <td style="width: 50%;">Respo réalisation</td><td style="width: 50%;"><?php echo $respo['prenom_respo']; echo "  "; echo $respo['nom_respo']  ?></td></tr>
-      <tr>  <td style="width: 50%;">Date réalisation</td> <td style="width: 50%;"><?php echo $emm['date_rea']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Score</td><td style="width: 50%;"><?php echo $emm['vote']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Situation actuelle </td> <td style="width: 50%;"><?php echo $emm['situation_actuelle']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Situation prposée</td><td style="width: 50%;"><?php echo $emm['situation_proposee']; ?></td></tr>
+          <div class="info_alerte">
+              <div class="date_et_titre">
+                  <h4 style="margin-top: 0px; font-size: 40px;">
+                    <?php echo $emm['type']; ?>
+                    </h4>
+              </div>
 
-
+              <p><b>Emmeteur : </b><?php echo $emm['nom']; echo "  "; echo $emm['prenom']; ?><br>
+                  <b>Mannager : </b><?php echo $sup['nom_sup']; echo "  "; echo $sup["prenom_sup"]; ?><br>
+                  <b>Nombre de vote : </b><?php echo $emm['vote'];?><br>
+                  <b>situation_actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
+                  <b>situation_proposee :</b><?php echo $emm['situation_proposee'];?><br><br><br>
+                  <b><?php echo "Cliquez pour voter";?></b><br></p>
 
 
+          </div>
 
-</tbody>
-  </table>
+      </div></a>
 
-<a href="details.php?vote=<?php echo $idee;?>" class="btn btn-default">Voter</a>
+
 
 <?php
 }else{
@@ -142,28 +191,26 @@ if(isset($_GET['idee2'])){
       $respo=$Query3->fetch();
       ?>
 
-      <table class="table" >
-      <tbody>
-      <tr>  <td style="width: 50%; ">Nom emmetteur</td> <td style="width: 50% "> <?php echo $emm['nom']; ?> </td></tr>
-      <tr>  <td style="width: 50% ;">Prénom emmetteur</td> <td style="width: 50% "><?php echo $emm['prenom']; ?></td></tr>
-      <tr>  <td style="width: 50% ;">Nom superviseur</td> <td style="width: 50%;"> <?php echo $sup['nom_sup']; ?> </td></tr>
-      <tr>  <td style="width: 50% ;">Prénom superviseur</td> <td style="width: 50%;"><?php echo $sup['prenom_sup']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Type</td><td style="width: 50%;"><?php echo $emm['type']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Transversalisation</td><td style="width: 50%;"><?php if($emm['transversalisation']){echo"oui";}else{echo "non";} ?></td></tr>
-      <tr>  <td style="width: 50%;">Retenue</td> <td style="width: 50%;"><?php if($emm['retenue']){echo"oui";}else{echo "non";}; ?></td></tr>
-      <tr>  <td style="width: 50%;">Respo réalisation</td><td style="width: 50%;"><?php echo $respo['prenom_respo']; echo "  "; echo $respo['nom_respo']  ?></td></tr>
-      <tr>  <td style="width: 50%;">Date réalisation</td> <td style="width: 50%;"><?php echo $emm['date_rea']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Score</td><td style="width: 50%;"><?php echo $emm['vote']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Situation actuelle </td> <td style="width: 50%;"><?php echo $emm['situation_actuelle']; ?></td></tr>
-      <tr>  <td style="width: 50%;">Situation prposée</td><td style="width: 50%;"><?php echo $emm['situation_proposee']; ?></td></tr>
+      <a href="details.php?vote=<?php echo (-$idee);?>" class="btn btn-default"><div class="alerte" >
+
+          <div class="info_alerte">
+              <div class="date_et_titre">
+                  <h4 style="margin-top: 0px; font-size: 40px;">
+                    <?php echo $emm['idees_ameliorations.type']; ?>
+                    </h4>
+              </div>
+
+              <p><b>Emmeteur : </b><?php echo $emm['nom']; echo "  "; echo "prenom"; ?><br>
+                  <b>Mannager : </b>><?php echo $sup['nom_sup']; echo "  "; echo "prenom_sup"; ?><br>
+                  <b>Nombre de vote : </b><?php echo $emm['vote'];?><br>
+                  <b>situation_actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
+                  <b>situation_proposee :</b><?php echo $emm['situation_proposee'];?><br><br><br>
+                  <b><?php echo "Cliquez pour retirer vote";?></b><br></p>
 
 
+          </div>
 
-
-
-</tbody>
-  </table>
-<a href="details.php?vote=<?php echo (-$idee);?>" class="btn btn-default">Retirer votre vote</a>
+      </div></a>
 
 
 <?php
