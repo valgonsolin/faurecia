@@ -146,9 +146,11 @@ else{
       while(preg_match('/^[(?:;), ]+$/',$entete)){
         $entete = fgets($fichier);
       }
-      $champs = explode(',',$entete);
+      $champs = explode(';',$entete);
+      $sep=1;
       if(sizeof($champs) < 2){
-        $champs = explode(';',$champs[0]);
+        $champs = explode(',',$champs[0]);
+        $sep =0;
       }
       $erreur=0;
       foreach($champs as $key => $value){
@@ -158,7 +160,13 @@ else{
         if(levenshtein(strtolower("designation article"),strtolower($value)) < 5 ){
           $description=$key;
         }
+        if(levenshtein(strtolower("designation"),strtolower($value)) < 5 ){
+          $description=$key;
+        }
         if(levenshtein(strtolower("emplacement"),strtolower($value)) < 5 ){
+          $emplacement=$key;
+        }
+        if(levenshtein(strtolower("emplacemt"),strtolower($value)) < 5 ){
           $emplacement=$key;
         }
       }
@@ -166,26 +174,22 @@ else{
         warning("Erreur","Problème de format de fichier.");
         drawForm();
       }else{
-        while($ligne=fgets($fichier)){
-          $tableau= explode(',',$ligne);
-          if(sizeof($tableau) < 2){
-            $tableau = explode(';',$tableau[0]);
-          }
-          if(preg_match('/^[(?:,), ]+$/',$ligne)){continue;}
-          $query= $bdd -> prepare('SELECT * FROM logistique_pieces WHERE reference= ?');
-          $query -> execute(array($tableau[$article]));
-          $value=$query->fetch();
-          if($value){
-            if($tableau[$description]==''){$descr=$value['description'];}else{$descr=$tableau[$description];}
-            if($tableau[$emplacement]==''){$adresse=$value['adresse'];}else{$adresse=$tableau[$emplacement];}
-            $update = $bdd -> prepare('UPDATE logistique_pieces SET description= ?,adresse= ? WHERE reference=?');
-            if( ! $update -> execute(array($descr,$adresse,$tableau[$article]))){
+        if($sep){
+          while($ligne=fgets($fichier)){
+            $tableau = explode(';',$ligne);
+            if(preg_match('/^[(?:,), ]+$/',$ligne)){continue;}
+            $update = $bdd -> prepare('INSERT INTO logistique_pieces(reference,description,adresse) VALUES (?,?,?) ON DUPLICATE KEY UPDATE description= ?,adresse= ? ');
+            if(! $update -> execute(array($tableau[$article],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement]))){
               $erreur += 1;
             }
-          }else{
-            $ajout = $bdd -> prepare('INSERT INTO logistique_pieces(reference,description,adresse) VALUES (?,?,?)');
-            if(! $ajout -> execute(array($tableau[$article],$tableau[$description],$tableau[$emplacement]))){
-              $erreur +=1;
+          }
+        }else{
+          while($ligne=fgets($fichier)){
+            $tableau = explode(',',$ligne);
+            if(preg_match('/^[(?:,), ]+$/',$ligne)){continue;}
+            $update = $bdd -> prepare('INSERT INTO logistique_pieces(reference,description,adresse) VALUES (?,?,?) ON DUPLICATE KEY UPDATE description= ?,adresse= ? ');
+            if(! $update -> execute(array($tableau[$article],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement]))){
+              $erreur += 1;
             }
           }
         }
@@ -220,9 +224,11 @@ else{
       while(preg_match('/^[(?:;), ]+$/',$entete)){
         $entete = fgets($fichier);
       }
-      $champs = explode(',',$entete);
+      $champs = explode(';',$entete);
+      $sep=1;
       if(sizeof($champs) < 2){
-        $champs = explode(';',$champs[0]);
+        $champs = explode(',',$champs[0]);
+        $sep =0;
       }
       $erreur=0;
       $erreur1=0;
@@ -237,23 +243,39 @@ else{
       if(! isset($article) || ! isset($sebango)){
         warning("Erreur","Problème de format de fichier.");drawForm();
       }else{
-        while($ligne=fgets($fichier)){
-          $tableau= explode(',',$ligne);
-          if(sizeof($tableau) < 2){
-            $tableau = explode(';',$tableau[0]);
-          }
-          if(preg_match('/^[(?:,), ]+$/',$ligne)){continue;}
-          $query= $bdd -> prepare('SELECT * FROM logistique_pieces WHERE reference= ?');
-          $query -> execute(array($tableau[$article]));
-          $value=$query->fetch();
-          if($value){
-            if($tableau[$sebango] == ''){$seb=$value['description'];}else{$seb=$tableau[$sebango];}
-            $update = $bdd -> prepare('UPDATE logistique_pieces SET sebango = ? WHERE reference=?');
-            if(! $update -> execute(array($seb,$tableau[$article]))){
-              $erreur +=1;
+        if($sep){
+          while($ligne=fgets($fichier)){
+            $tableau= explode(';',$ligne);
+            if(preg_match('/^[(?:,), ]+$/',$ligne)){continue;}
+            $query= $bdd -> prepare('SELECT * FROM logistique_pieces WHERE reference= ?');
+            $query -> execute(array($tableau[$article]));
+            $value=$query->fetch();
+            if($value){
+              if($tableau[$sebango] == ''){$seb=$value['description'];}else{$seb=$tableau[$sebango];}
+              $update = $bdd -> prepare('UPDATE logistique_pieces SET sebango = ? WHERE reference=?');
+              if(! $update -> execute(array($seb,$tableau[$article]))){
+                $erreur +=1;
+              }
+            }else{
+              $erreur1+=1;
             }
-          }else{
-            $erreur1+=1;
+          }
+        }else{
+          while($ligne=fgets($fichier)){
+            $tableau= explode(',',$ligne);
+            if(preg_match('/^[(?:,), ]+$/',$ligne)){continue;}
+            $query= $bdd -> prepare('SELECT * FROM logistique_pieces WHERE reference= ?');
+            $query -> execute(array($tableau[$article]));
+            $value=$query->fetch();
+            if($value){
+              if($tableau[$sebango] == ''){$seb=$value['description'];}else{$seb=$tableau[$sebango];}
+              $update = $bdd -> prepare('UPDATE logistique_pieces SET sebango = ? WHERE reference=?');
+              if(! $update -> execute(array($seb,$tableau[$article]))){
+                $erreur +=1;
+              }
+            }else{
+              $erreur1+=1;
+            }
           }
         }
 
@@ -289,9 +311,11 @@ else{
       while(preg_match('/^[(?:;), ]+$/',$entete)){
         $entete = fgets($fichier);
       }
-      $champs = explode(',',$entete);
+      $champs = explode(';',$entete);
+      $sep=1;
       if(sizeof($champs) < 2){
-        $champs = explode(';',$champs[0]);
+        $champs = explode(',',$champs[0]);
+        $sep =0;
       }
       $erreur=0;
       $erreur1=0;
@@ -318,39 +342,67 @@ else{
       if(! isset($article) || ! isset($kanban) || ! isset($lign) || ! isset($qte) ){
         warning("Erreur","Problème de format de fichier.");drawForm();
       }else{
-        while($ligne=fgets($fichier)){
-          $tableau= explode(',',$ligne);
-          if(sizeof($tableau) < 2){
-            $tableau = explode(';',$tableau[0]);
-          }
-          if(preg_match('/^[(?:,), ]+$/',$ligne)){continue;}
-          if(preg_match('/^[(?:;), ]+$/',$ligne)){continue;}
-          $query= $bdd -> prepare('SELECT * FROM logistique_pieces WHERE reference= ?');
-          $query -> execute(array($tableau[$article]));
-          $value=$query->fetch();
-          if($value){
-            $q = $bdd -> prepare('SELECT * FROM logistique_e_kanban WHERE piece = ?');
-            $q -> execute(array($value['id']));
-            if($Data = $q -> fetch()){
-              if($tableau[$kanban] == ''){$k=$Data['kanban'];}else{$k="S".substr($tableau[$kanban],4);}
-              if($tableau[$lign] == ''){$li=$Data['ligne'];}else{$li=$tableau[$lign];}
-              if($tableau[$qte] == ''){$quantite=$Data['quantite'];}else{$quantite=$tableau[$qte];}
-              $update = $bdd -> prepare('UPDATE logistique_e_kanban SET code_barres = ?, quantite = ?, ligne = ? WHERE piece =?');
-              if(! $update -> execute(array($k,$quantite,$li,$value['id']))){
-                $erreur +=1;
+        if($sep){
+          while($ligne=fgets($fichier)){
+            $tableau= explode(';',$ligne);
+            if(preg_match('/^[(?:,), ]+$/',$ligne)){continue;}
+            if(preg_match('/^[(?:;), ]+$/',$ligne)){continue;}
+            $query= $bdd -> prepare('SELECT * FROM logistique_pieces WHERE reference= ?');
+            $query -> execute(array($tableau[$article]));
+            $value=$query->fetch();
+            if($value){
+              $q = $bdd -> prepare('SELECT * FROM logistique_e_kanban WHERE piece = ?');
+              $q -> execute(array($value['id']));
+              if($Data = $q -> fetch()){
+                if($tableau[$kanban] == ''){$k=$Data['kanban'];}else{$k="S".substr($tableau[$kanban],4);}
+                if($tableau[$lign] == ''){$li=$Data['ligne'];}else{$li=$tableau[$lign];}
+                if($tableau[$qte] == ''){$quantite=$Data['quantite'];}else{$quantite=$tableau[$qte];}
+                $update = $bdd -> prepare('UPDATE logistique_e_kanban SET code_barres = ?, quantite = ?, ligne = ? WHERE piece =?');
+                if(! $update -> execute(array($k,$quantite,$li,$value['id']))){
+                  $erreur +=1;
+                }
+              }else{
+                $k=$tableau[$kanban];
+                $add = $bdd -> prepare('INSERT INTO logistique_e_kanban(code_barres, quantite,ligne, piece) VALUES (?,?,?,?)');
+                if(! $add -> execute(array($k,$tableau[$qte],$tableau[$lign],$value['id']))){
+                  $erreur +=1;
+                }
               }
             }else{
-              $k=$tableau[$kanban];
-              $add = $bdd -> prepare('INSERT INTO logistique_e_kanban(code_barres, quantite,ligne, piece) VALUES (?,?,?,?)');
-              if(! $add -> execute(array($k,$tableau[$qte],$tableau[$lign],$value['id']))){
-                $erreur +=1;
-              }
+              $erreur1+=1;
             }
-          }else{
-            $erreur1+=1;
+          }
+        }else{
+          while($ligne=fgets($fichier)){
+            $tableau= explode(',',$ligne);
+            if(preg_match('/^[(?:,), ]+$/',$ligne)){continue;}
+            if(preg_match('/^[(?:;), ]+$/',$ligne)){continue;}
+            $query= $bdd -> prepare('SELECT * FROM logistique_pieces WHERE reference= ?');
+            $query -> execute(array($tableau[$article]));
+            $value=$query->fetch();
+            if($value){
+              $q = $bdd -> prepare('SELECT * FROM logistique_e_kanban WHERE piece = ?');
+              $q -> execute(array($value['id']));
+              if($Data = $q -> fetch()){
+                if($tableau[$kanban] == ''){$k=$Data['kanban'];}else{$k="S".substr($tableau[$kanban],4);}
+                if($tableau[$lign] == ''){$li=$Data['ligne'];}else{$li=$tableau[$lign];}
+                if($tableau[$qte] == ''){$quantite=$Data['quantite'];}else{$quantite=$tableau[$qte];}
+                $update = $bdd -> prepare('UPDATE logistique_e_kanban SET code_barres = ?, quantite = ?, ligne = ? WHERE piece =?');
+                if(! $update -> execute(array($k,$quantite,$li,$value['id']))){
+                  $erreur +=1;
+                }
+              }else{
+                $k=$tableau[$kanban];
+                $add = $bdd -> prepare('INSERT INTO logistique_e_kanban(code_barres, quantite,ligne, piece) VALUES (?,?,?,?)');
+                if(! $add -> execute(array($k,$tableau[$qte],$tableau[$lign],$value['id']))){
+                  $erreur +=1;
+                }
+              }
+            }else{
+              $erreur1+=1;
+            }
           }
         }
-
         fclose($fichier);
         if($erreur == 0 && $erreur1 == 0){
           success('Modification effectuée','Les e-Kanban ont bien été mis à jour.');

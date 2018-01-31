@@ -17,7 +17,7 @@ if(!isset($_GET['id'])){ ?>
   <a href="projet.php?id=<?php echo $_GET['id']; ?>" class="bouton_menu" style="margin-right:20%">Projet</a>
   <a href="statistiques.php?id=<?php echo $_GET['id']; ?>" class="bouton_menu bouton_nav_selected" >Statistiques</a>
 </div>
-
+<a href="generate.php" class="btn btn-default">Fichier</a>
 
 <?php
 }
