@@ -27,6 +27,7 @@
           $_SESSION['idees'] = $Data['idees'];
           $_SESSION['launchboard'] = $Data['launchboard'];
           $_SESSION['manager'] = $Data['manager'];
+          $_SESSION['news'] = $Data['news'];
           ob_end_clean();
 
           if(isset($_GET['redirection'])){

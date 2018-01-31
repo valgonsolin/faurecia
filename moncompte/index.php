@@ -64,8 +64,9 @@ if(empty($_SESSION['login'])){
   R&amp;R : <?php echo(img($_SESSION['rr'])); ?>&emsp;
   HSE : <?php echo(img($_SESSION['hse'])); ?>&emsp;
   Kamishibai : <?php echo(img($_SESSION['kamishibai'])); ?>&emsp;
-  Idées améliorations : <?php echo(img($_SESSION['idees'])); ?>&emsp;
+  Idéess : <?php echo(img($_SESSION['idees'])); ?>&emsp;
   Logistique : <?php echo(img($_SESSION['logistique'])); ?>&emsp;
+  News : <?php echo(img($_SESSION['news'])); ?>&emsp;
   Launchboard: <?php echo(img($_SESSION['launchboard'])); ?></b>
 </p>
 <div class="btn btn-default" data-toggle="modal" data-target="#modal">Modifier le mot de passe</div>

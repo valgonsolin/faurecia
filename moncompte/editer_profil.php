@@ -38,6 +38,7 @@ if(isset($_GET['id'])){
     $launchboard=$Data['launchboard'];
     $manager=$Data['manager'];
     $mail = $Data['mail'];
+    $news = $Data['news'];
 }else{
 ?>
     <h2>Ajouter un profil</h2>
@@ -59,6 +60,7 @@ if(isset($_GET['id'])){
     $launchboard=0;
     $manager=-1;
     $mail="";
+    $news=0;
 }
 ?>
     <form class="form-horizontal" method="post" action="administration.php">
@@ -144,6 +146,7 @@ if(isset($_GET['id'])){
             <input type="hidden" name="idees" value="0">
             <input type="hidden" name="logistique" value="0">
             <input type="hidden" name="launchboard" value="0">
+            <input type="hidden" name="news" value="0">
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="admin" <?php if($admin){echo "checked";} ?>>Admin</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="qualite" <?php if($qualite){echo "checked";} ?>>Dojo Qualite</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="rr" <?php if($rr){echo "checked";} ?>>R&amp;R</label>
@@ -152,6 +155,7 @@ if(isset($_GET['id'])){
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="idees" <?php if($idees){echo "checked";} ?>>Idées améliorations</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="logistique" <?php if($logistique){echo "checked";} ?>>Logistique</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="launchboard" <?php if($launchboard){echo "checked";} ?>>Launchboard</label>
+            <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="news" <?php if($news){echo "checked";} ?>>News</label>
           </div>
         </div>
         <?php if(!isset($_GET['id'])){ ?>
