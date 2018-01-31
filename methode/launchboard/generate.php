@@ -12,7 +12,7 @@ $spreadsheet->setActiveSheetIndex(0)
  ->setCellValue('AI7', '15%');
 $spreadsheet->setActiveSheetIndex(0)
  ->setCellValue('B30', '1')
- ->setCellValue('S30', '18/09/1997')
+ ->setCellValue('S30', '18/09/1897')
  ->setCellValue('C30', 'titre');
 
 $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
