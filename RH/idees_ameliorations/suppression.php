@@ -23,13 +23,14 @@ else
 
   if(isset($_POST['supprimer'])){
 
-    $query = $bdd -> prepare('DELETE * FROM idees_ameliorations WHERE id=?');
+    $query = $bdd -> prepare('DELETE FROM idees_ameliorations WHERE id=?');
     $query -> execute(array($_POST['id']));
+
     success('Supprimé','La question a bien été supprimée.');
 
 }elseif(isset($_POST['modifier'])){
 
-  $query = $bdd -> prepare("UPDATE idees_ameliorations SET type=:type ,transversalisation = :transversalisation,retenue= :retenue,respo_rea,=:respo_rea, situation_actuelle= :situation_actuelle, situation_proposee= :situation_proposee WHERE id = :id ");
+  $query = $bdd -> prepare("UPDATE idees_ameliorations SET type=:type ,transversalisation = :transversalisation,retenue= :retenue,respo_rea=:respo_rea, situation_actuelle= :situation_actuelle, situation_proposee= :situation_proposee WHERE id = :id ");
   $query->bindValue('type', $_POST['type'],PDO::PARAM_STR);
   $query->bindValue('transversalisation', $_POST['transversalisation'],PDO::PARAM_INT);
  $query->bindValue('retenue', $_POST['retenue'],PDO::PARAM_INT);
@@ -38,15 +39,6 @@ else
  $query->bindValue('situation_proposee', $_POST['situation_proposee'],PDO::PARAM_STR);
  $query->bindValue('id', $_POST['id'],PDO::PARAM_INT);
  $query->execute();
-  // $query -> execute(array(
-  //     'type' => $_POST['type'],
-  //     'transversalisation' => $_POST['transversalisation'],
-  //     'retenue' =>$_POST['retenue'],
-  //     'respo_rea' => $_POST['respo_rea'],
-  //     'situation_actuelle' => $situationA,
-  //     'situation_proposee' => $situationP,
-  //     'id'=> $_POST['id']
-  print_r($query->errorInfo());
 
   if($query ==false){
     warning('Erreur','Les données entrées ne sont pas conformes.');
@@ -57,6 +49,55 @@ else
 
 
   ?>
+
+  <style>
+      .conteneur_alerte{
+          margin-top:20px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+      }
+      .alerte{
+          color: #000 ;
+          font-size: 15px;
+          background-color: #e3e3e3;
+          border-color: #ccc;
+          border-radius:6px;
+          border-width: 1px;
+          border-style: solid;
+          margin: 5px;
+      }
+      .alerte:hover{
+        opacity:0.7;
+      }
+      .info_alerte{
+          margin: 10px;
+          width: 320px;
+          padding: 10px;
+          border-radius:6px;
+          background-color: #FFF;
+          border-color: #ccc;
+          border-width: 1px;
+          border-style: solid;
+      }
+
+      .couleur{
+          margin: 10px;
+          width: 320px;
+          height: 20px;
+          border-radius:3px;
+          border-color: #ccc;
+          border-width: 1px;
+          border-style: solid;
+      }
+      .date_et_titre{
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+      }
+  </style>
+
+
   <h2>Idées</h2>
   <div class="boutons_nav" style="display: flex; justify-content: center;">
     <a href="ajout.php" class="bouton_menu" style="margin-right:20%">Ajout</a>
@@ -64,17 +105,7 @@ else
   </div>
 
 
-  <table class="table">
-  <thead class="thead">
-  <tr>
-      <th>Emmeteur</th>
-      <th>Date réalisation</th>
-      <th>Situation actuelle</th>
-      <th>Score</th>
-      <th></th>
-  </tr>
-  </thead>
-  <tbody>
+
 
 <?php
 
@@ -82,12 +113,12 @@ if(isset($_GET['nb'])){
 $nb=$_GET['nb'];
 }
   if($droit==1){
-  $qyy= $bdd->prepare('SELECT  date_rea,situation_actuelle,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  ORDER BY idees_ameliorations.date_rea DESC LIMIT 20 OFFSET :off ');
+  $qyy= $bdd->prepare('SELECT  situation_proposee,type,nom,date_rea,situation_actuelle,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  ORDER BY idees_ameliorations.date_rea DESC LIMIT 20 OFFSET :off ');
   $qyy->bindValue('off', $nb, PDO::PARAM_INT);
   $qyy->execute();
 
 }else{
-  $qyy= $bdd->prepare('SELECT  idees_ameliorations.id AS id1, date_rea,situation_actuelle,vote FROM idees_ameliorations  LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  WHERE (profil.id= :a OR profil.manager= :b)  ORDER BY vote LIMIT 20 OFFSET : off');
+  $qyy= $bdd->prepare('SELECT  idees_ameliorations.id AS id1, date_rea,situation_actuelle,vote,nom,type,situation_proposee FROM idees_ameliorations  LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  WHERE (profil.id= :a OR profil.manager= :b)  ORDER BY vote LIMIT 20 OFFSET : off');
   $qyy->bindValue('a', $nb, PDO::PARAM_INT);
   $qyy->bindValue('b', $nb, PDO::PARAM_INT);
   $qyy->bindValue('off', $nb, PDO::PARAM_INT);
@@ -97,19 +128,33 @@ $nb=$_GET['nb'];
   while($Data=$qyy->fetch()){
 
   ?>
-    <tr>
-      <td><?php echo $Data['id1']; ?></td>
-      <td><?php echo $Data['date_rea']; ?></td>
-      <td><?php echo $Data['situation_actuelle']?></td>
-      <td><?php echo $Data['vote'];?></td>
-      <td><a href="supprimer_question.php?id=<?php echo $Data['id1']?>" class="btn btn-default">Modifier</a></td>
-    </tr>
+<div class="conteneur_alerte">
+  <a href="supprimer_question.php?id=<?php echo $Data['id1']?>" class="btn btn-default">
+  <div class="alerte" >
+
+      <div class="info_alerte">
+          <div class="date_et_titre">
+              <h4 style="margin-top: 0px; font-size: 40px;">
+                <?php echo $Data['nom']; ?>
+                </h4>
+          </div>
+
+          <p><b>Type : </b><?php echo $Data['type'];?><br>
+              <b>Date création: </b><?php echo date('d/m/y ',strtotime($Data['date_rea']));?><br>
+              <b>Nombre de vote : </b><?php echo $Data['vote'];?><br>
+              <b>situation_actuelle :</b><?php echo $Data['situation_actuelle'];?><br>
+              <b>situation_proposee :</b><?php echo $Data['situation_proposee'];?><br></p>
+
+
+      </div>
+
+  </div></a>
+</div>
+
   <?php
 }
  ?>
-</tbody>
 
-</table>
 <?php
 
 if($droit==1){
