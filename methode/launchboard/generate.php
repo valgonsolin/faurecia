@@ -7,12 +7,22 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Cell;
 $input = 'base.xlsx';
-$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($input);
+
+$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
+$spreadsheet = $reader->load($input);
+// $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($input);
+
 
 $sheet = $spreadsheet->getActiveSheet();
-/* $xls_data contains this array:
-[1=>['A'=>'Domain', 'B'=>'Category', 'C'=>'Nr. Pages'], 2=>['A'=>'CoursesWeb.net', 'B'=>'Web Development', 'C'=>4000], 3=>['A'=>'MarPlo.net', 'B'=>'Courses & Games', 'C'=>15000]]
-*/
+$final = new Spreadsheet();
+$finaleSheet = $final -> getActiveSheet();
+
+function cellColor($sheet, $cells,$color){
+    $sheet->getStyle($cells)->getFill()
+    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+    ->getStartColor()->setARGB($color);
+}
+
 function copyRange( Worksheet $sheet, $srcRange, $dstCell) {
     // Validate source range. Examples: A2:A3, A2:AB2, A27:B100
     if( !preg_match('/^([A-Z]+)(\d+):([A-Z]+)(\d+)$/', $srcRange, $srcRangeMatch) ) {
@@ -91,35 +101,96 @@ function copyRange( Worksheet $sheet, $srcRange, $dstCell) {
     }
 }
 
-// $file->setActiveSheetIndex(0)
-//  ->setCellValue('A1', 'Domain')
-//  ->setCellValue('B1', 'Category')
-//  ->setCellValue('C1', 'Nr. Pages');
-copyrange($sheet,'B114:AO120','B22');
+function complete(Worksheet $sheet, $array, $row,$i){
+  $sheet ->setCellValue('B'.$row,$i)
+  ->setCellValue('C'.$row,$array['code']." - ".$array['titre']);
+  $cat = array('2tct','2capacity','2equip','2pfmea','2mvp','2layout','2master','2pack','3equip','3pack','3supplier','3checklist1','3pt','3checklist2','3mpt','3samples','4checklist','4empt');
+  $lettre = array('S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','BA','BB','BC','BD');
+  foreach ($cat as $index => $category){
+    if(! is_null($array[$category."_f"])){
+      $sheet -> setCellValue($lettre[2*$index].strval($row),date('j/m/y', strtotime($array[$category."_f"])));
+    }
+    if(! is_null($array[$category."_r"])){
+      $sheet -> setCellValue($lettre[2*$index+1].strval($row),date('j/m/y', strtotime($array[$category."_r"])));
+      if(strtotime($array[$category."_r"]) > strtotime($array[$category."_f"])){
+        cellColor($sheet,$lettre[2*$index+1].strval($row),'FF0000');
+      }else{
+        cellColor($sheet,$lettre[2*$index+1].strval($row),'00B050');
+      }
+    }
+  }
+}
+//PSA
+$psa = $bdd -> query('SELECT * FROM launchboard WHERE client = "PSA"');
+$projets = $psa -> fetchAll();
+$count = sizeof($projets);
+$i=1;
+$row=30;
+foreach ($projets as $key => $value) {
+  if($i == 1){
+    complete($sheet,$value,$row,1);
+  }elseif($i == $count){
+    complete($sheet,$value,$row+2*($i-1),$i);
+  }elseif($i == $count -1){
+    complete($sheet,$value,$row+2*($i-1),$i);
+  }else{
+    $sheet->insertNewRowBefore($row+$i*2,2);
+    copyrange($sheet,'A'.strval($row+($i-1)*2).':BD'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
+    complete($sheet,$value,$row+($i-1)*2,$i);
+  }
+  $i+=1;
+}
+
+//JLR
+$jlr = $bdd -> query('SELECT * FROM launchboard WHERE client = "JLR"');
+$projets = $jlr -> fetchAll();
+$count = sizeof($projets);
+$row=40 + ($i-4)*2;
+$i=1;
+foreach ($projets as $key => $value) {
+  if($i == 1){
+    complete($sheet,$value,$row,1);
+  }elseif($i == $count){
+    complete($sheet,$value,$row+2*($i-1),$i);
+  }elseif($i == $count -1){
+    complete($sheet,$value,$row+2*($i-1),$i);
+  }else{
+    $sheet->insertNewRowBefore($row+$i*2,2);
+    copyrange($sheet,'A'.strval($row+($i-1)*2).':BD'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
+    complete($sheet,$value,$row+($i-1)*2,$i);
+  }
+  $i+=1;
+}
+
+//Toyota
+$toy = $bdd -> query('SELECT * FROM launchboard WHERE client = "TOY/RENAULT"');
+$projets = $toy -> fetchAll();
+$count = sizeof($projets);
+$row=50 + ($i-4)*2 + ($row-40);
+$i=1;
+foreach ($projets as $key => $value) {
+  if($i == 1){
+    complete($sheet,$value,$row,1);
+  }elseif($i == $count){
+    complete($sheet,$value,$row+2*($i-1),$i);
+  }elseif($i == $count -1){
+    complete($sheet,$value,$row+2*($i-1),$i);
+  }else{
+    $sheet->insertNewRowBefore($row+$i*2,2);
+    copyrange($sheet,'A'.strval($row+($i-1)*2).':BD'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
+    complete($sheet,$value,$row+($i-1)*2,$i);
+  }
+  $i+=1;
+}
 
 $writer = new Xlsx($spreadsheet);
 $output ='temp.xlsx';
-$writer->save($output);
 
 header('Content-Description: File Transfer');
 header('Content-Type: application/ms-excel');
 header("Content-Disposition: attachment; filename=launchroom.xlsx");
 ob_clean();
 flush();
-readfile('temp.xlsx');
+$writer->save('php://output');
+// readfile('temp.xlsx');
 exit;
-
-
-//set style for A1,B1,C1 cells
-// $cell_st =[
-//  'font' =>['bold' => true],
-//  'alignment' =>['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
-//  'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
-// ];
-// $spreadsheet->getActiveSheet()->getStyle('A1:C1')->applyFromArray($cell_st);
-//
-// //set columns width
-// $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(16);
-// $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(18);
-//
-// $spreadsheet->getActiveSheet()->setTitle('Simple'); //set a title for Worksheet

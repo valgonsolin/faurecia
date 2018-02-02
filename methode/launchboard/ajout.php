@@ -21,7 +21,7 @@ if(empty($_SESSION['login'])){ ?>
       <div class="row">
         <div class="form-group col-md-12">
           <label>PPTL :</label>
-            <select class="form-control" name="profil">
+            <select class="form-control" name="profil" id="pptl">
               <?php
               $profil = $bdd -> query('SELECT * FROM profil');
               while($personne = $profil -> fetch()){ ?>
@@ -71,7 +71,7 @@ if(empty($_SESSION['login'])){ ?>
       <div class="row">
         <div class="form-group col-md-12">
           <label>Equipe :</label>
-          <select class="form-control" name="equipe[]" multiple>
+          <select class="form-control" name="equipe[]" multiple id="team">
             <?php
             $profil = $bdd -> query('SELECT * FROM profil');
             while($personne = $profil -> fetch()){ ?>
@@ -106,6 +106,15 @@ if(empty($_SESSION['login'])){ ?>
       <input type="submit" class="btn btn-default" name="ajout" value="Ajouter">
       <a href="index.php" class="btn btn-default pull-right">Retour</a>
     </form>
+    <script>
+    var team = document.getElementById("team");
+    var pptl = document.getElementById("pptl");
+    function update(){
+      team.value = pptl.value;
+    }
+    window.onload = update;
+    pptl.addEventListener("change", update);
+    </script>
 <?php
   }
 }
