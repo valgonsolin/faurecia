@@ -14,51 +14,40 @@ if(! empty($_FILES)){
   }else{
     $add = $bdd -> prepare('INSERT INTO news (id_pdf,nom,date) VALUES (?,?,NOW())');
     if($add -> execute(array($pdf,$_POST['nom']))){
-      success('Ajouté','Le news a bien été ajouté.');
+      success('Ajoutée','La news a bien été ajoutée.');
     }else{
       warning('Erreur','Il y a eu une erreur. Veuillez recommencer.');
     }
+  }
+}
+if(isset($_POST['delete'])){
+  $remove = $bdd -> prepare('DELETE FROM news WHERE id= ?');
+  if($remove -> execute(array($_POST['id']))){
+    success("Supprimée","La news a bien été supprimée.");
+  }else{
+    warning('Erreur','Il y a eu une erreur. Veuillez recommencer.');
   }
 }
 
 if (isset($_GET["recherche"])){
     $recherche = $_GET["recherche"];
 }
-$all = 0;
+$nb = "10";
 if (isset($_GET["all"])){
-    $all =1;
+    $nb = "10000";
 }
-if ($all){
-  $query = $bdd -> prepare('SELECT * FROM news WHERE nom LIKE :nom ORDER BY date DESC');
-}else{
-  $query = $bdd -> prepare('SELECT * FROM news WHERE nom LIKE :nom ORDER BY date DESC LIMIT 10');
-}
-$query ->bindValue(':nom','%'.$recherche.'%');
-$query -> execute();
-echo "<div class='row'>";
-while($Data = $query -> fetch()){
-  $file = $bdd -> prepare('SELECT * FROM files WHERE id = ?');
-  $file -> execute(array($Data['id_pdf']));
-  $pdf = $file -> fetch();
-  ?>
-  <div class="col-md-6">
-    <object data="<?php echo $pdf['chemin']; ?>" type="application/pdf" width="100%" height="100%">
-      <iframe src="<?php echo $pdf['chemin']; ?>" style="border: none;" width="100%" height="100%">
-        <p>Ce navigateur ne supporte pas les PDFs. <a href="<?php echo $pdf['chemin']; ?>">Télécharger le pdf</a></p></iframe>
-  </object>
-  </div>
-  <?php
-}
+latestNews($nb,$recherche);
 ?>
-</div>
 <form class="form-inline">
   <div class="form-group">
     <label for="recherche">Recherche :</label>
     <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="News" value="<?php echo $recherche;?>">
-    <label style="margin-left: 30px; margin-right:20px;"><input type="checkbox" name="all" <?php if($all){echo "checked";} ?>>Voir tout</label>
+    <label style="margin-left: 30px; margin-right:20px;"><input type="checkbox" name="all" <?php if($nb == "10000"){echo "checked";} ?>>Voir tout</label>
   </div>
   <button type="submit" class="btn btn-default">Rechercher</button>
-    <div class="btn btn-default pull-right" data-toggle="modal" data-target="#ajout">Ajouter un news</div>
+  <?php if(isset($_SESSION['login']) && $_SESSION['news']){ ?>
+    <div class="btn btn-default pull-right" data-toggle="modal" data-target="#ajout">Ajouter une news</div>
+  <?php } ?>
 </form>
 <div id="ajout" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -70,16 +59,20 @@ while($Data = $query -> fetch()){
       <div class="modal-body">
         <form method="post" class="form-group" enctype="multipart/form-data">
           <label>Nom :</label>
-          <input type="text" class="form-control" name="nom">
-          <div class="col-md-6">
-            <label> PDF : </label>
-            <input type="file" name="pdf">
+          <div class="row">
+            <div class="col-md-12">
+              <input type="text" class="form-control" name="nom">
+            </div>
           </div>
           <div class="row">
-          <div class="col-md-6">
-            <input type="submit" class="btn btn-default" value="Ajouter" name="add">
+            <div class="col-md-6">
+              <label> PDF : </label>
+              <input type="file" name="pdf">
+            </div>
+            <div class="col-md-6">
+              <input type="submit" class="btn btn-default" style="display:block; margin:auto;margin-top:15px;" value="Ajouter" name="add">
+            </div>
           </div>
-        </div>
         </form>
       </div>
     </div>
