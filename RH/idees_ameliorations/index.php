@@ -1,3 +1,4 @@
+
 <?php
 include_once "needed.php";
 include_once "../../needed.php";
@@ -30,6 +31,7 @@ if(isset($_GET['nb'])){
 
 if(empty($_SESSION['login']))
 { ?>
+
   <h2>Idées</h2>
   <h4>Vous devez être connecté pour accéder à cette partie.</h4>
   <a href="/moncompte/identification.php?redirection=RH/idees_ameliorations"><button class="btn btn-default">Se connecter</button></a>
@@ -39,6 +41,53 @@ if(empty($_SESSION['login']))
 else
 {
 ?>
+
+<style>
+    .conteneur_alerte{
+        margin-top:20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .alerte{
+        color: #000 ;
+        font-size: 15px;
+        background-color: #e3e3e3;
+        border-color: #ccc;
+        border-radius:6px;
+        border-width: 1px;
+        border-style: solid;
+        margin: 5px;
+    }
+    .alerte:hover{
+      opacity:0.7;
+    }
+    .info_alerte{
+        margin: 10px;
+        width: 320px;
+        padding: 10px;
+        border-radius:6px;
+        background-color: #FFF;
+        border-color: #ccc;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    .couleur{
+        margin: 10px;
+        width: 320px;
+        height: 20px;
+        border-radius:3px;
+        border-color: #ccc;
+        border-width: 1px;
+        border-style: solid;
+    }
+    .date_et_titre{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+</style>
 
 <h2>Idées du mois</h2>
 
@@ -58,58 +107,75 @@ else
 </form>
 
 
-<table class="table">
-<thead class="thead">
-<tr>
-    <th>Nom</th>
-    <th>Prénom</th>
-    <th style="width: 70px;">Type</th>
-    <th style="width: 30px;">Date</th>
-    <th style="width: 30px;">Score</th>
-    <th style="width: 30px;"> Votre vote</th>
-    <th style="width: 30px;">Details/Vote</th>
 
-</tr>
-</thead>
-<tbody>
 
+
+<div class="conteneur_alerte">
 <?php
 
 if($recherche>0){
-$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= ? and supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote DESC LIMIT 40  ') ;
+$Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= ? and supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote DESC LIMIT 40  ') ;
 $Query->execute(array($recherche,$debut,$mois));}
-else{$Query = $bdd->prepare('SELECT nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote DESC LIMIT 40  ') ;
+else{$Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote DESC LIMIT 40  ') ;
 $Query->execute(array($debut,$mois));}
 
+
 while ($Data = $Query->fetch()) {
+
   $c=0;
   $Qy = $bdd->prepare('SELECT * FROM votes_idees WHERE personne= ? AND idee= ?');
   $Qy->execute(array($_SESSION['id'],  $Data['id1']));
   if($Qy->fetch()){$c=1;}
-    ?>
+  if($c){ ?>
 
-    <tr>
-        <td> <?php echo $Data['nom']; ?> </td>
-        <td><?php echo $Data['prenom']; ?></td>
-        <td><?php echo $Data['type']; ?></td>
-        <td><?php echo $Data['date_rea']; ?></td>
-        <td><?php echo $Data['vote']; ?></td>
-        <td><?php
+    <a href="details.php?idee2= <?php echo $Data['id1'] ; ?>" ><div class="alerte" >
 
-        if($c){echo "<span style='font-size: 200%;'>&check;</span>";}else{echo "<span style='font-size: 150%;'>&#10008;</span>";} ?>
-      </td>
-      <?php if($c){ ?>
-        <td class="clickable" title="Vote/voir le detail " onclick="window.location='details.php?idee2= <?php echo $Data['id1'] ; ?>'" >Retirer vote</td>
-      <?php }else{ ?> <td class="clickable" title="Vote/voir le detail " onclick="window.location='details.php?idee= <?php echo $Data['id1'] ; ?>'" >Voter</td> <?php } ?>
+        <div class="info_alerte">
+            <div class="date_et_titre">
+                <h4 style="margin-top: 0px; font-size: 40px;">
+                  <?php echo $Data['nom']; ?>
+                  </h4>
+            </div>
 
-    </tr>
+            <p><b>Type : </b><?php echo $Data['type'];?><br>
+                <b>Date création: </b><?php echo date('d/m/y ',strtotime($Data['date_rea']));?><br>
+                <b>Nombre de vote : </b><?php echo $Data['vote'];?><br>
+                <b>situation_actuelle :</b><?php echo $Data['situation_actuelle'];?><br>
+                <b>situation_proposee :</b><?php echo $Data['situation_proposee'];?><br><br><br>
+                <b><?php echo "Cliquez pour retirer vote";?></b><br></p>
 
 
-    <?php
-}
+        </div>
+
+    </div></a>
+<?php
+}else{ ?>
+  <a href="details.php?idee= <?php echo $Data['id1'] ; ?>" ><div class="alerte" >
+
+      <div class="info_alerte">
+          <div class="date_et_titre">
+              <h4 style="margin-top: 0px; font-size: 40px;">
+                <?php echo $Data['nom']; ?>
+                </h4>
+          </div>
+
+          <p><b>Type : </b><?php echo $Data['type'];?><br>
+              <b>Date : </b><?php echo date('d/m/y ',strtotime($Data['date_rea']));?><br>
+              <b>Nombre de vote : </b><?php echo $Data['vote'];?><br>
+              <b>situation_actuelle : </b><?php echo $Data['situation_actuelle'];?><br>
+              <b>situation_proposee :</b><?php echo $Data['situation_proposee'];?><br><br><br>
+              <b><?php echo "Cliquez pour voter";?></b><br></p>
+
+        </div>
+
+
+  </div></a>
+
+<?php } }
+
+
 ?>
-</tbody>
-</table>
+</div>
 
 <?php
 if($debut > 39){
@@ -119,8 +185,8 @@ if($debut > 39){
 }
 $test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
     ON idees_ameliorations.emmetteur = profil.id
-    WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ? LIMIT 40 ');
-$test->execute(array('%'.$recherche.'%', '%'.$recherche.'%', ($debut+40), $mois));
+    WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and idees_ameliorations.id >= ? and ((MONTH(idees_ameliorations.date_rea)= ?)&&(YEAR(idees_ameliorations.date_rea)=?)) LIMIT 40 ');
+$test->execute(array('%'.$recherche.'%', '%'.$recherche.'%', ($debut+40), $mois, $annee));
 if($test -> fetch()){ ?>
   <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+40;?>" class="btn btn-default">Elements suivants</a>
 <?php
