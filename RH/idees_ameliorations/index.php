@@ -114,10 +114,21 @@ else
 <?php
 
 if($recherche>0){
-$Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= ? and supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote DESC LIMIT 40  ') ;
-$Query->execute(array($recherche,$debut,$mois));}
-else{$Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and idees_ameliorations.id >= ? and MONTH(idees_ameliorations.date_rea)= ?  ORDER BY vote DESC LIMIT 40  ') ;
-$Query->execute(array($debut,$mois));}
+$Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0 and (MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y) ORDER BY vote DESC LIMIT 5  OFFSET :nb') ;
+
+$Query->bindValue(':i',(int) $recherche,PDO::PARAM_INT);
+$Query->bindValue(':m', $mois, PDO::PARAM_INT);
+$Query->bindValue(':y', $annee,PDO::PARAM_INT);
+$Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
+$Query->execute();}
+
+
+else{$Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and(MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y)  ORDER BY vote DESC LIMIT 5 OFFSET :nb ') ;
+
+  $Query->bindValue(':m', $mois, PDO::PARAM_INT);
+  $Query->bindValue(':y', $annee,PDO::PARAM_INT);
+  $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
+  $Query->execute();}
 
 
 while ($Data = $Query->fetch()) {
@@ -178,17 +189,29 @@ while ($Data = $Query->fetch()) {
 </div>
 
 <?php
-if($debut > 39){
+if($debut > 4){
   ?>
-  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-40;?>" class="btn btn-default">Elements précédents</a>
+  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-5;?>" class="btn btn-default">Elements précédents</a>
 <?php
 }
-$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
+
+if($recherche>0){$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
     ON idees_ameliorations.emmetteur = profil.id
-    WHERE (nom LIKE ? or prenom LIKE ?) and supprime = 0 and idees_ameliorations.id >= ? and ((MONTH(idees_ameliorations.date_rea)= ?)&&(YEAR(idees_ameliorations.date_rea)=?)) LIMIT 40 ');
-$test->execute(array('%'.$recherche.'%', '%'.$recherche.'%', ($debut+40), $mois, $annee));
+    WHERE profil.id= :i and supprime = 0  and ((MONTH(idees_ameliorations.date_rea)= :m) and (YEAR(idees_ameliorations.date_rea)= :y)) LIMIT 5 OFFSET :nb');
+$test->bindValue(':i',$recherche, PDO::PARAM_INT);
+$test->bindValue(':m', $mois, PDO::PARAM_INT);
+$test->bindValue(':y', $annee,PDO::PARAM_INT);
+$test ->bindValue(':nb',(int) $debut+5, PDO::PARAM_INT);
+$test->execute(); }else{$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
+    ON idees_ameliorations.emmetteur = profil.id
+    WHERE  supprime = 0  and ((MONTH(idees_ameliorations.date_rea)= :m) and (YEAR(idees_ameliorations.date_rea)= :y)) LIMIT 5 OFFSET :nb');
+$test->bindValue(':m', $mois, PDO::PARAM_INT);
+$test->bindValue(':y', $annee,PDO::PARAM_INT);
+$test ->bindValue(':nb',(int) $debut+5, PDO::PARAM_INT);
+$test->execute();  }
+
 if($test -> fetch()){ ?>
-  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+40;?>" class="btn btn-default">Elements suivants</a>
+  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+5;?>" class="btn btn-default">Elements suivants</a>
 <?php
 }
 }
