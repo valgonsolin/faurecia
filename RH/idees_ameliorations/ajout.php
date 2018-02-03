@@ -24,10 +24,10 @@ else
 
     $datetime = date("Y-m-d");
 
-  $query = $bdd -> prepare('INSERT INTO idees_ameliorations(emmetteur, manager,type,transversalisation,retenue,respo_rea,date_rea,situation_actuelle,situation_proposee) VALUES (:emmetteur, :manager,:type,:transversalisation,:retenue,:respo_rea,:date_rea ,:situation_actuelle,:situation_proposee)');
-    $query -> execute(array(
+  $query = $bdd -> prepare('INSERT INTO idees_ameliorations(emmetteur,type,transversalisation,retenue,respo_rea,date_rea,situation_actuelle,situation_proposee) VALUES (:emmetteur,:type,:transversalisation,:retenue,:respo_rea,:date_rea ,:situation_actuelle,:situation_proposee)');
+
+    if($query -> execute(array(
       'emmetteur' => $_SESSION['id'],
-      'manager'=>$_SESSION['manager'],
       'type' => $_POST['type'],
       'transversalisation' => $_POST['transversalisation'],
       'retenue' =>$_POST['retenue'],
@@ -35,12 +35,11 @@ else
       'date_rea'=>$datetime,
       'situation_actuelle' => $_POST['situation_actuelle'],
       'situation_proposee' => $_POST['situation_proposee']
-    ));
-
-    if($query ==false){
-      warning('Erreur','Les données entrées ne sont pas conformes.');
-    }else{
+    ))){
       success('Ajouté','La question a bien été ajoutée.');
+    }else{
+      warning('Erreur','Les données entrées ne sont pas conformes.');
+      print_r($query -> errorInfo());
 
     }
   }

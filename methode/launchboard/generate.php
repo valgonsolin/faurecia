@@ -101,7 +101,7 @@ function copyRange( Worksheet $sheet, $srcRange, $dstCell) {
     }
 }
 
-function complete(Worksheet $sheet, $array, $row,$i){
+function complete(Worksheet $sheet, $array, $row,$i,$tab){
   $sheet ->setCellValue('B'.$row,$i)
   ->setCellValue('C'.$row,$array['code']." - ".$array['titre']);
   $cat = array('2tct','2capacity','2equip','2pfmea','2mvp','2layout','2master','2pack','3equip','3pack','3supplier','3checklist1','3pt','3checklist2','3mpt','3samples','4checklist','4empt');
@@ -116,48 +116,55 @@ function complete(Worksheet $sheet, $array, $row,$i){
         cellColor($sheet,$lettre[2*$index+1].strval($row),'FF0000');
       }else{
         cellColor($sheet,$lettre[2*$index+1].strval($row),'00B050');
+        $tab[$category]+=1
       }
     }
   }
 }
 //PSA
+$indice = array('S','U','W','Y','AA','AC','AE','AG','AJ','AL','AN','AP','AR','AT','AV','AX','BA','BC');
 $psa = $bdd -> query('SELECT * FROM launchboard WHERE client = "PSA"');
 $projets = $psa -> fetchAll();
 $count = sizeof($projets);
+$psagreen = array('2tct'=> 0,'2capacity'=> 0,'2equip'=> 0,'2pfmea'=> 0,'2mvp'=> 0,'2layout'=> 0,'2master'=> 0,'2pack'=> 0,'3equip'=> 0,'3pack'=> 0,'3supplier'=> 0,'3checklist1'=> 0,'3pt'=> 0,'3checklist2'=> 0,'3mpt'=> 0,'3samples'=> 0,'4checklist'=> 0,'4empt'=> 0);
 $i=1;
 $row=30;
 foreach ($projets as $key => $value) {
   if($i == 1){
-    complete($sheet,$value,$row,1);
+    complete($sheet,$value,$row,1,$psagreen);
   }elseif($i == $count){
-    complete($sheet,$value,$row+2*($i-1),$i);
+    complete($sheet,$value,$row+2*($i-1),$i,$psagreen);
   }elseif($i == $count -1){
-    complete($sheet,$value,$row+2*($i-1),$i);
+    complete($sheet,$value,$row+2*($i-1),$i,$psagreen);
   }else{
     $sheet->insertNewRowBefore($row+$i*2,2);
     copyrange($sheet,'A'.strval($row+($i-1)*2).':BD'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
-    complete($sheet,$value,$row+($i-1)*2,$i);
+    complete($sheet,$value,$row+($i-1)*2,$i,$psagreen);
   }
   $i+=1;
+}
+foreach ($psagreen as $key => $value) {
+  if
 }
 
 //JLR
 $jlr = $bdd -> query('SELECT * FROM launchboard WHERE client = "JLR"');
 $projets = $jlr -> fetchAll();
 $count = sizeof($projets);
+$jlrgreen = array('2tct'=> 0,'2capacity'=> 0,'2equip'=> 0,'2pfmea'=> 0,'2mvp'=> 0,'2layout'=> 0,'2master'=> 0,'2pack'=> 0,'3equip'=> 0,'3pack'=> 0,'3supplier'=> 0,'3checklist1'=> 0,'3pt'=> 0,'3checklist2'=> 0,'3mpt'=> 0,'3samples'=> 0,'4checklist'=> 0,'4empt'=> 0);
 $row=40 + ($i-4)*2;
 $i=1;
 foreach ($projets as $key => $value) {
   if($i == 1){
-    complete($sheet,$value,$row,1);
+    complete($sheet,$value,$row,1,$jlrgreen);
   }elseif($i == $count){
-    complete($sheet,$value,$row+2*($i-1),$i);
+    complete($sheet,$value,$row+2*($i-1),$i,$jlrgreen);
   }elseif($i == $count -1){
-    complete($sheet,$value,$row+2*($i-1),$i);
+    complete($sheet,$value,$row+2*($i-1),$i,$jlrgreen);
   }else{
     $sheet->insertNewRowBefore($row+$i*2,2);
     copyrange($sheet,'A'.strval($row+($i-1)*2).':BD'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
-    complete($sheet,$value,$row+($i-1)*2,$i);
+    complete($sheet,$value,$row+($i-1)*2,$i,$jlrgreen);
   }
   $i+=1;
 }
@@ -166,19 +173,20 @@ foreach ($projets as $key => $value) {
 $toy = $bdd -> query('SELECT * FROM launchboard WHERE client = "TOY/RENAULT"');
 $projets = $toy -> fetchAll();
 $count = sizeof($projets);
+$toygreen = array('2tct'=> 0,'2capacity'=> 0,'2equip'=> 0,'2pfmea'=> 0,'2mvp'=> 0,'2layout'=> 0,'2master'=> 0,'2pack'=> 0,'3equip'=> 0,'3pack'=> 0,'3supplier'=> 0,'3checklist1'=> 0,'3pt'=> 0,'3checklist2'=> 0,'3mpt'=> 0,'3samples'=> 0,'4checklist'=> 0,'4empt'=> 0);
 $row=50 + ($i-4)*2 + ($row-40);
 $i=1;
 foreach ($projets as $key => $value) {
   if($i == 1){
-    complete($sheet,$value,$row,1);
+    complete($sheet,$value,$row,1,$toygreen);
   }elseif($i == $count){
-    complete($sheet,$value,$row+2*($i-1),$i);
+    complete($sheet,$value,$row+2*($i-1),$i,$toygreen);
   }elseif($i == $count -1){
-    complete($sheet,$value,$row+2*($i-1),$i);
+    complete($sheet,$value,$row+2*($i-1),$i,$toygreen);
   }else{
     $sheet->insertNewRowBefore($row+$i*2,2);
     copyrange($sheet,'A'.strval($row+($i-1)*2).':BD'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
-    complete($sheet,$value,$row+($i-1)*2,$i);
+    complete($sheet,$value,$row+($i-1)*2,$i,$toygreen);
   }
   $i+=1;
 }
