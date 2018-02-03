@@ -21,7 +21,7 @@ if (isset($_GET["recherche"])){
 }
 
 if(isset($_GET['nb'])){
-  $debut=$_GET['nb'];
+  $debut=(int) $_GET['nb'];
 }
 
 
@@ -194,10 +194,12 @@ if($debut > 4){
       WHERE profil.id= :i and supprime = 0  LIMIT 5 OFFSET :nb');
   $test->bindValue(':i',$recherche, PDO::PARAM_INT);
   $test ->bindValue(':nb',(int) $debut+5, PDO::PARAM_INT);
-  $test->execute(); }else{$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
-      ON idees_ameliorations.emmetteur = profil.id
+  $test->execute(); }
+
+  else{$test = $bdd->prepare('SELECT * FROM profil JOIN idees_ameliorations
+      ON profil.id= idees_ameliorations.emmetteur
       WHERE  supprime = 0  LIMIT 5 OFFSET :nb');
-  $test ->bindValue(':nb',(int) $debut+5, PDO::PARAM_INT);
+  $test ->bindValue(':nb',(int) ($debut+5), PDO::PARAM_INT);
   $test->execute();  }
 
   if($test -> fetch()){ ?>

@@ -110,18 +110,18 @@ else
 <?php
 
 if(isset($_GET['nb'])){
-$nb=$_GET['nb'];
+$nb=(int ) $_GET['nb'];
 }
   if($droit==1){
-  $qyy= $bdd->prepare('SELECT  situation_proposee,type,nom,date_rea,situation_actuelle,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  ORDER BY idees_ameliorations.date_rea DESC LIMIT 20 OFFSET :off ');
-  $qyy->bindValue('off', $nb, PDO::PARAM_INT);
+  $qyy= $bdd->prepare('SELECT  situation_proposee,type,nom,date_rea,situation_actuelle,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  ORDER BY id1 DESC LIMIT 5 OFFSET :off ');
+  $qyy->bindValue(':off', $nb, PDO::PARAM_INT);
   $qyy->execute();
 
 }else{
-  $qyy= $bdd->prepare('SELECT  idees_ameliorations.id AS id1, date_rea,situation_actuelle,vote,nom,type,situation_proposee FROM idees_ameliorations  LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  WHERE (profil.id= :a OR profil.manager= :b)  ORDER BY vote LIMIT 20 OFFSET : off');
-  $qyy->bindValue('a', $nb, PDO::PARAM_INT);
-  $qyy->bindValue('b', $nb, PDO::PARAM_INT);
-  $qyy->bindValue('off', $nb, PDO::PARAM_INT);
+  $qyy= $bdd->prepare('SELECT  idees_ameliorations.id AS id1, date_rea,situation_actuelle,vote,nom,type,situation_proposee FROM idees_ameliorations  LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  WHERE (profil.id= :a OR profil.manager= :b)  ORDER BY id1 DESC LIMIT 5 OFFSET : off');
+  $qyy->bindValue(':a',$_SESSION['id'],PDO::PARAM_INT );
+  $qyy->bindValue(':b',$_SESSION['manager'],PDO::PARAM_INT );
+  $qyy->bindValue(':off', $nb, PDO::PARAM_INT);
   $qyy->execute(); }
 
 
@@ -158,26 +158,26 @@ $nb=$_GET['nb'];
 <?php
 
 if($droit==1){
-$test = $bdd->prepare('SELECT * FROM idees_ameliorations JOIN profil ON profil.id=idees_ameliorations.emmetteur ORDER BY date_rea LIMIT 1 OFFSET : off ');
-$test->bindValue('off',($nb+20),PDO::PARAM_INT );}
-else{$test = $bdd->prepare('SELECT * FROM idees_ameliorations JOIN profil ON profil.id=idees_ameliorations.emmetteur ORDER BY WHERE( profil.id= :a OR idees_ameliorations.manager= :b ) LIMIT 1 OFFSET :off ');
+$test = $bdd->prepare('SELECT * FROM idees_ameliorations LEFT JOIN profil ON profil.id=idees_ameliorations.emmetteur  LIMIT 5 OFFSET :off ');
+$test->bindValue(':off',(int) ($nb+5),PDO::PARAM_INT );
+$test->execute(); }
+else{$test = $bdd->prepare('SELECT * FROM idees_ameliorations JOIN profil ON profil.id=idees_ameliorations.emmetteur  WHERE( profil.id= :a OR idees_ameliorations.manager= :b ) LIMIT 5 OFFSET :off ');
 
-$test->bindValue('a',$_SESSION['id'],PDO::PARAM_INT );
-$test->bindValue('off',$_SESSION['manager'],PDO::PARAM_INT );
-$test->bindValue('off',($nb+20),PDO::PARAM_INT );
+$test->bindValue(':a',$_SESSION['id'],PDO::PARAM_INT );
+$test->bindValue(':b',$_SESSION['manager'],PDO::PARAM_INT );
+$test->bindValue(':off',($nb+5),PDO::PARAM_INT );
 $test->execute(); }
  ?>
-<form method="post" class="inline-form"> <?php
-  if($nb > 19){    ?>
-      <a href="suppression.php?nb=<?php echo $nb-20;?>" class="btn btn-default">Elements précédents</a>
+ <?php
+  if($nb > 4){    ?>
+      <a href="suppression.php?nb=<?php echo ($nb-5);?>" class="btn btn-default">Elements précédents</a>
     <?php
     }
     if($test -> fetch()){ ?>
-    <a href="suppression.php?nb=<?php echo $nb+20;?>" class="btn btn-default">Elements suivants</a>
+    <a href="suppression.php?nb=<?php echo $nb+5; ?>" class="btn btn-default">Elements suivants</a>
   <?php } ?>
 
-    <span class="clear" style="clear: both; display: block;"></span>
-  </form>
+
 <?php
 }
 
