@@ -118,11 +118,15 @@ $nb=(int ) $_GET['nb'];
   $qyy->execute();
 
 }else{
-  $qyy= $bdd->prepare('SELECT  idees_ameliorations.id AS id1, date_rea,situation_actuelle,vote,nom,type,situation_proposee FROM idees_ameliorations  LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  WHERE (profil.id= :a OR profil.manager= :b)  ORDER BY id1 DESC LIMIT 5 OFFSET : off');
-  $qyy->bindValue(':a',$_SESSION['id'],PDO::PARAM_INT );
-  $qyy->bindValue(':b',$_SESSION['manager'],PDO::PARAM_INT );
-  $qyy->bindValue(':off', $nb, PDO::PARAM_INT);
-  $qyy->execute(); }
+  $qyy= $bdd->prepare('SELECT  idees_ameliorations.id AS id1, date_rea,situation_actuelle,vote,nom,type,situation_proposee FROM idees_ameliorations  LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  WHERE (profil.id= ? OR profil.manager= ?)  ORDER BY id1 DESC LIMIT 5 OFFSET ?');
+  // $qyy->bindValue(':a',$_SESSION['id'],PDO::PARAM_INT );
+  // if(is_null($_SESSION['id'])){
+  //   $qyy->bindValue(':b',"",PDO::PARAM_INT );
+  // }else{
+  //   $qyy->bindValue(':b',$_SESSION['manager'],PDO::PARAM_INT );
+  // }
+  // $qyy->bindValue(':off', $nb, PDO::PARAM_INT);
+  $qyy->execute(array($_SESSION['manager'],$_SESSION['manager'],$nb)); }
 
 
   while($Data=$qyy->fetch()){

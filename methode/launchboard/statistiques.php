@@ -74,6 +74,12 @@ if((! is_null($Data['4empt_f'])) && (! is_null($Data['4empt_r'])) && (strtotime(
     <p>Date réalisée : <?php if(! is_null($Data['4empt_r'])){echo date('d/m/y',strtotime($Data['4empt_r'])); } ?></p>
   </div>
 </div>
+<?php
+$query = $bdd -> prepare('SELECT * FROM evolution_projet WHERE id_projet = ? ORDER BY date ASC');
+$query -> execute(array($_GET['id']));
+$dates = $query ->fetchAll();
+if(sizeof($dates) >0){
+  ?>
 
 <script src="../../js/moment.min.js"></script>
 <script src="../../js/Chart.js"></script>
@@ -84,15 +90,11 @@ if((! is_null($Data['4empt_f'])) && (! is_null($Data['4empt_r'])) && (strtotime(
   {
     return moment(days,'DD-MM-YYYY').toDate();
   }
-  <?php
-  $query = $bdd -> prepare('SELECT * FROM evolution_projet WHERE id_projet = ? ORDER BY date ASC');
-  $query -> execute(array($_GET['id']));
-  ?>
   var data1 = [
   <?php
-  while($date = $query -> fetch()){
+  foreach ($dates as $date) {
     echo "{x : newDate('".date('d/m/Y',strtotime($date['date']))."'), y: ".$date['pourcentage']."},";
-  } ?>];
+  }?>];
   var config = {
     type: 'line',
     data: {
@@ -141,7 +143,7 @@ if((! is_null($Data['4empt_f'])) && (! is_null($Data['4empt_r'])) && (strtotime(
       var myChart = new Chart(ctx, config);
 		};
 </script>
-
+<?php } ?>
 
 
 <a href="generate.php" class="btn btn-default">Fichier</a>
