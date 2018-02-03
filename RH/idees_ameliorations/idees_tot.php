@@ -94,7 +94,10 @@ else
     <label for="recherche">Recherche :</label>
     <select class="form-control" name="recherche" >
       <?php
-      $profil = $bdd -> query('SELECT * FROM profil');
+      $profil = $bdd -> query('SELECT * FROM profil'); ?>
+      <option value="">Selectionnez une personne </option>
+
+      <?php
       while($personne = $profil -> fetch()){ ?>
         <option value="<?php echo $personne['id']; ?>" ><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
     <?php  } ?>
@@ -111,10 +114,14 @@ else
 <?php
 
 if($recherche>0){
-$Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= ? and supprime = 0   ORDER BY date_rea DESC LIMIT 5 OFFSET ? ') ;
-$Query->execute(array($recherche,$debut));}
-else{$Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0   ORDER BY date_rea DESC LIMIT 5  OFFSET ? ') ;
-$Query->execute(array($debut));}
+  $Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0  ORDER BY id1 DESC LIMIT 5  OFFSET :nb') ;
+  $Query->bindValue(':i',(int) $recherche,PDO::PARAM_INT);
+  $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
+  $Query->execute();}
+
+else{$Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 ORDER BY id1 DESC LIMIT 5 OFFSET :nb ') ;
+  $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
+  $Query->execute();}
 
 
 while ($Data = $Query->fetch()) {
@@ -175,32 +182,29 @@ while ($Data = $Query->fetch()) {
 </div>
 
 <?php
+
 if($debut > 4){
-  ?>
-  <a href="idees_tot.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-5;?>" class="btn btn-default">Elements précédents</a>
+    ?>
+    <a href="idees_tot.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-5;?>" class="btn btn-default">Elements précédents</a>
+  <?php
+  }
+
+  if($recherche>0){$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
+      ON idees_ameliorations.emmetteur = profil.id
+      WHERE profil.id= :i and supprime = 0  LIMIT 5 OFFSET :nb');
+  $test->bindValue(':i',$recherche, PDO::PARAM_INT);
+  $test ->bindValue(':nb',(int) $debut+5, PDO::PARAM_INT);
+  $test->execute(); }else{$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
+      ON idees_ameliorations.emmetteur = profil.id
+      WHERE  supprime = 0  LIMIT 5 OFFSET :nb');
+  $test ->bindValue(':nb',(int) $debut+5, PDO::PARAM_INT);
+  $test->execute();  }
+
+  if($test -> fetch()){ ?>
+    <a href="idees_tot.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+5;?>" class="btn btn-default">Elements suivants</a>
 <?php
 }
 
-if($recherche>=0){
-$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
-    ON idees_ameliorations.emmetteur = profil.id
-    WHERE profil.id= ? and supprime = 0 and idees_ameliorations.id >= ? LIMIT 5   ');
-$test->execute(array($recherche, ($debut+5)));
-if($test -> fetch()){ ?>
-  <a href="idees_tot.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+5;?>" class="btn btn-default">Elements suivants</a>
-
-<?php
-}
-}else{$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
-    ON idees_ameliorations.emmetteur = profil.id
-    WHERE supprime = 0 and idees_ameliorations.id >= ? LIMIT 5   ');
-$test->execute(array( ($debut+5)));
-if($test -> fetch()){ ?>
-  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+5;?>" class="btn btn-default">Elements suivants</a>
-
-<?php
-}
-}
 
 }
 drawFooter();

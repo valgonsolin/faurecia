@@ -96,6 +96,10 @@ else
     <label>Recherche</label>
     <select class="form-control" name="recherche" >
       <?php
+      $profil = $bdd -> query('SELECT * FROM profil'); ?>
+      <option value="">Selectionnez une personne </option>
+
+      <?php
       $profil = $bdd -> query('SELECT * FROM profil');
       while($personne = $profil -> fetch()){ ?>
         <option value="<?php echo $personne['id']; ?>" ><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
