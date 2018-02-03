@@ -17,9 +17,6 @@ if(empty($_SESSION['login']))
 else
 {
   echo "<h2>Votre idée</h2>";
-  if(!$_SESSION['idees']){
-    echo "<p>Vous n'avez pas les droits pour accéder à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
-  }else{
 
 
   if(!empty($_POST)){
@@ -109,7 +106,7 @@ else
 
 
 <?php
-} }
+ }
 ?>
 
 
