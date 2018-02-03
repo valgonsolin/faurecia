@@ -56,25 +56,24 @@
     $direction="/moncompte/identification.php";
   }
 ?>
-    <form action=<?php echo $direction?> method="post" style="padding-top:20px">
-      <fieldset>
-        <legend>Identifiez-vous</legend>
+<h3>Identifiez-vous</h3>
+    <form action=<?php echo $direction?> method="post" style="padding-top:20px; width : 400px;" >
         <?php
           if(!empty($errorMessage))
           {
             echo '<p>', htmlspecialchars($errorMessage) ,'</p>';
           }
         ?>
-       <p>
+       <div clas="form-group">
           <label for="login">Login :</label>
-          <input type="text" name="login" id="login" value="" />
-        </p>
-        <p>
+          <input type="text" name="login" id="login" value="" class="form-control" />
+        </div>
+        <br>
+        <div class="form-group">
           <label for="password">Password :</label>
-          <input type="password" name="password" id="password" value="" />
-          <input type="submit" name="submit" value="Connexion" />
-        </p>
-      </fieldset>
+          <input type="password" name="password" id="password" value="" class="form-control" />
+        </div>
+        <input type="submit" name="submit" value="Connexion" class="btn btn-default"/>
     </form>
 
 

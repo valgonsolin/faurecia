@@ -1,11 +1,15 @@
 <?php
 
 include_once "needed.php";
+include_once "RH/news/needed.php";
 
 drawheader();
 
 ?>
 <img src="/images/background-3.png" style="width:125%; transform:translateX(-10%);" >
+
+<h1 style="text-align:center;"><a href="RH/news" style="color:grey;">News</a></h1>
+<?php latestNews("6",""); ?>
 <div id="menu_principal">
 	<a href="/presentation_usine/chiffres_cle.php" class="bouton_principal"><img src="/presentation_usine/ressources/beaulieupicture.jpg"><figcaption>L'usine</figcaption></a>
 	<a href="/dojo_qualite/ok_1er_piece.php" class="bouton_principal"><img src="/dojo_qualite/ressources/Basic01.PNG"><figcaption>Dojo Qualité</figcaption></a>

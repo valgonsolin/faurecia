@@ -175,11 +175,23 @@ while($Data = $query -> fetch()){
       </div>
       <?php
       if($Data['lb'] < 75){
-        echo '<div class="couleur" style="background-color: #da090d;"></div>';
+        ?>
+        <div class="progress couleur" style="margin-top:15px; margin-bottom: 15px;">
+          <div class="progress-bar" role="progressbar" style="width: <?php echo $Data['lb']; ?>%; background-color: #da090d;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $Data['lb']; ?>%</div>
+        </div>
+        <?php
       }elseif($Data['lb'] < 85){
-        echo '<div class="couleur" style="background-color: #FF9C00;"></div>';
+        ?>
+        <div class="progress couleur" style="margin-top:15px; margin-bottom: 15px;">
+          <div class="progress-bar" role="progressbar" style="width: <?php echo $Data['lb']; ?>%; background-color: #FF9C00;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $Data['lb']; ?>%</div>
+        </div>
+        <?php
       }else{
-        echo '<div class="couleur" style="background-color: #2b669a;"></div>';
+        ?>
+        <div class="progress couleur" style="margin-top:15px; margin-bottom: 15px;">
+          <div class="progress-bar" role="progressbar" style="width: <?php echo $Data['lb']; ?>%; background-color: #2b669a;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $Data['lb']; ?>%</div>
+        </div>
+        <?php
       }
       ?>
 
