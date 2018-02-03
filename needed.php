@@ -128,7 +128,7 @@ global $bdd;
                <?php } ?>
            </div>
       </div>
-      <a class="bouton_menu <?php if($selected=='moncompte'){echo ' bouton_menu_selected';} ?>"" href=<?php if(!empty($_SESSION['login'])){echo "/moncompte";}else{echo "/moncompte/identification.php";} ?>><?php if(!empty($_SESSION['login'])){echo "Mon Compte";}else{echo "Connexion";} ?></a>
+      <a class="bouton_menu <?php if($selected=='moncompte'){echo ' bouton_menu_selected';} ?>" href="<?php if(!empty($_SESSION['login'])){echo "/moncompte";}else{echo "/moncompte/identification.php";} ?>"><?php if(!empty($_SESSION['login'])){echo "Mon Compte";}else{echo "Connexion";} ?></a>
 		</div>
     </div>
 

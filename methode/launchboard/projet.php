@@ -22,10 +22,11 @@ function color($field){
     }else{
       echo "class='notvalid ".$class."yellow' title='Non validé'";
     }
+  }else{
+    echo "class='".$class."'";
   }
 }
 function forecast($field){
-
   global $_SESSION;
   global $Data;
   if($Data['profil'] == $_SESSION['id']){
@@ -291,6 +292,9 @@ if(!isset($_GET['id'])){ ?>
    .notvalid{
      background-color: #FFD700;
    }
+   td{
+     font-size: 80%;
+   }
 </style>
 <h2 style="margin-bottom:10px;">Projet : <?php echo $Data['titre']; ?></h2>
 <div class="boutons_nav" style="display: flex; justify-content: center;">
@@ -306,10 +310,9 @@ if(!isset($_GET['id'])){ ?>
     <h4>Code : <?php echo $Data['code']; ?></h4>
   </div>
   <div class="col-md-6">
-    <h4>Description :</h4>
+    <h4>Description :    <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
+          <div class="btn btn-default pull-right" data-toggle="modal" data-target="#description">Modifier la description</div><?php } ?></h4>
     <p><?php echo $Data['description']; ?></p>
-    <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
-      <div class="btn btn-default pull-right" data-toggle="modal" data-target="#description">Modifier la description</div><?php } ?>
   </div>
 </div>
 <div class="row">
@@ -364,7 +367,7 @@ if(!isset($_GET['id'])){ ?>
     ?>
     <div class="col-md-6">
       <h4>Pourcentage : <?php if(isset($date)){ echo " <small>(".date('j/m/y', $date).")</small>"; }
-      if((($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ) && $gate != "2"){ ?>
+      if((($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ) && $gate != "2B"){ ?>
                   <div class="btn btn-default pull-right" data-toggle="modal" data-target="#pourcentage">Mettre à jour le pourcentage</div><?php
       } ?></h4>
     </div>
