@@ -30,7 +30,7 @@ else
       $query = $bdd -> prepare('UPDATE qualite_hse_question SET ordre=ordre+1 WHERE ordre >= ? ');
       $query -> execute(array($_POST['ordre']));
     }
-    $file=upload($bdd,'file',"../../ressources","Quiz",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    $file=upload($bdd,'file',"../../ressources","hse",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
     if($file < 0){$file=NULL;}
     $reponse1=$_POST['reponse1'];
     $reponse2=$_POST['reponse2'];

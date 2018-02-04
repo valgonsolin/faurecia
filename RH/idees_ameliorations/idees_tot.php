@@ -145,7 +145,11 @@ while ($Data = $Query->fetch()) {
                 <b>Date création: </b><?php echo date('d/m/y ',strtotime($Data['date_rea']));?><br>
                 <b>Nombre de vote : </b><?php echo $Data['vote'];?><br>
                 <b>Situation actuelle :</b><?php echo $Data['situation_actuelle'];?><br>
+<<<<<<< HEAD
                 <b>Situation proposée :</b><?php echo $Data['situation_proposee'];?><br><br><br>
+=======
+                <b>Situation Proposee :</b><?php echo $Data['situation_proposee'];?><br><br><br>
+>>>>>>> d0f51896aa81819d21a7d263e2d45239d9d518c6
                 <b><?php echo "Cliquez pour retirer vote";?></b><br></p>
 
 

@@ -149,8 +149,13 @@ if(isset($_GET['idee'])){
               <p><b>Emmeteur : </b><?php echo $emm['nom']; echo "  "; echo $emm['prenom']; ?><br>
                   <b>Manager : </b><?php echo $sup['nom_sup']; echo "  "; echo $sup["prenom_sup"]; ?><br>
                   <b>Nombre de vote : </b><?php echo $emm['vote'];?><br>
+<<<<<<< HEAD
                   <b>Situation actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
                   <b>Situation proposée :</b><?php echo $emm['situation_proposee'];?><br><br><br>
+=======
+                  <b>Situation Actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
+                  <b>Situation Proposee :</b><?php echo $emm['situation_proposee'];?><br><br><br>
+>>>>>>> d0f51896aa81819d21a7d263e2d45239d9d518c6
                   <b><?php echo "Cliquez pour voter";?></b><br></p>
 
 

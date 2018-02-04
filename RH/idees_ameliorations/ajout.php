@@ -18,9 +18,16 @@ else
 {
   echo "<h2>Votre idée</h2>";
 
+  $img= NULL ;
 
   if(!empty($_POST)){
 
+    // if($_FILES['file_1']['name'] != ""){echo "bite";
+    //   $id1=upload($bdd,'file_1',"../../ressources","idees",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    //   if($id1>=0){
+    //     $img=$id1;
+    //     }
+    // }else{echo "teub";}
 
     $datetime = date("Y-m-d");
 
@@ -34,15 +41,14 @@ else
       'respo_rea' => $_POST['respo_rea'],
       'date_rea'=>$datetime,
       'situation_actuelle' => $_POST['situation_actuelle'],
-      'situation_proposee' => $_POST['situation_proposee']
+      'situation_proposee' => $_POST['situation_proposee'],
     ))){
       success('Ajouté','La question a bien été ajoutée.');
     }else{
       warning('Erreur','Les données entrées ne sont pas conformes.');
-      print_r($query -> errorInfo());
 
     }
-  }
+  }else{echo "bite";}
   ?>
   <div class="boutons_nav" style="display: flex; justify-content: center;">
     <a href="ajout.php" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Ajout</a>
@@ -96,6 +102,7 @@ else
       <label>Situation proposée :     </label>
       <input name="situation_proposee" class="form-control" type="text">
     </div>
+
 
 
   	<input value="Ajouter" class="btn btn-default" type="submit">
