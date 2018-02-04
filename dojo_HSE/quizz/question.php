@@ -35,13 +35,16 @@ if (! isset($_GET["id"])){
     <?php
 }else {
 
-    $Query = $bdd->prepare('SELECT * FROM qualite_hse_session WHERE id = ?');
+    $Query = $bdd->prepare('SELECT * FROM profil WHERE id = ?');
     $Query->execute(array($_GET["id"]));
     $type = $Query->fetch()['type'];
+    if(strcasecmp($type,"MOD")==0){$typ=0;}
+    else{$typ=1;}
 
     $Query = $bdd->prepare('SELECT * FROM qualite_hse_question WHERE id NOT IN
       (SELECT question FROM qualite_hse_reponse WHERE qualite_hse_reponse.session = ?) and type = ? ORDER BY ordre');
-    $Query->execute(array($_GET["id"],$type));
+    $Query->execute(array($_GET["id"],$typ));
+
     if($Data = $Query->fetch()) {
         ?>
 
@@ -112,10 +115,11 @@ if (! isset($_GET["id"])){
         </form>
       </div>
       <?php
-    }else{
-        ob_end_clean();
-        header('Location: '.$url."/dojo_HSE/quizz/resultats.php?id=".$_GET['id']);
     }
+    else{
+         ob_end_clean();
+         header('Location: '.$url."/dojo_HSE/quizz/resultats.php?id=".$_GET['id']);
+     }
 }
 drawFooter();
 ob_end_flush();
