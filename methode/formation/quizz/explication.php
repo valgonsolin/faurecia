@@ -52,7 +52,7 @@ if (! isset($_GET["id"])){
         <?php
     }else{
         ob_end_clean();
-        header('Location: '.$url."/methode/formation/quiz/depart.php?id_personne=".$_GET['id']);
+        header('Location: '.$url."/methode/formation/quizz/depart.php?id_personne=".$_GET['id']);
     }
 }
 drawFooter();

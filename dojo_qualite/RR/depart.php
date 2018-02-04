@@ -8,7 +8,7 @@ include_once "../needed.php";
 
 
 $Query = $bdd->prepare('SELECT * FROM profil WHERE id = ?');
-$Query->execute(array($_SESSION['id']]));
+$Query->execute(array($_SESSION['id']));
 $mo = $Query->fetch()['mo'];
 if ($mo == "MOD"){
     $type = 0;
