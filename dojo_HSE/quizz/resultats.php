@@ -151,7 +151,11 @@ array_push($proportion_bonne_reponse_cat, array($ancien_titre, $bonne_reponse_ca
             <td><?php echo $categorie[0];?></td>
             <td><?php echo $categorie[1];?></td>
             <td><?php echo $categorie[2];?></td>
+            <?php if(intval( $categorie[2])>0){ ?>
             <td><?php echo number_format(floatval(100*$categorie[1])/$categorie[2],1);?>%</td>
+          <?php }else{ ?>
+            <td><?php echo "Aucune questions traitées"; ?> </td> <?php } ?>
+
         </tr>
         <?php
         }
@@ -159,7 +163,9 @@ array_push($proportion_bonne_reponse_cat, array($ancien_titre, $bonne_reponse_ca
     </tbody>
 </table>
 <?php
+if($tot_reponse>0){
 $score = floatval($bonne_reponse)/$tot_reponse*100;
+}else{$score =0.0 ;}
 ?>
 <h4>Score</h4>
 <p style="text-align: center; font-size: 20px;">Vous avez obtenu un score de <?php echo  number_format($score, 1); ?> %.</p>
