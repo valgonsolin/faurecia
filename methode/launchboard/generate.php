@@ -116,13 +116,14 @@ function complete(Worksheet $sheet, $array, $row,$i,$tab){
         cellColor($sheet,$lettre[2*$index+1].strval($row),'FF0000');
       }else{
         cellColor($sheet,$lettre[2*$index+1].strval($row),'00B050');
-        $tab[$category]+=1
+        $tab[$category]+=1;
       }
     }
   }
+  return $tab;
 }
 //PSA
-$indice = array('S','U','W','Y','AA','AC','AE','AG','AJ','AL','AN','AP','AR','AT','AV','AX','BA','BC');
+$indice = array('2tct'=> 'S','2capacity'=> 'U','2equip'=> 'W','2pfmea'=> 'Y','2mvp'=> 'AA','2layout'=> 'AC','2master'=> 'AE','2pack'=> 'AG','3equip'=> 'AJ','3pack'=> 'AL','3supplier'=> 'AN','3checklist1'=> 'AP','3pt'=> 'AR','3checklist2'=> 'AT','3mpt'=> 'AV','3samples'=> 'AX','4checklist'=> 'BA','4empt'=> 'BC');
 $psa = $bdd -> query('SELECT * FROM launchboard WHERE client = "PSA"');
 $projets = $psa -> fetchAll();
 $count = sizeof($projets);
@@ -131,20 +132,22 @@ $i=1;
 $row=30;
 foreach ($projets as $key => $value) {
   if($i == 1){
-    complete($sheet,$value,$row,1,$psagreen);
+    $psagreen=complete($sheet,$value,$row,1,$psagreen);
   }elseif($i == $count){
-    complete($sheet,$value,$row+2*($i-1),$i,$psagreen);
+    $psagreen=complete($sheet,$value,$row+2*($i-1),$i,$psagreen);
   }elseif($i == $count -1){
-    complete($sheet,$value,$row+2*($i-1),$i,$psagreen);
+    $psagreen=complete($sheet,$value,$row+2*($i-1),$i,$psagreen);
   }else{
     $sheet->insertNewRowBefore($row+$i*2,2);
     copyrange($sheet,'A'.strval($row+($i-1)*2).':BD'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
-    complete($sheet,$value,$row+($i-1)*2,$i,$psagreen);
+    $psagreen=complete($sheet,$value,$row+($i-1)*2,$i,$psagreen);
   }
   $i+=1;
 }
 foreach ($psagreen as $key => $value) {
-  if
+  if($value/($i-1) > 0.75){
+    $sheet -> setCellValue($indice[$key].'17','75%');
+  }
 }
 
 //JLR
@@ -156,17 +159,22 @@ $row=40 + ($i-4)*2;
 $i=1;
 foreach ($projets as $key => $value) {
   if($i == 1){
-    complete($sheet,$value,$row,1,$jlrgreen);
+    $jlrgreen=complete($sheet,$value,$row,1,$jlrgreen);
   }elseif($i == $count){
-    complete($sheet,$value,$row+2*($i-1),$i,$jlrgreen);
+    $jlrgreen=complete($sheet,$value,$row+2*($i-1),$i,$jlrgreen);
   }elseif($i == $count -1){
-    complete($sheet,$value,$row+2*($i-1),$i,$jlrgreen);
+    $jlrgreen=complete($sheet,$value,$row+2*($i-1),$i,$jlrgreen);
   }else{
     $sheet->insertNewRowBefore($row+$i*2,2);
     copyrange($sheet,'A'.strval($row+($i-1)*2).':BD'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
-    complete($sheet,$value,$row+($i-1)*2,$i,$jlrgreen);
+    $jlrgreen=complete($sheet,$value,$row+($i-1)*2,$i,$jlrgreen);
   }
   $i+=1;
+}
+foreach ($jlrgreen as $key => $value) {
+  if($value/($i-1) > 0.75){
+    $sheet -> setCellValue($indice[$key].'19','75%');
+  }
 }
 
 //Toyota
@@ -178,17 +186,23 @@ $row=50 + ($i-4)*2 + ($row-40);
 $i=1;
 foreach ($projets as $key => $value) {
   if($i == 1){
-    complete($sheet,$value,$row,1,$toygreen);
+    $toygreen=complete($sheet,$value,$row,1,$toygreen);
   }elseif($i == $count){
-    complete($sheet,$value,$row+2*($i-1),$i,$toygreen);
+    $toygreen=complete($sheet,$value,$row+2*($i-1),$i,$toygreen);
   }elseif($i == $count -1){
-    complete($sheet,$value,$row+2*($i-1),$i,$toygreen);
+    $toygreen=complete($sheet,$value,$row+2*($i-1),$i,$toygreen);
   }else{
     $sheet->insertNewRowBefore($row+$i*2,2);
     copyrange($sheet,'A'.strval($row+($i-1)*2).':BD'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
-    complete($sheet,$value,$row+($i-1)*2,$i,$toygreen);
+    $toygreen=complete($sheet,$value,$row+($i-1)*2,$i,$toygreen);
   }
   $i+=1;
+}
+
+foreach ($toygreen as $key => $value) {
+  if($value/($i-1) > 0.75){
+    $sheet -> setCellValue($indice[$key].'21','75%');
+  }
 }
 
 $writer = new Xlsx($spreadsheet);
