@@ -162,12 +162,12 @@ if($droit==1){
 $test = $bdd->prepare('SELECT * FROM idees_ameliorations LEFT JOIN profil ON profil.id=idees_ameliorations.emmetteur  LIMIT 5 OFFSET :off ');
 $test->bindValue(':off',(int) ($nb+5),PDO::PARAM_INT );
 $test->execute(); }
-else{$test = $bdd->prepare('SELECT * FROM idees_ameliorations JOIN profil ON profil.id=idees_ameliorations.emmetteur  WHERE( profil.id= :a OR idees_ameliorations.manager= :b ) LIMIT 5 OFFSET :off ');
+else{$test = $bdd->prepare('SELECT * FROM idees_ameliorations JOIN profil ON profil.id=idees_ameliorations.emmetteur  WHERE( profil.id= :a OR profil.manager= :b ) LIMIT 5 OFFSET :off ');
 
-$test->bindValue(':a',$_SESSION['id'],PDO::PARAM_INT );
-$test->bindValue(':b',$_SESSION['manager'],PDO::PARAM_INT );
-$test->bindValue(':off',($nb+5),PDO::PARAM_INT );
-$test->execute(); }
+$test->bindValue(':a',($_SESSION['id']),PDO::PARAM_INT );
+$test->bindValue(':b', ($_SESSION['manager']),PDO::PARAM_INT );
+$test->bindValue(':off',(int) $nb+5,PDO::PARAM_INT );
+$test->execute();}
  ?>
  <?php
   if($nb > 4){    ?>
