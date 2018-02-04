@@ -140,7 +140,7 @@ while($Data = $query -> fetch()){
   <a href="projet.php?id=<?php echo $Data['projet']; ?>">
     <div class="projet" >
       <div class="info_projet">
-        <h4 style="margin-top: 0px; height:40px; font-size: 40px;"><?php echo $Data['code']; ?>
+        <h4 style="margin-top: 0px; height:40px; font-size: 40px;"><?php echo $Data['code']; ?><?php if($Data['archive']){ echo "<img src='../ressources/rubbish.png' alt ='corbeille' height='40px'/>";} ?>
             <?php if($Data['lb'] < 50){echo '<img src="../ressources/attention.png" style="height: 40px; float:right;">';} ?>
             </h4>
             <p><b>PPTL : </b><?php echo $Data['nom']." ".$Data['prenom']; ?><br>

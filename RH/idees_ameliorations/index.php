@@ -155,8 +155,8 @@ while ($Data = $Query->fetch()) {
             <p><b>Type : </b><?php echo $Data['type'];?><br>
                 <b>Date création: </b><?php echo date('d/m/y ',strtotime($Data['date_rea']));?><br>
                 <b>Nombre de vote : </b><?php echo $Data['vote'];?><br>
-                <b>situation_actuelle :</b><?php echo $Data['situation_actuelle'];?><br>
-                <b>situation_proposee :</b><?php echo $Data['situation_proposee'];?><br><br><br>
+                <b>Situation actuelle :</b><?php echo $Data['situation_actuelle'];?><br>
+                <b>Situation proposée :</b><?php echo $Data['situation_proposee'];?><br><br><br>
                 <b><?php echo "Cliquez pour retirer vote";?></b><br></p>
 
 
@@ -177,8 +177,8 @@ while ($Data = $Query->fetch()) {
           <p><b>Type : </b><?php echo $Data['type'];?><br>
               <b>Date : </b><?php echo date('d/m/y ',strtotime($Data['date_rea']));?><br>
               <b>Nombre de vote : </b><?php echo $Data['vote'];?><br>
-              <b>situation_actuelle : </b><?php echo $Data['situation_actuelle'];?><br>
-              <b>situation_proposee :</b><?php echo $Data['situation_proposee'];?><br><br><br>
+              <b>Situation actuelle : </b><?php echo $Data['situation_actuelle'];?><br>
+              <b>Situation proposée :</b><?php echo $Data['situation_proposee'];?><br><br><br>
               <b><?php echo "Cliquez pour voter";?></b><br></p>
 
         </div>

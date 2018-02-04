@@ -147,10 +147,10 @@ if(isset($_GET['idee'])){
               </div>
 
               <p><b>Emmeteur : </b><?php echo $emm['nom']; echo "  "; echo $emm['prenom']; ?><br>
-                  <b>Mannager : </b><?php echo $sup['nom_sup']; echo "  "; echo $sup["prenom_sup"]; ?><br>
+                  <b>Manager : </b><?php echo $sup['nom_sup']; echo "  "; echo $sup["prenom_sup"]; ?><br>
                   <b>Nombre de vote : </b><?php echo $emm['vote'];?><br>
-                  <b>situation_actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
-                  <b>situation_proposee :</b><?php echo $emm['situation_proposee'];?><br><br><br>
+                  <b>Situation actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
+                  <b>Situation proposée :</b><?php echo $emm['situation_proposee'];?><br><br><br>
                   <b><?php echo "Cliquez pour voter";?></b><br></p>
 
 
@@ -173,7 +173,7 @@ if(isset($_GET['idee2'])){
   <?php
 
 
-    $Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
+    $Query = $bdd->prepare('SELECT *, idees_ameliorations.type as typeidee FROM profil LEFT JOIN idees_ameliorations
                             ON profil.id=idees_ameliorations.emmetteur
                             WHERE idees_ameliorations.id= ? ') ;
     $Query->execute(array($idee));
@@ -196,15 +196,15 @@ if(isset($_GET['idee2'])){
           <div class="info_alerte">
               <div class="date_et_titre">
                   <h4 style="margin-top: 0px; font-size: 40px;">
-                    <?php echo $emm['idees_ameliorations.type']; ?>
+                    <?php echo $emm['typeidee']; ?>
                     </h4>
               </div>
 
-              <p><b>Emmeteur : </b><?php echo $emm['nom']; echo "  "; echo "prenom"; ?><br>
-                  <b>Mannager : </b>><?php echo $sup['nom_sup']; echo "  "; echo "prenom_sup"; ?><br>
+              <p><b>Emmeteur : </b><?php echo $emm['nom']; echo "  "; echo $emm["prenom"]; ?><br>
+                  <b>Manager : </b>><?php echo $sup['nom_sup']; echo "  "; echo $sup["prenom_sup"]; ?><br>
                   <b>Nombre de vote : </b><?php echo $emm['vote'];?><br>
-                  <b>situation_actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
-                  <b>situation_proposee :</b><?php echo $emm['situation_proposee'];?><br><br><br>
+                  <b>Situation actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
+                  <b>Situation proposée :</b><?php echo $emm['situation_proposee'];?><br><br><br>
                   <b><?php echo "Cliquez pour retirer vote";?></b><br></p>
 
 
