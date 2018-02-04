@@ -145,8 +145,7 @@ if(sizeof($dates) >0){
 </script>
 <?php } ?>
 
-
-<a href="generate.php" class="btn btn-default">Fichier</a>
+  <a href="generate.php" class="btn btn-default">Telecharger la LaunchRoom</a>
 
 <?php
 }
