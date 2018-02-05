@@ -65,7 +65,7 @@ else
   $query -> execute(array($_POST['id']));
   $Data= $query -> fetch();
   remove_file($bdd,$Data['image_correction']);
-  $query = $bdd -> query('UPDATE qualite_hse_question SET image_correction = NULL WHERE id = ?');
+  $query = $bdd -> prepare('UPDATE qualite_hse_question SET image_correction = NULL WHERE id = ?');
   $query -> execute(array($_POST['id']));
   success('Supprimé','L\'image a été supprimée.');
 }elseif(isset($_POST['modifier'])){

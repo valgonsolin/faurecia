@@ -18,20 +18,14 @@ else
 {
   echo "<h2>Votre idée</h2>";
 
-  $img= NULL ;
-
   if(!empty($_POST)){
 
-    // if($_FILES['file_1']['name'] != ""){echo "bite";
-    //   $id1=upload($bdd,'file_1',"../../ressources","idees",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
-    //   if($id1>=0){
-    //     $img=$id1;
-    //     }
-    // }else{echo "teub";}
+    $file=upload($bdd,'file',"../../ressources","hse",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    if($file < 0){$file=NULL;}
 
     $datetime = date("Y-m-d");
 
-  $query = $bdd -> prepare('INSERT INTO idees_ameliorations(emmetteur,type,transversalisation,retenue,respo_rea,date_rea,situation_actuelle,situation_proposee) VALUES (:emmetteur,:type,:transversalisation,:retenue,:respo_rea,:date_rea ,:situation_actuelle,:situation_proposee)');
+  $query = $bdd -> prepare('INSERT INTO idees_ameliorations(emmetteur,type,transversalisation,retenue,respo_rea,date_rea,situation_actuelle,situation_proposee,image,nbidees) VALUES (:emmetteur,:type,:transversalisation,:retenue,:respo_rea,:date_rea ,:situation_actuelle,:situation_proposee,:image,:nbidees)');
 
     if($query -> execute(array(
       'emmetteur' => $_SESSION['id'],
@@ -42,13 +36,15 @@ else
       'date_rea'=>$datetime,
       'situation_actuelle' => $_POST['situation_actuelle'],
       'situation_proposee' => $_POST['situation_proposee'],
+      'image'=>$file,
+      'nbidees'=>$_POST['nbidees']
     ))){
       success('Ajouté','La question a bien été ajoutée.');
     }else{
       warning('Erreur','Les données entrées ne sont pas conformes.');
 
     }
-  }else{echo "bite";}
+  }else{ echo "bite";}
   ?>
   <div class="boutons_nav" style="display: flex; justify-content: center;">
     <a href="ajout.php" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Ajout</a>
@@ -103,7 +99,15 @@ else
       <input name="situation_proposee" class="form-control" type="text">
     </div>
 
+    <div class="form-group">
+      <label>Nombre d'Idees Ameliorations  :     </label>
+      <input name="nbidees" value="1" class="form-control" type="int">
+    </div>
 
+    <div class="form-group">
+      <label>Image de Correction :     </label>
+      <input name="file" type="file">
+    </div>
 
   	<input value="Ajouter" class="btn btn-default" type="submit">
 

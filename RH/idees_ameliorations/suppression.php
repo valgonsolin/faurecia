@@ -22,15 +22,39 @@ else
 
 
   if(isset($_POST['supprimer'])){
+    $quer= $bdd -> prepare('SELECT * FROM idees_ameliorations WHERE id=?');
+    $quer -> execute(array($_POST['id']));
+    $Data= $quer -> fetch();
+    if($Data['image'] != NULL){
+      remove_file($bdd,$Data['image']);
+    }
 
     $query = $bdd -> prepare('DELETE FROM idees_ameliorations WHERE id=?');
     $query -> execute(array($_POST['id']));
 
     success('Supprimé','La question a bien été supprimée.');
 
+}elseif(isset($_POST['img-reset'])) {
+  $query= $bdd -> prepare('SELECT * FROM idees_ameliorations WHERE id=?');
+  $query -> execute(array($_POST['id']));
+  $Data= $query -> fetch();
+  remove_file($bdd,$Data['image']);
+  $query = $bdd -> prepare('UPDATE idees_ameliorations SET image = NULL WHERE id = ?');
+  $query -> execute(array($_POST['id']));
+  success('Supprimé','L\'image a été supprimée.');
 }elseif(isset($_POST['modifier'])){
 
-  $query = $bdd -> prepare("UPDATE idees_ameliorations SET type=:type ,transversalisation = :transversalisation,retenue= :retenue,respo_rea=:respo_rea, situation_actuelle= :situation_actuelle, situation_proposee= :situation_proposee WHERE id = :id ");
+  $quert= $bdd -> prepare('SELECT * FROM idees_ameliorations WHERE id=?');
+  $quert -> execute(array($_POST['id']));
+  $Data= $quert -> fetch();
+  $file=$Data['image'];
+  if($_FILES['fichier']['name'] != ""){
+    if($Data['image'] != NULL ){remove_file($bdd,$Data['image']); }
+    $file=upload($bdd,'fichier',"../../ressources","idees",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    if($file <0 ){ $file= $Data['image'];}
+  }
+
+  $query = $bdd -> prepare("UPDATE idees_ameliorations SET type=:type ,transversalisation = :transversalisation,retenue= :retenue,respo_rea=:respo_rea, situation_actuelle= :situation_actuelle, situation_proposee= :situation_proposee ,image = :image , nbidees= :nbidees WHERE id = :id ");
   $query->bindValue('type', $_POST['type'],PDO::PARAM_STR);
   $query->bindValue('transversalisation', $_POST['transversalisation'],PDO::PARAM_INT);
  $query->bindValue('retenue', $_POST['retenue'],PDO::PARAM_INT);
@@ -38,6 +62,8 @@ else
  $query->bindValue('situation_actuelle', $_POST['situation_actuelle'],PDO::PARAM_STR);
  $query->bindValue('situation_proposee', $_POST['situation_proposee'],PDO::PARAM_STR);
  $query->bindValue('id', $_POST['id'],PDO::PARAM_INT);
+ $query->bindValue('image',$ido,PDO::PARAM_INT);
+ $query->bindValue('nbidees',$_POST['nbidees'],PDO::PARAM_INT);
  $query->execute();
 
   if($query ==false){

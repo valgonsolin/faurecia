@@ -16,9 +16,7 @@ if(empty($_SESSION['login']))
 else
 {
   echo "<h2>Idées</h2>";
-  if(!$_SESSION['idees']){
-    echo "<p>Vous n'avez pas les droits pour accéder à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
-  }else{ ?>
+   ?>
   <div class="boutons_nav" style="display: flex; justify-content: center;">
     <a href="ajout.php" class="bouton_menu" style="margin-right:20%">Ajout</a>
     <a href="suppression.php" class="bouton_menu bouton_nav_selected">Modification/Suppression</a>
@@ -83,6 +81,32 @@ else
         <input name="situation_proposee" class="form-control" type="text" value="<?php echo $Data['situation_proposee']; ?>">
       </div>
 
+      <div class="form-group">
+        <label>Nombre d'Idees Ameliorations  :     </label>
+        <input name="nbidees" value="<?php echo $Data['nbidees'] ?>" class="form-control" type="int">
+      </div>
+
+      <div class"form-group">
+        <div class="row">
+          <div class="col-md-7">
+            <label>Image :</label>
+            <input type="file" name="fichier"><br/><br/>
+            <?php if($Data['image'] != NULL){ ?>
+            <input type="submit" name="img-reset" value="Supprimer l'image" class="btn btn-default">
+          <?php } ?>
+          </div>
+          <div class="col-md-5">
+        <?php
+          if($Data['image'] != NULL){
+            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+            $query -> execute(array($Data['image']));
+            $img= $query -> fetch(); ?>
+            <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; " alt="Image Idée">
+          <?php } ?>
+          </div>
+        </div>
+      </div>
+
 
 
       <input type="hidden" name="id" value="<?php echo $Data["id"] ?>" >
@@ -97,7 +121,7 @@ else
 
 <?php
 }
-}
+
 }
 ?>
 
