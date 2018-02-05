@@ -88,8 +88,16 @@ else
         justify-content: space-between;
     }
 </style>
+<?php
+$Qy= $bdd-> prepare('SELECT COUNT(*) as n FROM idees_ameliorations JOIN profil ON idees_ameliorations.emmetteur=profil.id WHERE  supprime = 0 and (MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y)');
+$Qy->bindValue(':m', $mois, PDO::PARAM_INT);
+$Qy->bindValue(':y', $annee,PDO::PARAM_INT);
+$Qy->execute();
+$n=$Qy->fetch();
 
-<h2>Idées du mois</h2>
+echo "<h2>Nombre d'idées publiées ce mois çi:"; echo "      ";echo $n['n']; echo "</h2>"; ?>
+
+
 
   <form class="form-inline">
   <div class="form-group">
@@ -128,7 +136,7 @@ $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
 $Query->execute();}
 
 
-else{$Query = $bdd->prepare('SELECT nbidees,situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and(MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y)  ORDER BY vote DESC LIMIT 5 OFFSET :nb ') ;
+else{$Query = $bdd->prepare('SELECT nbidees,situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and (MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y)  ORDER BY vote DESC LIMIT 5 OFFSET :nb ') ;
 
   $Query->bindValue(':m', $mois, PDO::PARAM_INT);
   $Query->bindValue(':y', $annee,PDO::PARAM_INT);
