@@ -120,7 +120,7 @@ if(isset($_GET['idee'])){
   <?php
 
 
-    $Query = $bdd->prepare('SELECT nom,prenom,type,vote,situation_actuelle,situation_proposee FROM profil LEFT JOIN idees_ameliorations
+    $Query = $bdd->prepare('SELECT nbidees,nom,prenom,type,vote,situation_actuelle,situation_proposee FROM profil LEFT JOIN idees_ameliorations
                             ON profil.id=idees_ameliorations.emmetteur
                             WHERE idees_ameliorations.id= ? ') ;
     $Query->execute(array($idee));
@@ -128,15 +128,14 @@ if(isset($_GET['idee'])){
           WHERE id= ? ');
     $Query2->execute(array($_SESSION['manager']));
 
-      $Query3= $bdd-> prepare('SELECT  nom AS nom_respo, prenom AS prenom_respo FROM idees_ameliorations JOIN profil
-            ON profil.id=idees_ameliorations.manager
-            WHERE idees_ameliorations.id= ? ');
-      $Query3->execute(array($idee));
+
 
       $emm=$Query->fetch();
       $sup=$Query2->fetch();
-      $respo=$Query3->fetch();
+
       ?>
+      <div class="row">
+      <div class="col-md-7">
     <a href="details.php?vote=<?php echo $idee;?>" class="btn btn-default"><div class="alerte" >
 
           <div class="info_alerte">
@@ -150,13 +149,26 @@ if(isset($_GET['idee'])){
                   <b>Manager : </b><?php echo $sup['nom_sup']; echo "  "; echo $sup["prenom_sup"]; ?><br>
                   <b>Nombre de vote : </b><?php echo $emm['vote'];?><br>
                   <b>Situation actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
+                  <b>Nobre d'idées qu'elle contient : </b><?php echo $emm['nbidees'];?><br>
                   <b>Situation proposée :</b><?php echo $emm['situation_proposee'];?><br><br><br>
                   <b><?php echo "Cliquez pour voter";?></b><br></p>
 
 
           </div>
 
-      </div></a>
+      </div></a> </div>
+      <div class="col-md-5">
+
+        <?php
+          if($emm['image'] != NULL){
+            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+            $query -> execute(array($emm['image']));
+            $img= $query -> fetch(); ?>
+            <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; " alt="Image associée à l'idée">
+          <?php } ?>
+        
+      </div>
+    </div>
 
 
 

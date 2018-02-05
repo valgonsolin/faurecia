@@ -139,12 +139,12 @@ if(isset($_GET['nb'])){
 $nb=(int ) $_GET['nb'];
 }
   if($droit==1){
-  $qyy= $bdd->prepare('SELECT  situation_proposee,type,nom,date_rea,situation_actuelle,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  ORDER BY id1 DESC LIMIT 5 OFFSET :off ');
+  $qyy= $bdd->prepare('SELECT  nbidees,ituation_proposee,type,nom,date_rea,situation_actuelle,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  ORDER BY id1 DESC LIMIT 5 OFFSET :off ');
   $qyy->bindValue(':off', $nb, PDO::PARAM_INT);
   $qyy->execute();
 
 }else{
-  $qyy= $bdd->prepare('SELECT  idees_ameliorations.id AS id1, date_rea,situation_actuelle,vote,nom,type,situation_proposee FROM idees_ameliorations  LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  WHERE (profil.id= :a OR profil.manager= :b)  ORDER BY id1 DESC LIMIT 5 OFFSET :off');
+  $qyy= $bdd->prepare('SELECT  nbidees,idees_ameliorations.id AS id1, date_rea,situation_actuelle,vote,nom,type,situation_proposee FROM idees_ameliorations  LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  WHERE (profil.id= :a OR profil.manager= :b)  ORDER BY id1 DESC LIMIT 5 OFFSET :off');
   $qyy->bindValue(':a',$_SESSION['id'],PDO::PARAM_INT );
   $qyy->bindValue(':b',$_SESSION['manager'],PDO::PARAM_INT );
   $qyy->bindValue(':off', $nb, PDO::PARAM_INT);
@@ -170,6 +170,7 @@ $nb=(int ) $_GET['nb'];
               <b>Date création: </b><?php echo date('d/m/y ',strtotime($Data['date_rea']));?><br>
               <b>Nombre de vote : </b><?php echo $Data['vote'];?><br>
               <b>Situation Actuelle :</b><?php echo $Data['situation_actuelle'];?><br>
+              <b>Nobre d'idées qu'elle contient : </b><?php echo $Data['nbidees'];?><br>
               <b>Situation Proposee :</b><?php echo $Data['situation_proposee'];?><br><br><br><br>
               <b><?php echo "Cliquez pour modifier/supprimer ";?><b><br></p>
 
