@@ -108,6 +108,7 @@ else
   </div>
   <button type="submit" class="btn btn-default">Rechercher</button>
   <a href="ajout.php" class="btn btn-default pull-right">Espace administration</a>
+  <a href="statistiques.php" class="btn btn-default pull-right">Statistiques</a>
 </form>
 
 
