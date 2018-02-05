@@ -62,7 +62,7 @@ else
  $query->bindValue('situation_actuelle', $_POST['situation_actuelle'],PDO::PARAM_STR);
  $query->bindValue('situation_proposee', $_POST['situation_proposee'],PDO::PARAM_STR);
  $query->bindValue('id', $_POST['id'],PDO::PARAM_INT);
- $query->bindValue('image',$ido,PDO::PARAM_INT);
+ $query->bindValue('image',$file,PDO::PARAM_INT);
  $query->bindValue('nbidees',$_POST['nbidees'],PDO::PARAM_INT);
  $query->execute();
 
