@@ -29,7 +29,7 @@ else
 <table class="table">
 <thead class="thead">
 <tr>
-    <th style="width: 150px;">Idnetifiant</th>
+    <th style="width: 150px;">Identifiant</th>
     <th>Nom</th>
     <th>Prénom</th>
     <th>Total questions traitées</th>
