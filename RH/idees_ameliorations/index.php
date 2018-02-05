@@ -118,7 +118,7 @@ else
 <?php
 
 if($recherche>0){
-$Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0 and (MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y) ORDER BY vote DESC LIMIT 5  OFFSET :nb') ;
+$Query = $bdd->prepare('SELECT nbidees,situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0 and (MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y) ORDER BY vote DESC LIMIT 5  OFFSET :nb') ;
 
 $Query->bindValue(':i',(int) $recherche,PDO::PARAM_INT);
 $Query->bindValue(':m', $mois, PDO::PARAM_INT);
@@ -127,7 +127,7 @@ $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
 $Query->execute();}
 
 
-else{$Query = $bdd->prepare('SELECT situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and(MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y)  ORDER BY vote DESC LIMIT 5 OFFSET :nb ') ;
+else{$Query = $bdd->prepare('SELECT nbidees,situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and(MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y)  ORDER BY vote DESC LIMIT 5 OFFSET :nb ') ;
 
   $Query->bindValue(':m', $mois, PDO::PARAM_INT);
   $Query->bindValue(':y', $annee,PDO::PARAM_INT);
@@ -156,7 +156,9 @@ while ($Data = $Query->fetch()) {
                 <b>Date création: </b><?php echo date('d/m/y ',strtotime($Data['date_rea']));?><br>
                 <b>Nombre de vote : </b><?php echo $Data['vote'];?><br>
                 <b>Situation actuelle :</b><?php echo $Data['situation_actuelle'];?><br>
+                <b>Nobre d'idées qu'elle contient : </b><?php echo $Data['nbidees'];?><br>
                 <b>Situation proposée :</b><?php echo $Data['situation_proposee'];?><br><br><br>
+
                 <b><?php echo "Cliquez pour retirer vote";?></b><br></p>
 
 
@@ -178,6 +180,7 @@ while ($Data = $Query->fetch()) {
               <b>Date : </b><?php echo date('d/m/y ',strtotime($Data['date_rea']));?><br>
               <b>Nombre de vote : </b><?php echo $Data['vote'];?><br>
               <b>Situation actuelle : </b><?php echo $Data['situation_actuelle'];?><br>
+              <b>Nobre d'idées qu'elle contient : </b><?php echo $Data['nbidees'];?><br>
               <b>Situation proposée :</b><?php echo $Data['situation_proposee'];?><br><br><br>
               <b><?php echo "Cliquez pour voter";?></b><br></p>
 
