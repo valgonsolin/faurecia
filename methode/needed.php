@@ -11,5 +11,5 @@ function drawMenu($selected){
             <a href="<?php echo $url; ?>/methode/formation"><div class="bouton_menu     <?php if($selected=='formation'){echo ' bouton_nav_selected';} ?>">Formation PPTL</div></a>
         </div>
     </div>
-<?php
+<?php 
 }
