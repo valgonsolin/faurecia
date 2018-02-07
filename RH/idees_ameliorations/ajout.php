@@ -44,7 +44,7 @@ else
       warning('Erreur','Les données entrées ne sont pas conformes.');
 
     }
-  }else{ echo "bite";}
+  }
   ?>
   <div class="boutons_nav" style="display: flex; justify-content: center;">
     <a href="ajout.php" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Ajout</a>
