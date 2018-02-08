@@ -114,6 +114,12 @@ if(!isset($_GET['id'])){ ?>
   <h4>Erreur... Votre session est inconnue.</h4>
   <a class="btn btn-default" href="<?php echo $url; ?>/methode/launchboard">Retourner au LaunchBoard</a>
   <?php }else{
+    if(! isset($_SESSION['login'])){ ?>
+        <h2>LaunchBoard</h2>
+  <h4>Vous devez etre connecté pour accéder à cette partie.</h4>
+  <a class="btn btn-default" href="<?php echo $url; ?>/methode/launchboard">Retourner au LaunchBoard</a>
+  <a class="btn btn-default" href="<?php echo $url; ?>/moncompte/identification.php">Connexion</a>
+   <?php }else{
   if(isset($_POST['delete_kickoff'])){
     remove_file($bdd,$_POST['kickoff']);
     $q = $bdd -> prepare('UPDATE launchboard SET kickoff = NULL WHERE id= ?');
@@ -746,6 +752,6 @@ if(!isset($_GET['id'])){ ?>
     //-->
     </script>
 <?php
-}
+}}
 drawFooter();
  ?>
