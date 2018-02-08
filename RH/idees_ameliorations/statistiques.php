@@ -21,7 +21,7 @@ if(isset($_POST['intervalle'])){
 
 ?>
 
-<a href="#categories"><button class="btn btn-default">Statistiques par categories</button></a> </br></br>
+<a href="#categories"><button class="btn btn-default">Voir statistiques par categories</button></a> </br></br>
 
 <form method="post" style="margin-top:20px;" enctype="multipart/form-data">
 
