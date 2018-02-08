@@ -60,7 +60,7 @@ $toutesdates = $qy ->fetchAll();
 
   ?>
 
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="../../js/loader.js"></script>
   <script src="../../js/moment.min.js"></script>
   <script src="../../js/Chart.js"></script>
   <script type="text/javascript">

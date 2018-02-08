@@ -120,7 +120,7 @@ if(isset($_GET['idee'])){
   <?php
 
 
-    $Query = $bdd->prepare('SELECT nbidees,nom,prenom,type,vote,situation_actuelle,situation_proposee FROM profil LEFT JOIN idees_ameliorations
+    $Query = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
                             ON profil.id=idees_ameliorations.emmetteur
                             WHERE idees_ameliorations.id= ? ') ;
     $Query->execute(array($idee));
@@ -146,7 +146,7 @@ if(isset($_GET['idee'])){
               </div>
 
               <p><b>Emmeteur : </b><?php echo $emm['nom']; echo "  "; echo $emm['prenom']; ?><br>
-                  <b>Manager : </b><?php echo $sup['nom_sup']; echo "  "; echo $sup["prenom_sup"]; ?><br>
+                  <b>Manager : </b> <?php echo $sup['nom_sup']; echo "  "; echo $sup["prenom_sup"]; ?> <br>
                   <b>Nombre de vote : </b><?php echo $emm['vote'];?><br>
                   <b>Situation actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
                   <b>Nobre d'idées qu'elle contient : </b><?php echo $emm['nbidees'];?><br>
@@ -166,7 +166,7 @@ if(isset($_GET['idee'])){
             $img= $query -> fetch(); ?>
             <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; " alt="Image associée à l'idée">
           <?php } ?>
-        
+
       </div>
     </div>
 
