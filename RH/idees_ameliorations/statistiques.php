@@ -21,6 +21,7 @@ if(isset($_POST['intervalle'])){
 
 ?>
 
+<a href="#categories"><button class="btn btn-default">Statistiques par categories</button></a> </br></br>
 
 <form method="post" style="margin-top:20px;" enctype="multipart/form-data">
 
@@ -140,7 +141,9 @@ function countOccurences(tab){
 <div id="curve_chart" style="width: 900px; height: 500px"></div>
 
 </br></br></br></br>
-<h1>Répartition des idees par catégories: </h1> </br></br>
+
+<div id="categories" ><h1>Répartition des idees par catégories: </h1> </div>
+ </br></br>
 
 <canvas id="browsersChart" width="400" height="100"></canvas>
 
