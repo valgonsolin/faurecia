@@ -139,7 +139,7 @@ if(isset($_GET['nb'])){
 $nb=(int ) $_GET['nb'];
 }
   if($droit==1){
-  $qyy= $bdd->prepare('SELECT  nbidees,ituation_proposee,type,nom,date_rea,situation_actuelle,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  ORDER BY id1 DESC LIMIT 5 OFFSET :off ');
+  $qyy= $bdd->prepare('SELECT  nbidees,situation_proposee,type,nom,date_rea,situation_actuelle,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  ORDER BY id1 DESC LIMIT 5 OFFSET :off ');
   $qyy->bindValue(':off', $nb, PDO::PARAM_INT);
   $qyy->execute();
 
@@ -150,7 +150,6 @@ $nb=(int ) $_GET['nb'];
   $qyy->bindValue(':off', $nb, PDO::PARAM_INT);
   $qyy->execute();
   }
-
 
   while($Data=$qyy->fetch()){
 

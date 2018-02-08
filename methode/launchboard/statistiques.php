@@ -11,6 +11,12 @@ if(!isset($_GET['id'])){ ?>
   <h4>OUPS... Votre session est inconnu.</h4>
   <a class="btn btn-default" href="<?php echo $url; ?>/methode/launchboard"> Retourner au LaunchBoard</a>
 <?php }else{
+   if(! isset($_SESSION['login'])){ ?>
+        <h2>LaunchBoard</h2>
+  <h4>Vous devez etre connecté pour accéder à cette partie.</h4>
+  <a class="btn btn-default" href="<?php echo $url; ?>/methode/launchboard">Retourner au LaunchBoard</a>
+  <a class="btn btn-default" href="<?php echo $url; ?>/moncompte/identification.php">Connexion</a>
+   <?php }else{
   $query = $bdd -> prepare('SELECT * FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE launchboard.id = ?');
   $query -> execute(array($_GET['id']));
   $Data = $query -> fetch();
@@ -148,6 +154,6 @@ if(sizeof($dates) >0){
   <a href="generate.php" class="btn btn-default">Telecharger la LaunchRoom</a>
 
 <?php
-}
+}}
 drawFooter();
  ?>
