@@ -129,6 +129,7 @@ $query ->execute();
   </div>
 
   <button type="submit" class="btn btn-default">Rechercher</button>
+  <a href="generate.php" class="btn btn-default pull-right">Export Excel</a>
   <a href="ajout.php" class="btn btn-default pull-right">Ajouter</a>
 </form>
 

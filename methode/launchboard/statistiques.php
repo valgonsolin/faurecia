@@ -149,11 +149,7 @@ if(sizeof($dates) >0){
       var myChart = new Chart(ctx, config);
 		};
 </script>
-<?php } ?>
-
-  <a href="generate.php" class="btn btn-default">Telecharger la LaunchRoom</a>
-
-<?php
+<?php }
 }}
 drawFooter();
  ?>

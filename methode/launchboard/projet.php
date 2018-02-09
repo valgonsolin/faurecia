@@ -154,6 +154,23 @@ if(!isset($_GET['id'])){ ?>
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
     }
   }
+  if(isset($_POST['helios'])){
+    $q = $bdd -> prepare('UPDATE launchboard SET link_helios = ? WHERE id = ?');
+    if($q -> execute(array($_POST['link_helios'],$_GET['id']))){
+      success('Modifiée','Le lien a été modifié.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
+  if(isset($_POST['plr'])){
+    $q = $bdd -> prepare('UPDATE launchboard SET link_plr = ? WHERE id = ?');
+    if($q -> execute(array($_POST['link_plr'],$_GET['id']))){
+      success('Modifiée','Le lien a été modifié.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
+  
   if(isset($_POST['ptg'])){
     $q = $bdd -> prepare('INSERT INTO evolution_projet(id_projet,pourcentage,date) VALUES (?,?,NOW())');
     if($q -> execute(array($_GET['id'],$_POST['pourcentage']))){
@@ -598,8 +615,12 @@ if(!isset($_GET['id'])){ ?>
         <?php
       }
       ?>
-      <h4>Lien HELIOS :</h4><a href="<?php echo $Data['link_helios']; ?>"><?php echo $Data['link_helios']; ?></a>
-      <h4>Lien PLR :</h4><a href="<?php echo $Data['link_plr']; ?>"><?php echo $Data['link_plr']; ?></a>
+      <h4>Lien HELIOS :<?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
+        <div class="btn btn-default pull-right" data-toggle="modal" data-target="#helios">Modifier</div><?php } ?></h4><a href="<?php echo $Data['link_helios']; ?>"><?php echo $Data['link_helios']; ?></a>
+      
+      <h4>Lien PLR : <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
+        <div class="btn btn-default pull-right" data-toggle="modal" data-target="#plr">Modifier</div><?php } ?></h4><a href="<?php echo $Data['link_plr']; ?>"><?php echo $Data['link_plr']; ?></a>
+      
   </div>
   <div class="col-md-6">
     <?php
@@ -706,17 +727,35 @@ if(!isset($_GET['id'])){ ?>
     </div>
   </div>
 </div>
-<div id="pourcentage" class="modal fade" role="dialog">
+<div id="helios" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Mettre à jour le pourcentage</h4>
+        <h4 class="modal-title">Modifier le lien</h4>
       </div>
       <div class="modal-body">
         <form method="post" class="form-group">
-          <input type="number" name="pourcentage" class="form-control" min="0" max="100" value="<?php if($pourcentage == "error"){echo "0";}else{echo $pourcentage;} ?>">
-          <input type="submit" name="ptg" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le pourcentage ?')">
+          <input type="text" class="form-control" name="link_helios" value="<?php echo $Data['link_helios']; ?>">
+          <br>
+          <input type="submit" name="helios" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le lien ?')">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="plr" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modifier le lien</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <input type="text" class="form-control" name="link_plr" value="<?php echo $Data['link_plr']; ?>">
+          <br>
+          <input type="submit" name="plr" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le lien ?')">
         </form>
       </div>
     </div>
