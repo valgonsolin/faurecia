@@ -23,10 +23,13 @@ if(isset($_GET['recherche'])){
 ?>
 <style>
     .conteneur_alerte{
+        margin-left:-12.5%;
+        margin-right:-12.5%;
         margin-top:20px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        font-family:Arial;
     }
     .alerte{
         color: #000 ;
@@ -119,7 +122,7 @@ if(isset($_GET['recherche'])){
                 logistique_reponse_jaune.couverture_ligne as couverture_ligne
                 FROM logistique_alerte
                 LEFT JOIN logistique_pieces on logistique_alerte.piece=logistique_pieces.id
-                LEFT JOIN logistique_e_kanban on logistique_e_kanban.id=logistique_alerte.e_kanban
+                LEFT JOIN logistique_e_kanban on logistique_e_kanban.piece=logistique_alerte.piece
                 LEFT JOIN logistique_reponse_jaune on logistique_alerte.id=logistique_reponse_jaune.alerte
                 WHERE state in ';
     $requete .= $state;

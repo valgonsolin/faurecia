@@ -19,7 +19,7 @@ if (isset($_POST['submit'])){
 
 if (isset($_GET['id'])){
     ?>
-    <h2>Modifier le profil</h2>
+    <h2>Modifier l'alerte</h2>
 
     <?php
     $Query = $bdd->prepare('SELECT * FROM logistique_pieces WHERE id = ?');
@@ -30,7 +30,7 @@ if (isset($_GET['id'])){
     $sebango = $Data['sebango'];
     $description = $Data['description'];
 }else{
-    ?><h2>Ajouter un profil</h2><?php
+    ?><h2>Ajouter une alerte</h2><?php
     $reference = "";
     $sebango = "";
     $description = "";

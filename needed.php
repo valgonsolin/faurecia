@@ -23,12 +23,14 @@ $bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'ta
         <script src="/js/jquery.min.js"></script>
         <script src="/bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        
 
 
 
 
         <link rel="stylesheet" href="/css/base.css"/>
 		    <link rel="stylesheet" href="/css/dropdown.css"/>
+
 
 
         <title>Faurecia Beaulieu</title>

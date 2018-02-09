@@ -34,12 +34,12 @@ if (isset($_POST['supprimer'])){
     header('Location: '.$url."/logistique/index.php");
 }
 
-$Query = $bdd->prepare('SELECT logistique_alerte.id as id_alerte , state, e_kanban, train, uc_restant_en_ligne, logistique_alerte.date , logistique_pieces.*  FROM logistique_alerte LEFT JOIN logistique_pieces on logistique_alerte.piece=logistique_pieces.id WHERE logistique_alerte.id = ?');
+$Query = $bdd->prepare('SELECT logistique_alerte.id as id_alerte , state, piece, train, uc_restant_en_ligne, logistique_alerte.date , logistique_pieces.*  FROM logistique_alerte LEFT JOIN logistique_pieces on logistique_alerte.piece=logistique_pieces.id WHERE logistique_alerte.id = ?');
 $Query->execute(array($_GET['id']));
 $Data = $Query->fetch();
 
-$Query_e_kanban = $bdd->prepare('SELECT * FROM logistique_e_kanban WHERE id = ?');
-$Query_e_kanban->execute(array($Data['e_kanban']));
+$Query_e_kanban = $bdd->prepare('SELECT * FROM logistique_e_kanban WHERE piece = ?');
+$Query_e_kanban->execute(array($Data['piece']));
 if ($Data_e_kanban = $Query_e_kanban->fetch()) {
     $quantite = $Data_e_kanban['quantite'];
     $ligne = $Data_e_kanban['ligne'];
@@ -168,7 +168,7 @@ $state = $Data['state'];
 
             <?php
             $Query = $bdd->prepare('SELECT * FROM logistique_e_kanban WHERE piece = ?');
-            $Query->execute(array($Data['id']));
+            $Query->execute(array($Data['piece']));
             while ($Data = $Query->fetch()) {
                 ?>
 
