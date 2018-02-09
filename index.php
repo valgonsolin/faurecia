@@ -54,7 +54,7 @@ drawheader();
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
 <?php
-  $query = $bdd -> prepare('SELECT * FROM news ORDER BY date DESC LIMIT 6');
+  $query = $bdd -> prepare('SELECT * FROM news ORDER BY date DESC LIMIT 12');
   $query -> execute();
   $test=1;
   while($Data = $query -> fetch()){

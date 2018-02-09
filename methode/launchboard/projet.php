@@ -761,6 +761,23 @@ if(!isset($_GET['id'])){ ?>
     </div>
   </div>
 </div>
+<div id="pourcentage" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mettre à jour le pourcentage</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <input type="text" class="form-control" name="pourcentage" value="<?php echo $pourcentage; ?>">
+          <br>
+          <input type="submit" name="ptg" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le pourcentage ?')">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <br><br>
 <form method="post" action="index.php">
   <a href="index.php" class="btn btn-default">Retour</a>
