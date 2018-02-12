@@ -1,9 +1,10 @@
+
 <?php
 include_once "needed.php";
 include_once "../../needed.php";
 
 drawHeader('RH');
-drawMenu('tot_idees');
+
 
 
 $recherche = -1;
@@ -16,19 +17,20 @@ $datetime = date("Y-m-d");
     $annee = $date['year'];
 
 
+
+
 if (isset($_GET["recherche"])){
     $recherche = $_GET["recherche"];
 }
 
 if(isset($_GET['nb'])){
-  $debut=(int) $_GET['nb'];
+  $debut=$_GET['nb'];
 }
-
-
 
 
 if(empty($_SESSION['login']))
 { ?>
+
   <h2>Idées</h2>
   <h4>Vous devez être connecté pour accéder à cette partie.</h4>
   <a href="/moncompte/identification.php?redirection=RH/idees_ameliorations"><button class="btn btn-default">Se connecter</button></a>
@@ -86,42 +88,54 @@ else
     }
 </style>
 
+<div class="boutons_nav" style="display: flex; justify-content: center;">
+  <a href="validation.php" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Valider idee</a>
+  <a href="realisation.php" class="bouton_menu">Declarer une idee "realisee"</a>
+</div>
+<br><br>
 
-<h2>Idées </h2>
+<h1>Les idées dont vous etes manager :</h1>
+<br><br>
+
+
 
   <form class="form-inline">
   <div class="form-group">
-    <label for="recherche">Recherche :</label>
+    <label>Recherche</label>
     <select class="form-control" name="recherche" >
       <?php
       $profil = $bdd -> query('SELECT * FROM profil'); ?>
       <option value="">Selectionnez une personne </option>
 
       <?php
+      $profil = $bdd -> query('SELECT * FROM profil');
       while($personne = $profil -> fetch()){ ?>
         <option value="<?php echo $personne['id']; ?>" ><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
     <?php  } ?>
     </select>
-
-
   </div>
   <button type="submit" class="btn btn-default">Rechercher</button>
-  <a href="ajout.php" class="btn btn-default pull-right">Espace administration</a>
-  <a href="validation.php" class="btn btn-default pull-right">Espace Manager</a>
+  </form>
 
-</form>
+
+
 
 
 <div class="conteneur_alerte">
 <?php
 
 if($recherche>0){
-  $Query = $bdd->prepare('SELECT nbidees,situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0  ORDER BY id1 DESC LIMIT 20  OFFSET :nb') ;
-  $Query->bindValue(':i',(int) $recherche,PDO::PARAM_INT);
-  $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
-  $Query->execute();}
+$Query = $bdd->prepare('SELECT *, idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0 and profil.manager=:m  ORDER BY id1 DESC LIMIT 20  OFFSET :nb') ;
 
-else{$Query = $bdd->prepare('SELECT nbidees,situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 ORDER BY id1 DESC LIMIT 20 OFFSET :nb ') ;
+$Query->bindValue(':i',(int) $recherche,PDO::PARAM_INT);
+$Query->bindValue(':m', $_SESSION['id'], PDO::PARAM_INT);
+$Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
+$Query->execute();}
+
+
+else{$Query = $bdd->prepare('SELECT *,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and profil.manager=:m   ORDER BY  id1 DESC LIMIT 20 OFFSET :nb ') ;
+
+  $Query->bindValue(':m', $_SESSION['id'], PDO::PARAM_INT);
   $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
   $Query->execute();}
 
@@ -129,12 +143,12 @@ else{$Query = $bdd->prepare('SELECT nbidees,situation_actuelle,situation_propose
 while ($Data = $Query->fetch()) {
 
   $c=0;
-  $Qy = $bdd->prepare('SELECT * FROM votes_idees WHERE personne= ? AND idee= ?');
-  $Qy->execute(array($_SESSION['id'],  $Data['id1']));
+  $Qy = $bdd->prepare('SELECT * FROM idees_ameliorations WHERE id= ? and valide= 1');
+  $Qy->execute(array( $Data['id1']));
   if($Qy->fetch()){$c=1;}
   if($c){ ?>
 
-    <a href="details.php?idee2= <?php echo $Data['id1'] ; ?>" ><div class="alerte" >
+    <a href="valide.php?idee2= <?php echo $Data['id1'] ; ?>" ><div class="alerte" >
 
         <div class="info_alerte">
             <div class="date_et_titre">
@@ -148,8 +162,10 @@ while ($Data = $Query->fetch()) {
                 <b>Nombre de vote : </b><?php echo $Data['vote'];?><br>
                 <b>Situation actuelle :</b><?php echo $Data['situation_actuelle'];?><br>
                 <b>Nobre d'idées qu'elle contient : </b><?php echo $Data['nbidees'];?><br>
+                <b><?php if($Data['valide']==1){echo "Cette idée a déja été validé par le manager ";}else{echo "L'idée n'a pas été validé par le manager";} ?></b><br>
                 <b>Situation proposée :</b><?php echo $Data['situation_proposee'];?><br><br><br>
-                <b><?php echo "Cliquez pour retirer vote";?></b><br></p>
+
+                <b><?php echo "Cliquez pour retirer validation idée ";?></b><br></p>
 
 
         </div>
@@ -157,7 +173,7 @@ while ($Data = $Query->fetch()) {
     </div></a>
 <?php
 }else{ ?>
-  <a href="details.php?idee= <?php echo $Data['id1'] ; ?>" ><div class="alerte" >
+  <a href="valide.php?idee= <?php echo $Data['id1'] ; ?>" ><div class="alerte" >
 
       <div class="info_alerte">
           <div class="date_et_titre">
@@ -171,8 +187,9 @@ while ($Data = $Query->fetch()) {
               <b>Nombre de vote : </b><?php echo $Data['vote'];?><br>
               <b>Situation actuelle : </b><?php echo $Data['situation_actuelle'];?><br>
               <b>Nobre d'idées qu'elle contient : </b><?php echo $Data['nbidees'];?><br>
+              <b><?php if($Data['valide']==1){echo "Cette idée a déja été validé par le manager ";}else{echo "L'idée n'a pas été validé par le manager";} ?></b><br>
               <b>Situation proposée :</b><?php echo $Data['situation_proposee'];?><br><br><br>
-              <b><?php echo "Cliquez pour voter";?></b><br></p>
+              <b><?php echo "Cliquez pour valider l'idée ";?></b><br></p>
 
         </div>
 
@@ -186,32 +203,27 @@ while ($Data = $Query->fetch()) {
 </div>
 
 <?php
-
 if($debut > 19){
-    ?>
-    <a href="idees_tot.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-20;?>" class="btn btn-default">Elements précédents</a>
-  <?php
-  }
-
-  if($recherche>0){$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
-      ON idees_ameliorations.emmetteur = profil.id
-      WHERE profil.id= :i and supprime = 0  LIMIT 20 OFFSET :nb');
-  $test->bindValue(':i',$recherche, PDO::PARAM_INT);
-  $test ->bindValue(':nb',(int) $debut+20, PDO::PARAM_INT);
-  $test->execute(); }
-
-  else{$test = $bdd->prepare('SELECT * FROM profil JOIN idees_ameliorations
-      ON profil.id= idees_ameliorations.emmetteur
-      WHERE  supprime = 0  LIMIT 20 OFFSET :nb');
-  $test ->bindValue(':nb',(int) ($debut+20), PDO::PARAM_INT);
-  $test->execute();  }
-
-  if($test -> fetch()){ ?>
-    <a href="idees_tot.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+20;?>" class="btn btn-default">Elements suivants</a>
+  ?>
+  <a href="validation.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-20;?>" class="btn btn-default">Elements précédents</a>
 <?php
 }
 
+if($recherche>0){$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
+    ON idees_ameliorations.emmetteur = profil.id
+    WHERE profil.id= :i and supprime = 0  LIMIT 20 OFFSET :nb');
+$test->bindValue(':i',$recherche, PDO::PARAM_INT);
+$test ->bindValue(':nb',(int) $debut+20, PDO::PARAM_INT);
+$test->execute(); }else{$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
+    ON idees_ameliorations.emmetteur = profil.id
+    WHERE  supprime = 0 LIMIT 20 OFFSET :nb');
+$test ->bindValue(':nb',(int) $debut+20, PDO::PARAM_INT);
+$test->execute();  }
 
+if($test -> fetch()){ ?>
+  <a href="validation.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+20;?>" class="btn btn-default">Elements suivants</a>
+<?php
+}
 }
 drawFooter();
  ?>

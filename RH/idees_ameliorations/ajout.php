@@ -23,9 +23,12 @@ else
     $file=upload($bdd,'file',"../../ressources","hse",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
     if($file < 0){$file=NULL;}
 
+    $file2=upload($bdd,'file1',"../../ressources","hse",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    if($file2 < 0){$file2=NULL;}
+
     $datetime = date("Y-m-d");
 
-  $query = $bdd -> prepare('INSERT INTO idees_ameliorations(emmetteur,type,transversalisation,retenue,respo_rea,date_rea,situation_actuelle,situation_proposee,image,nbidees) VALUES (:emmetteur,:type,:transversalisation,:retenue,:respo_rea,:date_rea ,:situation_actuelle,:situation_proposee,:image,:nbidees)');
+  $query = $bdd -> prepare('INSERT INTO idees_ameliorations(emmetteur,type,transversalisation,retenue,respo_rea,date_rea,situation_actuelle,situation_proposee,image,nbidees,image2) VALUES (:emmetteur,:type,:transversalisation,:retenue,:respo_rea,:date_rea ,:situation_actuelle,:situation_proposee,:image,:nbidees,:image2)');
 
     if($query -> execute(array(
       'emmetteur' => $_SESSION['id'],
@@ -37,7 +40,8 @@ else
       'situation_actuelle' => $_POST['situation_actuelle'],
       'situation_proposee' => $_POST['situation_proposee'],
       'image'=>$file,
-      'nbidees'=>$_POST['nbidees']
+      'nbidees'=>$_POST['nbidees'],
+      'image2'=>$file2
     ))){
       success('Ajouté','La question a bien été ajoutée.');
     }else{
@@ -105,8 +109,13 @@ else
     </div>
 
     <div class="form-group">
-      <label>Image de Correction :     </label>
+      <label>Image Avant  :     </label>
       <input name="file" type="file">
+    </div>
+
+    <div class="form-group">
+      <label>Image Apres  :     </label>
+      <input name="file1" type="file">
     </div>
 
   	<input value="Ajouter" class="btn btn-default" type="submit">
