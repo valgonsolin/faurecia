@@ -110,6 +110,7 @@ if(sizeof($dates) >0){
       }]
     },
     options: {
+      color: [ 'red'],
       responsive: true,
       legend :{
         display : false

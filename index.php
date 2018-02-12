@@ -6,10 +6,107 @@ include_once "RH/news/needed.php";
 drawheader();
 
 ?>
-<img src="/images/background-3.png" style="width:125%; transform:translateX(-10%);" >
+
+  <style>
+  .news{
+    color:#444;
+    background-color: #e3e3e3;
+    border-color: #ccc;
+    border-radius:6px;
+    border-width: 1px;
+    border-style: solid;
+    margin:2px;
+  }
+  .page{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;  
+  }
+  .news-content{
+    margin: 0 10px 10px 10px;
+    width: 400px;
+    height: 500px;
+    padding:0;
+    overflow:hidden;
+    border-radius:6px;
+    background-color: #FFF;
+    border-color: #ccc;
+    border-width: 1px;
+    border-style: solid;
+  }
+  .carousel-control{
+    background: none !important;
+    color:black !important;
+  }
+  .carousel-control.left{
+    margin-left:-100px;
+  }
+  .carousel-control.right{
+    margin-right:-100px;
+  }
+  </style>
+
+
+<img src="/images/background-3.png" style="width:125%;margin-left:-12.5%;margin-right:-12.5%;" >
 
 <h1 style="text-align:center;"><a href="RH/news" style="color:grey;">News</a></h1>
-<?php latestNews("6",""); ?>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+<?php
+  $query = $bdd -> prepare('SELECT * FROM news ORDER BY date DESC LIMIT 12');
+  $query -> execute();
+  $test=1;
+  while($Data = $query -> fetch()){
+    $date=strtotime($Data['date']);
+    $file = $bdd -> prepare('SELECT * FROM files WHERE id = ?');
+    $file -> execute(array($Data['id_pdf']));
+    $pdf = $file -> fetch();
+    ?>
+    <div class="item <?php if($test){echo "active"; $test=0;} ?>">
+    <div class="page">
+      <a href="<?php echo $url.'/RH/news/news.php?id='.$Data['id']; ?>">
+      <div class="news">
+        <h4 style="text-align:center;"><?php echo $Data['nom']; ?><small style="float:right; margin-right:5px;"><?php echo date('j/m/y', $date); ?></small></h4>
+        <div class="news-content">
+          <object data="<?php echo $pdf['chemin']; ?>" type="application/pdf" width="400px;" height="500px">
+            <iframe src="<?php echo $pdf['chemin']; ?>" style="border: none;" width="400px" height="500px">
+              <p>Ce navigateur ne supporte pas les PDFs. <a href="<?php echo $pdf['chemin']; ?>">Télécharger le pdf</a></p></iframe>
+            </object>
+          </div>
+        </div>
+      </a>
+      <?php $Data = $query -> fetch(); ?>
+      <a href="<?php echo $url.'/RH/news/news.php?id='.$Data['id']; ?>">
+      <div class="news">
+        <h4 style="text-align:center;"><?php echo $Data['nom']; ?><small style="float:right; margin-right:5px;"><?php echo date('j/m/y', $date); ?></small></h4>
+        <div class="news-content">
+          <object data="<?php echo $pdf['chemin']; ?>" type="application/pdf" width="400px;" height="500px">
+            <iframe src="<?php echo $pdf['chemin']; ?>" style="border: none;" width="400px" height="500px">
+              <p>Ce navigateur ne supporte pas les PDFs. <a href="<?php echo $pdf['chemin']; ?>">Télécharger le pdf</a></p></iframe>
+            </object>
+          </div>
+        </div>
+      </a>
+      </div>
+    </div>
+
+      <?php
+    }
+    ?>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
 <div id="menu_principal">
 	<a href="/presentation_usine/chiffres_cle.php" class="bouton_principal"><img src="/presentation_usine/ressources/beaulieupicture.jpg"><figcaption>L'usine</figcaption></a>
 	<a href="/dojo_qualite/ok_1er_piece.php" class="bouton_principal"><img src="/dojo_qualite/ressources/Basic01.PNG"><figcaption>Dojo Qualité</figcaption></a>
@@ -19,7 +116,6 @@ drawheader();
 </div>
 
 </div>
-
 <?php
 drawFooter();
 

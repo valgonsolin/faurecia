@@ -64,7 +64,7 @@ if(empty($_SESSION['login'])){
   R&amp;R : <?php echo(img($_SESSION['rr'])); ?>&emsp;
   HSE : <?php echo(img($_SESSION['hse'])); ?>&emsp;
   Kamishibai : <?php echo(img($_SESSION['kamishibai'])); ?>&emsp;
-  Idéess : <?php echo(img($_SESSION['idees'])); ?>&emsp;
+  Idées : <?php echo(img($_SESSION['idees'])); ?>&emsp;
   Logistique : <?php echo(img($_SESSION['logistique'])); ?>&emsp;
   News : <?php echo(img($_SESSION['news'])); ?>&emsp;
   Launchboard: <?php echo(img($_SESSION['launchboard'])); ?></b>

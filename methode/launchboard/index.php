@@ -82,6 +82,8 @@ $query ->execute();
 <style>
 .conteneur_projet{
     margin-top:20px;
+    margin-left:-12.5%;
+    margin-right:-12.5%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -89,6 +91,7 @@ $query ->execute();
 .projet{
     color: #000 ;
     font-size: 15px;
+    font-family:Arial;
     background-color: #e3e3e3;
     border-color: #ccc;
     border-radius:6px;
