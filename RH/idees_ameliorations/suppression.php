@@ -28,6 +28,9 @@ else
     if($Data['image'] != NULL){
       remove_file($bdd,$Data['image']);
     }
+    if($Data['image2'] != NULL){
+      remove_file($bdd,$Data['image2']);
+    }
 
     $query = $bdd -> prepare('DELETE FROM idees_ameliorations WHERE id=?');
     $query -> execute(array($_POST['id']));
@@ -42,19 +45,33 @@ else
   $query = $bdd -> prepare('UPDATE idees_ameliorations SET image = NULL WHERE id = ?');
   $query -> execute(array($_POST['id']));
   success('Supprimé','L\'image a été supprimée.');
+}elseif(isset($_POST['img-reset2'])) {
+  $query= $bdd -> prepare('SELECT * FROM idees_ameliorations WHERE id=?');
+  $query -> execute(array($_POST['id']));
+  $Data= $query -> fetch();
+  remove_file($bdd,$Data['image2']);
+  $query = $bdd -> prepare('UPDATE idees_ameliorations SET image = NULL WHERE id = ?');
+  $query -> execute(array($_POST['id']));
+  success('Supprimé','L\'image a été supprimée.');
 }elseif(isset($_POST['modifier'])){
 
   $quert= $bdd -> prepare('SELECT * FROM idees_ameliorations WHERE id=?');
   $quert -> execute(array($_POST['id']));
   $Data= $quert -> fetch();
   $file=$Data['image'];
+  $file2=$Data['image2'];
   if($_FILES['fichier']['name'] != ""){
     if($Data['image'] != NULL ){remove_file($bdd,$Data['image']); }
     $file=upload($bdd,'fichier',"../../ressources","idees",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
     if($file <0 ){ $file= $Data['image'];}
   }
+  if($_FILES['fichier2']['name'] != ""){
+    if($Data['image2'] != NULL ){remove_file($bdd,$Data['image2']); }
+    $file2=upload($bdd,'fichier2',"../../ressources","idees",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    if($file2 <0 ){ $file2= $Data['image2'];}
+  }
 
-  $query = $bdd -> prepare("UPDATE idees_ameliorations SET type=:type ,transversalisation = :transversalisation,retenue= :retenue,respo_rea=:respo_rea, situation_actuelle= :situation_actuelle, situation_proposee= :situation_proposee ,image = :image , nbidees= :nbidees WHERE id = :id ");
+  $query = $bdd -> prepare("UPDATE idees_ameliorations SET type=:type ,transversalisation = :transversalisation,retenue= :retenue,respo_rea=:respo_rea, situation_actuelle= :situation_actuelle, situation_proposee= :situation_proposee ,image = :image , nbidees= :nbidees, image2= :image2 WHERE id = :id ");
   $query->bindValue('type', $_POST['type'],PDO::PARAM_STR);
   $query->bindValue('transversalisation', $_POST['transversalisation'],PDO::PARAM_INT);
  $query->bindValue('retenue', $_POST['retenue'],PDO::PARAM_INT);
@@ -64,6 +81,7 @@ else
  $query->bindValue('id', $_POST['id'],PDO::PARAM_INT);
  $query->bindValue('image',$file,PDO::PARAM_INT);
  $query->bindValue('nbidees',$_POST['nbidees'],PDO::PARAM_INT);
+ $query->bindValue('image2',$file2,PDO::PARAM_INT);
  $query->execute();
 
   if($query ==false){
@@ -139,12 +157,12 @@ if(isset($_GET['nb'])){
 $nb=(int ) $_GET['nb'];
 }
   if($droit==1){
-  $qyy= $bdd->prepare('SELECT  nbidees,situation_proposee,type,nom,date_rea,situation_actuelle,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  ORDER BY id1 DESC LIMIT 5 OFFSET :off ');
+  $qyy= $bdd->prepare('SELECT  nbidees,situation_proposee,type,nom,date_rea,situation_actuelle,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  ORDER BY id1 DESC LIMIT 20 OFFSET :off ');
   $qyy->bindValue(':off', $nb, PDO::PARAM_INT);
   $qyy->execute();
 
 }else{
-  $qyy= $bdd->prepare('SELECT  nbidees,idees_ameliorations.id AS id1, date_rea,situation_actuelle,vote,nom,type,situation_proposee FROM idees_ameliorations  LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  WHERE (profil.id= :a OR profil.manager= :b)  ORDER BY id1 DESC LIMIT 5 OFFSET :off');
+  $qyy= $bdd->prepare('SELECT  nbidees,idees_ameliorations.id AS id1, date_rea,situation_actuelle,vote,nom,type,situation_proposee FROM idees_ameliorations  LEFT JOIN profil ON  profil.id=idees_ameliorations.emmetteur  WHERE (profil.id= :a OR profil.manager= :b)  ORDER BY id1 DESC LIMIT 20 OFFSET :off');
   $qyy->bindValue(':a',$_SESSION['id'],PDO::PARAM_INT );
   $qyy->bindValue(':b',$_SESSION['manager'],PDO::PARAM_INT );
   $qyy->bindValue(':off', $nb, PDO::PARAM_INT);
@@ -186,10 +204,10 @@ $nb=(int ) $_GET['nb'];
 <?php
 
 if($droit==1){
-$test = $bdd->prepare('SELECT * FROM idees_ameliorations LEFT JOIN profil ON profil.id=idees_ameliorations.emmetteur  LIMIT 5 OFFSET :off ');
+$test = $bdd->prepare('SELECT * FROM idees_ameliorations LEFT JOIN profil ON profil.id=idees_ameliorations.emmetteur  LIMIT 20 OFFSET :off ');
 $test->bindValue(':off',(int) ($nb+5),PDO::PARAM_INT );
 $test->execute(); }
-else{$test = $bdd->prepare('SELECT * FROM idees_ameliorations JOIN profil ON profil.id=idees_ameliorations.emmetteur  WHERE( profil.id= :a OR profil.manager= :b ) LIMIT 5 OFFSET :off ');
+else{$test = $bdd->prepare('SELECT * FROM idees_ameliorations JOIN profil ON profil.id=idees_ameliorations.emmetteur  WHERE( profil.id= :a OR profil.manager= :b ) LIMIT 20 OFFSET :off ');
 
 $test->bindValue(':a',($_SESSION['id']),PDO::PARAM_INT );
 $test->bindValue(':b', ($_SESSION['manager']),PDO::PARAM_INT );
@@ -197,12 +215,12 @@ $test->bindValue(':off',(int) $nb+5,PDO::PARAM_INT );
 $test->execute();}
  ?>
  <?php
-  if($nb > 4){    ?>
-      <a href="suppression.php?nb=<?php echo ($nb-5);?>" class="btn btn-default">Elements précédents</a>
+  if($nb > 19){    ?>
+      <a href="suppression.php?nb=<?php echo ($nb-20);?>" class="btn btn-default">Elements précédents</a>
     <?php
     }
     if($test -> fetch()){ ?>
-    <a href="suppression.php?nb=<?php echo $nb+5; ?>" class="btn btn-default">Elements suivants</a>
+    <a href="suppression.php?nb=<?php echo $nb+20; ?>" class="btn btn-default">Elements suivants</a>
   <?php } ?>
 
 

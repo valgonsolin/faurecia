@@ -25,36 +25,22 @@ if(isset($_GET['vote'])){
   $a_vote=$_GET['vote'];
 
   if($a_vote>0){
-      $Qy = $bdd->prepare('SELECT COUNT(id) AS nb FROM votes_idees WHERE personne= ? AND idee= ? ');
-      $Qy->execute(array($_SESSION['id'],  $a_vote));
+      $Qy = $bdd->prepare('SELECT valide AS v FROM idees_ameliorations WHERE id= ? ');
+      $Qy->execute(array($a_vote));
       $nb= $Qy->fetch();
-      if($nb['nb']>0){warning("ERREUR","vous avez deja voté pour cette idée");
-        }else{$queryy=$bdd->prepare('INSERT INTO votes_idees( personne, idee) VALUES(:personne , :idee )');
-                                                                                $queryy -> execute(array(
-                                                                                'personne' => $_SESSION['id'],
-                                                                                'idee' => $a_vote,
-                                                                                ));
-             $qy=$bdd->prepare('UPDATE idees_ameliorations SET vote= ? WHERE id = ?');
-             $qy2=$bdd->prepare('SELECT vote as v FROM idees_ameliorations WHERE id = ?');
-             $qy2 -> execute(array($a_vote));
-             $v=$qy2->fetch();
-             $qy -> execute(array($v['v']+1,$a_vote));
-            success("SUCCES","Le vote a bien été pris en compte") ;}
-  }else{$Qy = $bdd->prepare('SELECT COUNT(id) AS nb FROM idees_ameliorations WHERE id=? ');
-  $Qy->execute(array( (- $a_vote)));
+      if($nb['v']>0){warning("ERREUR","vous avez deja validée cette idée");
+      }else{$queryy=$bdd->prepare('UPDATE idees_ameliorations SET valide= 1 WHERE id =? ');
+            $queryy -> execute(array( $a_vote));
+            success("SUCCES","L'idée a bien été valiée") ;}
+  }else{$Qy = $bdd->prepare('SELECT valide AS v FROM idees_ameliorations WHERE id= ? ');
+  $Qy->execute(array($a_vote));
   $nb= $Qy->fetch();
-  if($nb['nb']=0){warning("ERREUR","vous ne pouvez pas voter pour cette idée");
+  if($nb['v']=0){warning("ERREUR","vous n'avez pas encore validé cette idée");
   }else{$p=(-$a_vote);
-        $queryy=$bdd->prepare('DELETE FROM votes_idees WHERE  personne= ? AND idee= ?');
-        $queryy -> execute(array($_SESSION['id'],$p));
-         $qy=$bdd->prepare('UPDATE idees_ameliorations SET vote= ? WHERE id = ?');
-         $qy2=$bdd->prepare('SELECT vote as v FROM idees_ameliorations WHERE id = ?');
-         $qy2 -> execute(array((-$a_vote)));
-         $v=$qy2->fetch();
-         $qy -> execute(array($v['v']-1,(-$a_vote)));
-        success("SUCCES","Le vote a bien été supprimé") ;
-
-  }
+         $qy=$bdd->prepare('UPDATE idees_ameliorations SET valide= 0 WHERE id = ?');
+         $qy -> execute(array($p));
+        success("SUCCES","La validationa bien été retirée") ;
+}
 
 }
 } ?>
@@ -136,7 +122,7 @@ if(isset($_GET['idee'])){
       ?>
       <div class="row">
       <div class="col-md-7">
-    <a href="details.php?vote=<?php echo $idee;?>" class="btn btn-default"><div class="alerte" >
+    <div class="alerte" >
 
           <div class="info_alerte">
               <div class="date_et_titre">
@@ -151,14 +137,13 @@ if(isset($_GET['idee'])){
                   <b>Situation actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
                   <b>Nobre d'idées qu'elle contient : </b><?php echo $emm['nbidees'];?><br>
                   <b><?php if($emm['valide']==1){echo "Cette idée a déja été validé par le manager ";}else{echo "L'idée n'a pas été validé par le manager";} ?></b><br>
-                  <b>Situation proposée :</b><?php echo $emm['situation_proposee'];?><br><br><br>
-                  <b><?php echo "Cliquez pour voter";?></b><br></p>
+                  <b>Situation proposée :</b><?php echo $emm['situation_proposee'];?><br><br><br></p>
 
 
 
           </div>
 
-      </div></a> </div>
+      </div> </div>
       <div class="col-md-5">
 
         <?php
@@ -172,8 +157,8 @@ if(isset($_GET['idee'])){
 
       </div>
     </div>
-    <div class="row"> <div class="col-md-7"></div>
-
+    <div class="row"> <div class="col-md-2"> <a href="valide.php?vote=<?php echo ($idee); ?>" class="btn btn-default pull-right">Valider l'idee</a> </div>
+    <div class="col-md-5"></div>
     <div class="col-md-5">
       <?php
         if($emm['image2'] != NULL){
@@ -220,28 +205,57 @@ if(isset($_GET['idee2'])){
       $respo=$Query3->fetch();
       ?>
 
-      <a href="details.php?vote=<?php echo (-$idee);?>" class="btn btn-default"><div class="alerte" >
+      <div class="row">
+      <div class="col-md-7">
+    <div class="alerte" >
 
           <div class="info_alerte">
               <div class="date_et_titre">
                   <h4 style="margin-top: 0px; font-size: 40px;">
-                    <?php echo $emm['typeidee']; ?>
+                    <?php echo $emm['type']; ?>
                     </h4>
               </div>
 
-              <p><b>Emmeteur : </b><?php echo $emm['nom']; echo "  "; echo $emm["prenom"]; ?><br>
-                  <b>Manager : </b>><?php echo $sup['nom_sup']; echo "  "; echo $sup["prenom_sup"]; ?><br>
+              <p><b>Emmeteur : </b><?php echo $emm['nom']; echo "  "; echo $emm['prenom']; ?><br>
+                  <b>Manager : </b> <?php echo $sup['nom_sup']; echo "  "; echo $sup["prenom_sup"]; ?> <br>
                   <b>Nombre de vote : </b><?php echo $emm['vote'];?><br>
                   <b>Situation actuelle :</b><?php echo $emm['situation_actuelle'];?><br>
                   <b>Nobre d'idées qu'elle contient : </b><?php echo $emm['nbidees'];?><br>
-                  <b><?php if($emm['valide']==1){echo "Cette idée a déja été validé par le manager ";}else{echo "L'idée n'a pas été validé par le manager";} ?><br>
-                  <b>Situation proposée :</b><?php echo $emm['situation_proposee'];?><br><br><br>
-                  <b><?php echo "Cliquez pour retirer vote";?></b><br></p>
+                  <b><?php if($emm['valide']==1){echo "Cette idée a déja été validé par le manager ";}else{echo "L'idée n'a pas été validé par le manager";} ?></b><br>
+                  <b>Situation proposée :</b><?php echo $emm['situation_proposee'];?><br><br><br></p>
+
 
 
           </div>
 
-      </div></a>
+      </div> </div>
+      <div class="col-md-5">
+
+        <?php
+          if($emm['image'] != NULL){
+            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+            $query -> execute(array($emm['image']));
+            $img= $query -> fetch(); ?>
+            <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; " alt="Image associée à l'idée">
+          <?php } ?>
+
+
+      </div>
+    </div>
+    <div class="row"> <div class="col-md-2"> <a href="valide.php?vote=<?php echo (-$idee); ?>" class="btn btn-default pull-right">Retirer Validation</a> </div>
+    <div class="col-md-5"></div>
+    <div class="col-md-5">
+      <?php
+        if($emm['image2'] != NULL){
+          $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+          $query -> execute(array($emm['image']));
+          $img= $query -> fetch(); ?>
+          <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; " alt="Image associée à l'idée">
+        <?php } ?>
+
+    </div>
+
+    </div>
 
 
 <?php

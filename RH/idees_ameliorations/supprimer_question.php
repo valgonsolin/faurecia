@@ -89,7 +89,7 @@ else
       <div class"form-group">
         <div class="row">
           <div class="col-md-7">
-            <label>Image :</label>
+            <label>Image Avant:</label>
             <input type="file" name="fichier"><br/><br/>
             <?php if($Data['image'] != NULL){ ?>
             <input type="submit" name="img-reset" value="Supprimer l'image" class="btn btn-default">
@@ -101,7 +101,28 @@ else
             $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
             $query -> execute(array($Data['image']));
             $img= $query -> fetch(); ?>
-            <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; " alt="Image Idée">
+            <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; " alt="Image Avant">
+          <?php } ?>
+          </div>
+        </div>
+      </div>
+
+      <div class"form-group">
+        <div class="row">
+          <div class="col-md-7">
+            <label>Image Apres:</label>
+            <input type="file" name="fichier2"><br/><br/>
+            <?php if($Data['image2'] != NULL){ ?>
+            <input type="submit" name="img-reset2" value="Supprimer l'image" class="btn btn-default">
+          <?php } ?>
+          </div>
+          <div class="col-md-5">
+        <?php
+          if($Data['image2'] != NULL){
+            $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+            $query -> execute(array($Data['image2']));
+            $img2= $query -> fetch(); ?>
+            <img src="<?php echo $img2['chemin']; ?>" style="max-width:100%; max-height:200px; " alt="Image Apres">
           <?php } ?>
           </div>
         </div>

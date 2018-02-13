@@ -116,7 +116,7 @@ echo "<h2>Nombre d'idées publiées ce mois çi:"; echo "      ";echo $n['n']; e
   </div>
   <button type="submit" class="btn btn-default">Rechercher</button>
   <a href="ajout.php" class="btn btn-default pull-right">Espace administration</a>
-  <a href="statistiques.php" class="btn btn-default pull-right">Statistiques</a>
+  <a href="validation.php" class="btn btn-default pull-right">Espace Manager</a>
 </form>
 
 
@@ -127,7 +127,7 @@ echo "<h2>Nombre d'idées publiées ce mois çi:"; echo "      ";echo $n['n']; e
 <?php
 
 if($recherche>0){
-$Query = $bdd->prepare('SELECT nbidees,situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0 and (MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y) ORDER BY vote DESC LIMIT 5  OFFSET :nb') ;
+$Query = $bdd->prepare('SELECT nbidees,situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0 and (MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y) ORDER BY vote DESC LIMIT 20  OFFSET :nb') ;
 
 $Query->bindValue(':i',(int) $recherche,PDO::PARAM_INT);
 $Query->bindValue(':m', $mois, PDO::PARAM_INT);
@@ -136,7 +136,7 @@ $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
 $Query->execute();}
 
 
-else{$Query = $bdd->prepare('SELECT nbidees,situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and (MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y)  ORDER BY vote DESC LIMIT 5 OFFSET :nb ') ;
+else{$Query = $bdd->prepare('SELECT *, idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and (MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y)  ORDER BY vote DESC LIMIT 20 OFFSET :nb ') ;
 
   $Query->bindValue(':m', $mois, PDO::PARAM_INT);
   $Query->bindValue(':y', $annee,PDO::PARAM_INT);
@@ -167,6 +167,7 @@ while ($Data = $Query->fetch()) {
                 <b>Situation actuelle :</b><?php echo $Data['situation_actuelle'];?><br>
                 <b>Nobre d'idées qu'elle contient : </b><?php echo $Data['nbidees'];?><br>
                 <b>Situation proposée :</b><?php echo $Data['situation_proposee'];?><br><br><br>
+                <b><?php if($Data['valide']==1){echo "Cette idée a déja été validé par le manager ";}else{echo "L'idée n'a pas été validé par le manager";} ?></b><br><br>
 
                 <b><?php echo "Cliquez pour retirer vote";?></b><br></p>
 
@@ -191,6 +192,7 @@ while ($Data = $Query->fetch()) {
               <b>Situation actuelle : </b><?php echo $Data['situation_actuelle'];?><br>
               <b>Nobre d'idées qu'elle contient : </b><?php echo $Data['nbidees'];?><br>
               <b>Situation proposée :</b><?php echo $Data['situation_proposee'];?><br><br><br>
+              <b><?php if($Data['valide']==1){echo "Cette idée a déja été validé par le manager ";}else{echo "L'idée n'a pas été validé par le manager";} ?></b><br><br>
               <b><?php echo "Cliquez pour voter";?></b><br></p>
 
         </div>
@@ -205,29 +207,29 @@ while ($Data = $Query->fetch()) {
 </div>
 
 <?php
-if($debut > 4){
+if($debut > 19){
   ?>
-  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-5;?>" class="btn btn-default">Elements précédents</a>
+  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-20;?>" class="btn btn-default">Elements précédents</a>
 <?php
 }
 
 if($recherche>0){$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
     ON idees_ameliorations.emmetteur = profil.id
-    WHERE profil.id= :i and supprime = 0  and ((MONTH(idees_ameliorations.date_rea)= :m) and (YEAR(idees_ameliorations.date_rea)= :y)) LIMIT 5 OFFSET :nb');
+    WHERE profil.id= :i and supprime = 0  and ((MONTH(idees_ameliorations.date_rea)= :m) and (YEAR(idees_ameliorations.date_rea)= :y)) LIMIT 20 OFFSET :nb');
 $test->bindValue(':i',$recherche, PDO::PARAM_INT);
 $test->bindValue(':m', $mois, PDO::PARAM_INT);
 $test->bindValue(':y', $annee,PDO::PARAM_INT);
-$test ->bindValue(':nb',(int) $debut+5, PDO::PARAM_INT);
+$test ->bindValue(':nb',(int) $debut+20, PDO::PARAM_INT);
 $test->execute(); }else{$test = $bdd->prepare('SELECT * FROM profil LEFT JOIN idees_ameliorations
     ON idees_ameliorations.emmetteur = profil.id
-    WHERE  supprime = 0  and ((MONTH(idees_ameliorations.date_rea)= :m) and (YEAR(idees_ameliorations.date_rea)= :y)) LIMIT 5 OFFSET :nb');
+    WHERE  supprime = 0  and ((MONTH(idees_ameliorations.date_rea)= :m) and (YEAR(idees_ameliorations.date_rea)= :y)) LIMIT 20 OFFSET :nb');
 $test->bindValue(':m', $mois, PDO::PARAM_INT);
 $test->bindValue(':y', $annee,PDO::PARAM_INT);
-$test ->bindValue(':nb',(int) $debut+5, PDO::PARAM_INT);
+$test ->bindValue(':nb',(int) $debut+20, PDO::PARAM_INT);
 $test->execute();  }
 
 if($test -> fetch()){ ?>
-  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+5;?>" class="btn btn-default">Elements suivants</a>
+  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+20;?>" class="btn btn-default">Elements suivants</a>
 <?php
 }
 }
