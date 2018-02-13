@@ -1,6 +1,6 @@
 <?php
+ini_set('memory_limit', '1024M');
 ob_start();
- ini_set('memory_limit', '1024M');
 include_once "../../needed.php";
 require '../../php/spreadsheet/vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
