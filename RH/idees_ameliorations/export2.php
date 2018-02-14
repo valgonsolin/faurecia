@@ -1,13 +1,12 @@
 <?php
 
-$datetime = date("Y-m-d");
-
-    $date = date_parse($datetime);
-    $jour = $date['day'];
-    $mois = $date['month'];
-    $annee = $date['year'];
-
 function exportCSV(PDO $bdd) {
+  $datetime = date("Y-m-d");
+
+      $date = date_parse($datetime);
+      $jour = $date['day'];
+      $mois = $date['month'];
+      $annee = $date['year'];
 
     $stmt = $bdd->prepare('SELECT idees_ameliorations.id,nom,date_rea,date_val,type,situation_actuelle,situation_proposee,valide,nbidees   FROM idees_ameliorations JOIN profil ON profil.id=idees_ameliorations.emmetteur WHERE YEAR(date_rea)= ? AND MONTH(date_rea)= ? ');
     $stmt->execute(array($annee,$mois));
