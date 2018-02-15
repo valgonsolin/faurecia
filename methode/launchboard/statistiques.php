@@ -6,6 +6,43 @@ include_once "../needed.php";
 drawHeader('methode');
 drawMenu('launchboard');
 
+function get_nb_open_days($date_start, $date_stop) {	
+	$arr_bank_holidays = array(); // Tableau des jours feriés	
+	
+	// On boucle dans le cas où l'année de départ serait différente de l'année d'arrivée
+	$diff_year = date('Y', $date_stop) - date('Y', $date_start);
+	for ($i = 0; $i <= $diff_year; $i++) {			
+		$year = (int)date('Y', $date_start) + $i;
+		// Liste des jours feriés
+		$arr_bank_holidays[] = '1_1_'.$year; // Jour de l'an
+		$arr_bank_holidays[] = '1_5_'.$year; // Fete du travail
+		$arr_bank_holidays[] = '8_5_'.$year; // Victoire 1945
+		$arr_bank_holidays[] = '14_7_'.$year; // Fete nationale
+		$arr_bank_holidays[] = '15_8_'.$year; // Assomption
+		$arr_bank_holidays[] = '1_11_'.$year; // Toussaint
+		$arr_bank_holidays[] = '11_11_'.$year; // Armistice 1918
+		$arr_bank_holidays[] = '25_12_'.$year; // Noel
+				
+		// Récupération de paques. Permet ensuite d'obtenir le jour de l'ascension et celui de la pentecote	
+		$easter = easter_date($year);
+		$arr_bank_holidays[] = date('j_n_'.$year, $easter + 86400); // Paques
+		$arr_bank_holidays[] = date('j_n_'.$year, $easter + (86400*39)); // Ascension
+		$arr_bank_holidays[] = date('j_n_'.$year, $easter + (86400*50)); // Pentecote	
+	}
+	//print_r($arr_bank_holidays);
+	$nb_days_open = 0;
+	// Mettre <= si on souhaite prendre en compte le dernier jour dans le décompte	
+	while ($date_start < $date_stop) {
+		// Si le jour suivant n'est ni un dimanche (0) ou un samedi (6), ni un jour férié, on incrémente les jours ouvrés	
+		if (!in_array(date('w', $date_start), array(0, 6)) 
+		&& !in_array(date('j_n_'.date('Y', $date_start), $date_start), $arr_bank_holidays)) {
+			$nb_days_open++;		
+		}
+		$date_start = mktime(date('H', $date_start), date('i', $date_start), date('s', $date_start), date('m', $date_start), date('d', $date_start) + 1, date('Y', $date_start));			
+	}		
+	return $nb_days_open;
+}
+
 if(!isset($_GET['id'])){ ?>
   <h2>LaunchBoard</h2>
   <h4>OUPS... Votre session est inconnu.</h4>
@@ -48,38 +85,42 @@ if(!isset($_GET['id'])){ ?>
 $color1="";
 $color2="";
 $color3="";
-if((! is_null($Data['3pt_f'])) && (! is_null($Data['3pt_r'])) && (strtotime($Data['3pt_r']) > strtotime('+30 days',strtotime(str_replace('/', '-', $Data['3pt_f']))))){
-  $color1="#FF002A";
+if(! is_null($Data['3pt_f']) && ! is_null($Data['3pt_r']) && (get_nb_open_days(strtotime($Data['3pt_f']),strtotime($Data['3pt_r'])) > 30)){
+  $color1='#FF002A';
 }
-if((! is_null($Data['3mpt_f'])) && (! is_null($Data['3mpt_r'])) && (strtotime($Data['3mpt_r']) > strtotime('+30 days',strtotime(str_replace('/', '-', $Data['3mpt_f']))))){
-  $color2="#FF002A";
+if(! is_null($Data['3mpt_f']) && ! is_null($Data['3mpt_r']) && (get_nb_open_days(strtotime($Data['3mpt_f']),strtotime($Data['3mpt_r'])) > 30)){
+  $color2='#FF002A';
 }
-if((! is_null($Data['4empt_f'])) && (! is_null($Data['4empt_r'])) && (strtotime($Data['4empt_r']) > strtotime('+30 days',strtotime(str_replace('/', '-', $Data['4empt_f']))))){
-  $color3="#FF002A";
+if(! is_null($Data['4empt_f']) && ! is_null($Data['4empt_r']) && (get_nb_open_days(strtotime($Data['4empt_f']),strtotime($Data['4empt_r'])) > 30)){
+  $color3='#FF002A';
 }
 
 ?>
-<div class="row">
+<div class="row" style="font-size:140%;">
   <h4>Time to Pass :</h4>
   <div class="col-md-4">
-    <b>PT</b>
-    <p>Date prévue : <span  style="background-color:<?php echo $color1; ?>; border-radius:3px;"><?php if(! is_null($Data['3pt_f'])){echo date('d/m/y',strtotime($Data['3pt_f'])); }?></span></p>
-    <p>Date prévue + 30 jours : <?php if(! is_null($Data['3pt_f'])){echo date('d/m/y',strtotime('+30 days',strtotime(str_replace('/', '-', $Data['3pt_f'])))); } ?></p>
-    <p>Date réalisée : <?php if(! is_null($Data['3pt_r'])){echo date('d/m/y',strtotime($Data['3pt_r'])); } ?></p>
+    <b>PT : <span  style="background-color:<?php echo $color1; ?>; border-radius:3px;"> <?php 
+    if(! is_null($Data['3pt_f']) && ! is_null($Data['3pt_r'])){
+      printf("%+d jours",get_nb_open_days(strtotime($Data['3pt_f']),strtotime($Data['3pt_r'])));
+    }
+    ?></span></b>
   </div>
   <div class="col-md-4">
-    <b>MPT</b>
-    <p>Date prévue : <span style="background-color:<?php echo $color2; ?>; border-radius:3px;"><?php if(! is_null($Data['3mpt_f'])){echo date('d/m/y',strtotime($Data['3mpt_f'])); } ?></span></p>
-    <p>Date prévue + 30 jours : <?php if(! is_null($Data['3pt_f'])){echo date('d/m/y',strtotime('+30 days',strtotime(str_replace('/', '-', $Data['3mpt_f'])))); } ?></p>
-    <p>Date réalisée : <?php if(! is_null($Data['3mpt_r'])){echo date('d/m/y',strtotime($Data['3mpt_r'])); } ?></p>
+      <b>MPT : <span  style="background-color:<?php echo $color2; ?>; border-radius:3px;"> <?php 
+    if(! is_null($Data['3mpt_f']) && ! is_null($Data['3mpt_r'])){
+      printf("%+d jours",get_nb_open_days(strtotime($Data['3mpt_f']),strtotime($Data['3mpt_r'])));
+    }
+    ?></span></b>
   </div>
   <div class="col-md-4">
-    <b>EMPT</b>
-    <p>Date prévue : <span   style="background-color:<?php echo $color3; ?>; border-radius:3px;"> <?php if(! is_null($Data['4empt_f'])){echo date('d/m/y',strtotime($Data['4empt_f'])); } ?> </span></p>
-    <p>Date prévue + 30 jours : <?php if(! is_null($Data['3pt_f'])){echo date('d/m/y',strtotime('+30 days',strtotime(str_replace('/', '-', $Data['4empt_f'])))); } ?></p>
-    <p>Date réalisée : <?php if(! is_null($Data['4empt_r'])){echo date('d/m/y',strtotime($Data['4empt_r'])); } ?></p>
+      <b>EMPT : <span  style="background-color:<?php echo $color3; ?>; border-radius:3px;"> <?php 
+    if(! is_null($Data['4empt_f']) && ! is_null($Data['4empt_r'])){
+      printf("%+d jours",get_nb_open_days(strtotime($Data['4empt_f']),strtotime($Data['4empt_r'])));
+    }
+    ?></span></b>
   </div>
 </div>
+<br>
 <?php
 $query = $bdd -> prepare('SELECT * FROM evolution_projet WHERE id_projet = ? ORDER BY date ASC');
 $query -> execute(array($_GET['id']));

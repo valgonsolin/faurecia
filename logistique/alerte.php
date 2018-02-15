@@ -57,48 +57,48 @@ $state = $Data['state'];
 
 <style>
 
-.entete{
-    display: flex;
-    justify-content: space-between;
-}
+    .entete{
+        display: flex;
+        justify-content: space-between;
+    }
 
-.conducteur{
-    background-color: #2b669a;
-}
-.sup_log{
-    background-color: #fff700;
-}
+    .conducteur{
+        background-color: #2b669a;
+    }
+    .sup_log{
+        background-color: #fff700;
+    }
 
-.appro{
+    .appro{
 
-    background-color: #ff9c00;
-}
-.resp_UAP{
+        background-color: #ff9c00;
+    }
+    .resp_UAP{
 
-    background-color: #da090d;
-}
+        background-color: #da090d;
+    }
 
-.page{
-    padding: 30px;
-    padding-top: 0px;
-    border-width: 1px;
-    border-color: #000;
-    border-style: solid;
-}
-.page > .row{
-    background-color: #FFF;
-    border-width: 1px;
-    border-color: #000;
-    border-style: solid;
-}
-.bouton_alerte{
-    margin: 10px;
-    height: 30px;
-}
+    .page{
+        padding: 30px;
+        padding-top: 0px;
+        border-width: 1px;
+        border-color: #000;
+        border-style: solid;
+    }
+    .page > .row{
+        background-color: #FFF;
+        border-width: 1px;
+        border-color: #000;
+        border-style: solid;
+    }
+    .bouton_alerte{
+        margin: 10px;
+        height: 30px;
+    }
 
-.bouton_alerte:hover{
-    filter: invert(100%);
-}
+    .bouton_alerte:hover{
+        filter: invert(100%);
+    }
 </style>
 
 

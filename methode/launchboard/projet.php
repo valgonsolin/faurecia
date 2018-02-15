@@ -154,6 +154,14 @@ if(!isset($_GET['id'])){ ?>
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
     }
   }
+  if(isset($_POST['sop'])){
+    $q = $bdd -> prepare('UPDATE launchboard SET initial_date = ? WHERE id = ?');
+    if($q -> execute(array($_POST['sop_date'],$_GET['id']))){
+      success('Modifiée','Le SOP a été modifié.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
   if(isset($_POST['helios'])){
     $q = $bdd -> prepare('UPDATE launchboard SET link_helios = ? WHERE id = ?');
     if($q -> execute(array($_POST['link_helios'],$_GET['id']))){
@@ -331,6 +339,8 @@ if(!isset($_GET['id'])){ ?>
       <div class="btn btn-default pull-right" data-toggle="modal" data-target="#modal">Modifier le PPTL</div><?php } ?>
 </h4>
     <h4>Code : <?php echo $Data['code']; ?></h4>
+    <h4>SOP :<?php if(!is_null($Data['initial_date'])){ echo date('d/m/y',strtotime($Data['initial_date']));} ?><?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
+          <div class="btn btn-default pull-right" data-toggle="modal" data-target="#sop">Modifier</div><?php } ?></h4>
   </div>
   <div class="col-md-6">
     <h4>Description :    <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
@@ -657,6 +667,23 @@ if(!isset($_GET['id'])){ ?>
           </select>
           <br>
           <input type="submit" name="pptl" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le PPTL ?')">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="sop" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modifier SOP</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <input type="date" name="sop_date" value="<?php echo $Data['initial_date']; ?>" class="form-control" >
+          <br>
+          <input type="submit" name="sop" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le SOP ?')">
         </form>
       </div>
     </div>

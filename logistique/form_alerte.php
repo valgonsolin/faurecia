@@ -17,6 +17,11 @@ if (isset($_POST['submit'])){
     if ($Data = $Query->fetch()){
         $piece = $Data['id'];
     }
+    $Query = $bdd->prepare('SELECT * FROM logistique_pieces WHERE sebango = ?');
+    $Query->execute(array($_POST['ref_code_barres']));
+    if ($Data = $Query->fetch()){
+        $piece = $Data['id'];
+    }   
     $Query = $bdd->prepare('SELECT * FROM logistique_e_kanban WHERE code_barres = ?');
     $Query->execute(array($_POST['ref_code_barres']));
     if ($Data = $Query->fetch()){

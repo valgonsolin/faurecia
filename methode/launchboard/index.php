@@ -15,13 +15,14 @@ if(! empty($_POST)){
     if($kickoff < 0){$kickoff=NULL;}
     $launchbook=upload($bdd,'launchbook',"../../ressources","launchboard",50485760,array( 'xls' , 'xlsx' , 'XLS' , 'XLSX' ));
     if($launchbook < 0){$launchbook=NULL;}
-    $add = $bdd -> prepare('INSERT INTO launchboard(profil,code,titre,client,description,initial_date,link_plr,link_helios,date_updated,kickoff,img_presentation,launchbook) VALUES (:profil,:code,:titre,:client,:description,CURDATE(),:link_plr,:link_helios,CURDATE(),:kickoff,:img,:launchbook)');
+    $add = $bdd -> prepare('INSERT INTO launchboard(profil,code,titre,client,description,initial_date,link_plr,link_helios,kickoff,img_presentation,launchbook) VALUES (:profil,:code,:titre,:client,:description,:sop,:link_plr,:link_helios,:kickoff,:img,:launchbook)');
     if($add -> execute(array(
       "profil" => $_POST['profil'],
       "code" => $_POST['code'],
       "titre" => $_POST['titre'],
       "client" => $_POST['client'],
       "description" => $_POST['description'],
+      "sop" => $_POST['sop'],
       "link_plr" => $_POST['plr'],
       "link_helios" => $_POST['helios'],
       "kickoff" => $kickoff,
@@ -55,10 +56,6 @@ if(! empty($_POST)){
     }
   }
 }
-
-
-
-
 
 $recherche = "";
 if (isset($_GET["recherche"])){
@@ -164,6 +161,7 @@ while($Data = $query -> fetch()){
               ?>
               <p><b> Gate : </b><?php echo $gate; ?>&emsp;
                 <b>LB : </b><?php if(is_null($Data['lb'])){echo "Inconnu";}else{echo $Data['lb']."%";} ?></p>
+                <p><b>SOP :</b> <?php if(!is_null($Data['initial_date'])){ echo date('d/m/y',strtotime($Data['initial_date']));} ?></p>
             </div>
             <div class="col-md-6">
             <?php
