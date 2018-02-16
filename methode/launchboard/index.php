@@ -9,25 +9,28 @@ drawMenu('launchboard');
 echo "<h2>LaunchRoom</h2>";
 if(! empty($_POST)){
   if(isset($_POST['ajout'])){
+    $descr="";
+    foreach($_POST['description'] as $key => $value) {
+      $descr.=$value." / ";
+    }
+    $descr=substr($descr,0,sizeof($descr)-3);
     $img=upload($bdd,'img',"../../ressources","launchboard",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
     if($img < 0){$img=NULL;}
     $kickoff=upload($bdd,'kickoff',"../../ressources","launchboard",50485760,array( 'ppt' , 'pptx' , 'PPT' , 'PPTX' ));
     if($kickoff < 0){$kickoff=NULL;}
-    $launchbook=upload($bdd,'launchbook',"../../ressources","launchboard",50485760,array( 'xls' , 'xlsx' , 'XLS' , 'XLSX' ));
-    if($launchbook < 0){$launchbook=NULL;}
     $add = $bdd -> prepare('INSERT INTO launchboard(profil,code,titre,client,description,initial_date,link_plr,link_helios,kickoff,img_presentation,launchbook) VALUES (:profil,:code,:titre,:client,:description,:sop,:link_plr,:link_helios,:kickoff,:img,:launchbook)');
     if($add -> execute(array(
       "profil" => $_POST['profil'],
       "code" => $_POST['code'],
       "titre" => $_POST['titre'],
       "client" => $_POST['client'],
-      "description" => $_POST['description'],
+      "description" => $descr,
       "sop" => $_POST['sop'],
       "link_plr" => $_POST['plr'],
       "link_helios" => $_POST['helios'],
       "kickoff" => $kickoff,
       "img" => $img,
-      "launchbook" => $launchbook
+      "launchbook" => $_POST['launchbook']
     ))){
       $id = $bdd -> lastInsertId();
       foreach($_POST['equipe'] as $prof) {
@@ -103,6 +106,7 @@ $query ->execute();
     margin: 10px;
     width: 400px;
     padding: 10px;
+    height:280px;
     border-radius:6px;
     background-color: #FFF;
     border-color: #ccc;
@@ -137,7 +141,15 @@ $query ->execute();
   <?php
 while($Data = $query -> fetch()){
   $q = $bdd -> prepare('SELECT * FROM files WHERE id= ?');
-  $q -> execute(array($Data['img_presentation'])); ?>
+  $q -> execute(array($Data['img_presentation']));
+  $ptg = $bdd -> prepare('SELECT * FROM evolution_projet WHERE id_projet = ? ORDER BY date DESC LIMIT 1' );
+  $ptg -> execute(array($Data['projet']));
+  if($res = $ptg -> fetch()){
+    $pourcentage=$res['pourcentage'];
+  }else{
+    $pourcentage=0;
+  }  
+ ?>
   <a href="projet.php?id=<?php echo $Data['projet']; ?>">
     <div class="projet" >
       <div class="info_projet">
@@ -149,7 +161,7 @@ while($Data = $query -> fetch()){
             <div style="padding:0;" class="container-fluid">
               <div class="row" style="height:120px;">
             <div class="col-md-6">
-              <b>Description : </b><?php echo substr($Data['description'],0,70);?><br><br>
+              <b>Description : </b><?php echo $Data['description']; ?><br>
               <?php
               $gate="2B";
               if($Data['2tct'] && $Data['2capacity'] && $Data['2equip'] && $Data['2pfmea'] && $Data['2mvp'] && $Data['2layout'] && $Data['2master'] && $Data['2pack']){
@@ -160,7 +172,7 @@ while($Data = $query -> fetch()){
               }
               ?>
               <p><b> Gate : </b><?php echo $gate; ?>&emsp;
-                <b>LB : </b><?php if(is_null($Data['lb'])){echo "Inconnu";}else{echo $Data['lb']."%";} ?></p>
+                <b>LB : </b><?php echo $pourcentage."%"; ?></p>
                 <p><b>SOP :</b> <?php if(!is_null($Data['initial_date'])){ echo date('d/m/y',strtotime($Data['initial_date']));} ?></p>
             </div>
             <div class="col-md-6">
@@ -169,34 +181,28 @@ while($Data = $query -> fetch()){
                 $q= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
                 $q -> execute(array($Data['img_presentation']));
                 $img= $q -> fetch();?>
-                <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height: 150px; float:right;" alt="Image">
+                <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height: 120px; float:right;" alt="Image">
               <?php } ?>
           </div>
         </div>
       </div>
       </div>
       <?php
-      if($Data['lb'] < 75){
-        ?>
-        <div class="progress couleur" style="margin-top:15px; margin-bottom: 15px;">
-          <div class="progress-bar" role="progressbar" style="width: <?php echo $Data['lb']; ?>%; background-color: #da090d;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $Data['lb']; ?>%</div>
-        </div>
-        <?php
-      }elseif($Data['lb'] < 85){
-        ?>
-        <div class="progress couleur" style="margin-top:15px; margin-bottom: 15px;">
-          <div class="progress-bar" role="progressbar" style="width: <?php echo $Data['lb']; ?>%; background-color: #FF9C00;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $Data['lb']; ?>%</div>
-        </div>
-        <?php
+      if($pourcentage < 75){
+        $couleur = "#da090d";
+      }elseif($pourcentage < 85){
+        $couleur = "#FF9C00";
       }else{
-        ?>
-        <div class="progress couleur" style="margin-top:15px; margin-bottom: 15px;">
-          <div class="progress-bar" role="progressbar" style="width: <?php echo $Data['lb']; ?>%; background-color: #2b669a;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $Data['lb']; ?>%</div>
-        </div>
-        <?php
+        $couleur = "#2b669a";
       }
-      ?>
-
+      if($pourcentage >5){
+        $text="white";
+      }else{
+        $text="black";
+      } ?>
+      <div class="progress couleur" style="margin-top:15px; margin-bottom: 15px;">
+        <div class="progress-bar" role="progressbar" style="color:<?php echo $text; ?>;width: <?php echo $pourcentage; ?>%; background-color: <?php echo $couleur; ?>;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $pourcentage; ?>%</div>
+      </div>
     </div>
   </a>
 

@@ -73,11 +73,12 @@ function choose($field){
         </div>
       </div>
     </div>
-  </div>
-<?php  }
+  </div> <?php 
+ }
 }
 function treatForm($field){
   global $_SESSION;
+  global $fields;
   global $bdd;
   global $Data;
   if($Data['profil'] == $_SESSION['id']){
@@ -102,8 +103,30 @@ function treatForm($field){
       $q = $bdd -> prepare('UPDATE launchboard SET '.$field.'= 1 WHERE id = ?');
       if($q -> execute(array($_GET['id']))){
         success('Validée','La date a bien été validée.');
+        $Data[$field]=1;
       }else{
         warning('Erreur','Veuillez réessayer.');
+      }
+       //retablissement pourcentage
+      if(substr($field,0,1)=="2"){
+        $total=0;
+        $avancement=0;
+        foreach ($fields as $key => $value) {
+          if(! is_null($Data[$value."_f"])){
+            $total +=1;
+            if($Data[$value]){
+              $avancement +=1;
+            }
+          }
+        }
+        if($total >0){
+          $pourcentage = round((floatval($avancement/$total)*100),2);
+        }else{
+          $pourcentage =0;
+        }
+        echo $pourcentage;
+        $q = $bdd -> prepare('INSERT INTO evolution_projet(id_projet,pourcentage,date) VALUES (?,?,NOW())');
+        $q -> execute(array($_GET['id'],$pourcentage));
       }
     }
   }
@@ -129,15 +152,6 @@ if(!isset($_GET['id'])){ ?>
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
     }
   }
-  if(isset($_POST['delete_launchbook'])){
-    remove_file($bdd,$_POST['launchbook']);
-    $q = $bdd -> prepare('UPDATE launchboard SET launchbook = NULL WHERE id= ?');
-    if($q -> execute(array($_GET['id']))){
-      success('Supprimé','Le launchbook a bien été supprimé.');
-    }else{
-      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
-    }
-  }
   if(isset($_POST['pptl'])){
     $q = $bdd -> prepare('UPDATE launchboard SET profil = ? WHERE id = ?');
     if($q -> execute(array($_POST['profil'],$_GET['id']))){
@@ -146,9 +160,22 @@ if(!isset($_GET['id'])){ ?>
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
     }
   }
+  if(isset($_POST['launchbook'])){
+    $q = $bdd -> prepare('UPDATE launchboard SET launchbook = ? WHERE id = ?');
+    if($q -> execute(array($_POST['launchbook_link'],$_GET['id']))){
+      success('Modifié','Le launchbook a été modifié.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
   if(isset($_POST['descr'])){
+    $descr="";
+    foreach($_POST['description'] as $key => $value) {
+      $descr.=$value." / ";
+    }
+    $descr=substr($descr,0,sizeof($descr)-3);
     $q = $bdd -> prepare('UPDATE launchboard SET description = ? WHERE id = ?');
-    if($q -> execute(array($_POST['description'],$_GET['id']))){
+    if($q -> execute(array($descr,$_GET['id']))){
       success('Modifiée','La description a été modifiée.');
     }else{
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
@@ -216,19 +243,6 @@ if(!isset($_GET['id'])){ ?>
         }
       }
     }
-    if(isset($_FILES['launchbook']) && $_FILES['launchbook']['name'] != ""){
-      $launchbook=upload($bdd,'launchbook',"../../ressources","launchboard",50485760,array( 'xls' , 'xlsx' , 'XLS' , 'XLSX' ));
-      if($launchbook < 0){
-        warning('Erreur','Le fichier n\'a pas pu être importé.');
-      }else{
-        $q = $bdd -> prepare('UPDATE launchboard SET launchbook = ? WHERE id = ?');
-        if($q -> execute(array($launchbook,$_GET['id']))){
-          success('Ajouté','Le launchbook a bien été ajouté.');
-        }else{
-          warning('Erreur','Il y a eu une erreur. Veuillez recommencer.');
-        }
-      }
-    }
     if(isset($_FILES['img']) && $_FILES['img']['name'] != ""){
       $img=upload($bdd,'img',"../../ressources","launchboard",50485760,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG'  ));
       if($img < 0){
@@ -250,6 +264,7 @@ if(!isset($_GET['id'])){ ?>
     foreach ($fields as $key => $value) {
       treatForm($value);
     }
+    
     $query = $bdd -> prepare('SELECT * FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE launchboard.id = ?');
     $query -> execute(array($_GET['id']));
     $Data = $query -> fetch();
@@ -330,7 +345,7 @@ if(!isset($_GET['id'])){ ?>
 <h2 style="margin-bottom:10px;">Projet : <?php echo $Data['titre']; ?></h2>
 <div class="boutons_nav" style="display: flex; justify-content: center;">
   <a href="projet.php?id=<?php echo $_GET['id']; ?>" class="bouton_menu bouton_nav_selected" style="margin-right:20%">Projet</a>
-  <a href="statistiques.php?id=<?php echo $_GET['id']; ?>" class="bouton_menu" >Statistiques</a>
+  <a href="statistiques_projet.php?id=<?php echo $_GET['id']; ?>" class="bouton_menu" >Statistiques</a>
 </div>
 <div class="row conteneur">
   <div class="col-md-6">
@@ -350,7 +365,7 @@ if(!isset($_GET['id'])){ ?>
 </div>
 <div class="row">
   <?php
-  $gate="2B";
+  //CAlcul avancement et retard
   $total=0;
   $avancement=0;
   $retard=0;
@@ -365,37 +380,38 @@ if(!isset($_GET['id'])){ ?>
         }
       }
     }
-  }
-  if($total > 0){
+  }  
+  if($total <= 0){$total=1;}
+    //on recupere la gate
+    $gate="2B";
     if($Data['2tct'] && $Data['2capacity'] && $Data['2equip'] && $Data['2pfmea'] && $Data['2mvp'] && $Data['2layout'] && $Data['2master'] && $Data['2pack']){
-      $ptg = $bdd -> prepare('SELECT * FROM evolution_projet WHERE id_projet = ? ORDER BY date DESC' );
-      $ptg -> execute(array($_GET['id']));
-      if($res = $ptg -> fetch()){
-        $pourcentage=$res['pourcentage'];
-      }else{
-        $pourcentage="error";
-      }
-      if($pourcentage == "error"){
-        $pourcentage = NULL;
-      }else{
-        $date = strtotime($res['date']);
-      }
       $gate="3";
       if($Data['3equip'] && $Data['3pack'] && $Data['3supplier'] && $Data['3checklist1'] && $Data['3pt'] && $Data['3checklist2'] && $Data['3mpt'] && $Data['3samples']){
         $gate="4";
       }
-    }else{
-      $pourcentage = round((floatval($avancement/$total)*100),2);
     }
-    $maj = $bdd -> prepare('UPDATE launchboard SET lb = ? WHERE id = ?');
-    $maj -> execute(array($pourcentage,$_GET['id']));
-    $Data['lb']=$pourcentage;
-    if($Data['lb'] < 75){
+    //on recupere le pourcentage
+    $ptg = $bdd -> prepare('SELECT * FROM evolution_projet WHERE id_projet = ? ORDER BY date DESC LIMIT 1' );
+    $ptg -> execute(array($_GET['id']));
+    if($res = $ptg -> fetch()){
+      $pourcentage=$res['pourcentage'];
+      $date = strtotime($res['date']);
+    }else{
+      $pourcentage=0;
+      $date= strtotime("now");
+    }
+
+    if($pourcentage < 75){
       $couleur = "#da090d";
-    }elseif($Data['lb'] < 85){
+    }elseif($pourcentage < 85){
       $couleur = "#FF9C00";
     }else{
       $couleur = "#2b669a";
+    }
+    if($pourcentage >5){
+      $text="white";
+    }else{
+      $text="black";
     }
     ?>
     <div class="col-md-6">
@@ -406,7 +422,7 @@ if(!isset($_GET['id'])){ ?>
     </div>
     <div class="col-md-6">
       <div class="progress" style="margin-top:15px; margin-bottom: 15px;">
-        <div class="progress-bar" role="progressbar" style="width: <?php echo $Data['lb']; ?>%; background-color: <?php echo $couleur; ?>;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $Data['lb']; ?>%</div>
+        <div class="progress-bar" role="progressbar" style="color:<?php echo $text; ?>;width: <?php echo $pourcentage; ?>%; background-color: <?php echo $couleur; ?>;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $pourcentage; ?>%</div>
       </div>
     </div>
     <div class="col-md-6">Avancement : <?php echo round((floatval($avancement/$total)*100),2); ?>% &emsp; Retard : <?php echo round((floatval($retard/$total)*100),2); ?>%</div>
@@ -414,8 +430,6 @@ if(!isset($_GET['id'])){ ?>
       <h4>Gate : <?php echo $gate; ?></h4>
     </div>
 
-  <?php
-}?>
 </div>
 <br>
 <div class="row">
@@ -608,23 +622,10 @@ if(!isset($_GET['id'])){ ?>
         </form>
         <?php
       }
-      echo "<br>";
-      if(! is_null($Data['launchbook'])){?>
-        <form method="post" >
-          <input type="hidden" name="launchbook" value="<?php echo $Data['launchbook']; ?>">
-          <a href="download.php?name=launchbook<?php echo $_GET['id']; ?>&amp;id=<?php echo $Data['launchbook']; ?>" class="btn btn-default">Télécharger le launchbook</a>
-          <input type="submit" name="delete_launchbook" class="btn btn-default" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le launchbook ? ')" value="Supprimer">
-        </form>
-        <?php
-      }
-      else{ ?>
-        <form method="post" enctype="multipart/form-data">
-          <input type="file" name="launchbook">
-          <input type="submit" class="btn btn-default" value="Ajouter le launchbook">
-        </form>
-        <?php
-      }
-      ?>
+      echo "<br>"; ?>
+        <h4>Launchbook :<?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
+        <div class="btn btn-default pull-right" data-toggle="modal" data-target="#launchbook">Modifier</div><?php } ?></h4><a href="<?php echo $Data['launchbook']; ?>"><?php echo $Data['launchbook']; ?></a>
+      
       <h4>Lien HELIOS :<?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
         <div class="btn btn-default pull-right" data-toggle="modal" data-target="#helios">Modifier</div><?php } ?></h4><a href="<?php echo $Data['link_helios']; ?>"><?php echo $Data['link_helios']; ?></a>
       
@@ -638,7 +639,7 @@ if(!isset($_GET['id'])){ ?>
       $img = $bdd -> prepare('SELECT * FROM files WHERE id = ?');
       $img -> execute(array($Data['img_presentation']));
       $img = $img -> fetch();
-      echo "<img src=".$img['chemin']." style='width:100%;border-radius: 6px;' alt='Image'>";
+      echo "<img src=".$img['chemin']." style='max-width:100%;border-radius: 6px; max-height:350px;' alt='Image'>";
     }else{ ?>
       <form method="post" enctype="multipart/form-data">
         <input type="file" name="img">
@@ -667,6 +668,22 @@ if(!isset($_GET['id'])){ ?>
           </select>
           <br>
           <input type="submit" name="pptl" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le PPTL ?')">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="launchbook" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modifier le launchbook</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <input type="text" name="launchbook_link" value="<?php echo $Data['launchbook']; ?>" class="form-control">
+          <input type="submit" name="launchbook" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le launchbook ?')">
         </form>
       </div>
     </div>
@@ -738,7 +755,7 @@ if(!isset($_GET['id'])){ ?>
           <div class="row">
             <div class="form-group col-md-12">
               <label>Description :</label>
-              <select name="description" class="form-control">
+              <select name="description[]" class="form-control" multiple>
                 <option value="Components">Components</option>
                 <option value="Stamped muffler">Stamped muffler</option>
                 <option value="Locked muffler">Locked muffler</option>

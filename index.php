@@ -54,7 +54,7 @@ drawheader();
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
 <?php
-  $query = $bdd -> prepare('SELECT * FROM news ORDER BY date DESC LIMIT 12');
+  $query = $bdd -> prepare('SELECT * FROM news ORDER BY date DESC LIMIT 10');
   $query -> execute();
   $test=1;
   while($Data = $query -> fetch()){
@@ -76,7 +76,11 @@ drawheader();
           </div>
         </div>
       </a>
-      <?php $Data = $query -> fetch(); ?>
+      <?php if($Data = $query -> fetch()){
+      $date=strtotime($Data['date']);
+      $file = $bdd -> prepare('SELECT * FROM files WHERE id = ?');
+      $file -> execute(array($Data['id_pdf']));
+      $pdf = $file -> fetch(); ?>
       <a href="<?php echo $url.'/RH/news/news.php?id='.$Data['id']; ?>">
       <div class="news">
         <h4 style="text-align:center;"><?php echo $Data['nom']; ?><small style="float:right; margin-right:5px;"><?php echo date('j/m/y', $date); ?></small></h4>
@@ -87,7 +91,7 @@ drawheader();
             </object>
           </div>
         </div>
-      </a>
+      </a><?php } ?>
       </div>
     </div>
 
