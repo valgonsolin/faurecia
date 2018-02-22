@@ -55,9 +55,9 @@ if(empty($_SESSION['login'])){ ?>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-8">
           <label>Description :</label>
-          <select name="description" class="form-control">
+          <select name="description[]" class="form-control" multiple>
             <option value="Components">Components</option>
             <option value="Stamped muffler">Stamped muffler</option>
             <option value="Locked muffler">Locked muffler</option>
@@ -66,6 +66,10 @@ if(empty($_SESSION['login'])){ ?>
             <option value="Final assy no jit">Final assy no jit</option>
             <option value="Final assy jit">Final assy jit</option>
           </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label>SOP :</label>
+          <input type="date" name="sop" class="form-control" required>
         </div>
       </div>
       <div class="row">
@@ -82,8 +86,8 @@ if(empty($_SESSION['login'])){ ?>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
-          <label>Launchbook (xls) :</label>
-          <input type="file" name="launchbook">
+          <label>Launchbook :</label>
+          <input type="url" name="launchbook" class="form-control">
         </div>
         <div class="form-group col-md-6">
           <label>Kickoff (ppt) :</label>

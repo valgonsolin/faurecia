@@ -107,13 +107,12 @@ if(isset($_GET['recherche'])){
 <div class="conteneur_alerte">
     <?php
 
-    $requete = 'SELECT
+    $requete = 'SELECT DISTINCT
                 (CASE
                  WHEN logistique_alerte.id in (SELECT alerte FROM logistique_reponse_rouge) then 3
                  WHEN logistique_alerte.id in (SELECT alerte FROM logistique_reponse_orange) then 2
                  WHEN logistique_alerte.id in (SELECT alerte FROM logistique_reponse_jaune) then 1
                  ELSE 0 END) as couleur,
-
                 logistique_alerte.id as id_alerte,
                 logistique_alerte.state as state,
                 logistique_alerte.date ,
