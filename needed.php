@@ -17,7 +17,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'ta
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name="robots" content="noindex, nofollow, noarchive"/>
         <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png"/>
-
+        <link rel="stylesheet" href="/css/styledem.css">
 
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.css"/>
         <script src="/js/jquery.min.js"></script>
@@ -30,6 +30,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'ta
 
         <link rel="stylesheet" href="/css/base.css"/>
 		    <link rel="stylesheet" href="/css/dropdown.css"/>
+
 
 
 
