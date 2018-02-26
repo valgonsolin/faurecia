@@ -23,7 +23,7 @@ $datetime = date("Y-m-d");
 
 if(empty($_SESSION['login']))
 { ?>
-  <h2>Idées</h2>
+  <h2>Formationss</h2>
   <h4>Vous devez être connecté pour accéder à cette partie.</h4>
   <a href="/moncompte/identification.php?redirection=RH/formations/index.php"><button class="btn btn-default">Se connecter</button></a>
 <?php
@@ -61,7 +61,6 @@ if(!empty($_POST)){
 
       success('Ajouté','La formation a bien été ajoutée.');
     }else{
-      print_r($query->errorInfo());
       warning('Erreur','Les données entrées ne sont pas conformes.');
 
     }
