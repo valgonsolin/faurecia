@@ -22,6 +22,20 @@ if(isset($_GET['nb'])){
       $debut=$_GET['nb'];
     }
 
+if(isset($_GET['demande'])){
+      $query = $bdd -> prepare('INSERT INTO demande_formations(formation,demandeur) VALUES (:f,:d)');
+      if($query -> execute(array(
+        'f' => $_GET['demande'],
+        'd' =>$_SESSION['id'],
+      ))){
+
+        success('Ajouté','La demande a bien été effectuée.');
+      }else{
+        warning('Erreur','Imossible de faire la demande');
+
+      }
+      }
+
 
 
 ?>
@@ -122,8 +136,16 @@ $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
 $Query->execute();
 
 
-while ($Data = $Query->fetch()) { ?>
-  <a href="formation_details.php?formation= <?php echo $Data['id'] ; ?>" ><div class="alerte" >
+while ($Data = $Query->fetch()) {
+  $Query2 = $bdd->prepare('SELECT * FROM demande_formations WHERE demandeur = :d AND formation= :f ') ;
+
+  $Query2->bindValue(':d', $_SESSION['id'] , PDO::PARAM_INT);
+  $Query2 ->bindValue(':f',(int) $Data['id'], PDO::PARAM_INT);
+  $Query2->execute();
+  if(!($Query2->fetch() ) ){
+  ?>
+
+  <a href="index.php?demande= <?php echo $Data['id'] ; ?>" ><div class="alerte" >
 
       <div class="info_alerte">
           <div class="date_et_titre">
@@ -145,7 +167,9 @@ while ($Data = $Query->fetch()) { ?>
   </div></a>
 
 
+
 <?php
+    }
  }
  ?>
 </div>
