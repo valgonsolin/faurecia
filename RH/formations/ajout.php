@@ -11,7 +11,7 @@ $datetime = date("Y-m-d");
 <script src="jquery2.js"></script>
 <script>
   $( function() {
-    $( "#datepicker" ).datepicker({ minDate: -20, maxDate: "+48M +10D", changeMonth: true,
+    $( "#datepicker" ).datepicker({ minDate: -0, maxDate: "+48M +10D", changeMonth: true,
       changeYear: true });
   } );
 </script>
@@ -21,19 +21,51 @@ $datetime = date("Y-m-d");
 
 <?php
 
-
 if(empty($_SESSION['login']))
 { ?>
   <h2>Idées</h2>
   <h4>Vous devez être connecté pour accéder à cette partie.</h4>
   <a href="/moncompte/identification.php?redirection=RH/formations/index.php"><button class="btn btn-default">Se connecter</button></a>
 <?php
-}
+}else{
 
 
 if(!empty($_POST)){
-  echo $_POST['date_deb'];
-}
+
+      $dateoj = date_parse($_POST['date_deb']);
+      $jour = $dateoj['day'];
+      $mois = $dateoj['month'];
+      $annee = $dateoj['year'];
+
+      if($mois<10){
+
+    $dateDepart =$annee."-"."0".$mois."-".$jour;}
+    else{$dateDepart =$annee."-"."0".$mois."-".$jour;}
+
+    //durée à rajouter : 6 mois;
+    $duree = 6;
+
+    //la première étape est de transformer cette date en timestamp
+    $dateDepartTimestamp = strtotime($dateDepart);
+
+    //on calcule la date de fin
+    $dateFin = date("Y-m-d", strtotime("+".$duree." month", $dateDepartTimestamp ));
+
+    $query = $bdd -> prepare('INSERT INTO formations_dispo(trainingtitle,date_deb,date_fin,date_ajout) VALUES (:tt,:dd,:df,:da)');
+    if($query -> execute(array(
+      'tt' => $_POST['title'],
+      'dd' => $dateDepart,
+      'df' => $dateFin,
+      'da' =>$datetime,
+    ))){
+
+      success('Ajouté','La formation a bien été ajoutée.');
+    }else{
+      print_r($query->errorInfo());
+      warning('Erreur','Les données entrées ne sont pas conformes.');
+
+    }
+  }
 
 if(!$_SESSION['formations']){
   echo "<p> Vous n'avez pas accées à cette partie, seuls les RH ont accés à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
@@ -51,13 +83,10 @@ if(!$_SESSION['formations']){
           <label>Training Title</label>
             <select name="title" class="form-control">
               <option value="Recyclage CACES 2 et 3n" selected="selected">Recyclage CACES 2 et 3</option>
-              <option value="Recyclage SST Port des EPI">Recyclage SST Port des EPI</option>
-              <option value="Port des EPI">Port des EPI</option>
               <option value="Recyclage habilitations électriques BR et HRs">Recyclage habilitations électriques BR et HR</option>
               <option value="Recyclage BE manœuvre+ initiale H0V">Recyclage BE manœuvre+ initiale H0V</option>
               <option value="Anglais">Anglais</option>
-              <option value="Recyclage BE manœuvre">Recyclage BE manœuvre</option>
-              <option value="Recyclage SST">Recyclage SST</option>
+              <option value="Recyclage SST">Recyclage SST(port des EPI)</option>
               <option value="Welding Technology">Welding Technology</option>
               <option value="FES Outils : QRCI 8D">FES Outils : QRCI 8D</option>
               <option value="Programmation cintrage">Programmation cintrage</option>
@@ -88,15 +117,17 @@ if(!$_SESSION['formations']){
       </div>
     </div>
 
-  </form>
-
-<br><br><br><br><br><br><br><br>
-<?php  }
-
-?>
 
 
+<br><br><br><br><br><br>
+<div class="row">
+<div class="col-md-4 col-md-offset-5"><input value="Ajouter" class="btn btn-default " type="submit"></div>
+<div class="col-md-3"></div>
+</div>
 
-<?php
+</form>
+
+<?php }  }
+
 drawFooter();
 ?>
