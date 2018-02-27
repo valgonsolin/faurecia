@@ -6,6 +6,8 @@ drawHeader('RH');
 drawMenu('collab');
 ?>
 
+
+
 <?php
 drawFooter();
 ?>

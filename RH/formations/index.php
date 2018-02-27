@@ -22,20 +22,6 @@ if(isset($_GET['nb'])){
       $debut=$_GET['nb'];
     }
 
-if(isset($_GET['demande'])){
-      $query = $bdd -> prepare('INSERT INTO demande_formations(formation,demandeur) VALUES (:f,:d)');
-      if($query -> execute(array(
-        'f' => $_GET['demande'],
-        'd' =>$_SESSION['id'],
-      ))){
-
-        success('Ajouté','La demande a bien été effectuée.');
-      }else{
-        warning('Erreur','Imossible de faire la demande');
-
-      }
-      }
-
 
 
 ?>
@@ -104,7 +90,7 @@ if(empty($_SESSION['login'])){
 
     <label>Training Title</label>
       <select name="recherche" class="form-control">
-        <option value="" selected="selected">Rechercher une catégorie</option>
+        <option value="" selected="selected">Toute catégories</option>
         <option value="Recyclage CACES 2 et 3n" >Recyclage CACES 2 et 3</option>
         <option value="Recyclage habilitations électriques BR et HRs">Recyclage habilitations électriques BR et HR</option>
         <option value="Recyclage BE manœuvre+ initiale H0V">Recyclage BE manœuvre+ initiale H0V</option>
@@ -145,7 +131,7 @@ while ($Data = $Query->fetch()) {
   if(!($Query2->fetch() ) ){
   ?>
 
-  <a href="index.php?demande= <?php echo $Data['id'] ; ?>" ><div class="alerte" >
+  <a href="details_demande.php?demande= <?php echo $Data['id'] ; ?>" ><div class="alerte" >
 
       <div class="info_alerte">
           <div class="date_et_titre">
