@@ -54,40 +54,33 @@ drawheader();
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
 <?php
-  $query = $bdd -> prepare('SELECT * FROM news ORDER BY date DESC LIMIT 10');
+  $query = $bdd -> prepare('SELECT news.nom as nom, files.chemin as chemin,news.id as news,news.date as date FROM news JOIN files ON files.id=news.id_pdf ORDER BY date DESC LIMIT 10');
   $query -> execute();
   $test=1;
   while($Data = $query -> fetch()){
-    $date=strtotime($Data['date']);
-    $file = $bdd -> prepare('SELECT * FROM files WHERE id = ?');
-    $file -> execute(array($Data['id_pdf']));
-    $pdf = $file -> fetch();
     ?>
     <div class="item <?php if($test){echo "active"; $test=0;} ?>">
     <div class="page">
-      <a href="<?php echo $url.'/RH/news/news.php?id='.$Data['id']; ?>">
+      <a href="<?php echo $url.'/RH/news/news.php?id='.$Data['news']; ?>">
       <div class="news">
-        <h4 style="text-align:center;"><?php echo $Data['nom']; ?><small style="float:right; margin-right:5px;"><?php echo date('j/m/y', $date); ?></small></h4>
+        <h4 style="text-align:center;"><?php echo $Data['nom']; ?><small style="float:right; margin-right:5px;"><?php echo date('j/m/y', strtotime($Data['date'])); ?></small></h4>
         <div class="news-content">
-          <object data="<?php echo $pdf['chemin']; ?>" type="application/pdf" width="400px;" height="500px">
-            <iframe src="<?php echo $pdf['chemin']; ?>" style="border: none;" width="400px" height="500px">
-              <p>Ce navigateur ne supporte pas les PDFs. <a href="<?php echo $pdf['chemin']; ?>">Télécharger le pdf</a></p></iframe>
+          <object data="<?php echo $Data['chemin']; ?>" type="application/pdf" width="400px;" height="500px">
+            <iframe src="<?php echo $Data['chemin']; ?>" style="border: none;" width="400px" height="500px">
+              <p>Ce navigateur ne supporte pas les PDFs. <a href="<?php echo $Data['chemin']; ?>">Télécharger le pdf</a></p></iframe>
             </object>
           </div>
         </div>
       </a>
       <?php if($Data = $query -> fetch()){
-      $date=strtotime($Data['date']);
-      $file = $bdd -> prepare('SELECT * FROM files WHERE id = ?');
-      $file -> execute(array($Data['id_pdf']));
-      $pdf = $file -> fetch(); ?>
-      <a href="<?php echo $url.'/RH/news/news.php?id='.$Data['id']; ?>">
+      ?>
+      <a href="<?php echo $url.'/RH/news/news.php?id='.$Data['news']; ?>">
       <div class="news">
-        <h4 style="text-align:center;"><?php echo $Data['nom']; ?><small style="float:right; margin-right:5px;"><?php echo date('j/m/y', $date); ?></small></h4>
+        <h4 style="text-align:center;"><?php echo $Data['nom']; ?><small style="float:right; margin-right:5px;"><?php echo date('j/m/y', strtotime($Data['date'])); ?></small></h4>
         <div class="news-content">
-          <object data="<?php echo $pdf['chemin']; ?>" type="application/pdf" width="400px;" height="500px">
-            <iframe src="<?php echo $pdf['chemin']; ?>" style="border: none;" width="400px" height="500px">
-              <p>Ce navigateur ne supporte pas les PDFs. <a href="<?php echo $pdf['chemin']; ?>">Télécharger le pdf</a></p></iframe>
+          <object data="<?php echo $Data['chemin']; ?>" type="application/pdf" width="400px;" height="500px">
+            <iframe src="<?php echo $Data['chemin']; ?>" style="border: none;" width="400px" height="500px">
+              <p>Ce navigateur ne supporte pas les PDFs. <a href="<?php echo $Data['chemin']; ?>">Télécharger le pdf</a></p></iframe>
             </object>
           </div>
         </div>
