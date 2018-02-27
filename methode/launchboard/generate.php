@@ -102,7 +102,7 @@ function copyRange( Worksheet $sheet, $srcRange, $dstCell) {
     }
 }
 
-function complete(Worksheet $sheet, $array, $row,$i,$tab){
+function complete(Worksheet $sheet, $array, $row,$i){
   $sheet ->setCellValue('B'.$row,$i)
   ->setCellValue('C'.$row,$array['code']." - ".$array['titre']);
   $cat = array('2tct','2capacity','2equip','2pfmea','2mvp','2layout','2master','2pack','3equip','3pack','3supplier','3checklist1','3pt','3checklist2','3mpt','3samples','4checklist','4empt');
@@ -117,30 +117,92 @@ function complete(Worksheet $sheet, $array, $row,$i,$tab){
         cellColor($sheet,$lettre[2*$index+1].strval($row),'FF0000');
       }else{
         cellColor($sheet,$lettre[2*$index+1].strval($row),'00B050');
-        $tab[$category]+=1;
       }
     }
   }
-  return $tab;
+  //partie calcul ttp
+  if($sheet->getCell('AR'.strval($row))->getValue()  == ""){
+    $sheet->setCellValue('AS'.strval($row),'0');
+  }else{
+    $sheet->setCellValue('AS'.strval($row),'1');
+  }
+  if(strtotime($sheet->getCell('AR'.strval($row))->getValue()) >= time() ){
+    $sheet->setCellValue('AT'.strval($row),'0');
+  }else{
+    $sheet->setCellValue('AT'.strval($row),'1');
+  }
+  if($sheet->getCell('AW'.strval($row))->getValue() == "" && ($sheet->getCell('AT'.strval($row))->getValue()) && ($sheet->getCell('AS'.strval($row))->getValue())){
+    $sheet->setCellValue('AU'.strval($row),'BH$7-AR'.strval($row));
+  }else{
+    $sheet->setCellValue('AU'.strval($row),'0');
+  }
+  if($sheet->getCell('AU'.strval($row))->getValue()  == ""){
+    $sheet->setCellValue('AV'.strval($row),'0');
+  }else{
+    $sheet->setCellValue('AV'.strval($row),'1');
+  }
+
+  if($sheet->getCell('AZ'.strval($row))->getValue()  == ""){
+    $sheet->setCellValue('BA'.strval($row),'0');
+  }else{
+    $sheet->setCellValue('BA'.strval($row),'1');
+  }
+  if(strtotime($sheet->getCell('AZ'.strval($row))->getValue()) >= time() ){
+    $sheet->setCellValue('BB'.strval($row),'0');
+  }else{
+    $sheet->setCellValue('BB'.strval($row),'1');
+  }
+  if($sheet->getCell('BE'.strval($row))->getValue() == "" && ($sheet->getCell('BA'.strval($row))->getValue()) && ($sheet->getCell('BB'.strval($row))->getValue())){
+    $sheet->setCellValue('BC'.strval($row),'BH$7-AZ'.strval($row));
+  }else{
+    $sheet->setCellValue('BC'.strval($row),'0');
+  }
+  if($sheet->getCell('BC'.strval($row))->getValue()  == ""){
+    $sheet->setCellValue('BD'.strval($row),'0');
+  }else{
+    $sheet->setCellValue('BD'.strval($row),'1');
+  }
+
+  if($sheet->getCell('BK'.strval($row))->getValue()  == ""){
+    $sheet->setCellValue('BL'.strval($row),'0');
+  }else{
+    $sheet->setCellValue('BL'.strval($row),'1');
+  }
+  if(strtotime($sheet->getCell('BK'.strval($row))->getValue()) >= time() ){
+    $sheet->setCellValue('BM'.strval($row),'0');
+  }else{
+    $sheet->setCellValue('BM'.strval($row),'1');
+  }
+  if($sheet->getCell('BP'.strval($row))->getValue() == "" && ($sheet->getCell('BL'.strval($row))->getValue()) && ($sheet->getCell('BM'.strval($row))->getValue())){
+    $sheet->setCellValue('BN'.strval($row),'=BH$7-BK'.strval($row));
+    $sheet->getCell('BN'.strval($row))->getCalculatedValue();
+  }else{
+    $sheet->setCellValue('BN'.strval($row),'0');
+  }
+  if($sheet->getCell('BN'.strval($row))->getValue()  == ""){
+    $sheet->setCellValue('BO'.strval($row),'0');
+  }else{
+    $sheet->setCellValue('BO'.strval($row),'1');
+  }
+  
 }
 //PSA
 $psa = $bdd -> query('SELECT * FROM launchboard WHERE client = "PSA" AND archive=0');
 $projets = $psa -> fetchAll();
 $count = sizeof($projets);
-$psagreen = array('2tct'=> 0,'2capacity'=> 0,'2equip'=> 0,'2pfmea'=> 0,'2mvp'=> 0,'2layout'=> 0,'2master'=> 0,'2pack'=> 0,'3equip'=> 0,'3pack'=> 0,'3supplier'=> 0,'3checklist1'=> 0,'3pt'=> 0,'3checklist2'=> 0,'3mpt'=> 0,'3samples'=> 0,'4checklist'=> 0,'4empt'=> 0);
 $i=1;
 $row=30;
 foreach ($projets as $key => $value) {
   if($i == 1){
-    $psagreen=complete($sheet,$value,$row,1,$psagreen);
+    complete($sheet,$value,$row,1);
   }elseif($i == $count){
-    $psagreen=complete($sheet,$value,$row+2*($i-1),$i,$psagreen);
+    complete($sheet,$value,$row+2*($i-1),$i);
   }elseif($i == $count -1){
-    $psagreen=complete($sheet,$value,$row+2*($i-1),$i,$psagreen);
+    complete($sheet,$value,$row+2*($i-1),$i);
   }else{
     $sheet->insertNewRowBefore($row+$i*2,2);
     copyrange($sheet,'A'.strval($row+($i-1)*2).':BP'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
-    $psagreen=complete($sheet,$value,$row+($i-1)*2,$i,$psagreen);
+    complete($sheet,$value,$row+($i-1)*2,$i);
   }
   $i+=1;
 }
@@ -149,20 +211,19 @@ foreach ($projets as $key => $value) {
 $jlr = $bdd -> query('SELECT * FROM launchboard WHERE client = "JLR" AND archive=0');
 $projets = $jlr -> fetchAll();
 $count = sizeof($projets);
-$jlrgreen = array('2tct'=> 0,'2capacity'=> 0,'2equip'=> 0,'2pfmea'=> 0,'2mvp'=> 0,'2layout'=> 0,'2master'=> 0,'2pack'=> 0,'3equip'=> 0,'3pack'=> 0,'3supplier'=> 0,'3checklist1'=> 0,'3pt'=> 0,'3checklist2'=> 0,'3mpt'=> 0,'3samples'=> 0,'4checklist'=> 0,'4empt'=> 0);
 $row=40 + ($i-4)*2;
 $i=1;
 foreach ($projets as $key => $value) {
   if($i == 1){
-    $jlrgreen=complete($sheet,$value,$row,1,$jlrgreen);
+    complete($sheet,$value,$row,1);
   }elseif($i == $count){
-    $jlrgreen=complete($sheet,$value,$row+2*($i-1),$i,$jlrgreen);
+    complete($sheet,$value,$row+2*($i-1),$i);
   }elseif($i == $count -1){
-    $jlrgreen=complete($sheet,$value,$row+2*($i-1),$i,$jlrgreen);
+    complete($sheet,$value,$row+2*($i-1),$i);
   }else{
     $sheet->insertNewRowBefore($row+$i*2,2);
     copyrange($sheet,'A'.strval($row+($i-1)*2).':BP'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
-    $jlrgreen=complete($sheet,$value,$row+($i-1)*2,$i,$jlrgreen);
+    complete($sheet,$value,$row+($i-1)*2,$i);
   }
   $i+=1;
 }
@@ -171,32 +232,28 @@ foreach ($projets as $key => $value) {
 $toy = $bdd -> query('SELECT * FROM launchboard WHERE client = "TOY/RENAULT" AND archive=0');
 $projets = $toy -> fetchAll();
 $count = sizeof($projets);
-$toygreen = array('2tct'=> 0,'2capacity'=> 0,'2equip'=> 0,'2pfmea'=> 0,'2mvp'=> 0,'2layout'=> 0,'2master'=> 0,'2pack'=> 0,'3equip'=> 0,'3pack'=> 0,'3supplier'=> 0,'3checklist1'=> 0,'3pt'=> 0,'3checklist2'=> 0,'3mpt'=> 0,'3samples'=> 0,'4checklist'=> 0,'4empt'=> 0);
 $row=50 + ($i-4)*2 + ($row-40);
 $i=1;
 foreach ($projets as $key => $value) {
   if($i == 1){
-    $toygreen=complete($sheet,$value,$row,1,$toygreen);
+    complete($sheet,$value,$row,1);
   }elseif($i == $count){
-    $toygreen=complete($sheet,$value,$row+2*($i-1),$i,$toygreen);
+    complete($sheet,$value,$row+2*($i-1),$i);
   }elseif($i == $count -1){
-    $toygreen=complete($sheet,$value,$row+2*($i-1),$i,$toygreen);
+    complete($sheet,$value,$row+2*($i-1),$i);
   }else{
     $sheet->insertNewRowBefore($row+$i*2,2);
     copyrange($sheet,'A'.strval($row+($i-1)*2).':BP'.strval($row+1+($i-1)*2),'A'.strval($row+$i*2));
-    $toygreen=complete($sheet,$value,$row+($i-1)*2,$i,$toygreen);
+    complete($sheet,$value,$row+($i-1)*2,$i);
   }
   $i+=1;
 }
 
 $writer = new Xlsx($spreadsheet);
-$output ='temp.xlsx';
-
 header('Content-Description: File Transfer');
 header('Content-Type: application/ms-excel');
 header("Content-Disposition: attachment; filename=launchroom.xlsx");
 ob_clean();
 flush();
 $writer->save('php://output');
-// readfile('temp.xlsx');
 exit;

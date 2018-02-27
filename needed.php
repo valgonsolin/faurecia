@@ -83,7 +83,6 @@ global $bdd;
       <div class="dropdown-content">
               <a href="<?php echo $url; ?>/dojo_HSE/mandatory_rules.php" class="bouton_dropdown" >Mandatory Rules</a>
               <a href="<?php echo $url; ?>/dojo_HSE/quizz/index.php" class="bouton_dropdown">Quiz</a>
-
       </div>
       </div>
 			<div class="dropdown">
