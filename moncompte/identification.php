@@ -28,6 +28,8 @@
           $_SESSION['launchboard'] = $Data['launchboard'];
           $_SESSION['manager'] = $Data['manager'];
           $_SESSION['news'] = $Data['news'];
+          $_SESSION['formations'] = $Data['formation'];
+
           ob_end_clean();
 
           if(isset($_GET['redirection'])){

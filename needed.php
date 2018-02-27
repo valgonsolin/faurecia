@@ -17,19 +17,20 @@ $bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'ta
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name="robots" content="noindex, nofollow, noarchive"/>
         <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png"/>
-
+        <link rel="stylesheet" href="/css/styledem.css">
 
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.css"/>
         <script src="/js/jquery.min.js"></script>
         <script src="/bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-        
+
 
 
 
 
         <link rel="stylesheet" href="/css/base.css"/>
 		    <link rel="stylesheet" href="/css/dropdown.css"/>
+
 
 
 
@@ -56,7 +57,7 @@ global $bdd;
                 <div class="dropdown-content">
                     <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_dropdown" >Présentation Usine</a>
                     <a href="<?php echo $url; ?>/RH/idees_ameliorations" class="bouton_dropdown" >Idées améliorations</a>
-                    <a class="bouton_dropdown" >Formations</a>
+                    <a href="<?php echo $url; ?>/RH/formations" class="bouton_dropdown" >Formations</a>
                     <!-- <a class="bouton_dropdown" >Plan de rotation</a> -->
                     <?php if((isset($_SESSION['login'])) && $_SESSION['admin']){ ?>
                     <a href="<?php echo $url; ?>/moncompte/administration.php" class="bouton_dropdown" >Profils</a>

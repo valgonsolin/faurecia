@@ -5,6 +5,14 @@ include_once "../../needed.php";
 drawHeader('RH');
 drawMenu('');
 
+function img($int){
+    if($int>0){
+      return '<img src="ressources/checked.png" style="height: 20px;" >';
+    }else{
+        return '<img src="ressources/cancel.png" style="height: 20px;" >';
+    }
+}
+
 $a_vote=0;
 $idee=-1;
 
@@ -161,6 +169,7 @@ if(isset($_GET['idee'])){
       </div></a> </div>
       <div class="col-md-5">
 
+
         <?php
           if($emm['image'] != NULL){
             $query= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
@@ -168,11 +177,14 @@ if(isset($_GET['idee'])){
             $img= $query -> fetch(); ?>
             <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height:200px; " alt="Image associée à l'idée">
           <?php } ?>
-
-
+        </div>
+    </div>
+    <div class="row"> <div class="col-md-7">
+      <div class="row">
+        &emsp;Transversalisation : <?php echo(img($emm['transversalisation'])); ?>&emsp;
+        retenue : <?php echo(img($emm['retenue'])); ?>&emsp;
       </div>
     </div>
-    <div class="row"> <div class="col-md-7"></div>
 
     <div class="col-md-5">
       <?php

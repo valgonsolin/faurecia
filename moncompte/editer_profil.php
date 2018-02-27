@@ -60,6 +60,8 @@ if(isset($_GET['id'])){
     $launchboard=0;
     $manager=-1;
     $mail="";
+    $idees=0;
+    $formations=0;
     $news=0;
 }
 ?>
@@ -147,6 +149,8 @@ if(isset($_GET['id'])){
             <input type="hidden" name="logistique" value="0">
             <input type="hidden" name="launchboard" value="0">
             <input type="hidden" name="news" value="0">
+            <input type="hidden" name="idees" value="0">
+            <input type="hidden" name="formations" value="0">
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="admin" <?php if($admin){echo "checked";} ?>>Admin</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="qualite" <?php if($qualite){echo "checked";} ?>>Dojo Qualite</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="rr" <?php if($rr){echo "checked";} ?>>R&amp;R</label>
@@ -156,6 +160,8 @@ if(isset($_GET['id'])){
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="logistique" <?php if($logistique){echo "checked";} ?>>Logistique</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="launchboard" <?php if($launchboard){echo "checked";} ?>>Launchboard</label>
             <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="news" <?php if($news){echo "checked";} ?>>News</label>
+            <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="idees" <?php if($idees){echo "checked";} ?>>Idées</label>
+            <label class="control-label checkbox-inline"><input type="checkbox" value="1" name="formations" <?php if($formations){echo "checked";} ?>>Formations</label>
           </div>
         </div>
         <?php if(!isset($_GET['id'])){ ?>

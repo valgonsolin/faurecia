@@ -75,13 +75,13 @@ else
   <div class="form-group">
     <label>Transversalisation :     </label><label style="margin-left:20px">
       <input type="hidden" value="0" name="transversalisation">
-      <input name="vrai1" type="checkbox" value="1"> Oui</label>
+      <input name="transversalisation" type="checkbox" value="1"> Oui</label>
 
   </div>
   <div class="form-group">
     <label>Retenue :     </label><label style="margin-left:20px">
       <input type="hidden" value="0" name="retenue">
-      <input name="vrai1" type="checkbox" value="1"> Oui</label>
+      <input name="retenue" type="checkbox" value="1"> Oui</label>
 
   </div>
   <div class="form-group">
