@@ -9,6 +9,43 @@ use PhpOffice\PhpSpreadsheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Cell;
 $input = 'base2.xlsx';
 
+function get_nb_open_days($date_start, $date_stop) {	
+	$arr_bank_holidays = array(); // Tableau des jours feriés	
+	
+	// On boucle dans le cas où l'année de départ serait différente de l'année d'arrivée
+	$diff_year = date('Y', $date_stop) - date('Y', $date_start);
+	for ($i = 0; $i <= $diff_year; $i++) {			
+		$year = (int)date('Y', $date_start) + $i;
+		// Liste des jours feriés
+		$arr_bank_holidays[] = '1_1_'.$year; // Jour de l'an
+		$arr_bank_holidays[] = '1_5_'.$year; // Fete du travail
+		$arr_bank_holidays[] = '8_5_'.$year; // Victoire 1945
+		$arr_bank_holidays[] = '14_7_'.$year; // Fete nationale
+		$arr_bank_holidays[] = '15_8_'.$year; // Assomption
+		$arr_bank_holidays[] = '1_11_'.$year; // Toussaint
+		$arr_bank_holidays[] = '11_11_'.$year; // Armistice 1918
+		$arr_bank_holidays[] = '25_12_'.$year; // Noel
+				
+		// Récupération de paques. Permet ensuite d'obtenir le jour de l'ascension et celui de la pentecote	
+		$easter = easter_date($year);
+		$arr_bank_holidays[] = date('j_n_'.$year, $easter + 86400); // Paques
+		$arr_bank_holidays[] = date('j_n_'.$year, $easter + (86400*39)); // Ascension
+		$arr_bank_holidays[] = date('j_n_'.$year, $easter + (86400*50)); // Pentecote	
+	}
+	//print_r($arr_bank_holidays);
+	$nb_days_open = 0;
+	// Mettre <= si on souhaite prendre en compte le dernier jour dans le décompte	
+	while ($date_start < $date_stop) {
+		// Si le jour suivant n'est ni un dimanche (0) ou un samedi (6), ni un jour férié, on incrémente les jours ouvrés	
+		if (!in_array(date('w', $date_start), array(0, 6)) 
+		&& !in_array(date('j_n_'.date('Y', $date_start), $date_start), $arr_bank_holidays)) {
+			$nb_days_open++;		
+		}
+		$date_start = mktime(date('H', $date_start), date('i', $date_start), date('s', $date_start), date('m', $date_start), date('d', $date_start) + 1, date('Y', $date_start));			
+	}		
+	return $nb_days_open;
+}
+
 $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
 $spreadsheet = $reader->load($input);
 // $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($input);
@@ -109,11 +146,11 @@ function complete(Worksheet $sheet, $array, $row,$i){
   $lettre = array('S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AW','AX','AY','AZ','BE','BF','BG','BI','BJ','BK','BP');
   foreach ($cat as $index => $category){
     if(! is_null($array[$category."_f"])){
-      $sheet -> setCellValue($lettre[2*$index].strval($row),date('j/m/y', strtotime($array[$category."_f"])));
+      $sheet -> setCellValue($lettre[2*$index].strval($row),date('j/m/y', strtotime(str_replace('/', '-',$array[$category."_f"]))));
     }
-    if(! is_null($array[$category."_r"])){
-      $sheet -> setCellValue($lettre[2*$index+1].strval($row),date('j/m/y', strtotime($array[$category."_r"])));
-      if(strtotime($array[$category."_r"]) > strtotime($array[$category."_f"])){
+    if(! is_null($array[$category."_r"]) && $array[$category]){
+      $sheet -> setCellValue($lettre[2*$index+1].strval($row),date('j/m/y', strtotime(str_replace('/', '-',$array[$category."_r"]))));
+      if(strtotime(str_replace('/', '-',$array[$category."_r"])) > strtotime(str_replace('/', '-',$array[$category."_f"]))){
         cellColor($sheet,$lettre[2*$index+1].strval($row),'FF0000');
       }else{
         cellColor($sheet,$lettre[2*$index+1].strval($row),'00B050');
@@ -126,13 +163,13 @@ function complete(Worksheet $sheet, $array, $row,$i){
   }else{
     $sheet->setCellValue('AS'.strval($row),'1');
   }
-  if(strtotime($sheet->getCell('AR'.strval($row))->getValue()) >= time() ){
+  if(strtotime(str_replace('/', '-',$array['3pt_f'])) >= time() ){
     $sheet->setCellValue('AT'.strval($row),'0');
   }else{
     $sheet->setCellValue('AT'.strval($row),'1');
   }
   if($sheet->getCell('AW'.strval($row))->getValue() == "" && ($sheet->getCell('AT'.strval($row))->getValue()) && ($sheet->getCell('AS'.strval($row))->getValue())){
-    $sheet->setCellValue('AU'.strval($row),'BH$7-AR'.strval($row));
+    $sheet->setCellValue('AU'.strval($row),strval(get_nb_open_days(strtotime(str_replace('/', '-',$array['3pt_f'])),time())));
   }else{
     $sheet->setCellValue('AU'.strval($row),'0');
   }
@@ -147,13 +184,13 @@ function complete(Worksheet $sheet, $array, $row,$i){
   }else{
     $sheet->setCellValue('BA'.strval($row),'1');
   }
-  if(strtotime($sheet->getCell('AZ'.strval($row))->getValue()) >= time() ){
+  if(strtotime(str_replace('/', '-',$array['3mpt_f'])) >= time() ){
     $sheet->setCellValue('BB'.strval($row),'0');
   }else{
     $sheet->setCellValue('BB'.strval($row),'1');
   }
   if($sheet->getCell('BE'.strval($row))->getValue() == "" && ($sheet->getCell('BA'.strval($row))->getValue()) && ($sheet->getCell('BB'.strval($row))->getValue())){
-    $sheet->setCellValue('BC'.strval($row),'BH$7-AZ'.strval($row));
+    $sheet->setCellValue('BC'.strval($row),strval(get_nb_open_days(strtotime(str_replace('/', '-',$array['3mpt_f'])),time())));
   }else{
     $sheet->setCellValue('BC'.strval($row),'0');
   }
@@ -168,14 +205,13 @@ function complete(Worksheet $sheet, $array, $row,$i){
   }else{
     $sheet->setCellValue('BL'.strval($row),'1');
   }
-  if(strtotime($sheet->getCell('BK'.strval($row))->getValue()) >= time() ){
+  if(strtotime(str_replace('/', '-',$array['4empt_f'])) >= time() ){
     $sheet->setCellValue('BM'.strval($row),'0');
   }else{
     $sheet->setCellValue('BM'.strval($row),'1');
   }
   if($sheet->getCell('BP'.strval($row))->getValue() == "" && ($sheet->getCell('BL'.strval($row))->getValue()) && ($sheet->getCell('BM'.strval($row))->getValue())){
-    $sheet->setCellValue('BN'.strval($row),'=BH$7-BK'.strval($row));
-    $sheet->getCell('BN'.strval($row))->getCalculatedValue();
+    $sheet->setCellValue('BN'.strval($row),strval(get_nb_open_days(strtotime(str_replace('/', '-',$array["4empt_f"])),time())));
   }else{
     $sheet->setCellValue('BN'.strval($row),'0');
   }
@@ -186,7 +222,10 @@ function complete(Worksheet $sheet, $array, $row,$i){
   }
   
 }
+
+$sheet->setCellValue('BH7',date("j/m/y"));
 //PSA
+$tabPSA=array("totalPT" =>0,"ttpPT"=>0,"totalMPT"=>0,"ttpMPT"=>0,"totalEMPT"=>0,"ttpEMPT"=>0);
 $psa = $bdd -> query('SELECT * FROM launchboard WHERE client = "PSA" AND archive=0');
 $projets = $psa -> fetchAll();
 $count = sizeof($projets);
@@ -205,9 +244,22 @@ foreach ($projets as $key => $value) {
     complete($sheet,$value,$row+($i-1)*2,$i);
   }
   $i+=1;
+  if(! is_null($value['3pt_f']) && ! $value['3pt']){
+		$tabPSA['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3pt_f']))),time());
+		$tabPSA['totalPT']+=1;
+	}
+	if(! is_null($value['3mpt_f']) && ! $value['3mpt']){
+		$tabPSA['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3mpt_f']))),time());
+		$tabPSA['totalMPT']+=1;
+	}
+	if(! is_null($value['4empt_f']) && ! $value['4empt']){
+		$tabPSA['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['4empt_f']))),time());
+		$tabPSA['totalEMPT']+=1;
+	}
 }
 
 //JLR
+$tabJLR=array("totalPT" =>0,"ttpPT"=>0,"totalMPT"=>0,"ttpMPT"=>0,"totalEMPT"=>0,"ttpEMPT"=>0);
 $jlr = $bdd -> query('SELECT * FROM launchboard WHERE client = "JLR" AND archive=0');
 $projets = $jlr -> fetchAll();
 $count = sizeof($projets);
@@ -226,9 +278,22 @@ foreach ($projets as $key => $value) {
     complete($sheet,$value,$row+($i-1)*2,$i);
   }
   $i+=1;
+  if(! is_null($value['3pt_f']) && ! $value['3pt']){
+		$tabJLR['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3pt_f']))),time());
+		$tabJLR['totalPT']+=1;
+	}
+	if(! is_null($value['3mpt_f']) && ! $value['3mpt']){
+		$tabJLR['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3mpt_f']))),time());
+		$tabJLR['totalMPT']+=1;
+	}
+	if(! is_null($value['4empt_f']) && ! $value['4empt']){
+		$tabJLR['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['4empt_f']))),time());
+		$tabJLR['totalEMPT']+=1;
+	}
 }
 
 //Toyota
+$tabTOY=array("totalPT" =>0,"ttpPT"=>0,"totalMPT"=>0,"ttpMPT"=>0,"totalEMPT"=>0,"ttpEMPT"=>0);
 $toy = $bdd -> query('SELECT * FROM launchboard WHERE client = "TOY/RENAULT" AND archive=0');
 $projets = $toy -> fetchAll();
 $count = sizeof($projets);
@@ -247,8 +312,76 @@ foreach ($projets as $key => $value) {
     complete($sheet,$value,$row+($i-1)*2,$i);
   }
   $i+=1;
+  if(! is_null($value['3pt_f']) && ! $value['3pt']){
+		$tabTOY['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3pt_f']))),time());
+		$tabTOY['totalPT']+=1;
+	}
+	if(! is_null($value['3mpt_f']) && ! $value['3mpt']){
+		$tabTOY['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3mpt_f']))),time());
+		$tabTOY['totalMPT']+=1;
+	}
+	if(! is_null($value['4empt_f']) && ! $value['4empt']){
+		$tabTOY['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['4empt_f']))),time());
+		$tabTOY['totalEMPT']+=1;
+	}
 }
 
+//TTP
+if($tabPSA['totalPT'] == 0){
+  $sheet->setCellValue('AR17',0);
+}else{
+  $sheet->setCellValue('AR17',(int) $tabPSA['ttpPT']/$tabPSA['totalPT']);
+}
+if($tabJLR['totalPT'] == 0){
+  $sheet->setCellValue('AR19',0);
+}else{
+  $sheet->setCellValue('AR19',(int) $tabJLR['ttpPT']/$tabJLR['totalPT']);
+}
+if($tabTOY['totalPT'] == 0){
+  $sheet->setCellValue('AR21',0);
+}else{
+  $sheet->setCellValue('AR21',(int) $tabTOY['ttpPT']/$tabTOY['totalPT']);
+}
+
+if($tabPSA['totalMPT'] == 0){
+  $sheet->setCellValue('AZ17',0);
+}else{
+  $sheet->setCellValue('AZ17',(int) $tabPSA['ttpMPT']/$tabPSA['totalMPT']);
+}
+if($tabJLR['totalMPT'] == 0){
+  $sheet->setCellValue('AZ19',0);
+}else{
+  $sheet->setCellValue('AZ19',(int) $tabJLR['ttpMPT']/$tabJLR['totalMPT']);
+}
+if($tabTOY['totalMPT'] == 0){
+  $sheet->setCellValue('AZ21',0);
+}else{
+  $sheet->setCellValue('AZ21',(int) $tabTOY['ttpMPT']/$tabTOY['totalMPT']);
+}
+
+if($tabPSA['totalEMPT'] == 0){
+  $sheet->setCellValue('BK17',0);
+}else{
+  $sheet->setCellValue('BK17',(int) $tabPSA['ttpEMPT']/$tabPSA['totalEMPT']);
+}
+if($tabJLR['totalEMPT'] == 0){
+  $sheet->setCellValue('BK19',0);
+}else{
+  $sheet->setCellValue('BK19',(int) $tabJLR['ttpEMPT']/$tabJLR['totalEMPT']);
+}
+if($tabTOY['totalEMPT'] == 0){
+  $sheet->setCellValue('BK21',0);
+}else{
+  $sheet->setCellValue('BK21',(int) $tabTOY['ttpEMPT']/$tabTOY['totalEMPT']);
+}
+
+$tot= $tabPSA['totalPT'] + $tabPSA['totalMPT'] + $tabPSA['totalEMPT'] + $tabTOY['totalPT'] + $tabTOY['totalMPT'] + $tabTOY['totalEMPT'] + $tabJLR['totalPT'] + $tabJLR['totalMPT'] + $tabJLR['totalEMPT'];
+$ttp = $tabPSA['ttpPT'] + $tabPSA['ttpMPT'] + $tabPSA['ttpEMPT'] + $tabTOY['ttpPT'] + $tabTOY['ttpMPT'] + $tabTOY['ttpEMPT'] + $tabJLR['ttpPT'] + $tabJLR['ttpMPT'] + $tabJLR['ttpEMPT'];
+if($tot){
+  $sheet ->setCellValue('AI7',(int) $ttp/$tot);
+}else{
+  $sheet->setCellValue('AI7', 0);
+}
 $writer = new Xlsx($spreadsheet);
 header('Content-Description: File Transfer');
 header('Content-Type: application/ms-excel');
