@@ -105,7 +105,7 @@ if(empty($_SESSION['login'])){
   </div>
 
 <button type="submit" class="btn btn-default">Rechercher</button>
-<a href="mesfor.php" class="btn btn-default pull-right">Mes demande formations</a>
+<a href="mesfor.php" class="btn btn-default pull-right">Formations en attente de validation</a>
 <a href="index.php" class="btn btn-default pull-right">Formations validées</a>
 </form>
 <br><br>
