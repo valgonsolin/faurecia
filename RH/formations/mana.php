@@ -47,7 +47,7 @@ if(empty($_SESSION['login'])) { ?>
               margin: 5px;
           }
           .alerte:hover{
-            opacity:1;
+            opacity:0.6;
           }
           .info_alerte{
               margin: 10px;
@@ -76,7 +76,7 @@ if(empty($_SESSION['login'])) { ?>
           }
       </style>
 
-      <h2>Toutes mes demandes de formations</h2>
+      <h2>Toutes les demandes de formations dont vous êtes responsable</h2>
       <form class="form-inline">
         <div class="form-group">
 
@@ -97,16 +97,79 @@ if(empty($_SESSION['login'])) { ?>
         </div>
 
       <button type="submit" class="btn btn-default">Rechercher</button>
-      <a href="#" class="btn btn-default pull-right">Evaluation à chaud </a>
-      <a href="#" class="btn btn-default pull-right"> </a>
+      <a href="#" class="btn btn-default pull-right">Evaluation à froid </a>
       </form>
     <br>
 
+    <?php echo "Training title recheché: ".$recherche; ?>
+
+    <div class="conteneur_alerte">
+    <?php
+
+    $Query = $bdd->prepare('SELECT *,demande_formations.id as id1 FROM demande_formations JOIN formations_dispo ON demande_formations.formation=formations_dispo.id
+      JOIN profil ON demande_formations.demandeur=profil.id WHERE trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0  AND profil.manager= :m AND demande_formations.valide=0 ORDER BY date_deb LIMIT 20  OFFSET :nb') ;
+
+    $Query->bindValue(':tt', '%'.$recherche.'%',PDO::PARAM_STR);
+    $Query->bindValue(':d1', $datetime , PDO::PARAM_STR);
+    $Query ->bindValue(':m',(int) $_SESSION['id'], PDO::PARAM_INT);
+    $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
+    $Query->execute();
+
+
+    while ($Data = $Query->fetch()) { ?>
+
+      <a href="evalchaud.php?avalide= <?php echo $Data['id1'] ; ?>" ><div class="alerte" >
+
+          <div class="info_alerte">
+              <div class="date_et_titre">
+                  <h4 style="margin-top: 0px; font-size: 40px;">
+                    <?php echo $Data['trainingtitle']; ?>
+                    </h4>
+              </div>
+
+              <p><b>Date de début : </b><?php echo $Data['date_deb'];?><br>
+                  <b>Date de fin: </b><?php echo $Data['date_fin'];?><br>
+                  <b>Date d'ajout : </b><?php echo $Data['date_ajout'];?><br>
+                  <b>Origine du besoin :</b><?php echo $Data['origine'];?><br>
+                  <br><br>
+
+                  <b><?php echo "Cliquez pour valider cette formation";?></b><br></p>
+
+
+          </div>
+
+      </div></a>
 
 
 
+    <?php
+     }
+     ?>
+    </div>
 
-<?php
-}
-drawFooter();
-?>
+
+    <?php
+
+
+    if($debut > 19){
+      ?>
+      <a href="mana.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-20;?>" class="btn btn-default">Elements précédents</a>
+    <?php
+    }
+
+    $test = $bdd->prepare('SELECT * FROM demande_formations JOIN formations_dispo ON demande_formations.formation=formations_dispo.id
+      JOIN profil ON demande_formations.demandeur=profil.id WHERE trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0  AND profil.manager= :m AND demande_formations.valide=0 ORDER BY date_deb LIMIT 20  OFFSET :nb');
+    $test->bindValue(':tt','%'.$recherche.'%', PDO::PARAM_STR);
+    $test->bindValue(':d1', $datetime, PDO::PARAM_INT);
+    $test->bindValue(':m', $_SESSION['id'], PDO::PARAM_INT);
+    $test ->bindValue(':nb',(int) $debut+20, PDO::PARAM_INT);
+    $test->execute();
+
+    if($test -> fetch()){ ?>
+      <a href="mana.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+20;?>" class="btn btn-default">Elements suivants</a>
+    <?php
+
+    }
+    }
+    drawFooter();
+    ?>

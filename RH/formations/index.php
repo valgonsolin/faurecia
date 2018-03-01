@@ -106,7 +106,7 @@ if(empty($_SESSION['login'])){
 
 <button type="submit" class="btn btn-default">Rechercher</button>
 <a href="mesfor.php" class="btn btn-default pull-right">Mes demande formations</a>
-<a href="index.php" class="btn btn-default pull-right">Mes formations à venir</a>
+<a href="index.php" class="btn btn-default pull-right">Formations validées</a>
 </form>
 <br><br>
 <?php echo "Training title recheché: ".$recherche; ?>
@@ -170,12 +170,15 @@ if($debut > 19){
 <?php
 }
 
-$test = $bdd->prepare('SELECT * FROM formations_dispo WHERE trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0  ORDER BY date_deb LIMIT 1  OFFSET :nb');
+
+$test = $bdd->prepare('SELECT id FROM formations_dispo WHERE id NOT IN
+  (SELECT formations_dispo.id as id FROM formations_dispo JOIN demande_formations ON formations_dispo.id=demande_formations.formation WHERE demandeur= :dd)
+  AND trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0 ORDER BY date_deb LIMIT 1 OFFSET :nb');
+$test->bindValue(':dd', $_SESSION['id'], PDO::PARAM_INT);
 $test->bindValue(':tt','%'.$recherche.'%', PDO::PARAM_STR);
 $test->bindValue(':d1', $datetime, PDO::PARAM_INT);
 $test ->bindValue(':nb',(int) $debut+20, PDO::PARAM_INT);
 $test->execute();
-
 if($test -> fetch()){ ?>
   <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+20;?>" class="btn btn-default">Elements suivants</a>
 <?php
