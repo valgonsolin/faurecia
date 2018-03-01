@@ -106,7 +106,7 @@ if(empty($_SESSION['login'])){
 
 <button type="submit" class="btn btn-default">Rechercher</button>
 <a href="mesfor.php" class="btn btn-default pull-right">Formations en attente de validation</a>
-<a href="index.php" class="btn btn-default pull-right">Formations validées</a>
+<a href="mesval.php" class="btn btn-default pull-right">Formations validées</a>
 </form>
 <br><br>
 <?php echo "Training title recheché: ".$recherche; ?>
