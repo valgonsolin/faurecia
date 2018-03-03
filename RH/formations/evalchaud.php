@@ -9,7 +9,7 @@ drawMenu('mana');
 
 if(!(empty($_POST))){
   $qyy = $bdd -> prepare('SELECT COUNT(*) as n FROM demande_formations WHERE formation= ? AND valide= 1 ');
-  $qyy->execute(array($_POST['id']));
+  $qyy->execute(array($_POST['id2']));
   $c=$qyy->fetch();
   if($c['n']>0){warning('Erreur','Vous avez déja validé la demande formation'); }else{
     // t'en etais à l'insert into+update (valide)
@@ -48,7 +48,7 @@ if(!(empty($_POST))){
 
 
 if(isset($_GET['avalide'])){
-  $Query2 = $bdd->prepare('SELECT *,demande_formations.id as id1  FROM formations_dispo JOIN demande_formations ON formations_dispo.id=demande_formations.formation WHERE  demande_formations.id= :f ') ;
+  $Query2 = $bdd->prepare('SELECT *,demande_formations.id as id1,formations_dispo.id as id2  FROM formations_dispo JOIN demande_formations ON formations_dispo.id=demande_formations.formation WHERE  demande_formations.id= :f ') ;
 
   $Query2 ->bindValue(':f',(int) $_GET['avalide'], PDO::PARAM_INT);
   $Query2->execute();
@@ -310,7 +310,7 @@ if(isset($_GET['avalide'])){
         <div class="col-md-3 col-md-offset-5">
           <br><br><br>
           <input type="hidden" name="id" value="<?php echo $Data["id1"] ?>" >
-
+          <input type="hidden" name="id2" value="<?php echo $Data["id2"] ?>" >
           <input value="Valider la demande de formation" class="btn btn-default" type="submit">
 
         </div>

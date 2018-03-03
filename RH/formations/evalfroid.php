@@ -76,7 +76,7 @@ if(empty($_SESSION['login'])) { ?>
           }
       </style>
 
-      <h2>Toutes les demandes de formations dont vous êtes responsable</h2>
+      <h2>Remplissage des évaluations à froid</h2>
       <form class="form-inline">
         <div class="form-group">
 
@@ -97,7 +97,7 @@ if(empty($_SESSION['login'])) { ?>
         </div>
 
       <button type="submit" class="btn btn-default">Rechercher</button>
-      <a href="evalfroid.php" class="btn btn-default pull-right">Evaluation à froid </a>
+      <a href="mana.php" class="btn btn-default pull-right">Validation des formations </a>
       </form>
     <br>
 
@@ -107,7 +107,7 @@ if(empty($_SESSION['login'])) { ?>
     <?php
 
     $Query = $bdd->prepare('SELECT *,demande_formations.id as id1 FROM demande_formations JOIN formations_dispo ON demande_formations.formation=formations_dispo.id
-      JOIN profil ON demande_formations.demandeur=profil.id WHERE trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0  AND profil.manager= :m AND demande_formations.valide=0 ORDER BY date_deb LIMIT 20  OFFSET :nb') ;
+      JOIN profil ON demande_formations.demandeur=profil.id WHERE trainingtitle LIKE :tt AND DATEDIFF(:d1 , date_fin  )>183  AND profil.manager= :m AND demande_formations.valide=1 AND demande_formations.evalfroid=0 ORDER BY date_deb LIMIT 20  OFFSET :nb') ;
 
     $Query->bindValue(':tt', '%'.$recherche.'%',PDO::PARAM_STR);
     $Query->bindValue(':d1', $datetime , PDO::PARAM_STR);
@@ -118,7 +118,7 @@ if(empty($_SESSION['login'])) { ?>
 
     while ($Data = $Query->fetch()) { ?>
 
-      <a href="evalchaud.php?avalide= <?php echo $Data['id1'] ; ?>" ><div class="alerte" >
+      <a href="remplirfroid.php?aremplir= <?php echo $Data['id1'] ; ?>" ><div class="alerte" >
 
           <div class="info_alerte">
               <div class="date_et_titre">
@@ -138,7 +138,7 @@ if(empty($_SESSION['login'])) { ?>
                   <b>Origine du besoin :</b><?php echo $Data['origine'];?><br>
                   <br><br>
 
-                  <b><?php echo "Cliquez pour valider cette formation";?></b><br></p>
+                  <b><?php echo "Cliquez pour remplir l'évaluation à froid";?></b><br></p>
 
 
           </div>
@@ -163,7 +163,7 @@ if(empty($_SESSION['login'])) { ?>
     }
 
     $test = $bdd->prepare('SELECT * FROM demande_formations JOIN formations_dispo ON demande_formations.formation=formations_dispo.id
-      JOIN profil ON demande_formations.demandeur=profil.id WHERE trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0  AND profil.manager= :m AND demande_formations.valide=0 ORDER BY date_deb LIMIT 20  OFFSET :nb');
+      JOIN profil ON demande_formations.demandeur=profil.id WHERE trainingtitle LIKE :tt AND DATEDIFF(date_fin, :d1 )>183  AND profil.manager= :m AND demande_formations.valide=1 AND demande_formations.evalfroid=0 ORDER BY date_deb LIMIT 20  OFFSET :nb');
     $test->bindValue(':tt','%'.$recherche.'%', PDO::PARAM_STR);
     $test->bindValue(':d1', $datetime, PDO::PARAM_INT);
     $test->bindValue(':m', $_SESSION['id'], PDO::PARAM_INT);
