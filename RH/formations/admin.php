@@ -78,7 +78,7 @@ if(empty($_SESSION['login']))
       }
   </style>
 
-  <h2>Toutes mes demandes de formations</h2>
+  <h2>Espace admin formations</h2>
   <form class="form-inline">
     <div class="form-group">
 
@@ -99,12 +99,13 @@ if(empty($_SESSION['login']))
     </div>
 
   <button type="submit" class="btn btn-default">Rechercher</button>
-  <a href="#" class="btn btn-default pull-right">Formations en attendes de validation</a>
-  <a href="index.php" class="btn btn-default pull-right">Effectuer une demande de formations</a>
+  <a href="admin2.php" class="btn btn-default pull-right">Formations terminées</a>
+
   </form>
 <br>
 
 
 <?php
+}
 drawFooter();
 ?>

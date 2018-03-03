@@ -99,7 +99,7 @@ if(empty($_SESSION['login']))
     </div>
 
   <button type="submit" class="btn btn-default">Rechercher</button>
-  <a href="attval.php" class="btn btn-default pull-right">Formations en attendes de validation</a>
+  <a href="#" class="btn btn-default pull-right">Demande de formations validées</a>
   <a href="index.php" class="btn btn-default pull-right">Effectuer une demande de formations</a>
   </form>
 <br>
@@ -107,8 +107,8 @@ if(empty($_SESSION['login']))
 <div class="conteneur_alerte">
 <?php
 
-  $query= $bdd->prepare('SELECT * FROM demande_formations JOIN formations_dispo  ON demande_formations.formation=formations_dispo.id
-                        WHERE demandeur= :d and valide = 1 AND trainingtitle LIKE :tt  AND DATEDIFF(date_deb, :d1 )>0 ORDER BY formations_dispo.date_deb LIMIT 20 OFFSET :nb ');
+  $query= $bdd->prepare('SELECT trainingtitle,date_deb,date_fin,origine FROM demande_formations JOIN formations_dispo  ON demande_formations.formation=formations_dispo.id
+                        WHERE demandeur= :d and valide = 0 AND trainingtitle LIKE :tt  AND DATEDIFF(date_deb, :d1 )>0 ORDER BY formations_dispo.date_deb LIMIT 20 OFFSET :nb ');
                         $query->bindValue(':d', $_SESSION['id'], PDO::PARAM_INT);
                         $query->bindValue(':tt','%'.$recherche.'%', PDO::PARAM_STR);
                         $query->bindValue(':d1',$datetime, PDO::PARAM_STR);
@@ -151,12 +151,12 @@ if(empty($_SESSION['login']))
 
 if($debut > 19){
   ?>
-  <a href="mesfor.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-20;?>" class="btn btn-default">Elements précédents</a>
+  <a href="attval.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-20;?>" class="btn btn-default">Elements précédents</a>
 <?php
 }
 
 $test = $bdd->prepare('SELECT * FROM demande_formations JOIN formations_dispo  ON demande_formations.formation=formations_dispo.id
-                      WHERE demandeur= :d and valide = 1 AND trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0 ORDER BY formations_dispo.date_deb LIMIT 1 OFFSET :nb');
+                      WHERE demandeur= :d and valide = 0 AND trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0 ORDER BY formations_dispo.date_deb LIMIT 1 OFFSET :nb');
 $test->bindValue(':d', $_SESSION['id'], PDO::PARAM_INT);
 $test->bindValue(':tt','%'.$recherche.'%', PDO::PARAM_STR);
 $test->bindValue(':d1',$datetime, PDO::PARAM_STR);
@@ -164,7 +164,7 @@ $test ->bindValue(':nb',(int) $debut+20, PDO::PARAM_INT);
 $test->execute();
 
 if($test -> fetch()){ ?>
-  <a href="mesfor.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+20;?>" class="btn btn-default">Elements suivants</a>
+  <a href="attval.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+20;?>" class="btn btn-default">Elements suivants</a>
 
 <?php
 }
