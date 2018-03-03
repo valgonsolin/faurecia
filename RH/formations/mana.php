@@ -126,8 +126,13 @@ if(empty($_SESSION['login'])) { ?>
                     <?php echo $Data['trainingtitle']; ?>
                     </h4>
               </div>
-
-              <p><b>Date de début : </b><?php echo $Data['date_deb'];?><br>
+              <?php
+              $qq=$bdd->prepare('SELECT * FROM profil WHERE id = ?');
+              $qq->execute(array($Data['demandeur']));
+              $DA=$qq->fetch();
+              ?>
+              <p><b>Demandeur :</b><?php echo $DA['nom']." ".$DA['prenom'] ; ?> <br>
+                  <b>Date de début : </b><?php echo $Data['date_deb'];?><br>
                   <b>Date de fin: </b><?php echo $Data['date_fin'];?><br>
                   <b>Date d'ajout : </b><?php echo $Data['date_ajout'];?><br>
                   <b>Origine du besoin :</b><?php echo $Data['origine'];?><br>

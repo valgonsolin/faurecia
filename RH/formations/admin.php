@@ -30,7 +30,9 @@ if(empty($_SESSION['login']))
   <h4>Vous devez être connecté pour accéder à cette partie.</h4>
   <a href="/moncompte/identification.php?redirection=RH/formations/index.php"><button class="btn btn-default">Se connecter</button></a>
 <?php
-}else{ ?>
+}else{
+  if(!($_SESSION['formations']==1)){echo "Vous n'avez pas accés à cette partie. "; }
+  else{ ?>
   <style>
       .conteneur_alerte{
           margin-top:20px;
@@ -100,12 +102,88 @@ if(empty($_SESSION['login']))
 
   <button type="submit" class="btn btn-default">Rechercher</button>
   <a href="admin2.php" class="btn btn-default pull-right">Formations terminées</a>
+  <a href="export.php" class="btn btn-default pull-right">Export excel</a>
 
   </form>
 <br>
 
 
+<?php echo "Training title recheché: ".$recherche; ?>
+
+<div class="conteneur_alerte">
+<?php
+
+$Query = $bdd->prepare('SELECT * FROM formations_dispo JOIN demande_formations ON formations_dispo.id=demande_formations.formation WHERE trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0  AND valide=1 AND evalfroid=0 ORDER BY date_deb LIMIT 20  OFFSET :nb') ;
+
+$Query->bindValue(':tt', '%'.$recherche.'%',PDO::PARAM_STR);
+$Query->bindValue(':d1', $datetime , PDO::PARAM_STR);
+$Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
+$Query->execute();
+
+
+while ($Data = $Query->fetch()) {
+  ?>
+
+  <div class="alerte" >
+
+      <div class="info_alerte">
+          <div class="date_et_titre">
+              <h4 style="margin-top: 0px; font-size: 40px;">
+                <?php echo $Data['trainingtitle']; ?>
+                </h4>
+          </div>
+          <?php
+          $qq=$bdd->prepare('SELECT * FROM profil WHERE id = ?');
+          $qq->execute(array($Data['demandeur']));
+          $DA=$qq->fetch();
+          $qy=$bdd->prepare('SELECT manager FROM profil WHERE id = ?');
+          $qy->execute(array($Data['demandeur']));
+          $DE=$qy->fetch();
+          $qe=$bdd->prepare('SELECT * FROM profil WHERE id = ?');
+          $qe->execute(array($DE['manager']));
+          $DM=$qe->fetch();
+          ?>
+          <p><b>Demandeur : </b><?php echo $DA['nom']." ".$DA['prenom'] ; ?> <br>
+              <b>Manager en charge : </b><?php echo $DM['nom']." ".$DM['prenom'] ; ?> <br>
+              <b>Date de début : </b><?php echo $Data['date_deb'];?><br>
+              <b>Date de fin: </b><?php echo $Data['date_fin'];?><br>
+              <b>Date d'ajout : </b><?php echo $Data['date_ajout'];?>
+              <br><br><br></p>
+
+
+      </div>
+
+  </div>
+
+
+
+<?php
+
+ }
+ ?>
+</div>
+
+
+<?php
+
+
+if($debut > 19){
+  ?>
+  <a href="admin.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-20;?>" class="btn btn-default">Elements précédents</a>
 <?php
 }
+
+
+$test = $bdd->prepare('SELECT * FROM formations_dispo JOIN demande_formations ON formations_dispo.id=demande_formations.formation WHERE trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0  AND valide=1 AND evalfroid=0 ORDER BY date_deb LIMIT 20  OFFSET :nb');
+$test->bindValue(':tt', '%'.$recherche.'%',PDO::PARAM_STR);
+$test->bindValue(':d1', $datetime , PDO::PARAM_STR);
+$test ->bindValue(':nb',(int) $debut+20, PDO::PARAM_INT);
+$test->execute();
+if($test -> fetch()){ ?>
+  <a href="admin.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+20;?>" class="btn btn-default">Elements suivants</a>
+<?php
+
+}
+}}
 drawFooter();
 ?>

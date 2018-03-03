@@ -100,6 +100,7 @@ if(empty($_SESSION['login']))
 
   <button type="submit" class="btn btn-default">Rechercher</button>
   <a href="admin.php" class="btn btn-default pull-right">Formations validées</a>
+  <a href="export.php" class="btn btn-default pull-right">Export excel</a>
   </form>
 <br>
 
