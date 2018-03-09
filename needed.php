@@ -1,8 +1,16 @@
 <?php
 session_start();
-$url = "http://faureciabeaulieu.fr";
+
+$french = "http://faureciabeaulieu.fr"; //link for french version
+$english = "http://faureciabeaulieu.fr"; //link for english version
+
 $bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'tavg', 'lacolloc');
-// array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+$lang = "fr"; // fr for french, en for english
+if($lang == "en"){
+    $url = $english;
+}else{
+    $url = $french;
+}
 
 ?>
 
@@ -45,12 +53,24 @@ function drawHeader($selected='')
 {
 global $url;
 global $bdd;
+global $lang;
+global $french;
+global $english;
+
 ?>
 <body>
 	<div id="page">
     <div id="header_banner">
         <a href="<?php echo $url; ?>/index.php" class="lien_accueil"><img src="<?php echo $url; ?>/images/logo.png"></a>
-        <a href="https://faurus.ww.faurecia.com/community/fcm/fcm-beaulieu" class="lien_accueil" style="float:right; margin-right:100px;"><img src="<?php echo $url; ?>/images/faurus.png" style=" height:35px;"></a>
+
+        <?php
+        if($lang == "fr"){ ?>
+            <a href="<?php echo $english; ?>" style="float:right;margin-right:10px;"><img src="/images/gb.svg" style=" height:35px;" alt="English"></a>
+        <?php }elseif($lang=="en"){ ?>
+        <a href="<?php echo $french; ?>" style="float:right;margin-right:10px;"><img src="/images/fr.svg" style=" height:35px;" alt="French"></a>
+       <?php } ?>
+        <a href="https://faurus.ww.faurecia.com/community/fcm/fcm-beaulieu" class="lien_accueil" style="float:right;"><img src="<?php echo $url; ?>/images/faurus.png" style=" height:35px;"></a>
+        
         <div id="menu">
             <div class="dropdown">
             <a href="<?php echo $url; ?>/presentation_usine/chiffres_cle.php" class="bouton_menu  <?php if($selected=='RH'){echo ' bouton_menu_selected';} ?> dropbtn" >RH</a>
