@@ -19,9 +19,19 @@ if(empty($_SESSION['login'])){ ?>
     ?>
     <form method="post" action="index.php" enctype="multipart/form-data">
       <div class="row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
           <label>PPTL :</label>
             <select class="form-control" name="profil" id="pptl">
+              <?php
+              $profil = $bdd -> query('SELECT * FROM profil');
+              while($personne = $profil -> fetch()){ ?>
+                <option value="<?php echo $personne['id']; ?>"><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+            <?php  } ?>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label>PM :</label>
+            <select class="form-control" name="pm">
               <?php
               $profil = $bdd -> query('SELECT * FROM profil');
               while($personne = $profil -> fetch()){ ?>
@@ -85,13 +95,17 @@ if(empty($_SESSION['login'])){ ?>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label>Launchbook :</label>
           <input type="url" name="launchbook" class="form-control">
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label>Kickoff (ppt) :</label>
           <input type="file" name="kickoff">
+        </div>
+        <div class="form-group col-md-4">
+          <label>Make or Buy &amp; BOM (ppt) :</label>
+          <input type="file" name="makeorbuy">
         </div>
       </div>
       <div class="row">

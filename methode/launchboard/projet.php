@@ -143,19 +143,36 @@ if(!isset($_GET['id'])){ ?>
   <a class="btn btn-default" href="<?php echo $url; ?>/methode/launchboard">Retourner au LaunchBoard</a>
   <a class="btn btn-default" href="<?php echo $url; ?>/moncompte/identification.php">Connexion</a>
    <?php }else{
-  if(isset($_POST['delete_kickoff'])){
-    remove_file($bdd,$_POST['kickoff']);
-    $q = $bdd -> prepare('UPDATE launchboard SET kickoff = NULL WHERE id= ?');
-    if($q -> execute(array($_GET['id']))){
-      success('Supprimé','Le kickoff a bien été supprimé.');
+     if(isset($_POST['delete_kickoff'])){
+       remove_file($bdd,$_POST['kickoff']);
+       $q = $bdd -> prepare('UPDATE launchboard SET kickoff = NULL WHERE id= ?');
+       if($q -> execute(array($_GET['id']))){
+         success('Supprimé','Le kickoff a bien été supprimé.');
+       }else{
+         warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+       }
+     }
+     if(isset($_POST['delete_makeorbuy'])){
+       remove_file($bdd,$_POST['makeorbuy']);
+       $q = $bdd -> prepare('UPDATE launchboard SET makeorbuy = NULL WHERE id= ?');
+       if($q -> execute(array($_GET['id']))){
+         success('Supprimé','Le Make or Buy a bien été supprimé.');
+       }else{
+         warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+       }
+     }
+     if(isset($_POST['pptl'])){
+    $q = $bdd -> prepare('UPDATE launchboard SET profil = ? WHERE id = ?');
+    if($q -> execute(array($_POST['profil'],$_GET['id']))){
+      success('Modifié','Le PPTL a été modifié.');
     }else{
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
     }
   }
-  if(isset($_POST['pptl'])){
-    $q = $bdd -> prepare('UPDATE launchboard SET profil = ? WHERE id = ?');
-    if($q -> execute(array($_POST['profil'],$_GET['id']))){
-      success('Modifié','Le PPTL a été modifié.');
+     if(isset($_POST['pm_check'])){
+    $q = $bdd -> prepare('UPDATE launchboard SET pm = ? WHERE id = ?');
+    if($q -> execute(array($_POST['pm'],$_GET['id']))){
+      success('Modifié','Le PM a été modifié.');
     }else{
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
     }
@@ -229,6 +246,26 @@ if(!isset($_GET['id'])){ ?>
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
     }
   }
+  //Pourcentages
+  if(isset($_POST['capacitaire_click'])){
+    $q = $bdd -> prepare('UPDATE launchboard SET capacitaire= ? WHERE id = ?');
+    if($q -> execute(array($_POST['capacitaire'],$_GET['id']))){
+      success('Modifiée','Le pourcentage a été modifiée.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
+  foreach (['me'=>'ME','hsep'=>'HSE','quality'=>'QUALITY','log'=>'LOG/PC&amp;L','training'=>'Training/EE','supplier'=>'Suppliers'] as $key => $value){
+    if(isset($_POST[$key.'_click'])){
+      $q = $bdd -> prepare('UPDATE launchboard SET '.$key.'= ? WHERE id = ?');
+      if($q -> execute(array($_POST[$key],$_GET['id']))){
+        success('Modifiée','Le '.$value.' a été modifiée.');
+      }else{
+        warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+      }
+    }
+  }
+  //Files
   if(! empty($_FILES)){
     if(isset($_FILES['kickoff']) && $_FILES['kickoff']['name'] != ""){
       $kickoff=upload($bdd,'kickoff',"../../ressources","launchboard",50485760,array( 'ppt' , 'pptx' , 'PPT' , 'PPTX' ));
@@ -238,6 +275,19 @@ if(!isset($_GET['id'])){ ?>
         $q = $bdd -> prepare('UPDATE launchboard SET kickoff = ? WHERE id = ?');
         if($q -> execute(array($kickoff,$_GET['id']))){
           success('Ajouté','Le kickoff a bien été ajouté.');
+        }else{
+          warning('Erreur','Il y a eu une erreur. Veuillez recommencer.');
+        }
+      }
+    }
+    if(isset($_FILES['makeorbuy']) && $_FILES['makeorbuy']['name'] != ""){
+      $makeorbuy=upload($bdd,'makeorbuy',"../../ressources","launchboard",50485760,array( 'ppt' , 'pptx' , 'PPT' , 'PPTX' ));
+      if($makeorbuy < 0){
+        warning('Erreur','Le fichier n\'a pas pu être importé.');
+      }else{
+        $q = $bdd -> prepare('UPDATE launchboard SET makeorbuy = ? WHERE id = ?');
+        if($q -> execute(array($makeorbuy,$_GET['id']))){
+          success('Ajouté','Le Make or Buy a bien été ajouté.');
         }else{
           warning('Erreur','Il y a eu une erreur. Veuillez recommencer.');
         }
@@ -270,6 +320,9 @@ if(!isset($_GET['id'])){ ?>
     $Data = $query -> fetch();
 ?>
 <style>
+  .clickable{
+    border-radius:4px;
+  }
   .couleur{
     margin: 10px;
     width: 400px;
@@ -358,6 +411,15 @@ if(!isset($_GET['id'])){ ?>
           <div class="btn btn-default pull-right" data-toggle="modal" data-target="#sop">Modifier</div><?php } ?></h4>
   </div>
   <div class="col-md-6">
+      <?php
+      $pmquery = $bdd -> prepare('SELECT * FROM profil WHERE id = ?');
+      $pmquery -> execute(array($Data['pm']));
+      $pers = $pmquery -> fetch();
+      ?>
+      <h4>PM : <?php echo $pers['nom']; ?> <?php echo $pers['prenom']; ?>
+      <?php if($_SESSION['launchboard']){ ?>
+      <div class="btn btn-default pull-right" data-toggle="modal" data-target="#pm">Modifier le PM</div><?php } ?>
+    </h4>
     <h4>Description :    <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
           <div class="btn btn-default pull-right" data-toggle="modal" data-target="#description">Modifier la description</div><?php } ?></h4>
     <p><?php echo $Data['description']; ?></p>
@@ -365,7 +427,7 @@ if(!isset($_GET['id'])){ ?>
 </div>
 <div class="row">
   <?php
-  //CAlcul avancement et retard
+  //Calcul avancement et retard
   $total=0;
   $avancement=0;
   $retard=0;
@@ -419,17 +481,41 @@ if(!isset($_GET['id'])){ ?>
       if((($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ) && $gate != "2B"){ ?>
                   <div class="btn btn-default pull-right" data-toggle="modal" data-target="#pourcentage">Mettre à jour le pourcentage</div><?php
       } ?></h4>
+
     </div>
     <div class="col-md-6">
       <div class="progress" style="margin-top:15px; margin-bottom: 15px;">
         <div class="progress-bar" role="progressbar" style="color:<?php echo $text; ?>;width: <?php echo $pourcentage; ?>%; background-color: <?php echo $couleur; ?>;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $pourcentage; ?>%</div>
       </div>
     </div>
-    <div class="col-md-6">Avancement : <?php echo round((floatval($avancement/$total)*100),2); ?>% &emsp; Retard : <?php echo round((floatval($retard/$total)*100),2); ?>%</div>
+    <div class="col-md-6">Avancement : <?php echo round((floatval($avancement/$total)*100),2); ?>% &emsp; Retard : <?php echo round((floatval($retard/$total)*100),2); ?>% &emsp; LB : <?php echo $pourcentage; ?>% &emsp; 
+      <span class="clickable" data-toggle="modal" data-target="#capacitaire">
+        <?php if(! is_null($Data['capacitaire'])){ echo " Cp : ".$Data['capacitaire']."%"; }?>
+      </span>
+      </div>
     <div class="col-md-6">
       <h4>Gate : <?php echo $gate; ?></h4>
     </div>
-
+    <div class="col-md-6" style="font-size:80%;">
+      <?php
+      foreach (['me'=>'ME','hsep'=>'HSE','quality'=>'QUALITY','log'=>'LOG/PC&amp;L','training'=>'Training/EE','supplier'=>'Suppliers'] as $key => $value) {
+        if(is_null($Data[$key])){
+          $color="";
+          $pour="-";
+        }else{
+          $pour=$Data[$key]." %";
+          if($Data[$key] <75){
+            $color = '#FF002A';
+          }else if($Data[$key] < 85){
+            $color='#ff8900';
+          }else{
+            $color='green';
+          }
+        }
+        echo '<span style="color:'.$color.';" class="clickable" data-toggle="modal" data-target="#'.$key.'">'.$value.' : '.$pour.'</span>&emsp; ';
+      }
+      ?>
+    </div>
 </div>
 <br>
 <div class="row">
@@ -612,13 +698,35 @@ if(!isset($_GET['id'])){ ?>
           <form method="post">
             <input type="hidden" name="kickoff" value="<?php echo $Data['kickoff']; ?>">
             <a href="download.php?id=<?php echo $Data['kickoff']; ?>&amp;name=kickoff<?php echo $_GET['id']; ?>" class="btn btn-default">Télécharger le kickoff</a>
-            <input type="submit" name="delete_kickoff" class="btn btn-default" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le kickoff ?')">
+            <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){?>
+            <input type="submit" name="delete_kickoff" class="btn btn-default" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le kickoff ?')"><?php } ?>
           </form>
         <?php
-      }else{ ?>
+      }elseif(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
         <form method="post" enctype="multipart/form-data">
           <input type="file" name="kickoff">
           <input type="submit" class="btn btn-default" value="Ajouter le kickoff (ppt)">
+        </form>
+        <?php
+      }
+      echo "<br>"; ?>
+
+      <?php
+      if(! is_null($Data['makeorbuy'])){
+        $img = $bdd -> prepare('SELECT * FROM files WHERE id = ?');
+        $img -> execute(array($Data['makeorbuy']));
+        $file = $img -> fetch(); ?>
+          <form method="post">
+            <input type="hidden" name="makeorbuy" value="<?php echo $Data['makeorbuy']; ?>">
+            <a href="download.php?id=<?php echo $Data['makeorbuy']; ?>&amp;name=makeorbuy<?php echo $_GET['id']; ?>" class="btn btn-default">Télécharger le Make or Buy &amp; BOM</a>
+            <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){?>
+            <input type="submit" name="delete_makeorbuy" class="btn btn-default" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le Make or Buy ?')"><?php } ?>
+          </form>
+        <?php
+      }elseif(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
+        <form method="post" enctype="multipart/form-data">
+          <input type="file" name="makeorbuy">
+          <input type="submit" class="btn btn-default" value="Ajouter le Make or Buy (ppt)">
         </form>
         <?php
       }
@@ -640,7 +748,7 @@ if(!isset($_GET['id'])){ ?>
       $img -> execute(array($Data['img_presentation']));
       $img = $img -> fetch();
       echo "<img src=".$img['chemin']." style='max-width:100%;border-radius: 6px; max-height:350px;' alt='Image'>";
-    }else{ ?>
+    }elseif(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
       <form method="post" enctype="multipart/form-data">
         <input type="file" name="img">
         <input type="submit" class="btn btn-default" value="Ajouter l'image">
@@ -659,7 +767,7 @@ if(!isset($_GET['id'])){ ?>
       </div>
       <div class="modal-body">
         <form method="post" class="form-group">
-          <select class="form-control" name="profil" <?php echo $Data['profil']; ?>>
+          <select class="form-control" name="profil">
             <?php
             $profil = $bdd -> query('SELECT * FROM profil');
             while($personne = $profil -> fetch()){ ?>
@@ -668,6 +776,29 @@ if(!isset($_GET['id'])){ ?>
           </select>
           <br>
           <input type="submit" name="pptl" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le PPTL ?')">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="pm" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modifier le PM</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <select class="form-control" name="pm">
+            <?php
+            $profil = $bdd -> query('SELECT * FROM profil');
+            while($personne = $profil -> fetch()){ ?>
+              <option value="<?php echo $personne['id']; ?>" <?php if($Data['pm'] == $personne['id']){echo "selected";} ?>><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
+          <?php  } ?>
+          </select>
+          <br>
+          <input type="submit" name="pm_check" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le PM ?')">
         </form>
       </div>
     </div>
@@ -822,15 +953,55 @@ if(!isset($_GET['id'])){ ?>
     </div>
   </div>
 </div>
+<!-- Pourcentages -->
+<div id="capacitaire" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modifier le capacitaire</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <input type="number" class="form-control" name="capacitaire" value="<?php echo $Data['capacitaire']; ?>">
+          <br>
+          <input type="submit" name="capacitaire_click" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le capacitaire ?')">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php
+foreach (['me'=>'ME','hsep'=>'HSE','quality'=>'QUALITY','log'=>'LOG/PC&amp;L','training'=>'Training/EE','supplier'=>'Suppliers'] as $key => $value){ ?>
+<div id="<?php echo $key; ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modifier le pourcentage <?php echo $value; ?></h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <input type="number" class="form-control" name="<?php echo $key; ?>" value="<?php echo $Data[$key]; ?>">
+          <br>
+          <input type="submit" name="<?php echo $key; ?>_click" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le pourcentage <?php echo $value; ?> ?')">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php } ?>
 <br><br>
 <form method="post" action="index.php">
   <a href="index.php" class="btn btn-default">Retour</a>
-  <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" >
-  <?php if($Data['archive']){
-    echo '<input type="submit" class="btn btn-default pull-right" value="Restaurer" name="desarchive" onclick="return confirm(\'Êtes-vous sûr de vouloir restaurer le projet ?\')">';
-  }else{
-    echo '<input type="submit" class="btn btn-default pull-right" value="Archiver" name="archive" onclick="return confirm(\'Êtes-vous sûr de vouloir archiver le projet ?\')">';
-  }
+  <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
+    <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" >
+    <?php if($Data['archive']){
+      echo '<input type="submit" class="btn btn-default pull-right" value="Restaurer" name="desarchive" onclick="return confirm(\'Êtes-vous sûr de vouloir restaurer le projet ?\')">';
+    }else{
+      echo '<input type="submit" class="btn btn-default pull-right" value="Archiver" name="archive" onclick="return confirm(\'Êtes-vous sûr de vouloir archiver le projet ?\')">';
+    }
+  } 
   ?>
 </form>
 <script type="text/javascript">

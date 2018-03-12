@@ -10,17 +10,22 @@ echo "<h2>LaunchRoom</h2>";
 if(! empty($_POST)){
   if(isset($_POST['ajout'])){
     $descr="";
-    foreach($_POST['description'] as $key => $value) {
-      $descr.=$value." / ";
+    if(isset($_POST['description'])){
+      foreach($_POST['description'] as $key => $value) {
+        $descr.=$value." / ";
+      }
     }
     $descr=substr($descr,0,sizeof($descr)-3);
     $img=upload($bdd,'img',"../../ressources","launchboard",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
     if($img < 0){$img=NULL;}
     $kickoff=upload($bdd,'kickoff',"../../ressources","launchboard",50485760,array( 'ppt' , 'pptx' , 'PPT' , 'PPTX' ));
     if($kickoff < 0){$kickoff=NULL;}
-    $add = $bdd -> prepare('INSERT INTO launchboard(profil,code,titre,client,description,initial_date,link_plr,link_helios,kickoff,img_presentation,launchbook) VALUES (:profil,:code,:titre,:client,:description,:sop,:link_plr,:link_helios,:kickoff,:img,:launchbook)');
+    $makeorbuy=upload($bdd,'makeorbuy',"../../ressources","launchboard",50485760,array( 'ppt' , 'pptx' , 'PPT' , 'PPTX' ));
+    if($makeorbuy < 0){$makeorbuy=NULL;}
+    $add = $bdd -> prepare('INSERT INTO launchboard(profil,pm,code,titre,client,description,initial_date,link_plr,link_helios,kickoff,makeorbuy,img_presentation,launchbook) VALUES (:profil,:pm,:code,:titre,:client,:description,:sop,:link_plr,:link_helios,:kickoff,:makeorbuy,:img,:launchbook)');
     if($add -> execute(array(
       "profil" => $_POST['profil'],
+      "pm" => $_POST['pm'],
       "code" => $_POST['code'],
       "titre" => $_POST['titre'],
       "client" => $_POST['client'],
@@ -29,6 +34,7 @@ if(! empty($_POST)){
       "link_plr" => $_POST['plr'],
       "link_helios" => $_POST['helios'],
       "kickoff" => $kickoff,
+      "makeorbuy" => $makeorbuy,
       "img" => $img,
       "launchbook" => $_POST['launchbook']
     ))){
@@ -160,30 +166,50 @@ while($Data = $query -> fetch()){
             <b>Client : </b><?php echo $Data['client']; ?></p>
             <div style="padding:0;" class="container-fluid">
               <div class="row" style="height:120px;">
-            <div class="col-md-6">
-              <b>Description : </b><?php echo $Data['description']; ?><br>
-              <?php
-              $gate="2B";
-              if($Data['2tct'] && $Data['2capacity'] && $Data['2equip'] && $Data['2pfmea'] && $Data['2mvp'] && $Data['2layout'] && $Data['2master'] && $Data['2pack']){
-                $gate="3";
-                if($Data['3equip'] && $Data['3pack'] && $Data['3supplier'] && $Data['3checklist1'] && $Data['3pt'] && $Data['3checklist2'] && $Data['3mpt'] && $Data['3samples']){
-                  $gate="4";
+              <div class="col-md-8">
+                <b>Description : </b><?php echo $Data['description']; ?><br>
+                <?php
+                $gate="2B";
+                if($Data['2tct'] && $Data['2capacity'] && $Data['2equip'] && $Data['2pfmea'] && $Data['2mvp'] && $Data['2layout'] && $Data['2master'] && $Data['2pack']){
+                  $gate="3";
+                  if($Data['3equip'] && $Data['3pack'] && $Data['3supplier'] && $Data['3checklist1'] && $Data['3pt'] && $Data['3checklist2'] && $Data['3mpt'] && $Data['3samples']){
+                    $gate="4";
+                  }
                 }
-              }
-              ?>
-              <p><b> Gate : </b><?php echo $gate; ?>&emsp;
-                <b>LB : </b><?php echo $pourcentage."%"; ?></p>
-                <p><b>SOP :</b> <?php if(!is_null($Data['initial_date'])){ echo date('d/m/y',strtotime($Data['initial_date']));} ?></p>
+                ?>
+                <p><b> Gate : </b><?php echo $gate; ?>&emsp;
+                  <b>LB : </b><?php echo $pourcentage."%"; ?>&ensp; Cp : <?php echo $Data['capacitaire']; ?> %</p>
+                  <p><b>SOP :</b> <?php if(!is_null($Data['initial_date'])){ echo date('d/m/y',strtotime($Data['initial_date']));} ?></p>
+              </div>
+              <div class="col-md-4">
+              <?php
+                if($Data['img_presentation'] != NULL){
+                  $q= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
+                  $q -> execute(array($Data['img_presentation']));
+                  $img= $q -> fetch();?>
+                  <img src="<?php echo $img['chemin']; ?>" style="border-radius:1px;max-width:100%; max-height: 120px; float:right;" alt="Image">
+                <?php } ?>
             </div>
-            <div class="col-md-6">
-            <?php
-              if($Data['img_presentation'] != NULL){
-                $q= $bdd -> prepare('SELECT * FROM files WHERE id= ?');
-                $q -> execute(array($Data['img_presentation']));
-                $img= $q -> fetch();?>
-                <img src="<?php echo $img['chemin']; ?>" style="max-width:100%; max-height: 120px; float:right;" alt="Image">
-              <?php } ?>
-          </div>
+            <div class="col-md-12" style="font-size:75%;">
+                <?php
+                foreach (['me'=>'ME','hsep'=>'HSE','quality'=>'QUALITY','log'=>'LOG/PC&amp;L','training'=>'Training/EE','supplier'=>'Suppliers'] as $key => $value) {
+                  if(is_null($Data[$key])){
+                    $color="";
+                    $pour="-";
+                  }else{
+                    $pour=$Data[$key]." %";
+                    if($Data[$key] <75){
+                      $color = '#FF002A';
+                    }else if($Data[$key] < 85){
+                      $color='#ff8900';
+                    }else{
+                      $color='green';
+                    }
+                  }
+                  echo '<span style="color:'.$color.'; white-space: nowrap;" >'.$value.' : '.$pour.'</span>&emsp; ';
+                }
+                ?>
+            </div>
         </div>
       </div>
       </div>
