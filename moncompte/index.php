@@ -67,7 +67,8 @@ if(empty($_SESSION['login'])){
   Idées : <?php echo(img($_SESSION['idees'])); ?>&emsp;
   Logistique : <?php echo(img($_SESSION['logistique'])); ?>&emsp;
   News : <?php echo(img($_SESSION['news'])); ?>&emsp;
-  Launchboard: <?php echo(img($_SESSION['launchboard'])); ?></b>
+  Launchboard: <?php echo(img($_SESSION['launchboard'])); ?>
+  Formation: <?php echo(img($_SESSION['formations'])); ?></b>
 </p>
 <div class="btn btn-default" data-toggle="modal" data-target="#modal">Modifier le mot de passe</div>
 <div data-toggle="modal" data-target="#modal2" class="btn btn-default">Modifier mon profil</div>

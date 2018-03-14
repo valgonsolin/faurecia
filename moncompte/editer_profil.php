@@ -39,6 +39,7 @@ if(isset($_GET['id'])){
     $manager=$Data['manager'];
     $mail = $Data['mail'];
     $news = $Data['news'];
+    $formations = $Data['formation'];
 }else{
 ?>
     <h2>Ajouter un profil</h2>

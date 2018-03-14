@@ -17,7 +17,7 @@ if(! isset($_GET['id'])){
   <h1 style="text-align:center;"><?php echo $Data['nom']; ?><small style="float:right;"><?php echo date('j/m/y', $date); ?></small></h1>
   <object data="<?php echo $Data['chemin']; ?>" type="application/pdf" width="100%" height="1000px">
     <iframe src="<?php echo $Data['chemin']; ?>" style="border: none;" width="100%" height="1000px">
-      <p>Ce navigateur ne supporte pas les PDFs. <a href="<?php echo $data['chemin']; ?>">Télécharger le pdf</a></p>
+      <p>Ce navigateur ne supporte pas les PDFs. <a href="<?php echo $Data['chemin']; ?>">Télécharger le pdf</a></p>
     </iframe>
   </object>
   <?php
