@@ -1,5 +1,5 @@
 <?php
-
+include_once "../../needed.php";
 function exportCSV(PDO $bdd) {
   $datetime = date("Y-m-d");
 
@@ -27,14 +27,7 @@ function exportCSV(PDO $bdd) {
 }
 
 try {
-    $pdo_options = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ];
-
-    $pdo = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'tavg', 'lacolloc');
-
-    exportCSV($pdo);
+  exportCSV($bdd);
 } catch (RuntimeException $ex) { // Inclut les PDOException
     echo $ex->getMessage();
 }
