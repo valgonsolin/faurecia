@@ -85,13 +85,13 @@ if(!isset($_GET['id'])){ ?>
 $color1="";
 $color2="";
 $color3="";
-if(! is_null($Data['3pt_f']) && ! $Data['3pt'] && (get_nb_open_days(strtotime($Data['3pt_f']),time()) > 30)){
+if(! is_null($Data['3pt_f']) && (get_nb_open_days(strtotime($Data['3pt_f']),time()) > 30)){
   $color1='#FF002A';
 }
-if(! is_null($Data['3mpt_f']) && ! $Data['3mpt'] && (get_nb_open_days(strtotime($Data['3mpt_f']),time()))){
+if(! is_null($Data['3mpt_f']) && (get_nb_open_days(strtotime($Data['3mpt_f']),time()))){
   $color2='#FF002A';
 }
-if(! is_null($Data['4empt_f']) && ! $Data['4empt'] && (get_nb_open_days(strtotime($Data['4empt_f']),time()) > 30)){
+if(! is_null($Data['4empt_f']) && (get_nb_open_days(strtotime($Data['4empt_f']),time()) > 30)){
   $color3='#FF002A';
 }
 
@@ -99,21 +99,21 @@ if((! is_null($Data['3pt_f']) && ! $Data['3pt']) || (! is_null($Data['3mpt_f']) 
 ?>
 <div class="row" style="font-size:140%;">
   <h4>Time to Pass :</h4>
-  <?php if(! is_null($Data['3pt_f']) && ! $Data['3pt']){ ?>
+  <?php if(! is_null($Data['3pt_f'])){ ?>
   <div class="col-md-4">
     <b>PT : <span  style="background-color:<?php echo $color1; ?>; border-radius:3px;"> <?php 
     printf("%+d jours",get_nb_open_days(strtotime($Data['3pt_f']),time()));
     ?></span></b>
   </div>
   <?php }
-  if(! is_null($Data['3mpt_f']) && ! $Data['3mpt']){ ?>
+  if(! is_null($Data['3mpt_f'])){ ?>
   <div class="col-md-4">
       <b>MPT : <span  style="background-color:<?php echo $color2; ?>; border-radius:3px;"> <?php 
       printf("%+d jours",get_nb_open_days(strtotime($Data['3mpt_f']),time()));
     ?></span></b>
   </div>
   <?php }
-  if(! is_null($Data['4empt_f']) && ! $Data['4empt']){ ?>
+  if(! is_null($Data['4empt_f'])){ ?>
   <div class="col-md-4">
       <b>EMPT : <span  style="background-color:<?php echo $color3; ?>; border-radius:3px;"> <?php 
       printf("%+d jours",get_nb_open_days(strtotime($Data['4empt_f']),time()));

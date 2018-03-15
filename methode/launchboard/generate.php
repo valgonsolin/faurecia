@@ -375,6 +375,22 @@ if($tabTOY['totalEMPT'] == 0){
   $sheet->setCellValue('BK21',(int) $tabTOY['ttpEMPT']/$tabTOY['totalEMPT']);
 }
 
+if($tabPSA['totalPT']+$tabJLR['totalPT']+$totalToy['totalPT'] == 0){
+  $sheet->setCellValue('P17',0);
+}else{
+  $sheet->setCellValue('P17',(int) (($tabPSA['ttpPT']+$tabJLR['ttpPT']+$totalToy['ttpPT'])/($tabPSA['totalPT']+$tabJLR['totalPT']+$totalToy['totalPT'])));
+}
+if($tabPSA['totalMPT']+$tabJLR['totalMPT']+$totalToy['totalMPT'] == 0){
+  $sheet->setCellValue('P19',0);
+}else{
+  $sheet->setCellValue('P19',(int) (($tabPSA['ttpMPT']+$tabJLR['ttpMPT']+$totalToy['ttpMPT'])/($tabPSA['totalMPT']+$tabJLR['totalMPT']+$totalToy['totalMPT'])));
+}
+if($tabPSA['totalEMPT']+$tabJLR['totalEMPT']+$totalToy['totalEMPT'] == 0){
+  $sheet->setCellValue('P21',0);
+}else{
+  $sheet->setCellValue('P21',(int) (($tabPSA['ttpEMPT']+$tabJLR['ttpEMPT']+$totalToy['ttpEMPT'])/($tabPSA['totalEMPT']+$tabJLR['totalEMPT']+$totalToy['totalEMPT'])));
+}
+
 $tot= $tabPSA['totalPT'] + $tabPSA['totalMPT'] + $tabPSA['totalEMPT'] + $tabTOY['totalPT'] + $tabTOY['totalMPT'] + $tabTOY['totalEMPT'] + $tabJLR['totalPT'] + $tabJLR['totalMPT'] + $tabJLR['totalEMPT'];
 $ttp = $tabPSA['ttpPT'] + $tabPSA['ttpMPT'] + $tabPSA['ttpEMPT'] + $tabTOY['ttpPT'] + $tabTOY['ttpMPT'] + $tabTOY['ttpEMPT'] + $tabJLR['ttpPT'] + $tabJLR['ttpMPT'] + $tabJLR['ttpEMPT'];
 if($tot){

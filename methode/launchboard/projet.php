@@ -489,8 +489,8 @@ if(!isset($_GET['id'])){ ?>
       </div>
     </div>
     <div class="col-md-6">Avancement : <?php echo round((floatval($avancement/$total)*100),2); ?>% &emsp; Retard : <?php echo round((floatval($retard/$total)*100),2); ?>% &emsp; LB : <?php echo $pourcentage; ?>% &emsp; 
-      <span class="clickable" data-toggle="modal" data-target="#capacitaire">
-        <?php if(! is_null($Data['capacitaire'])){ echo " Cp : ".$Data['capacitaire']."%"; }?>
+    <span <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?> class="clickable" data-toggle="modal" data-target="#capacitaire" <?php } ?>>
+        <?php if(! is_null($Data['capacitaire'])){ echo " Cp : ".$Data['capacitaire']."%"; }else{ echo "Cp : -";}?>
       </span>
       </div>
     <div class="col-md-6">
@@ -512,7 +512,11 @@ if(!isset($_GET['id'])){ ?>
             $color='green';
           }
         }
-        echo '<span style="color:'.$color.';" class="clickable" data-toggle="modal" data-target="#'.$key.'">'.$value.' : '.$pour.'</span>&emsp; ';
+        if((($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] )){
+          echo '<span style="color:'.$color.';" class="clickable" data-toggle="modal" data-target="#'.$key.'">'.$value.' : '.$pour.'</span>&emsp; ';
+        }else{
+          echo '<span style="color:'.$color.';" >'.$value.' : '.$pour.'</span>&emsp; ';
+        }
       }
       ?>
     </div>
