@@ -48,16 +48,25 @@ $total=0;
 $tabPSA=array("totalPT" =>0,"ttpPT"=>0,"totalMPT"=>0,"ttpMPT"=>0,"totalEMPT"=>0,"ttpEMPT"=>0);
 $psa = $bdd -> query('SELECT * FROM launchboard WHERE client = "PSA"');
 While($projet = $psa ->fetch()){
-	if(! is_null($projet['3pt_f']) && ! $projet['3pt']){
+	if(! is_null($projet['3pt_f']) && ( is_null($projet['3pt_r']) || (! $projet['3pt']))){
 		$tabPSA['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3pt_f']))),time());
 		$tabPSA['totalPT']+=1;
+	}elseif(! is_null($projet['3pt_f']) && ! is_null($projet['3pt_r']) && $projet['3pt']){
+		$tabPSA['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3pt_f']))),strtotime(str_replace('/', '-',($projet['3pt_r']))));
+		$tabPSA['totalPT']+=1;
 	}
-	if(! is_null($projet['3mpt_f']) && ! $projet['3mpt']){
+	if(! is_null($projet['3mpt_f']) && ( is_null($projet['3mpt_r']) || (! $projet['3mpt']))){
 		$tabPSA['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3mpt_f']))),time());
 		$tabPSA['totalMPT']+=1;
+	}elseif(! is_null($projet['3mpt_f']) && ! is_null($projet['3mpt_r']) && $projet['3mpt']){
+		$tabPSA['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3mpt_f']))),strtotime(str_replace('/', '-',($projet['3mpt_r']))));
+		$tabPSA['totalMPT']+=1;
 	}
-	if(! is_null($projet['4empt_f']) && ! $projet['4empt']){
+	if(! is_null($projet['4empt_f']) && ( is_null($projet['4empt_r']) || (! $projet['4empt']))){
 		$tabPSA['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['4empt_f']))),time());
+		$tabPSA['totalEMPT']+=1;
+	}elseif(! is_null($projet['4empt_f']) && ! is_null($projet['4empt_r']) && $projet['4empt']){
+		$tabPSA['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['4empt_f']))),strtotime(str_replace('/', '-',($projet['4empt_r']))));
 		$tabPSA['totalEMPT']+=1;
 	}
 }
@@ -66,16 +75,26 @@ While($projet = $psa ->fetch()){
 $tabJLR=array("totalPT" =>0,"ttpPT"=>0,"totalMPT"=>0,"ttpMPT"=>0,"totalEMPT"=>0,"ttpEMPT"=>0);
 $jlr = $bdd -> query('SELECT * FROM launchboard WHERE client = "JLR"');
 While($projet = $jlr ->fetch()){
-	if(! is_null($projet['3pt_f']) && ! $projet['3pt']){
+
+	if(! is_null($projet['3pt_f']) && ( is_null($projet['3pt_r']) || (! $projet['3pt']))){
 		$tabJLR['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3pt_f']))),time());
 		$tabJLR['totalPT']+=1;
+	}elseif(! is_null($projet['3pt_f']) && ! is_null($projet['3pt_r']) && $projet['3pt']){
+		$tabJLR['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3pt_f']))),strtotime(str_replace('/', '-',($projet['3pt_r']))));
+		$tabJLR['totalPT']+=1;
 	}
-	if(! is_null($projet['3mpt_f']) && ! $projet['3mpt']){
+	if(! is_null($projet['3mpt_f']) && ( is_null($projet['3mpt_r']) || (! $projet['3mpt']))){
 		$tabJLR['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3mpt_f']))),time());
 		$tabJLR['totalMPT']+=1;
+	}elseif(! is_null($projet['3mpt_f']) && ! is_null($projet['3mpt_r']) && $projet['3mpt']){
+		$tabJLR['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3mpt_f']))),strtotime(str_replace('/', '-',($projet['3mpt_r']))));
+		$tabJLR['totalMPT']+=1;
 	}
-	if(! is_null($projet['4empt_f']) && ! $projet['4empt']){
+	if(! is_null($projet['4empt_f']) && ( is_null($projet['4empt_r']) || (! $projet['4empt']))){
 		$tabJLR['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['4empt_f']))),time());
+		$tabJLR['totalEMPT']+=1;
+	}elseif(! is_null($projet['4empt_f']) && ! is_null($projet['4empt_r']) && $projet['4empt']){
+		$tabJLR['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['4empt_f']))),strtotime(str_replace('/', '-',($projet['4empt_r']))));
 		$tabJLR['totalEMPT']+=1;
 	}
 }
@@ -84,24 +103,33 @@ While($projet = $jlr ->fetch()){
 $tabTOY=array("totalPT" =>0,"ttpPT"=>0,"totalMPT"=>0,"ttpMPT"=>0,"totalEMPT"=>0,"ttpEMPT"=>0);
 $toy = $bdd -> query('SELECT * FROM launchboard WHERE client = "TOY/RENAULT"');
 While($projet = $toy ->fetch()){
-	if(! is_null($projet['3pt_f']) && ! $projet['3pt']){
+	if(! is_null($projet['3pt_f']) && ( is_null($projet['3pt_r']) || (! $projet['3pt']))){
 		$tabTOY['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3pt_f']))),time());
 		$tabTOY['totalPT']+=1;
+	}elseif(! is_null($projet['3pt_f']) && ! is_null($projet['3pt_r']) && $projet['3pt']){
+		$tabTOY['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3pt_f']))),strtotime(str_replace('/', '-',($projet['3pt_r']))));
+		$tabTOY['totalPT']+=1;
 	}
-	if(! is_null($projet['3mpt_f']) && ! $projet['3mpt']){
+	if(! is_null($projet['3mpt_f']) && ( is_null($projet['3mpt_r']) || (! $projet['3mpt']))){
 		$tabTOY['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3mpt_f']))),time());
 		$tabTOY['totalMPT']+=1;
+	}elseif(! is_null($projet['3mpt_f']) && ! is_null($projet['3mpt_r']) && $projet['3mpt']){
+		$tabTOY['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['3mpt_f']))),strtotime(str_replace('/', '-',($projet['3mpt_r']))));
+		$tabTOY['totalMPT']+=1;
 	}
-	if(! is_null($projet['4empt_f']) && ! $projet['4empt']){
+	if(! is_null($projet['4empt_f']) && ( is_null($projet['4empt_r']) || (! $projet['4empt']))){
 		$tabTOY['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['4empt_f']))),time());
 		$tabTOY['totalEMPT']+=1;
-	}
+	}elseif(! is_null($projet['4empt_f']) && ! is_null($projet['4empt_r']) && $projet['4empt']){
+		$tabTOY['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($projet['4empt_f']))),strtotime(str_replace('/', '-',($projet['4empt_r']))));
+		$tabTOY['totalEMPT']+=1;
+	}	
 }
 
 $tot= $tabPSA['totalPT'] + $tabPSA['totalMPT'] + $tabPSA['totalEMPT'] + $tabTOY['totalPT'] + $tabTOY['totalMPT'] + $tabTOY['totalEMPT'] + $tabJLR['totalPT'] + $tabJLR['totalMPT'] + $tabJLR['totalEMPT'];
 $ttp = $tabPSA['ttpPT'] + $tabPSA['ttpMPT'] + $tabPSA['ttpEMPT'] + $tabTOY['ttpPT'] + $tabTOY['ttpMPT'] + $tabTOY['ttpEMPT'] + $tabJLR['ttpPT'] + $tabJLR['ttpMPT'] + $tabJLR['ttpEMPT'];
 if($tot){
- 	$score = (int) $ttp/$tot;
+ 	$score = (int) ($ttp/$tot);
 }else{
   	$score =0;
 }

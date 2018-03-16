@@ -31,13 +31,7 @@ if(empty($_SESSION['login'])){ ?>
         </div>
         <div class="form-group col-md-6">
           <label>PM :</label>
-            <select class="form-control" name="pm">
-              <?php
-              $profil = $bdd -> query('SELECT * FROM profil');
-              while($personne = $profil -> fetch()){ ?>
-                <option value="<?php echo $personne['id']; ?>"><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
-            <?php  } ?>
-            </select>
+          <input type="text" name="pm" class="form-control" placehoder="Project Manager">
         </div>
       </div>
       <div class="row">

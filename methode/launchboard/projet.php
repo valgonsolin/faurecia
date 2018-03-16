@@ -411,13 +411,8 @@ if(!isset($_GET['id'])){ ?>
           <div class="btn btn-default pull-right" data-toggle="modal" data-target="#sop">Modifier</div><?php } ?></h4>
   </div>
   <div class="col-md-6">
-      <?php
-      $pmquery = $bdd -> prepare('SELECT * FROM profil WHERE id = ?');
-      $pmquery -> execute(array($Data['pm']));
-      $pers = $pmquery -> fetch();
-      ?>
-      <h4>PM : <?php echo $pers['nom']; ?> <?php echo $pers['prenom']; ?>
-      <?php if($_SESSION['launchboard']){ ?>
+      <h4>PM : <?php echo $Data['pm']; ?>
+      <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard']){ ?>
       <div class="btn btn-default pull-right" data-toggle="modal" data-target="#pm">Modifier le PM</div><?php } ?>
     </h4>
     <h4>Description :    <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
@@ -794,13 +789,7 @@ if(!isset($_GET['id'])){ ?>
       </div>
       <div class="modal-body">
         <form method="post" class="form-group">
-          <select class="form-control" name="pm">
-            <?php
-            $profil = $bdd -> query('SELECT * FROM profil');
-            while($personne = $profil -> fetch()){ ?>
-              <option value="<?php echo $personne['id']; ?>" <?php if($Data['pm'] == $personne['id']){echo "selected";} ?>><?php echo $personne['nom']." ".$personne['prenom']; ?></option>
-          <?php  } ?>
-          </select>
+          <input type="text" class="form-control" name="pm" value="<?php echo $Data['pm']; ?>">
           <br>
           <input type="submit" name="pm_check" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le PM ?')">
         </form>
@@ -967,7 +956,7 @@ if(!isset($_GET['id'])){ ?>
       </div>
       <div class="modal-body">
         <form method="post" class="form-group">
-          <input type="number" class="form-control" name="capacitaire" value="<?php echo $Data['capacitaire']; ?>">
+          <input type="number" class="form-control" name="capacitaire" value="<?php echo $Data['capacitaire']; ?>" min="0" max="100">
           <br>
           <input type="submit" name="capacitaire_click" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le capacitaire ?')">
         </form>
@@ -986,7 +975,7 @@ foreach (['me'=>'ME','hsep'=>'HSE','quality'=>'QUALITY','log'=>'LOG/PC&amp;L','t
       </div>
       <div class="modal-body">
         <form method="post" class="form-group">
-          <input type="number" class="form-control" name="<?php echo $key; ?>" value="<?php echo $Data[$key]; ?>">
+          <input type="number" class="form-control" name="<?php echo $key; ?>" value="<?php echo $Data[$key]; ?>" min="0" max="100">
           <br>
           <input type="submit" name="<?php echo $key; ?>_click" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le pourcentage <?php echo $value; ?> ?')">
         </form>

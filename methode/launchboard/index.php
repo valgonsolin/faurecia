@@ -73,9 +73,9 @@ if (isset($_GET["recherche"])){
 $supprime =false;
 if(isset($_GET['supprime'])){
   $supprime=true;
-  $query = $bdd -> prepare('SELECT *, launchboard.id as projet FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE (nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) ORDER BY lb ASC');
+  $query = $bdd -> prepare('SELECT *, launchboard.id as projet, lb.pourcentage as lb FROM launchboard JOIN profil ON profil.id=launchboard.profil LEFT JOIN (SELECT * FROM evolution_projet T WHERE NOT EXISTS (SELECT 1 FROM evolution_projet T2 WHERE T2.id_projet = T.id_projet AND T2.date > T.date)) as lb ON launchboard.id = lb.id_projet WHERE (nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) ORDER BY lb ASC');
 }else{
-  $query = $bdd -> prepare('SELECT *, launchboard.id as projet FROM launchboard JOIN profil ON profil.id=launchboard.profil WHERE ((nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) AND archive = 0) ORDER BY lb ASC');
+  $query = $bdd -> prepare('SELECT *, launchboard.id as projet, lb.pourcentage as lb FROM launchboard JOIN profil ON profil.id=launchboard.profil LEFT JOIN (SELECT * FROM evolution_projet T WHERE NOT EXISTS (SELECT 1 FROM evolution_projet T2 WHERE T2.id_projet = T.id_projet AND T2.date > T.date)) as lb ON launchboard.id = lb.id_projet WHERE ((nom LIKE :nom or prenom LIKE :prenom or titre LIKE :titre or code LIKE :code) AND archive = 0) ORDER BY lb ASC');
 }
 $query ->bindValue(':titre','%'.$recherche.'%');
 $query ->bindValue(':nom','%'.$recherche.'%');
@@ -86,49 +86,49 @@ $query ->execute();
 ?>
 
 <style>
-.conteneur_projet{
-    margin-top:20px;
-    margin-left:-12.5%;
-    margin-right:-12.5%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.projet{
-    color: #000 ;
-    font-size: 15px;
-    font-family:Arial;
-    background-color: #e3e3e3;
-    border-color: #ccc;
-    border-radius:6px;
-    border-width: 1px;
-    border-style: solid;
-    margin: 5px;
-}
-.projet:hover{
-  opacity:0.7;
-}
-.info_projet{
-    margin: 10px;
-    width: 400px;
-    padding: 10px;
-    height:280px;
-    border-radius:6px;
-    background-color: #FFF;
-    border-color: #ccc;
-    border-width: 1px;
-    border-style: solid;
-}
+  .conteneur_projet{
+      margin-top:20px;
+      margin-left:-12.5%;
+      margin-right:-12.5%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+  .projet{
+      color: #000 ;
+      font-size: 15px;
+      font-family:Arial;
+      background-color: #e3e3e3;
+      border-color: #ccc;
+      border-radius:6px;
+      border-width: 1px;
+      border-style: solid;
+      margin: 5px;
+  }
+  .projet:hover{
+    opacity:0.7;
+  }
+  .info_projet{
+      margin: 10px;
+      width: 400px;
+      padding: 10px;
+      height:280px;
+      border-radius:6px;
+      background-color: #FFF;
+      border-color: #ccc;
+      border-width: 1px;
+      border-style: solid;
+  }
 
-.couleur{
-    margin: 10px;
-    width: 400px;
-    height: 20px;
-    border-radius:3px;
-    border-color: #ccc;
-    border-width: 1px;
-    border-style: solid;
-}
+  .couleur{
+      margin: 10px;
+      width: 400px;
+      height: 20px;
+      border-radius:3px;
+      border-color: #ccc;
+      border-width: 1px;
+      border-style: solid;
+  }
 </style>
 <form class="form-inline">
   <div class="form-group">
@@ -148,10 +148,8 @@ $query ->execute();
 while($Data = $query -> fetch()){
   $q = $bdd -> prepare('SELECT * FROM files WHERE id= ?');
   $q -> execute(array($Data['img_presentation']));
-  $ptg = $bdd -> prepare('SELECT * FROM evolution_projet WHERE id_projet = ? ORDER BY date DESC LIMIT 1' );
-  $ptg -> execute(array($Data['projet']));
-  if($res = $ptg -> fetch()){
-    $pourcentage=$res['pourcentage'];
+  if(! is_null($Data['lb'])){
+    $pourcentage=$Data['lb'];
   }else{
     $pourcentage=0;
   }  
@@ -163,7 +161,7 @@ while($Data = $query -> fetch()){
             <?php if($Data['lb'] < 50){echo '<img src="../ressources/attention.png" style="height: 40px; float:right;">';} ?>
             </h4>
             <p><b>PPTL : </b><?php echo $Data['nom']." ".$Data['prenom']; ?><br>
-            <b>Client : </b><?php echo $Data['client']; ?></p>
+            <b>Client : </b><?php echo $Data['client']; ?><span style="float:right;"><b>PM : </b> <?php echo $Data['pm']; ?></span></p>
             <div style="padding:0;" class="container-fluid">
               <div class="row" style="height:120px;">
               <div class="col-md-8">
@@ -178,7 +176,7 @@ while($Data = $query -> fetch()){
                 }
                 ?>
                 <p><b> Gate : </b><?php echo $gate; ?>&emsp;
-                  <b>LB : </b><?php echo $pourcentage."%"; ?>&ensp; Cp : <?php echo $Data['capacitaire']; ?> %</p>
+                  <b>LB : </b><?php echo $pourcentage."%"; ?>&ensp; <b>Cp : </b><?php if(is_null($Data['capacitaire'])){echo "-";}else{echo $Data['capacitaire']." %"; }?></p>
                   <p><b>SOP :</b> <?php if(!is_null($Data['initial_date'])){ echo date('d/m/y',strtotime($Data['initial_date']));} ?></p>
               </div>
               <div class="col-md-4">

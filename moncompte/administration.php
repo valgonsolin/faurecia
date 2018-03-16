@@ -28,7 +28,7 @@ if(empty($_SESSION['login'])){ ?>
             }
         }else{
             if($_POST['new1'] == $_POST['new2']){
-              $Query = $bdd->prepare('INSERT INTO profil SET nom = ?, prenom = ?,identifiant = ?,mail = ? , mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ?, idees = ?, launchboard = ?, manager = ?,news = ?,formations=?,password = ?');
+              $Query = $bdd->prepare('INSERT INTO profil SET nom = ?, prenom = ?,identifiant = ?,mail = ? , mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ?, idees = ?, launchboard = ?, manager = ?,news = ?,formation=?,password = ?');
               if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['identifiant'],$_POST['mail'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['admin'],$_POST['qualite'],$_POST['rr'],$_POST['hse'],$_POST['kamishibai'],$_POST['logistique'],$_POST['idees'],$_POST['launchboard'],$_POST['manager'],$_POST['news'],$_POST['formations'],crypt(strtolower($_POST['new1']),"faureciabeaulieu")))){
                 success("Ajouté","Le profil a bien été ajouté.");
               }else{
