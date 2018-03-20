@@ -244,18 +244,28 @@ foreach ($projets as $key => $value) {
     complete($sheet,$value,$row+($i-1)*2,$i);
   }
   $i+=1;
-  if(! is_null($value['3pt_f']) && ! $value['3pt']){
+
+  if(! is_null($value['3pt_f']) && ( is_null($value['3pt_r']) || (! $value['3pt']))){
 		$tabPSA['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3pt_f']))),time());
 		$tabPSA['totalPT']+=1;
+	}elseif(! is_null($value['3pt_f']) && ! is_null($value['3pt_r']) && $value['3pt']){
+		$tabPSA['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3pt_f']))),strtotime(str_replace('/', '-',($value['3pt_r']))));
+		$tabPSA['totalPT']+=1;
 	}
-	if(! is_null($value['3mpt_f']) && ! $value['3mpt']){
+	if(! is_null($value['3mpt_f']) && ( is_null($value['3mpt_r']) || (! $value['3mpt']))){
 		$tabPSA['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3mpt_f']))),time());
 		$tabPSA['totalMPT']+=1;
+	}elseif(! is_null($value['3mpt_f']) && ! is_null($value['3mpt_r']) && $value['3mpt']){
+		$tabPSA['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3mpt_f']))),strtotime(str_replace('/', '-',($value['3mpt_r']))));
+		$tabPSA['totalMPT']+=1;
 	}
-	if(! is_null($value['4empt_f']) && ! $value['4empt']){
+	if(! is_null($value['4empt_f']) && ( is_null($value['4empt_r']) || (! $value['4empt']))){
 		$tabPSA['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['4empt_f']))),time());
 		$tabPSA['totalEMPT']+=1;
-	}
+	}elseif(! is_null($value['4empt_f']) && ! is_null($value['4empt_r']) && $value['4empt']){
+		$tabPSA['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['4empt_f']))),strtotime(str_replace('/', '-',($value['4empt_r']))));
+		$tabPSA['totalEMPT']+=1;
+  }
 }
 
 //JLR
@@ -278,16 +288,26 @@ foreach ($projets as $key => $value) {
     complete($sheet,$value,$row+($i-1)*2,$i);
   }
   $i+=1;
-  if(! is_null($value['3pt_f']) && ! $value['3pt']){
+
+	if(! is_null($value['3pt_f']) && ( is_null($value['3pt_r']) || (! $value['3pt']))){
 		$tabJLR['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3pt_f']))),time());
 		$tabJLR['totalPT']+=1;
+	}elseif(! is_null($value['3pt_f']) && ! is_null($value['3pt_r']) && $value['3pt']){
+		$tabJLR['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3pt_f']))),strtotime(str_replace('/', '-',($value['3pt_r']))));
+		$tabJLR['totalPT']+=1;
 	}
-	if(! is_null($value['3mpt_f']) && ! $value['3mpt']){
+	if(! is_null($value['3mpt_f']) && ( is_null($value['3mpt_r']) || (! $value['3mpt']))){
 		$tabJLR['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3mpt_f']))),time());
 		$tabJLR['totalMPT']+=1;
+	}elseif(! is_null($value['3mpt_f']) && ! is_null($value['3mpt_r']) && $value['3mpt']){
+		$tabJLR['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3mpt_f']))),strtotime(str_replace('/', '-',($value['3mpt_r']))));
+		$tabJLR['totalMPT']+=1;
 	}
-	if(! is_null($value['4empt_f']) && ! $value['4empt']){
+	if(! is_null($value['4empt_f']) && ( is_null($value['4empt_r']) || (! $value['4empt']))){
 		$tabJLR['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['4empt_f']))),time());
+		$tabJLR['totalEMPT']+=1;
+	}elseif(! is_null($value['4empt_f']) && ! is_null($value['4empt_r']) && $value['4empt']){
+		$tabJLR['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['4empt_f']))),strtotime(str_replace('/', '-',($value['4empt_r']))));
 		$tabJLR['totalEMPT']+=1;
 	}
 }
@@ -312,17 +332,27 @@ foreach ($projets as $key => $value) {
     complete($sheet,$value,$row+($i-1)*2,$i);
   }
   $i+=1;
-  if(! is_null($value['3pt_f']) && ! $value['3pt']){
-		$tabTOY['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3pt_f']))),time());
-		$tabTOY['totalPT']+=1;
+
+	if(! is_null($value['3pt_f']) && ( is_null($value['3pt_r']) || (! $value['3pt']))){
+		$tabJLR['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3pt_f']))),time());
+		$tabJLR['totalPT']+=1;
+	}elseif(! is_null($value['3pt_f']) && ! is_null($value['3pt_r']) && $value['3pt']){
+		$tabJLR['ttpPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3pt_f']))),strtotime(str_replace('/', '-',($value['3pt_r']))));
+		$tabJLR['totalPT']+=1;
 	}
-	if(! is_null($value['3mpt_f']) && ! $value['3mpt']){
-		$tabTOY['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3mpt_f']))),time());
-		$tabTOY['totalMPT']+=1;
+	if(! is_null($value['3mpt_f']) && ( is_null($value['3mpt_r']) || (! $value['3mpt']))){
+		$tabJLR['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3mpt_f']))),time());
+		$tabJLR['totalMPT']+=1;
+	}elseif(! is_null($value['3mpt_f']) && ! is_null($value['3mpt_r']) && $value['3mpt']){
+		$tabJLR['ttpMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['3mpt_f']))),strtotime(str_replace('/', '-',($value['3mpt_r']))));
+		$tabJLR['totalMPT']+=1;
 	}
-	if(! is_null($value['4empt_f']) && ! $value['4empt']){
-		$tabTOY['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['4empt_f']))),time());
-		$tabTOY['totalEMPT']+=1;
+	if(! is_null($value['4empt_f']) && ( is_null($value['4empt_r']) || (! $value['4empt']))){
+		$tabJLR['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['4empt_f']))),time());
+		$tabJLR['totalEMPT']+=1;
+	}elseif(! is_null($value['4empt_f']) && ! is_null($value['4empt_r']) && $value['4empt']){
+		$tabJLR['ttpEMPT']+=get_nb_open_days(strtotime(str_replace('/', '-',($value['4empt_f']))),strtotime(str_replace('/', '-',($value['4empt_r']))));
+		$tabJLR['totalEMPT']+=1;
 	}
 }
 

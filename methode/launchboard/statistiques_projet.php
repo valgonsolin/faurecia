@@ -85,38 +85,56 @@ if(!isset($_GET['id'])){ ?>
 $color1="";
 $color2="";
 $color3="";
-if(! is_null($Data['3pt_f']) && (get_nb_open_days(strtotime($Data['3pt_f']),time()) > 30)){
+if(! is_null($Data['3pt_f']) && ( is_null($Data['3pt_r']) || (! $Data['3pt']) ) && (get_nb_open_days(strtotime(str_replace('/', '-',$Data['3pt_f'])),time()) > 30)){
+  $color1='#FF002A';
+}elseif(! is_null($Data['3pt_f']) && ! is_null($Data['3pt_r']) && $Data['3pt'] && (get_nb_open_days(strtotime(str_replace('/', '-',$Data['3pt_f'])),strtotime(str_replace('/', '-',$Data['3pt_r']))) > 30)){
   $color1='#FF002A';
 }
-if(! is_null($Data['3mpt_f']) && (get_nb_open_days(strtotime($Data['3mpt_f']),time()))){
+if(! is_null($Data['3mpt_f']) && ( is_null($Data['3mpt_r']) || (! $Data['3mpt']) ) && (get_nb_open_days(strtotime(str_replace('/', '-',$Data['3mpt_f'])),time()) > 30)){
+  $color2='#FF002A';
+}elseif(! is_null($Data['3mpt_f']) && ! is_null($Data['3mpt_r']) && $Data['3mpt'] && (get_nb_open_days(strtotimestr_replace('/', '-',($Data['3mpt_f'])),strtotime(str_replace('/', '-',$Data['3mpt_r']))) > 30)){
   $color2='#FF002A';
 }
-if(! is_null($Data['4empt_f']) && (get_nb_open_days(strtotime($Data['4empt_f']),time()) > 30)){
+if(! is_null($Data['4empt_f']) && ( is_null($Data['3mpt_r']) || (! $Data['3mpt']) ) && (get_nb_open_days(strtotime(str_replace('/', '-',$Data['4empt_f'])),time()) > 30)){
+  $color3='#FF002A';
+}elseif(! is_null($Data['4empt_f']) && ! is_null($Data['4empt_r']) && $Data['4empt'] && (get_nb_open_days(strtotime(str_replace('/', '-',$Data['4empt_f'])),strtotime(str_replace('/', '-',$Data['4empt_r']))) > 30)){
   $color3='#FF002A';
 }
 
-if((! is_null($Data['3pt_f']) && ! $Data['3pt']) || (! is_null($Data['3mpt_f']) && ! $Data['3mpt']) || (! is_null($Data['4empt_f']) && ! $Data['4empt'])){
+if((! is_null($Data['3pt_f']) || ! is_null($Data['3mpt_f']) || ! is_null($Data['4empt_f']) )){
 ?>
 <div class="row" style="font-size:140%;">
   <h4>Time to Pass :</h4>
   <?php if(! is_null($Data['3pt_f'])){ ?>
   <div class="col-md-4">
-    <b>PT : <span  style="background-color:<?php echo $color1; ?>; border-radius:3px;"> <?php 
-    printf("%+d jours",get_nb_open_days(strtotime($Data['3pt_f']),time()));
+    <b>PT : <span  style="background-color:<?php echo $color1; ?>; border-radius:3px;"> <?php
+    if(! is_null($Data['3pt_r'] && $Data['3pt'])){
+      printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['3pt_f'])),strtotime(str_replace('/', '-',$Data['3pt_r']))));
+    }else{
+      printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['3pt_f'])),time()));
+    }
     ?></span></b>
   </div>
   <?php }
   if(! is_null($Data['3mpt_f'])){ ?>
   <div class="col-md-4">
-      <b>MPT : <span  style="background-color:<?php echo $color2; ?>; border-radius:3px;"> <?php 
-      printf("%+d jours",get_nb_open_days(strtotime($Data['3mpt_f']),time()));
+    <b>MPT : <span  style="background-color:<?php echo $color2; ?>; border-radius:3px;"> <?php 
+    if(! is_null($Data['3mpt_r'] && $Data['3mpt'])){
+      printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['3mpt_f'])),strtotime(str_replace('/', '-',$Data['3mpt_r']))));
+    }else{
+      printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['3mpt_f'])),time()));
+    }
     ?></span></b>
   </div>
   <?php }
   if(! is_null($Data['4empt_f'])){ ?>
   <div class="col-md-4">
       <b>EMPT : <span  style="background-color:<?php echo $color3; ?>; border-radius:3px;"> <?php 
-      printf("%+d jours",get_nb_open_days(strtotime($Data['4empt_f']),time()));
+      if(! is_null($Data['4empt_r'] && $Data['4empt'])){
+        printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['4empt_f'])),strtotime(str_replace('/', '-',$Data['4empt_r']))));
+      }else{
+        printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['4empt_f'])),time()));
+      }
     ?></span></b>
   </div>
   <?php } ?>
