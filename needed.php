@@ -12,7 +12,7 @@ if($lang == "en"){
     $url = $french;
 }
 
-? >
+?>
 
     <!doctype html>
 
