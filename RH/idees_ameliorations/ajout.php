@@ -20,10 +20,10 @@ else
 
   if(!empty($_POST)){
 
-    $file=upload($bdd,'file',"../../ressources","hse",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    $file=upload($bdd,'file',"../../ressources","idee",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
     if($file < 0){$file=NULL;}
 
-    $file2=upload($bdd,'file1',"../../ressources","hse",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
+    $file2=upload($bdd,'file1',"../../ressources","idee",5048576,array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'JPG' , 'JPEG' , 'GIF' , 'PNG' ));
     if($file2 < 0){$file2=NULL;}
 
     $datetime = date("Y-m-d");

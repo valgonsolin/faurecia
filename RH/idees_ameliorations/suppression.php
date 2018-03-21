@@ -173,7 +173,7 @@ $nb=(int ) $_GET['nb'];
 
   ?>
 <div class="conteneur_alerte">
-  <a href="supprimer_question.php?id=<?php echo $Data['id1']?>" class="btn btn-default">
+  <a href="supprimer_question.php?id=<?php echo $Data['id1']?>" >
   <div class="alerte" >
 
       <div class="info_alerte">

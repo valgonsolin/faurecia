@@ -127,7 +127,7 @@ echo "<h2>Nombre d'idées publiées ce mois çi:"; echo "      ";echo $n['n']; e
 <?php
 
 if($recherche>0){
-$Query = $bdd->prepare('SELECT nbidees,situation_actuelle,situation_proposee,nom,prenom,type,date_rea,vote,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0 and (MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y) ORDER BY vote DESC LIMIT 20  OFFSET :nb') ;
+$Query = $bdd->prepare('SELECT *,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0 and (MONTH(idees_ameliorations.date_rea)= :m and YEAR(idees_ameliorations.date_rea)= :y) ORDER BY vote DESC LIMIT 20  OFFSET :nb') ;
 
 $Query->bindValue(':i',(int) $recherche,PDO::PARAM_INT);
 $Query->bindValue(':m', $mois, PDO::PARAM_INT);

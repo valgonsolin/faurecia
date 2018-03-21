@@ -124,7 +124,7 @@ else
 <?php
 
 if($recherche>0){
-$Query = $bdd->prepare('SELECT *, idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0 and profil.manager=:m  ORDER BY id1 DESC LIMIT 20  OFFSET :nb') ;
+$Query = $bdd->prepare('SELECT *, idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE profil.id= :i and supprime = 0 and profil.manager=:m  and valide=1 ORDER BY id1 DESC LIMIT 20  OFFSET :nb') ;
 
 $Query->bindValue(':i',(int) $recherche,PDO::PARAM_INT);
 $Query->bindValue(':m', $_SESSION['id'], PDO::PARAM_INT);
@@ -132,7 +132,7 @@ $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
 $Query->execute();}
 
 
-else{$Query = $bdd->prepare('SELECT *,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and profil.manager=:m   ORDER BY  id1 DESC LIMIT 20 OFFSET :nb ') ;
+else{$Query = $bdd->prepare('SELECT *,idees_ameliorations.id AS id1 FROM idees_ameliorations LEFT JOIN profil  ON idees_ameliorations.emmetteur = profil.id  WHERE  supprime = 0 and profil.manager=:m and valide=1  ORDER BY  id1 DESC LIMIT 20 OFFSET :nb ') ;
 
   $Query->bindValue(':m', $_SESSION['id'], PDO::PARAM_INT);
   $Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
