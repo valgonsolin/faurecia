@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 16 mars 2018 à 13:41
+-- Généré le :  ven. 16 mars 2018 à 14:57
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.1.9
 
@@ -680,7 +680,7 @@ CREATE TABLE IF NOT EXISTS `equipe` (
   `id_projet` int(11) NOT NULL,
   `id_profil` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `equipe`
@@ -691,7 +691,8 @@ INSERT INTO `equipe` (`id`, `id_projet`, `id_profil`) VALUES
 (2, 1, 32),
 (3, 2, 32),
 (4, 1, 34),
-(5, 3, 29);
+(5, 3, 29),
+(6, 4, 29);
 
 -- --------------------------------------------------------
 
@@ -893,12 +894,11 @@ CREATE TABLE IF NOT EXISTS `launchboard` (
   `description` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `img_presentation` int(11) DEFAULT NULL,
   `archive` tinyint(1) DEFAULT '0',
-  `lb` int(11) DEFAULT NULL,
   `initial_date` date NOT NULL,
   `link_plr` varchar(140) COLLATE utf8mb4_unicode_ci NOT NULL,
   `link_helios` varchar(140) COLLATE utf8mb4_unicode_ci NOT NULL,
   `kickoff` int(11) DEFAULT NULL,
-  `pm` int(11) NOT NULL,
+  `pm` varchar(140) COLLATE utf8mb4_unicode_ci NOT NULL,
   `me` int(11) DEFAULT NULL,
   `hsep` int(11) DEFAULT NULL,
   `quality` int(11) DEFAULT NULL,
@@ -963,15 +963,15 @@ CREATE TABLE IF NOT EXISTS `launchboard` (
   `4empt_r` date DEFAULT NULL,
   `4empt` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `launchboard`
 --
 
-INSERT INTO `launchboard` (`id`, `profil`, `code`, `titre`, `client`, `description`, `img_presentation`, `archive`, `lb`, `initial_date`, `link_plr`, `link_helios`, `kickoff`, `pm`, `me`, `hsep`, `quality`, `log`, `training`, `supplier`, `capacitaire`, `makeorbuy`, `launchbook`, `2tct_f`, `2tct_r`, `2tct`, `2capacity_f`, `2capacity_r`, `2capacity`, `2equip_r`, `2equip_f`, `2equip`, `2pfmea_f`, `2pfmea_r`, `2pfmea`, `2mvp_f`, `2mvp_r`, `2mvp`, `2layout_f`, `2layout_r`, `2layout`, `2master_f`, `2master_r`, `2master`, `2pack_f`, `2pack_r`, `2pack`, `3equip_f`, `3equip_r`, `3equip`, `3pack_f`, `3pack_r`, `3pack`, `3supplier_f`, `3supplier_r`, `3supplier`, `3checklist1_f`, `3checklist1_r`, `3checklist1`, `3pt_f`, `3pt_r`, `3pt`, `3checklist2_f`, `3checklist2_r`, `3checklist2`, `3mpt_f`, `3mpt_r`, `3mpt`, `3samples_f`, `3samples_r`, `3samples`, `4checklist_f`, `4checklist_r`, `4checklist`, `4empt_f`, `4empt_r`, `4empt`) VALUES
-(1, 31, '12345', 'TEST', 'PSA', 'Locked muffler', 107, 0, 60, '2018-02-03', '', '', 105, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '106', '2018-02-13', '2018-02-12', 1, '2018-02-20', '2018-03-15', 1, '2018-02-22', '2018-02-21', 1, '2018-02-23', '2018-02-14', 1, '2018-02-14', '2017-11-09', 1, '2018-02-19', '2018-02-18', 1, '2018-02-20', '2018-02-13', 1, '2018-02-19', '2017-12-13', 1, NULL, NULL, 0, '2018-02-15', '2018-02-14', 1, NULL, NULL, 0, NULL, NULL, 0, '2018-02-08', '2018-02-08', 0, NULL, NULL, 0, '2018-02-09', '2018-02-10', 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0),
-(2, 31, 'F503B', 'Muffler CMF1', 'PSA', 'Stamped muffler', 114, 0, NULL, '2018-03-08', '', '', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0);
+INSERT INTO `launchboard` (`id`, `profil`, `code`, `titre`, `client`, `description`, `img_presentation`, `archive`, `initial_date`, `link_plr`, `link_helios`, `kickoff`, `pm`, `me`, `hsep`, `quality`, `log`, `training`, `supplier`, `capacitaire`, `makeorbuy`, `launchbook`, `2tct_f`, `2tct_r`, `2tct`, `2capacity_f`, `2capacity_r`, `2capacity`, `2equip_r`, `2equip_f`, `2equip`, `2pfmea_f`, `2pfmea_r`, `2pfmea`, `2mvp_f`, `2mvp_r`, `2mvp`, `2layout_f`, `2layout_r`, `2layout`, `2master_f`, `2master_r`, `2master`, `2pack_f`, `2pack_r`, `2pack`, `3equip_f`, `3equip_r`, `3equip`, `3pack_f`, `3pack_r`, `3pack`, `3supplier_f`, `3supplier_r`, `3supplier`, `3checklist1_f`, `3checklist1_r`, `3checklist1`, `3pt_f`, `3pt_r`, `3pt`, `3checklist2_f`, `3checklist2_r`, `3checklist2`, `3mpt_f`, `3mpt_r`, `3mpt`, `3samples_f`, `3samples_r`, `3samples`, `4checklist_f`, `4checklist_r`, `4checklist`, `4empt_f`, `4empt_r`, `4empt`) VALUES
+(1, 31, '12345', 'TEST', 'PSA', 'Locked muffler', 107, 0, '2018-02-03', '', '', 105, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '106', '2018-02-13', '2018-02-12', 1, '2018-02-20', '2018-03-15', 1, '2018-02-22', '2018-02-21', 1, '2018-02-23', '2018-02-14', 1, '2018-02-14', '2017-11-09', 1, '2018-02-19', '2018-02-18', 1, '2018-02-20', '2018-02-13', 1, '2018-02-19', '2017-12-13', 1, NULL, NULL, 0, '2018-02-15', '2018-02-14', 1, NULL, NULL, 0, NULL, NULL, 0, '2018-02-08', '2018-02-08', 0, NULL, NULL, 0, '2018-02-09', '2018-02-10', 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0),
+(2, 31, 'F503B', 'Muffler CMF1', 'PSA', 'Stamped muffler', 114, 0, '2018-03-08', '', '', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
