@@ -31,7 +31,7 @@ if(empty($_SESSION['login']))
   <a href="/moncompte/identification.php?redirection=RH/formations/index.php"><button class="btn btn-default">Se connecter</button></a>
 <?php
 }else{
-  if(!($_SESSION['formations']==1)){echo "Vous n'avez pas accés à cette partie. "; }
+  if(!($_SESSION['admin']==1)){echo "Vous n'avez pas accés à cette partie. "; }
   else{ ?>
   <style>
       .conteneur_alerte{
