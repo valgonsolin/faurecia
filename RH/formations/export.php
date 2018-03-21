@@ -1,5 +1,7 @@
 <?php
-
+ob_start();
+include_once "../../needed.php";
+ob_clean();
 
 function exportCSV(PDO $bdd) {
     $query = ('SELECT profil.nom as Name,profil.prenom as FirstName,formations_dispo.trainingtitle as Training_Title,
@@ -36,14 +38,7 @@ function exportCSV(PDO $bdd) {
 }
 
 try {
-    $pdo_options = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ];
-
-    $pdo = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'tavg', 'lacolloc');
-
-    exportCSV($pdo);
+    exportCSV($bdd);
 } catch (RuntimeException $ex) { // Inclut les PDOException
     echo $ex->getMessage();
 }

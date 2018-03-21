@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 $french = "http://faureciabeaulieu.fr"; //link for french version
 $english = "http://faureciabeaulieu.fr"; //link for english version
 

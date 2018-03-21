@@ -1,7 +1,7 @@
 <?php
-
+ob_start();
 include_once "../../needed.php";
-
+ob_clean();
 function exportCSV(PDO $bdd) {
     $query = 'SELECT idees_ameliorations.id,nom,date_rea,date_val,type,situation_actuelle,situation_proposee,valide,nbidees   FROM idees_ameliorations JOIN profil ON profil.id=idees_ameliorations.emmetteur';
     $stmt = $bdd->query($query);

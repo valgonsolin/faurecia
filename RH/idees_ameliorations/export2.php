@@ -1,5 +1,7 @@
 <?php
+ob_start();
 include_once "../../needed.php";
+ob_clean();
 function exportCSV(PDO $bdd) {
   $datetime = date("Y-m-d");
 
