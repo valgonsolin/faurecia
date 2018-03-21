@@ -52,7 +52,7 @@ if(!empty($_POST)){
     //on calcule la date de fin
     $dateFin = date("Y-m-d", strtotime("+".$duree." month", $dateDepartTimestamp));
 
-    $query = $bdd -> prepare('INSERT INTO formations_dispo(training_title,date_deb,date_fin,date_ajout) VALUES (:tt,:dd,:df,:da)');
+    $query = $bdd -> prepare('INSERT INTO formations_dispo(trainingtitle,date_deb,date_fin,date_ajout) VALUES (:tt,:dd,:df,:da)');
     if($query -> execute(array(
       'tt' => $_POST['title'],
       'dd' => $dateDepart,

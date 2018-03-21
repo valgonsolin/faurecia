@@ -80,7 +80,7 @@ if(empty($_SESSION['login']))
       }
   </style>
 
-  <h2>Espace admin formations</h2>
+  <h2>Toutes les formations validées</h2>
   <form class="form-inline">
     <div class="form-group">
 

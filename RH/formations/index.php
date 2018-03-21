@@ -114,7 +114,7 @@ if(empty($_SESSION['login'])){
 <div class="conteneur_alerte">
 <?php
 
-$Query = $bdd->prepare('SELECT * FROM formations_dispo WHERE training_title LIKE :tt AND DATEDIFF(date_deb, :d1 )>0  ORDER BY date_deb LIMIT 20  OFFSET :nb') ;
+$Query = $bdd->prepare('SELECT * FROM formations_dispo WHERE trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0  ORDER BY date_deb LIMIT 20  OFFSET :nb') ;
 
 $Query->bindValue(':tt', '%'.$recherche.'%',PDO::PARAM_STR);
 $Query->bindValue(':d1', $datetime , PDO::PARAM_STR);
@@ -136,7 +136,7 @@ while ($Data = $Query->fetch()) {
       <div class="info_alerte">
           <div class="date_et_titre">
               <h4 style="margin-top: 0px; font-size: 40px;">
-                <?php echo $Data['training_title']; ?>
+                <?php echo $Data['trainingtitle']; ?>
                 </h4>
           </div>
 
@@ -173,7 +173,7 @@ if($debut > 19){
 
 $test = $bdd->prepare('SELECT id FROM formations_dispo WHERE id NOT IN
   (SELECT formations_dispo.id as id FROM formations_dispo JOIN demande_formations ON formations_dispo.id=demande_formations.formation WHERE demandeur= :dd)
-  AND training_title LIKE :tt AND DATEDIFF(date_deb, :d1 )>0 ORDER BY date_deb LIMIT 1 OFFSET :nb');
+  AND trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0 ORDER BY date_deb LIMIT 1 OFFSET :nb');
 $test->bindValue(':dd', $_SESSION['id'], PDO::PARAM_INT);
 $test->bindValue(':tt','%'.$recherche.'%', PDO::PARAM_STR);
 $test->bindValue(':d1', $datetime, PDO::PARAM_INT);
