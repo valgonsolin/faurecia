@@ -40,18 +40,19 @@ if(!empty($_POST)){
       if($mois<10){
 
     $dateDepart =$annee."-"."0".$mois."-".$jour;}
-    else{$dateDepart =$annee."-"."0".$mois."-".$jour;}
+    else{$dateDepart =$annee."-".$mois."-".$jour;}
 
     //durée à rajouter : 6 mois;
     $duree = 6;
 
     //la première étape est de transformer cette date en timestamp
+    $dateDepartTimestamp = date("Y-m-d",strtotime($_POST['date_deb']));
     $dateDepartTimestamp = strtotime($dateDepart);
 
     //on calcule la date de fin
-    $dateFin = date("Y-m-d", strtotime("+".$duree." month", $dateDepartTimestamp ));
+    $dateFin = date("Y-m-d", strtotime("+".$duree." month", $dateDepartTimestamp));
 
-    $query = $bdd -> prepare('INSERT INTO formations_dispo(trainingtitle,date_deb,date_fin,date_ajout) VALUES (:tt,:dd,:df,:da)');
+    $query = $bdd -> prepare('INSERT INTO formations_dispo(training_title,date_deb,date_fin,date_ajout) VALUES (:tt,:dd,:df,:da)');
     if($query -> execute(array(
       'tt' => $_POST['title'],
       'dd' => $dateDepart,
@@ -62,7 +63,7 @@ if(!empty($_POST)){
       success('Ajouté','La formation a bien été ajoutée.');
     }else{
       warning('Erreur','Les données entrées ne sont pas conformes.');
-
+      print_r($query->errorInfo());
     }
   }
 
@@ -109,7 +110,7 @@ if(!$_SESSION['formations']){
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="form-group"><label>Date de début de la formation </label>
-          <input type="text" id="datepicker" name="date_deb" class="form-control">
+          <input type="date"  name="date_deb" class="form-control">
         </div>
       </div>
       <div class="col-md-3">
