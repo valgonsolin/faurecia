@@ -43,7 +43,7 @@ else
       'nbidees'=>$_POST['nbidees'],
       'image2'=>$file2
     ))){
-      success('Ajouté','La question a bien été ajoutée.');
+      success('Ajouté',"L'idée a bien été ajoutée.");
     }else{
       warning('Erreur','Les données entrées ne sont pas conformes.');
 

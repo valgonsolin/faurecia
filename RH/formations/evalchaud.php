@@ -305,6 +305,7 @@ if(isset($_GET['avalide'])){
             </div>
 
           </div>
+        
 
 
         <div class="col-md-3 col-md-offset-5">
@@ -314,7 +315,7 @@ if(isset($_GET['avalide'])){
           <input value="Valider la demande de formation" class="btn btn-default" type="submit">
 
         </div>
-
+        </div>
         </form>
 
 
