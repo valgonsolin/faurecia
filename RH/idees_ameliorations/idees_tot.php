@@ -106,7 +106,7 @@ else
 
   </div>
   <button type="submit" class="btn btn-default">Rechercher</button>
-  <a href="ajout.php" class="btn btn-default pull-right">Ajouter une idée</a>
+  <a href="ajout.php" class="btn btn-default pull-right">Ajouter/Modifier une idée</a>
   <a href="validation.php" class="btn btn-default pull-right">Espace Manager</a>
 
 </form>

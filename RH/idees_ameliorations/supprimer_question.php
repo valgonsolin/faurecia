@@ -10,7 +10,7 @@ if(empty($_SESSION['login']))
   <h2>Idées</h2>
   <h4>Vous devez être connecté pour accéder à cette partie.</h4>
   <a href="/moncompte/identification.php?redirection=RH/idees_ameliorations/ajout.php"><button class="btn btn-default">Se connecter</button></a>
-  <a href="index.php" class="btn btn-default"> Retourner au quiz</a>
+  <a href="index.php" class="btn btn-default"> Retourner à l'acceuil IA</a>
 <?php
 }
 else
