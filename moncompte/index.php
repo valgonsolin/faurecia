@@ -32,8 +32,8 @@ if(!empty($_POST)){
   }
   }
   if(isset($_POST['submit'])){
-    $Query = $bdd->prepare('UPDATE profil SET nom = ?, prenom = ?,mail = ?, mo = ?, uap = ?, tournee = ?, manager = ? WHERE id = ?');
-    if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['manager'],$_SESSION["id"]))){
+    $Query = $bdd->prepare('UPDATE profil SET nom = ?, prenom = ?,mail = ?, mo = ?, uap = ?, tournee = ?, manager = ?,services = ? WHERE id = ?');
+    if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['manager'],$_POST['services'],$_SESSION["id"]))){
       success('Modifié','Le profil a bien été modifié');
       $_SESSION['manager']=$_POST['manager'];
     }else{
@@ -55,6 +55,7 @@ if(empty($_SESSION['login'])){
   $mo = $Data['mo'];
   $uap = $Data['uap'];
   $tournee = $Data['tournee'];
+  $services = $Data['services'];
   $mail = $Data['mail'];
   ?>
 <p>Connecté en tant que <?php echo $_SESSION['nom']."  ".$_SESSION['prenom']; ?></p>
@@ -134,6 +135,22 @@ if(empty($_SESSION['login'])){
                 </select>              </div>
 
             </div>
+                    <div class="form-group">
+            <label for="services" class="control-label col-sm-2">Services :</label>
+            <div class="col-sm-10">
+                <select name="services" id="services" class="form-control">
+                  <option value="HSE" <?php if($services == "HSE"){echo 'selected="selected"';}?> >HSE</option>
+                  <option value="MAINTENANCE" <?php if($services == "MAINTENANCE"){echo 'selected="selected"';}?> >MAINTENANCE</option>
+                  <option value="FES" <?php if($services == "FES"){echo 'selected="selected"';}?> >FES</option>
+                  <option value="PRODUCTION UAP1" <?php if($services == "PRODUCTION UAP1"){echo 'selected="selected"';}?> >PRODUCTION UAP1</option>
+                  <option value="PRODUCTION UAP2" <?php if($services == "PRODUCTION UAP2"){echo 'selected="selected"';}?> >PRODUCTION UAP2</option>
+                  <option value="PRODUCTION UAP3" <?php if($services == "PRODUCTION UAP3"){echo 'selected="selected"';}?> >PRODUCTION UAP3</option>
+                  <option value="QUALITE" <?php if($services == "QUALITE"){echo 'selected="selected"';}?> >QUALITE</option>
+                  <option value="FINANCE" <?php if($services == "FINANCE"){echo 'selected="selected"';}?> >FINANCE</option>
+                  <option value="RH" <?php if($services == "RH"){echo 'selected="selected"';}?> >RH</option>
+                </select>
+            </div>
+        </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="tournee">Tournée :</label>
                 <div class="col-sm-10">

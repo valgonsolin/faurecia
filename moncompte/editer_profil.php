@@ -40,6 +40,7 @@ if(isset($_GET['id'])){
     $mail = $Data['mail'];
     $news = $Data['news'];
     $formations = $Data['formation'];
+    $services = $Data['services'];
 }else{
 ?>
     <h2>Ajouter un profil</h2>
@@ -64,6 +65,7 @@ if(isset($_GET['id'])){
     $idees=0;
     $formations=0;
     $news=0;
+    $services = "";
 }
 ?>
     <form class="form-horizontal" method="post" action="administration.php">
@@ -105,6 +107,22 @@ if(isset($_GET['id'])){
               <?php  } ?>
             </select>
           </div>
+        </div>
+        <div class="form-group">
+            <label for="services" class="control-label col-sm-2">Services :</label>
+            <div class="col-sm-10">
+                <select name="services" id="services" class="form-control">
+                  <option value="HSE" <?php if($services == "HSE"){echo 'selected="selected"';}?> >HSE</option>
+                  <option value="MAINTENANCE" <?php if($services == "MAINTENANCE"){echo 'selected="selected"';}?> >MAINTENANCE</option>
+                  <option value="FES" <?php if($services == "FES"){echo 'selected="selected"';}?> >FES</option>
+                  <option value="PRODUCTION UAP1" <?php if($services == "PRODUCTION UAP1"){echo 'selected="selected"';}?> >PRODUCTION UAP1</option>
+                  <option value="PRODUCTION UAP2" <?php if($services == "PRODUCTION UAP2"){echo 'selected="selected"';}?> >PRODUCTION UAP2</option>
+                  <option value="PRODUCTION UAP3" <?php if($services == "PRODUCTION UAP3"){echo 'selected="selected"';}?> >PRODUCTION UAP3</option>
+                  <option value="QUALITE" <?php if($services == "QUALITE"){echo 'selected="selected"';}?> >QUALITE</option>
+                  <option value="FINANCE" <?php if($services == "FINANCE"){echo 'selected="selected"';}?> >FINANCE</option>
+                  <option value="RH" <?php if($services == "RH"){echo 'selected="selected"';}?> >RH</option>
+                </select>
+            </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="tournee">Tournée :</label>
