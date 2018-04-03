@@ -196,9 +196,11 @@ if(isset($_GET['avalide'])){
           </div>
           <div class="col-md-5 col-md-offset-2">
             <div class="form-group">
-            <label>Priorité:</label> <br><label style="margin-left:20px">
-              <input type="hidden" value="0" name="priorite">
-              <input name="priorite" type="checkbox" value="1"> indispensable</label>
+            <label>Priorité:</label> <br>
+            <label style="margin-left:20px">
+              <input type="radio" value="0" name="priorite" checked="checked">souhaitable</label>
+              <label style="margin-left:20px">
+              <input name="priorite" type="radio" value="1"> indispensable</label>
             </div>
           </div>
         </div>

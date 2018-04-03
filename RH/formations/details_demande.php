@@ -111,8 +111,13 @@ if(isset($_GET['demande'])){
           <form action="details_demande.php" method="post" style="margin-top:20px;" enctype="multipart/form-data">
             <div class="form-group">
           		<label>Origine du besoin :     </label>
-          		<input name="origine" class="form-control" type="text">
-          	</div>
+                  <select name="origine" class="form-control">
+                  <option value="PLan formation" selected="selected">Plan formation</option>
+                  <option value="Entretien individuel" >Entretien individuel</option>
+                  <option value="Staffing review">Staffing review</option>
+                  <option value="Autre">Autre</option>
+                  </select>
+            </div>
             <input type="hidden" name="id" value="<?php echo $Data["id"] ?>" >
             <input value="Demander la formation" class="btn btn-default" type="submit">
           </form>

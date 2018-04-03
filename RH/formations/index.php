@@ -5,9 +5,6 @@ include_once "../../needed.php";
 drawHeader('RH');
 drawMenu('collab');
 
-
-$recherche = "";
-$debut=0;
 $datetime = date("Y-m-d");
 
     $date = date_parse($datetime);
@@ -15,23 +12,65 @@ $datetime = date("Y-m-d");
     $mois = $date['month'];
     $annee = $date['year'];
 
-if (isset($_GET["recherche"])){
-        $recherche = $_GET["recherche"];
-    }
-if(isset($_GET['nb'])){
-      $debut=$_GET['nb'];
-    }
+if(!empty($_POST)){
+    $dateoj = date_parse($_POST['date_deb']);
+    $jour = $dateoj['day'];
+    $mois = $dateoj['month'];
+    $annee = $dateoj['year'];
 
+    if($mois<10){
 
+  $dateDepart =$annee."-"."0".$mois."-".$jour;}
+  else{$dateDepart =$annee."-".$mois."-".$jour;}
+
+  //durée à rajouter : 6 mois;
+  $duree = 6;
+
+  //la première étape est de transformer cette date en timestamp
+  $dateDepartTimestamp = date("Y-m-d",strtotime($_POST['date_deb']));
+  $dateDepartTimestamp = strtotime($dateDepart);
+
+  //on calcule la date de fin
+  $dateFin = date("Y-m-d", strtotime("+".$duree." month", $dateDepartTimestamp));
+
+  $query = $bdd -> prepare('INSERT INTO formations_dispo(trainingtitle,date_deb,date_fin,date_ajout) VALUES (:tt,:dd,:df,:da)');
+  if($query -> execute(array(
+    'tt' => $_POST['title'],
+    'dd' => $dateDepart,
+    'df' => $dateFin,
+    'da' =>$datetime,
+  ))){
+  }else{
+    warning('Erreur','Les données entrées ne sont pas conformes.');
+    print_r($query->errorInfo());
+  }
+  $qq=$bdd->query('SELECT MAX(id) as m FROM formations_dispo');
+  $last=$qq->fetch();
+  $query2= $bdd-> prepare('INSERT INTO demande_formations(formation,demandeur,origine) VALUES (:f,:d,:o)');
+  if($query2 -> execute(array(
+    'f' => $last['m'],
+    'd' => $_SESSION['id'],
+    'o' => $_POST['origine'],
+  ))){
+      success('Succés','La demande de formation à bien été efétuée');
+  }else{
+    warning('Erreur','Les données entrées ne sont pas conformes.');
+    print_r($query->errorInfo());
+  }
+}
 
 ?>
+<br>
+  <a href="attval.php" class="btn btn-default pull-right">Formations en attendes de validation</a>
+  <a href="mesval.php" class="btn btn-default pull-right">Voir mes formations validées</a>
+<br>
 
 <h2>Demande de formations</h2>
 
 <?php
 if(empty($_SESSION['login'])){
   ?>
-    <h2>Formationss</h2>
+    <h2>Formations</h2>
     <h4>Vous devez être connecté pour accéder à cette partie.</h4>
     <a href="/moncompte/identification.php?redirection=RH/formations/index.php"><button class="btn btn-default">Se connecter</button></a>
   <?php
@@ -84,106 +123,70 @@ if(empty($_SESSION['login'])){
         justify-content: space-between;
     }
 </style>
+     <form method="post" style="margin-top:20px;" enctype="multipart/form-data">
 
-<form class="form-inline">
-  <div class="form-group">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="form-group">
 
-    <label>Training Title</label>
-      <select name="recherche" class="form-control">
-        <option value="" selected="selected">Toute catégories</option>
-        <option value="Recyclage CACES 2 et 3n" >Recyclage CACES 2 et 3</option>
-        <option value="Recyclage habilitations électriques BR et HRs">Recyclage habilitations électriques BR et HR</option>
-        <option value="Recyclage BE manœuvre+ initiale H0V">Recyclage BE manœuvre+ initiale H0V</option>
-        <option value="Anglais">Anglais</option>
-        <option value="Recyclage SST">Recyclage SST(port des EPI)</option>
-        <option value="Welding Technology">Welding Technology</option>
-        <option value="FES Outils : QRCI 8D">FES Outils : QRCI 8D</option>
-        <option value="Programmation cintrage">Programmation cintrage</option>
-        <option value="EE Fundamentals">EE Fundamentals</option>
-        <option value="Young female Manager Program">Young female Manager Program</option>
-      </select>
-  </div>
-
-<button type="submit" class="btn btn-default">Rechercher</button>
-<a href="attval.php" class="btn btn-default pull-right">Formations en attente de validation</a>
-<a href="mesval.php" class="btn btn-default pull-right">Formations validées</a>
-</form>
-<br><br>
-<?php echo "Training title recheché: ".$recherche; ?>
-
-<div class="conteneur_alerte">
-<?php
-
-$Query = $bdd->prepare('SELECT * FROM formations_dispo WHERE trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0  ORDER BY date_deb LIMIT 20  OFFSET :nb') ;
-
-$Query->bindValue(':tt', '%'.$recherche.'%',PDO::PARAM_STR);
-$Query->bindValue(':d1', $datetime , PDO::PARAM_STR);
-$Query ->bindValue(':nb',(int) $debut, PDO::PARAM_INT);
-$Query->execute();
-
-
-while ($Data = $Query->fetch()) {
-  $Query2 = $bdd->prepare('SELECT * FROM demande_formations WHERE demandeur = :d AND formation= :f ') ;
-
-  $Query2->bindValue(':d', $_SESSION['id'] , PDO::PARAM_INT);
-  $Query2 ->bindValue(':f',(int) $Data['id'], PDO::PARAM_INT);
-  $Query2->execute();
-  if(!($Query2->fetch() ) ){
-  ?>
-
-  <a href="details_demande.php?demande= <?php echo $Data['id'] ; ?>" ><div class="alerte" >
-
-      <div class="info_alerte">
-          <div class="date_et_titre">
-              <h4 style="margin-top: 0px; font-size: 40px;">
-                <?php echo $Data['trainingtitle']; ?>
-                </h4>
-          </div>
-
-          <p><b>Date de début : </b><?php echo $Data['date_deb'];?><br>
-              <b>Date de fin: </b><?php echo $Data['date_fin'];?><br>
-              <b>Date d'ajout : </b><?php echo $Data['date_ajout'];?>
-              <br><br><br>
-
-              <b><?php echo "Cliquez pour demander cette formation";?></b><br></p>
-
-
+          <label>Training Title</label>
+            <select name="title" class="form-control">
+              <option value="Recyclage CACES 2 et 3n" selected="selected">Recyclage CACES 2 et 3</option>
+              <option value="Recyclage habilitations électriques BR et HRs">Recyclage habilitations électriques BR et HR</option>
+              <option value="Recyclage BE manœuvre+ initiale H0V">Recyclage BE manœuvre+ initiale H0V</option>
+              <option value="Anglais">Anglais</option>
+              <option value="Recyclage SST">Recyclage SST(port des EPI)</option>
+              <option value="Welding Technology">Welding Technology</option>
+              <option value="FES Outils : QRCI 8D">FES Outils : QRCI 8D</option>
+              <option value="Programmation cintrage">Programmation cintrage</option>
+              <option value="EE Fundamentals">EE Fundamentals</option>
+              <option value="Young female Manager Program">Young female Manager Program</option>
+            </select>
+        </div>
       </div>
-
-  </div></a>
-
-
+      <div class="col-md-3">
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <p>La date de fin de formation pendra automatiquement la valeur date de début +6mois</p>
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="form-group"><label>Date de début de la formation </label>
+          <input type="date"  name="date_deb" class="form-control" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+    <div class="form-group">
+          	<label>Origine du besoin :     </label>
+            <select name="origine" class="form-control">
+            <option value="Plan formation" selected="selected">Plan formation</option>
+            <option value="Entretien individuel" >Entretien individuel</option>
+            <option value="Staffing review">Staffing review</option>
+            <option value="Autre">Autre</option>
+            </select>
+    </div>
+    </div>
+    </div>   
+    <div class="row"> 
+    <div class="col-md-6 col-md-offset-3">
+    <input value="Demander la formation" class="btn btn-default" type="submit">
+    </div>
+    </div>
+    </form>
 
 <?php
-    }
- }
- ?>
-</div>
 
-
-<?php
-
-
-if($debut > 19){
-  ?>
-  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut-20;?>" class="btn btn-default">Elements précédents</a>
-<?php
-}
-
-
-$test = $bdd->prepare('SELECT id FROM formations_dispo WHERE id NOT IN
-  (SELECT formations_dispo.id as id FROM formations_dispo JOIN demande_formations ON formations_dispo.id=demande_formations.formation WHERE demandeur= :dd)
-  AND trainingtitle LIKE :tt AND DATEDIFF(date_deb, :d1 )>0 ORDER BY date_deb LIMIT 1 OFFSET :nb');
-$test->bindValue(':dd', $_SESSION['id'], PDO::PARAM_INT);
-$test->bindValue(':tt','%'.$recherche.'%', PDO::PARAM_STR);
-$test->bindValue(':d1', $datetime, PDO::PARAM_INT);
-$test ->bindValue(':nb',(int) $debut+20, PDO::PARAM_INT);
-$test->execute();
-if($test -> fetch()){ ?>
-  <a href="index.php?recherche=<?php echo $recherche;?>&amp;nb=<?php echo $debut+20;?>" class="btn btn-default">Elements suivants</a>
-<?php
-
-}
 }
 drawFooter();
 ?>

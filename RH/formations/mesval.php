@@ -26,7 +26,7 @@ if(isset($_GET['nb'])){
 
 if(empty($_SESSION['login']))
 { ?>
-  <h2>Formationss</h2>
+  <h2>Formations</h2>
   <h4>Vous devez être connecté pour accéder à cette partie.</h4>
   <a href="/moncompte/identification.php?redirection=RH/formations/index.php"><button class="btn btn-default">Se connecter</button></a>
 <?php
@@ -127,6 +127,7 @@ if(empty($_SESSION['login']))
 
             <p><b>Date de début : </b><?php echo $Data['date_deb'];?><br>
                 <b>Date de fin: </b><?php echo $Data['date_fin'];?><br>
+                <b>Date de demande: </b><?php echo $Data['date_ajout'];?><br>
                 <b>Origine du besoin :</b><?php echo $Data['origine']; ?><br>
                 <?php
                     $qyy=$bdd->prepare('SELECT * FROM profil WHERE id = ? ');

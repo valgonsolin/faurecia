@@ -107,7 +107,7 @@ if(empty($_SESSION['login']))
 <div class="conteneur_alerte">
 <?php
 
-  $query= $bdd->prepare('SELECT trainingtitle,date_deb,date_fin,origine FROM demande_formations JOIN formations_dispo  ON demande_formations.formation=formations_dispo.id
+  $query= $bdd->prepare('SELECT trainingtitle,date_deb,date_fin,origine,date_ajout FROM demande_formations JOIN formations_dispo  ON demande_formations.formation=formations_dispo.id
                         WHERE demandeur= :d and valide = 0 AND trainingtitle LIKE :tt  AND DATEDIFF(date_deb, :d1 )>0 ORDER BY formations_dispo.date_deb LIMIT 20 OFFSET :nb ');
                         $query->bindValue(':d', $_SESSION['id'], PDO::PARAM_INT);
                         $query->bindValue(':tt','%'.$recherche.'%', PDO::PARAM_STR);
@@ -127,6 +127,7 @@ if(empty($_SESSION['login']))
 
             <p><b>Date de début : </b><?php echo $Data['date_deb'];?><br>
                 <b>Date de fin: </b><?php echo $Data['date_fin'];?><br>
+                <b>Date de demande: </b><?php echo $Data['date_ajout'];?><br>
                 <b>Origine du besoin :</b><?php echo $Data['origine']; ?><br>
                 <?php
                     $qyy=$bdd->prepare('SELECT * FROM profil WHERE id = ? ');
