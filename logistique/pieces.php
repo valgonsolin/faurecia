@@ -32,7 +32,8 @@ if ( isset($_GET['recherche'])) {
 <tr>
     <th style="width: 50px">Reference</th>
     <th style="width: 50px">Sebango</th>
-    <th>Description</th></th>
+    <th>Description</th>
+    <th>Fournisseur</th>
 </tr>
 </thead>
 <tbody>
@@ -59,6 +60,7 @@ while ($Data = $Query->fetch()) {
         <td><?php echo $Data['reference']; ?></td>
         <td><?php echo $Data['sebango']; ?></td>
         <td><?php echo $Data['description']; ?></td>
+        <td><?php echo $Data['fournisseur']; ?></td>
     </tr>
 
 

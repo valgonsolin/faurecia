@@ -101,7 +101,8 @@ if(isset($_GET['recherche'])){
         </select>
     </div>
     <button type="submit" class="btn btn-default">Rechercher</button>
-    <a class="btn btn-default pull-right" href="form_alerte.php">Ajouter une nouvelle alerte</a>
+    <a href="pareto.php" class="btn btn-default pull-right">Pareto</a>
+    <a class="btn btn-default pull-right" href="form_alerte.php">Nouvelle alerte</a>
 </form>
 
 <div class="conteneur_alerte">
@@ -160,7 +161,8 @@ if(isset($_GET['recherche'])){
                 <p><b>Désignation : </b><?php echo substr($Data['description'],0,18);?><br>
                     <b>Date et heure : </b><?php echo date('d/m/y H:i',strtotime($Data['date']));?><br>
                     <b>Référence concernée : </b><?php echo $Data['reference'];?><br>
-                    <b>Ligne : </b><?php echo $Data['ligne'];?></p>
+                    <b>Ligne : </b><?php echo $Data['ligne'];?><br>
+                    <b>Fournisseur : </b><span style="font-size:70%;"><?php echo substr($Data['fournisseur'],0,25);?></span></p>
 
             </div>
                 <?php
