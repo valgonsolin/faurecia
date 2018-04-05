@@ -20,6 +20,7 @@ if (isset($_GET['id'])){
                 <b>Référence : </b><?php echo $Data['reference'] ?><br>
                 <b>Sebango : </b><?php echo $Data['sebango'] ?><br>
                 <b>Description : </b><?php echo $Data['description'] ?><br>
+                <b>Fournisseur : </b><?php echo $Data['fournisseur'] ?><br>
             </p>
 
 

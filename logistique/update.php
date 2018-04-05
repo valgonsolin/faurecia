@@ -170,8 +170,11 @@ else{
         if(levenshtein(strtolower("emplacemt"),strtolower($value)) < 5 ){
           $emplacement=$key;
         }
+        if(levenshtein(strtolower("fournisseur"),strtolower($value)) < 5 ){
+          $fournisseur=$key;
+        }
       }
-      if(! isset($article) || ! isset($description) || ! isset($emplacement)){
+      if(! isset($article) || ! isset($description) || ! isset($emplacement) || ! isset($fournisseur)){
         warning("Erreur","Problème de format de fichier.");
         drawForm();
       }else{
@@ -179,8 +182,8 @@ else{
           while($ligne=fgets($fichier)){
             $tableau = explode(';',$ligne);
             if(preg_match('/^[(?:,), ]+$/',$ligne)){continue;}
-            $update = $bdd -> prepare('INSERT INTO logistique_pieces(reference,description,adresse) VALUES (?,?,?) ON DUPLICATE KEY UPDATE description= ?,adresse= ? ');
-            if(! $update -> execute(array($tableau[$article],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement]))){
+            $update = $bdd -> prepare('INSERT INTO logistique_pieces(reference,description,adresse,fournisseur) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE description= ?,adresse= ?,fournisseur = ? ');
+            if(! $update -> execute(array($tableau[$article],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$fournisseur]),@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$fournisseur])))){
               $erreur += 1;
             }
           }
@@ -188,8 +191,8 @@ else{
           while($ligne=fgets($fichier)){
             $tableau = explode(',',$ligne);
             if(preg_match('/^[(?:,), ]+$/',$ligne)){continue;}
-            $update = $bdd -> prepare('INSERT INTO logistique_pieces(reference,description,adresse) VALUES (?,?,?) ON DUPLICATE KEY UPDATE description= ?,adresse= ? ');
-            if(! $update -> execute(array($tableau[$article],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement]))){
+            $update = $bdd -> prepare('INSERT INTO logistique_pieces(reference,description,adresse,fournisseur) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE description= ?,adresse= ?,fournisseur = ? ');
+            if(! $update -> execute(array($tableau[$article],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$fournisseur]),@iconv("UTF-8","UTF-8//IGNORE",$tableau[$description]),$tableau[$emplacement],@iconv("UTF-8","UTF-8//IGNORE",$tableau[$fournisseur])))){
               $erreur += 1;
             }
           }

@@ -142,6 +142,7 @@ $state = $Data['state'];
                 <b>Référence : </b><?php echo $Data['reference'] ?><br>
                 <b>Description : </b><?php echo $Data['description'] ?><br>
                 <b>Adresse : </b><?php echo $Data['adresse'] ?><br>
+                <b>Fournisseur : </b><?php echo $Data['fournisseur'] ?><br>
                 <br>
                 <b>Quantité / UC : </b> <?php echo $quantite ?><br>
                 <b>Nombre d'UC restant en ligne : </b> <?php echo $Data['uc_restant_en_ligne'] ?> <br>

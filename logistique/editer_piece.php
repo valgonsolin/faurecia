@@ -6,11 +6,11 @@ drawheader();
 
 if (isset($_POST['submit'])){
     if (isset($_GET['id'])){
-        $Query = $bdd->prepare('UPDATE logistique_pieces SET code_barres=?, sebango =?, reference=?, description=?, ligne =?, emplacement=?, quantite=? WHERE id = ?');
-        $Query->execute(array($_POST['code_barres'],$_POST['sebango'],$_POST['reference'],$_POST['description'],$_POST['ligne'],$_POST['emplacement'],$emplacement['quantite'],$_GET["id"]));
+        $Query = $bdd->prepare('UPDATE logistique_pieces SET sebango =?, reference=?, description=?, adresse=?, fournisseur = ? WHERE id = ?');
+        $Query->execute(array($_POST['sebango'],$_POST['reference'],$_POST['description'],$_POST['emplacement'],$_POST['fournisseur'],$_GET["id"]));
     }else{
-        $Query = $bdd->prepare('INSERT INTO logistique_pieces SET code_barres=?, sebango =?, reference=?, description=?, ligne =?, emplacement=?, quantite=?');
-        $Query->execute(array($_POST['code_barres'],$_POST['sebango'],$_POST['reference'],$_POST['description'],$_POST['ligne'],$_POST['emplacement'],$emplacement['quantite'],$_GET["id"]));
+        $Query = $bdd->prepare('INSERT INTO logistique_pieces SET sebango =?, reference=?, description=?, adresse=?,fournisseur = ?');
+        $Query->execute(array($_POST['sebango'],$_POST['reference'],$_POST['description'],$_POST['emplacement'],$_POST['fournisseur'],$_GET["id"]));
     }
     ob_end_clean();
     header('Location: '.$url."/logistique/pieces.php");
@@ -29,11 +29,15 @@ if (isset($_GET['id'])){
     $reference = $Data['reference'];
     $sebango = $Data['sebango'];
     $description = $Data['description'];
+    $fournisseur = $Data['fournisseur'];
+    $emplacement = $Data['adresse'];
 }else{
     ?><h2>Ajouter une alerte</h2><?php
     $reference = "";
     $sebango = "";
     $description = "";
+    $fournisseur = "";
+    $emplacement = "";
 }
 ?>
     <form class="form-horizontal" method="post">
@@ -53,6 +57,18 @@ if (isset($_GET['id'])){
             <label class="control-label col-sm-2" for="description">Description :</label>
             <div class="col-sm-10">
                 <input type="text" name="description" class="form-control" id="description" placeholder="Entrer la description"  value="<?php echo $description; ?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="fournisseur">Fournisseur :</label>
+            <div class="col-sm-10">
+                <input type="text" name="fournisseur" class="form-control" id="fournisseur" placeholder="Entrer le fournisseur"  value="<?php echo $fournisseur; ?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="emplacement">Adresse :</label>
+            <div class="col-sm-10">
+                <input type="text" name="emplacement" class="form-control" id="emplacement" placeholder="Entrer l'adresse"  value="<?php echo $emplacement; ?>">
             </div>
         </div>
         <div class="form-group">
