@@ -195,6 +195,63 @@ foreach ($tipos as $tipo){
        });
    </script>
 
+</br></br></br></br>
+
+<div id="categories" ><h1>Répartition des idees par services: </h1> </div>
+ </br></br>
+
+<canvas id="browsersChart2" width="400" height="100"></canvas>
+
+<?php $qyy=$bdd->query('SELECT services,COUNT(*) as nb FROM idees_ameliorations JOIN profil ON idees_ameliorations.emmetteur=profil.id GROUP BY services ');
+$tipos=$qyy->fetchAll();
+ ?>
+
+<script>
+
+
+var tipos =new Array();
+var nbtipos =new Array();
+<?php
+foreach ($tipos as $tipo){
+  ?>tipos.push("<?php echo $tipo['services']; ?>");
+    nbtipos.push("<?php echo $tipo['nb']; ?>");
+
+<?php } ?>;
+
+
+
+
+   var ctx = document.getElementById("browsersChart2");
+   var myChart = new Chart(ctx, {
+       type: 'pie',
+       data: {
+           datasets: [{
+               label: 'Browsers',
+               data: nbtipos,
+               backgroundColor: [
+             '#ff6384',
+             '#36a2eb',
+             '#cc65fe',
+             '#ffce56',
+             '#676633',
+             '#507925',
+             '#892197',
+             '#769414',
+             '#D3D3D3'
+
+        ]
+
+           }],
+           labels: tipos
+           },
+           options: {
+                   responsive: true
+           }
+       });
+   </script>
+
+
+
 <?php }else{echo "<h1>Aucune idee soumise pour le moment...</h1>" ;}
 
 
