@@ -41,6 +41,7 @@ $f=$query->fetchAll();
   	  <script src="../js/moment.min.js"></script>
       <script src="../js/Chart.js"></script>
       <canvas id="myChart" ></canvas>
+
 <script>
 
 
@@ -48,7 +49,7 @@ var fournisseur =new Array();
 var nbfournisseur =new Array();
 <?php
 foreach ($f as $fou){
-  ?>fournisseur.push("<?php echo $fou['f']; ?>");
+   ?>fournisseur.push("<?php echo preg_replace( "/\r|\n/", "", $fou['f'] ); ?>");
     nbfournisseur.push("<?php echo $fou['count']; ?>");
 
 <?php } ?>;
@@ -62,7 +63,9 @@ var myChart = new Chart(ctx, {
         datasets: [{
             label: 'Pareto par fournisseur',
             data: nbfournisseur,
-            borderWidth: 1
+            borderWidth: 1,
+            backgroundColor: "#ff8900",
+            borderColor: "#E37C07"
         }]
     },
     options: {
