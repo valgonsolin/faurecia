@@ -18,8 +18,24 @@ if(empty($_SESSION['login'])){ ?>
   if(!$_SESSION['admin']){
     echo "<p>Vous n'avez pas les droits pour accéder à cette partie. <a href='".$url."' class='btn btn-default pull-right'>Accueil</a></p>";
   }else{
+    if(isset($_POST['delete'])){
+      $delete= $bdd -> prepare('DELETE FROM services WHERE id = ?');
+      if($delete -> execute(array($_POST['delete']))){
+        success('Supprimé',"Le service a été supprimé.");
+      }else{
+        warning("Erreur","Veuillez réessayer.");
+      }
+    }
+    if(isset($_POST['add_service'])){
+      $delete= $bdd -> prepare('INSERT INTO services SET service = ?');
+      if($delete -> execute(array($_POST['service_value']))){
+        success('Ajouté',"Le service a été ajouté.");
+      }else{
+        warning("Erreur","Veuillez réessayer.");
+      }
+    }
     if (isset($_POST['modifier'])){
-        if (isset($_POST['id'])){
+      if (isset($_POST['id'])){
             $Query = $bdd->prepare('UPDATE profil SET nom = ?, prenom = ?,identifiant = ?,mail = ?, mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ?, idees = ?, launchboard = ?, manager = ?, news = ?, formation= ?, services= ? WHERE id = ?');
             if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['identifiant'],$_POST['mail'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['admin'],$_POST['qualite'],$_POST['rr'],$_POST['hse'],$_POST['kamishibai'],$_POST['logistique'],$_POST['idees'],$_POST['launchboard'],$_POST['manager'],$_POST['news'],$_POST['formations'],$_POST['services'],$_POST['id'])) ) {
               success('Modifié',"Le profil a été modifié.");
@@ -27,7 +43,7 @@ if(empty($_SESSION['login'])){ ?>
               warning("Erreur","Veuillez réessayer.");
             }
         }else{
-            if($_POST['new1'] == $_POST['new2']){
+          if($_POST['new1'] == $_POST['new2']){
               $Query = $bdd->prepare('INSERT INTO profil SET nom = ?, prenom = ?,identifiant = ?,mail = ? , mo = ?, uap = ?, tournee = ?, admin = ?, qualite = ?, rr = ?, hse = ?, kamishibai = ?, logistique = ?, idees = ?, launchboard = ?, manager = ?,news = ?,formation=?,services=?,password = ?');
               if($Query->execute(array($_POST['nom'],$_POST['prenom'],$_POST['identifiant'],$_POST['mail'],$_POST['mo'],$_POST['uap'],$_POST['tournee'],$_POST['admin'],$_POST['qualite'],$_POST['rr'],$_POST['hse'],$_POST['kamishibai'],$_POST['logistique'],$_POST['idees'],$_POST['launchboard'],$_POST['manager'],$_POST['news'],$_POST['formations'],$_POST['services'],crypt(strtolower($_POST['new1']),"faureciabeaulieu")))){
                 success("Ajouté","Le profil a bien été ajouté.");
@@ -91,6 +107,8 @@ if(empty($_SESSION['login'])){ ?>
       </div>
       <button type="submit" class="btn btn-default">Rechercher</button>
       <a href="editer_profil.php" class="btn btn-default pull-right">Ajouter un profil</a>
+      <a data-toggle="modal" data-target="#modal"class="btn btn-default pull-right">Gestion Services</a>
+
     </form>
     <table class="table">
       <thead class="thead">
@@ -125,6 +143,46 @@ if(empty($_SESSION['login'])){ ?>
         ?>
       </tbody>
     </table>
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Gestion Services</h4>
+      </div>
+      <div class="modal-body">
+        <h4>Ajouter un service </h4>
+        <form method="post" class="form-group row">
+          <div class="col-md-12">
+            <label for="services">Service : </label>
+          </div>
+          <div class="col-md-10">
+            <input type="text" id="services" name="service_value" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <input type="submit" value="Ajouter" name="add_service" class="btn btn-default">
+          </div>
+        </form>
+        <h4>Supprimer un service</h4>
+        <div class="row">
+          <form method="post" class="col-md-6">
+            <ul>
+              <?php
+              $serv = $bdd -> query("SELECT * FROM services");
+              while($service = $serv->fetch()){ ?>
+                <li><?php echo $service['service']; ?>
+                <input id="delete<?php echo $service['id']; ?>" type="submit" name="delete" value="<?php echo $service['id']; ?>" style="display:none;" onclick="confirm('Supprimer le service <?php echo $service['service']; ?> ?')">
+                <label style="margin:0;" class="pull-right" for="delete<?php echo $service['id']; ?>"><img src="ressources/cancel.png" style="max-height:15px;"></label>
+                </li>
+              <?php } ?>
+            </ul>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php
   }

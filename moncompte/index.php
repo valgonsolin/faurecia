@@ -137,17 +137,13 @@ if(empty($_SESSION['login'])){
             </div>
                     <div class="form-group">
             <label for="services" class="control-label col-sm-2">Services :</label>
+            <?php  $serv = $bdd -> query("SELECT * FROM services"); ?>
             <div class="col-sm-10">
                 <select name="services" id="services" class="form-control">
-                  <option value="HSE" <?php if($services == "HSE"){echo 'selected="selected"';}?> >HSE</option>
-                  <option value="MAINTENANCE" <?php if($services == "MAINTENANCE"){echo 'selected="selected"';}?> >MAINTENANCE</option>
-                  <option value="FES" <?php if($services == "FES"){echo 'selected="selected"';}?> >FES</option>
-                  <option value="PRODUCTION UAP1" <?php if($services == "PRODUCTION UAP1"){echo 'selected="selected"';}?> >PRODUCTION UAP1</option>
-                  <option value="PRODUCTION UAP2" <?php if($services == "PRODUCTION UAP2"){echo 'selected="selected"';}?> >PRODUCTION UAP2</option>
-                  <option value="PRODUCTION UAP3" <?php if($services == "PRODUCTION UAP3"){echo 'selected="selected"';}?> >PRODUCTION UAP3</option>
-                  <option value="QUALITE" <?php if($services == "QUALITE"){echo 'selected="selected"';}?> >QUALITE</option>
-                  <option value="FINANCE" <?php if($services == "FINANCE"){echo 'selected="selected"';}?> >FINANCE</option>
-                  <option value="RH" <?php if($services == "RH"){echo 'selected="selected"';}?> >RH</option>
+                  <?php
+                  while($service = $serv -> fetch()){ ?>
+                    <option value="<?php echo $service['id']; ?>" <?php if($services == $service['id']){echo 'selected="selected"';}?> ><?php echo $service['service']; ?></option>
+                  <?php } ?>
                 </select>
             </div>
         </div>

@@ -30,7 +30,7 @@ if(isset($_POST['intervalle'])){
 	</div>
 
 <?php 
-$query=$bdd->prepare('SELECT logistique_pieces.fournisseur as f,COUNT(*) as count FROM logistique_alerte JOIN logistique_pieces ON logistique_alerte.piece = logistique_pieces.id WHERE DATEDIFF(?,logistique_alerte.date )<= ? GROUP BY fournisseur ORDER BY count DESC');
+$query=$bdd->prepare('SELECT logistique_pieces.fournisseur as f,COUNT(*) as count FROM logistique_alerte JOIN logistique_pieces ON logistique_alerte.piece = logistique_pieces.id WHERE DATEDIFF(?,logistique_alerte.date )<= ? GROUP BY fournisseur ORDER BY count DESC LIMIT 30');
 $query->execute(array($datetime, $intervalle));
 $f=$query->fetchAll();
 ?>

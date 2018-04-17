@@ -1,0 +1,8 @@
+ALTER TABLE `profil` DROP `services`;
+ALTER TABLE `profil` ADD `services` INT NOT NULL AFTER `formation`;
+
+CREATE TABLE IF NOT EXISTS `services` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service` varchar(140) NOT NULL,
+  PRIMARY KEY (`id`)
+)
