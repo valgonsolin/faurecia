@@ -103,6 +103,7 @@ if(empty($_SESSION['login']))
   <button type="submit" class="btn btn-default">Rechercher</button>
   <a href="admin.php" class="btn btn-default pull-right">Formations validées</a>
   <a href="excel.php" class="btn btn-default pull-right">Export excel</a>
+  <a href="ajout.php" class="btn btn-default pull-right">Ajouter un intitulé de formation</a>
 
 
   </form>

@@ -128,21 +128,15 @@ if(empty($_SESSION['login'])){
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="form-group">
-
-          <label>Training Title</label>
-            <select name="title" class="form-control">
-              <option value="Recyclage CACES 2 et 3n" selected="selected">Recyclage CACES 2 et 3</option>
-              <option value="Recyclage habilitations électriques BR et HRs">Recyclage habilitations électriques BR et HR</option>
-              <option value="Recyclage BE manœuvre+ initiale H0V">Recyclage BE manœuvre+ initiale H0V</option>
-              <option value="Anglais">Anglais</option>
-              <option value="Recyclage SST">Recyclage SST(port des EPI)</option>
-              <option value="Welding Technology">Welding Technology</option>
-              <option value="FES Outils : QRCI 8D">FES Outils : QRCI 8D</option>
-              <option value="Programmation cintrage">Programmation cintrage</option>
-              <option value="EE Fundamentals">EE Fundamentals</option>
-              <option value="Young female Manager Program">Young female Manager Program</option>
-            </select>
-        </div>
+    <label>Training title</label>
+    <select class="form-control" name="title" >
+      <?php
+      $t = $bdd -> query('SELECT * FROM title');
+      while($intitule = $t -> fetch()){ ?>
+        <option value="<?php echo $intitule['trainingtitle']; ?>"> <?php echo $intitule['trainingtitle'] ; ?> </option>
+    <?php  } ?>
+    </select>
+  </div>
       </div>
       <div class="col-md-3">
       </div>
