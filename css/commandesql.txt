@@ -6,3 +6,5 @@ CREATE TABLE IF NOT EXISTS `services` (
   `service` varchar(140) NOT NULL,
   PRIMARY KEY (`id`)
 )
+
+CREATE TABLE title  (trainingtitle VARCHAR(400) )

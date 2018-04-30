@@ -43,6 +43,14 @@ function get_nb_open_days($date_start, $date_stop) {
 	return $nb_days_open;
 }
 
+function get_nb_open_days_alg($date_start, $date_stop){
+	if($date_start<$date_stop){
+		return get_nb_open_days($date_start,$date_stop);
+	}else{
+		return (-1) * get_nb_open_days($date_stop,$date_start);
+	}
+}
+
 if(!isset($_GET['id'])){ ?>
   <h2>LaunchBoard</h2>
   <h4>OUPS... Votre session est inconnu.</h4>
@@ -92,7 +100,7 @@ if(! is_null($Data['3pt_f']) && ( is_null($Data['3pt_r']) || (! $Data['3pt']) ) 
 }
 if(! is_null($Data['3mpt_f']) && ( is_null($Data['3mpt_r']) || (! $Data['3mpt']) ) && (get_nb_open_days(strtotime(str_replace('/', '-',$Data['3mpt_f'])),time()) > 30)){
   $color2='#FF002A';
-}elseif(! is_null($Data['3mpt_f']) && ! is_null($Data['3mpt_r']) && $Data['3mpt'] && (get_nb_open_days(strtotimestr_replace('/', '-',($Data['3mpt_f'])),strtotime(str_replace('/', '-',$Data['3mpt_r']))) > 30)){
+}elseif(! is_null($Data['3mpt_f']) && ! is_null($Data['3mpt_r']) && $Data['3mpt'] && (get_nb_open_days(strtotime(str_replace('/', '-',($Data['3mpt_f']))),strtotime(str_replace('/', '-',$Data['3mpt_r']))) > 30)){
   $color2='#FF002A';
 }
 if(! is_null($Data['4empt_f']) && ( is_null($Data['3mpt_r']) || (! $Data['3mpt']) ) && (get_nb_open_days(strtotime(str_replace('/', '-',$Data['4empt_f'])),time()) > 30)){
@@ -108,10 +116,15 @@ if((! is_null($Data['3pt_f']) || ! is_null($Data['3mpt_f']) || ! is_null($Data['
   <?php if(! is_null($Data['3pt_f'])){ ?>
   <div class="col-md-4">
     <b>PT : <span  style="background-color:<?php echo $color1; ?>; border-radius:3px;"> <?php
-    if(! is_null($Data['3pt_r'] && $Data['3pt'])){
-      printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['3pt_f'])),strtotime(str_replace('/', '-',$Data['3pt_r']))));
+    if((! is_null($Data['3pt_r'])) && $Data['3pt']){
+      printf("%+d jours",get_nb_open_days_alg(strtotime(str_replace('/', '-',$Data['3pt_f'])),strtotime(str_replace('/', '-',$Data['3pt_r']))));
     }else{
-      printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['3pt_f'])),time()));
+      $days= get_nb_open_days(strtotime(str_replace('/', '-',$Data['3pt_f'])),time());
+      if($days > 0){
+        printf("%+d jours",$days);
+      }else{
+        echo date("d/m/y",strtotime(str_replace('/', '-',$Data['3pt_f'])));
+      }
     }
     ?></span></b>
   </div>
@@ -119,10 +132,15 @@ if((! is_null($Data['3pt_f']) || ! is_null($Data['3mpt_f']) || ! is_null($Data['
   if(! is_null($Data['3mpt_f'])){ ?>
   <div class="col-md-4">
     <b>MPT : <span  style="background-color:<?php echo $color2; ?>; border-radius:3px;"> <?php 
-    if(! is_null($Data['3mpt_r'] && $Data['3mpt'])){
-      printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['3mpt_f'])),strtotime(str_replace('/', '-',$Data['3mpt_r']))));
+    if((! is_null($Data['3mpt_r']) && $Data['3mpt'])){
+      printf("%+d jours",get_nb_open_days_alg(strtotime(str_replace('/', '-',$Data['3mpt_f'])),strtotime(str_replace('/', '-',$Data['3mpt_r']))));
     }else{
-      printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['3mpt_f'])),time()));
+      $days= get_nb_open_days(strtotime(str_replace('/', '-',$Data['3mpt_f'])),time());
+      if($days > 0){
+        printf("%+d jours",$days);
+      }else{
+        echo date("d/m/y",strtotime(str_replace('/', '-',$Data['3mpt_f'])));
+      }
     }
     ?></span></b>
   </div>
@@ -130,10 +148,15 @@ if((! is_null($Data['3pt_f']) || ! is_null($Data['3mpt_f']) || ! is_null($Data['
   if(! is_null($Data['4empt_f'])){ ?>
   <div class="col-md-4">
       <b>EMPT : <span  style="background-color:<?php echo $color3; ?>; border-radius:3px;"> <?php 
-      if(! is_null($Data['4empt_r'] && $Data['4empt'])){
-        printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['4empt_f'])),strtotime(str_replace('/', '-',$Data['4empt_r']))));
+      if((! is_null($Data['4empt_r']) && $Data['4empt'])){
+        printf("%+d jours",get_nb_open_days_alg(strtotime(str_replace('/', '-',$Data['4empt_f'])),strtotime(str_replace('/', '-',$Data['4empt_r']))));
       }else{
-        printf("%+d jours",get_nb_open_days(strtotime(str_replace('/', '-',$Data['4empt_f'])),time()));
+        $days= get_nb_open_days(strtotime(str_replace('/', '-',$Data['4empt_f'])),time());
+        if($days > 0){
+          printf("%+d jours",$days);
+        }else{
+          echo date("d/m/y",strtotime(str_replace('/', '-',$Data['4empt_f'])));
+        }
       }
     ?></span></b>
   </div>
