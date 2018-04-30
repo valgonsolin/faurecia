@@ -4,7 +4,7 @@ $french = "http://faureciabeaulieu.fr"; //link for french version
 $english = "http://faureciabeaulieu.fr"; //link for english version
 
 
-$bdd = new PDO('mysql:host=localhost;dbname=faurecia_test;charset=utf8', 'tavg', 'lacolloc');
+$bdd = new PDO('mysql:host=localhost;dbname=faurecia_beaulieu;charset=utf8', 'tavg', 'lacolloc');
 $lang = "fr"; // fr for french, en for english
 if($lang == "en"){
     $url = $english;
