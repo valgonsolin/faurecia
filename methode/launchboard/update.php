@@ -1,11 +1,8 @@
 <?php
+
 include_once "../../needed.php";
 
-include_once "../needed.php";
-
-drawHeader('methode');
-drawMenu('statistiques');
-
+$query = $bdd -> prepare("INSERT INTO `score_ttp` (`id`, `score`, `date`) VALUES (NULL, ?, NOW())");
 function get_nb_open_days($date_start, $date_stop) {	
 	$arr_bank_holidays = array(); // Tableau des jours feriés	
 	
@@ -200,115 +197,7 @@ if($total_division){
 }else{
   	$score =0;
 }
+
+$query -> execute(array($score));
+
 ?>
-
-<style>
-	.conteneur{
-	background-color: #efefef;
-	padding: 10px;
-	border-radius: 6px;
-	text-align:center;
-	}
-</style>
-
-<h2>LaunchRoom</h2>
-
-<h1 style="text-align:center;"> TTP Score : <?php echo $score; ?> </h1>
-<br>
-
-<div class="row" style="font-size:140%;">
-	<div class="col-md-4">
-		<div class="conteneur">
-			<b>PSA<br>
-			PT : <?php echo $moyPT_PSA; ?></b><br>
-			<b> MPT : <?php echo $moyMPT_PSA; ?></b><br>
-			<b> EMPT : <?php echo $moyEMPT_PSA; ?></b>
-		</div>
-	</div>
-	<div class="col-md-4">
-		<div class="conteneur">
-			<b>JLR<br>
-			PT : <?php echo $moyPT_JLR; ?></b><br>
-			<b> MPT : <?php echo $moyMPT_JLR; ?></b><br>
-			<b> EMPT : <?php echo $moyEMPT_JLR; ?></b>
-		</div>
-	</div>
-	<div class="col-md-4 ">
-		<div class="conteneur">
-			<b>TOYOTA / RENAULT<br>
-			PT : <?php echo $moyPT_TOY; ?></b><br>
-			<b> MPT : <?php echo $moyMPT_TOY; ?></b><br>
-			<b> EMPT : <?php echo $moyEMPT_TOY; ?></b>
-		</div>
-	</div>
-</div>
-  <?php 
-$query = $bdd -> query('SELECT * FROM score_ttp ORDER BY date ASC');
-$dates = $query ->fetchAll();
-if(sizeof($dates) >0){
-  ?>
-<script src="../../js/moment.min.js"></script>
-<script src="../../js/Chart.js"></script>
-
-<canvas id="myChart" style="width=400px; height:400px;"></canvas>
-<script>
-  function newDate(days)
-  {
-    return moment(days,'DD/MM/YYYY').toDate();
-  }
-  var data1 = [
-  <?php
-  foreach ($dates as $date) {
-    echo "{x : newDate('".date('d/m/Y',strtotime($date['date']))."'), y: ".$date['score']."},";
-  }?>];
-  var config = {
-    type: 'line',
-    data: {
-      datasets: [{
-        fill: false,
-        lineTension: 0.1,
-        data: data1,
-      }]
-    },
-    options: {
-      color: [ 'red'],
-      responsive: true,
-	  tooltips: {enabled: false},
-      hover: {mode: null},
-      legend :{
-        display : false
-      },
-      title:{
-        display:true,
-        text:"Évolution du Scoring"
-      },
-      scales: {
-        xAxes: [{
-          type: 'time',
-          display: true,
-          scaleLabel: {
-            display: true,
-            labelString: 'Date'
-          }
-        }],
-        yAxes: [{
-          display: true,
-          scaleLabel: {
-            display: true,
-            labelString: 'Scoring TTP'
-          }
-        }]
-      }
-    }
-  };
-
-		window.onload = function() {
-      var ctx = document.getElementById("myChart");
-      var myChart = new Chart(ctx, config);
-		};
-</script>
-
-<?php
-}
-drawFooter();
- ?>

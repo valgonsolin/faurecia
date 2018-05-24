@@ -8,3 +8,5 @@ CREATE TABLE IF NOT EXISTS `services` (
 )
 
 CREATE TABLE title  (trainingtitle VARCHAR(400) )
+
+CREATE TABLE `faurecia_beaulieu`.`score_ttp` ( `id` INT NOT NULL AUTO_INCREMENT , `score` INT NOT NULL , `date` DATE NOT NULL , PRIMARY KEY (`id`))
