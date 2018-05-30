@@ -152,6 +152,15 @@ if(!isset($_GET['id'])){ ?>
          warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
        }
      }
+     if(isset($_POST['delete_img'])){
+       remove_file($bdd,$_POST['img']);
+       $q = $bdd -> prepare('UPDATE launchboard SET img_presentation = NULL WHERE id= ?');
+       if($q -> execute(array($_GET['id']))){
+         success('Supprimé','L\'image a bien été supprimé.');
+       }else{
+         warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+       }
+     }
      if(isset($_POST['delete_makeorbuy'])){
        remove_file($bdd,$_POST['makeorbuy']);
        $q = $bdd -> prepare('UPDATE launchboard SET makeorbuy = NULL WHERE id= ?');
@@ -165,6 +174,22 @@ if(!isset($_GET['id'])){ ?>
     $q = $bdd -> prepare('UPDATE launchboard SET profil = ? WHERE id = ?');
     if($q -> execute(array($_POST['profil'],$_GET['id']))){
       success('Modifié','Le PPTL a été modifié.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
+     if(isset($_POST['code'])){
+    $q = $bdd -> prepare('UPDATE launchboard SET code = ? WHERE id = ?');
+    if($q -> execute(array($_POST['code'],$_GET['id']))){
+      success('Modifié','Le code a été modifié.');
+    }else{
+      warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
+    }
+  }
+     if(isset($_POST['titre'])){
+    $q = $bdd -> prepare('UPDATE launchboard SET titre = ? WHERE id = ?');
+    if($q -> execute(array($_POST['titre'],$_GET['id']))){
+      success('Modifié','Le titre a été modifié.');
     }else{
       warning('Erreur','Il y a eu une erreur. Veuillez réessayer.');
     }
@@ -406,7 +431,9 @@ if(!isset($_GET['id'])){ ?>
       <?php if($_SESSION['launchboard']){ ?>
       <div class="btn btn-default pull-right" data-toggle="modal" data-target="#modal">Modifier le PPTL</div><?php } ?>
 </h4>
-    <h4>Code : <?php echo $Data['code']; ?></h4>
+    <h4>Code : <?php echo $Data['code']; ?>
+          <?php if($_SESSION['launchboard']){ ?>
+      <div class="btn btn-default pull-right" data-toggle="modal" data-target="#code">Modifier le code</div><?php } ?></h4>
     <h4>SOP :<?php if(!is_null($Data['initial_date'])){ echo date('d/m/y',strtotime($Data['initial_date']));} ?><?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
           <div class="btn btn-default pull-right" data-toggle="modal" data-target="#sop">Modifier</div><?php } ?></h4>
   </div>
@@ -418,6 +445,8 @@ if(!isset($_GET['id'])){ ?>
     <h4>Description :    <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
           <div class="btn btn-default pull-right" data-toggle="modal" data-target="#description">Modifier la description</div><?php } ?></h4>
     <p><?php echo $Data['description']; ?></p>
+    <?php if($_SESSION['launchboard']){ ?>
+      <div class="btn btn-default pull-right" data-toggle="modal" data-target="#titre">Modifier le titre</div><?php } ?>
   </div>
 </div>
 <div class="row">
@@ -745,8 +774,14 @@ if(!isset($_GET['id'])){ ?>
     if(! is_null($Data['img_presentation'])){
       $img = $bdd -> prepare('SELECT * FROM files WHERE id = ?');
       $img -> execute(array($Data['img_presentation']));
-      $img = $img -> fetch();
-      echo "<img src=".$img['chemin']." style='max-width:100%;border-radius: 6px; max-height:350px;' alt='Image'>";
+      $img = $img -> fetch(); ?>
+      <img src="<?php echo $img['chemin']; ?>" style='max-width:100%;border-radius: 6px; max-height:350px;' alt='Image'>
+      <form method="post">
+        <input type="hidden" name="img" value="<?php echo $img['id'];?>">
+      <?php if(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){?>
+        <input type="submit" name="delete_img" class="btn btn-default" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer limage ?')"><?php }
+        echo "</form>";
+
     }elseif(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
       <form method="post" enctype="multipart/form-data">
         <input type="file" name="img">
@@ -825,6 +860,40 @@ if(!isset($_GET['id'])){ ?>
           <input type="date" name="sop_date" value="<?php echo $Data['initial_date']; ?>" class="form-control" >
           <br>
           <input type="submit" name="sop" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le SOP ?')">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="code" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modifier Code</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <input type="text" name="code" value="<?php echo $Data['code']; ?>" class="form-control" >
+          <br>
+          <input type="submit" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le Code ?')">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="titre" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modifier le titre</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-group">
+          <input type="text" name="titre" value="<?php echo $Data['titre']; ?>" class="form-control" >
+          <br>
+          <input type="submit" class="btn btn-default form-control" value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier le titre ?')">
         </form>
       </div>
     </div>
