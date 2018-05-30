@@ -293,7 +293,7 @@ if(!isset($_GET['id'])){ ?>
   //Files
   if(! empty($_FILES)){
     if(isset($_FILES['kickoff']) && $_FILES['kickoff']['name'] != ""){
-      $kickoff=upload($bdd,'kickoff',"../../ressources","launchboard",50485760,array( 'ppt' , 'pptx' , 'PPT' , 'PPTX' ));
+      $kickoff=upload($bdd,'kickoff',"../../ressources","launchboard",50485760);
       if($kickoff < 0){
         warning('Erreur','Le fichier n\'a pas pu être importé.');
       }else{
@@ -306,7 +306,7 @@ if(!isset($_GET['id'])){ ?>
       }
     }
     if(isset($_FILES['makeorbuy']) && $_FILES['makeorbuy']['name'] != ""){
-      $makeorbuy=upload($bdd,'makeorbuy',"../../ressources","launchboard",50485760,array( 'ppt' , 'pptx' , 'PPT' , 'PPTX' ));
+      $makeorbuy=upload($bdd,'makeorbuy',"../../ressources","launchboard",50485760);
       if($makeorbuy < 0){
         warning('Erreur','Le fichier n\'a pas pu être importé.');
       }else{
@@ -733,7 +733,7 @@ if(!isset($_GET['id'])){ ?>
       }elseif(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
         <form method="post" enctype="multipart/form-data">
           <input type="file" name="kickoff">
-          <input type="submit" class="btn btn-default" value="Ajouter le kickoff (ppt)">
+          <input type="submit" class="btn btn-default" value="Ajouter le kickoff">
         </form>
         <?php
       }
@@ -754,7 +754,7 @@ if(!isset($_GET['id'])){ ?>
       }elseif(($Data['profil'] == $_SESSION['id']) || $_SESSION['launchboard'] ){ ?>
         <form method="post" enctype="multipart/form-data">
           <input type="file" name="makeorbuy">
-          <input type="submit" class="btn btn-default" value="Ajouter le Make or Buy (ppt)">
+          <input type="submit" class="btn btn-default" value="Ajouter le Make or Buy">
         </form>
         <?php
       }
