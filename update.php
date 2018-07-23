@@ -1,6 +1,6 @@
 <?php
 
-include_once "../../needed.php";
+include_once(dirname(__FILE__) . "/needed.php");
 
 $query = $bdd -> prepare("INSERT INTO `score_ttp` (`id`, `score`, `date`) VALUES (NULL, ?, NOW())");
 function get_nb_open_days($date_start, $date_stop) {	

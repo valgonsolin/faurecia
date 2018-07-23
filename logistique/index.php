@@ -79,7 +79,7 @@ if(isset($_GET['recherche'])){
 
     <div class="form-group">
         <label for="recherche">Recherche :</label>
-        <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="id de l'alerte, sebango" value="<?php echo $recherche;?>">
+        <input type="text" class="form-control" name = "recherche" id="recherche" placeholder="id, sebango, adresse" value="<?php echo $recherche;?>">
     </div>
     <div class="form-group">
 
@@ -118,6 +118,7 @@ if(isset($_GET['recherche'])){
                 logistique_alerte.state as state,
                 logistique_alerte.date ,
                 logistique_pieces.*,
+                logistique_pieces.adresse as adresse,
                 logistique_e_kanban.ligne,
                 logistique_reponse_jaune.couverture_ligne as couverture_ligne
                 FROM logistique_alerte
@@ -130,6 +131,8 @@ if(isset($_GET['recherche'])){
     $requete .= "AND (logistique_alerte.id LIKE '%";
     $requete .= $recherche;
     $requete .= "%' OR sebango LIKE '%";
+    $requete .= $recherche;
+    $requete .= "%' OR logistique_pieces.adresse LIKE '%";
     $requete .= $recherche;
     $requete .= "%')";
 
@@ -150,6 +153,11 @@ if(isset($_GET['recherche'])){
                         }
                         ?></h4>
                     <?php
+                    if (strtotime($Data['date']) > time()) {
+                        ?>
+                        <img src="ressources/date.png" style="height: 40px;">
+                        <?php
+                    }
                     if ($Data['couverture_ligne'] == 0 and $Data['couleur'] == 1) {
                         ?>
                         <img src="ressources/attention.png" style="height: 40px;">
@@ -158,11 +166,13 @@ if(isset($_GET['recherche'])){
                     ?>
                 </div>
 
-                <p><b>Désignation : </b><?php echo substr($Data['description'],0,18);?><br>
-                    <b>Date et heure : </b><?php echo date('d/m/y H:i',strtotime($Data['date']));?><br>
-                    <b>Référence concernée : </b><?php echo $Data['reference'];?><br>
-                    <b>Ligne : </b><?php echo $Data['ligne'];?><br>
-                    <b>Fournisseur : </b><span style="font-size:70%;"><?php echo substr($Data['fournisseur'],0,25);?></span></p>
+                <p><b>Désignation : </b><span style="font-size:70%;"><?php echo substr($Data['description'],0,18);?></span><br>
+                    <b>Date et heure : </b><span style="font-size:70%;"><?php echo date('d/m/y H:i',strtotime($Data['date']));?></span><br>
+                    <b>Référence concernée : </b><span style="font-size:70%;"><?php echo $Data['reference'];?></span><br>
+                    <b>Ligne : </b><span style="font-size:70%;"><?php echo $Data['ligne'];?></span><br>
+                    <b>Fournisseur : </b><span style="font-size:70%;"><?php echo substr($Data['fournisseur'],0,25);?></span><br>
+                    <b>Adresse : </b><span style="font-size:70%;"><?php echo substr($Data['adresse'],0,25);?></span>
+                    </p>
 
             </div>
                 <?php

@@ -243,7 +243,9 @@ if($total_division){
 	</div>
 </div>
   <?php 
-$query = $bdd -> query('SELECT * FROM score_ttp ORDER BY date ASC');
+$query = $bdd -> query('SELECT * FROM score_ttp 
+
+WHERE date BETWEEN (CURRENT_DATE() - INTERVAL 6 MONTH) AND CURRENT_DATE() ORDER BY date ASC');
 $dates = $query ->fetchAll();
 if(sizeof($dates) >0){
   ?>
@@ -285,6 +287,9 @@ if(sizeof($dates) >0){
       scales: {
         xAxes: [{
           type: 'time',
+		  time : {
+			  unit : 'day'
+		  },
           display: true,
           scaleLabel: {
             display: true,

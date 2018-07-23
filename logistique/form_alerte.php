@@ -32,26 +32,30 @@ if (isset($_POST['submit'])){
     $Query = $bdd->prepare('SELECT * FROM logistique_alerte WHERE piece = ? and state <> -1');
     $Query->execute(array($piece));
 
-    if (! $Data = $Query->fetch()) {
+    if ($Data = $Query->fetch()) {
         if ($piece != -1) {
             if (isset($_GET['id'])) {
-                $Query = $bdd->prepare('UPDATE logistique_alerte SET piece=?, e_kanban=?,  train=?, uc_restant_en_ligne=? WHERE id = ?');
+                $Query = $bdd->prepare('UPDATE logistique_alerte SET piece=?, date=NOW(),e_kanban=?,  train=?, uc_restant_en_ligne=? WHERE id = ?');
                 $Query->execute(array($piece, $e_kanban, $_POST['train'], $_POST['uc_en_ligne'], $_GET["id"]));
                 ob_end_clean();
                 header('Location: ' . $url . "/logistique/alerte.php?id=" . $_GET['id']);
 
             } else {
-                $Query = $bdd->prepare('INSERT INTO logistique_alerte SET piece=?, e_kanban=?,  train=?, uc_restant_en_ligne=?');
-                $Query->execute(array($piece, $e_kanban, $_POST['train'], $_POST['uc_en_ligne']));
-                ob_end_clean();
-                header('Location: ' . $url . "/logistique/index.php");
+                warning("Erreur","Une alerte est déjà en cours sur cette pièce."); 
             }
 
-        } else {
+        }else {
           warning("Erreur","La référence ou le code barre choisi n'éxiste pas.");
         }
     }else{
-        warning("Erreur","Une alerte est déjà en cours sur cette pièce.");
+        if($piece != -1){
+            $Query = $bdd->prepare('INSERT INTO logistique_alerte SET piece=?, e_kanban=?,  train=?, uc_restant_en_ligne=?');
+            $Query->execute(array($piece, $e_kanban, $_POST['train'], $_POST['uc_en_ligne']));
+            ob_end_clean();
+            header('Location: ' . $url . "/logistique/index.php");
+        }else {
+          warning("Erreur","La référence ou le code barre choisi n'éxiste pas.");
+        }
     }
 }
 
