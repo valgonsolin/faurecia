@@ -133,67 +133,77 @@ While($projet = $toy ->fetch()){
 
 //calcul des moyennes
 $total_division=0;
+$somme=0;
 
 if($tabPSA['totalPT']){
 	$moyPT_PSA = (int) ($tabPSA['ttpPT']/$tabPSA['totalPT']);
-	$total_division+=1;
+	$somme+=$tabPSA['ttpPT'];
+	$total_division+=$tabPSA['totalPT'];
 }else{
 	$moyPT_PSA = 0;
 }
 if($tabPSA['totalMPT']){
 	$moyMPT_PSA = (int) ($tabPSA['ttpMPT']/$tabPSA['totalMPT']);
-	$total_division+=1;
+	$somme+=$tabPSA['ttpMPT'];
+	$total_division+=$tabPSA['totalMPT'];
 }else{
 	$moyMPT_PSA = 0;
 }
 if($tabPSA['totalEMPT']){
 	$moyEMPT_PSA = (int) ($tabPSA['ttpEMPT']/$tabPSA['totalEMPT']);
-	$total_division+=1;
+	$somme+=$tabPSA['ttpEMPT'];
+	$total_division+=$tabPSA['totalEMPT'];
 }else{
 	$moyEMPT_PSA = 0;
 }
 
 if($tabTOY['totalPT']){
 	$moyPT_TOY = (int) ($tabTOY['ttpPT']/$tabTOY['totalPT']);
-	$total_division+=1;
+	$somme+=$tabTOY['ttpPT'];
+	$total_division+=$tabTOY['totalPT'];
 }else{
 	$moyPT_TOY = 0;
 }
 if($tabTOY['totalMPT']){
 	$moyMPT_TOY = (int) ($tabTOY['ttpMPT']/$tabTOY['totalMPT']);
-	$total_division+=1;
+	$somme+=$tabTOY['ttpMPT'];
+	$total_division+=$tabTOY['totalMPT'];
 }else{
 	$moyMPT_TOY = 0;
 }
 if($tabTOY['totalEMPT']){
 	$moyEMPT_TOY = (int) ($tabTOY['ttpEMPT']/$tabTOY['totalEMPT']);
-	$total_division+=1;
+	$somme+=$tabTOY['ttpEMPT'];
+	$total_division+=$tabTOY['totalEMPT'];
 }else{
 	$moyEMPT_TOY = 0;
 }
 
 if($tabJLR['totalPT']){
 	$moyPT_JLR = (int) ($tabJLR['ttpPT']/$tabJLR['totalPT']);
-	$total_division+=1;
+	$somme+=$tabJLR['ttpPT'];
+	$total_division+=$tabJLR['totalPT'];
 }else{
 	$moyPT_JLR = 0;
 }
 if($tabJLR['totalMPT']){
 	$moyMPT_JLR = (int) ($tabJLR['ttpMPT']/$tabJLR['totalMPT']);
-	$total_division+=1;
+	$somme+=$tabJLR['ttpMPT'];
+	$total_division+=$tabJLR['totalMPT'];
 }else{
 	$moyMPT_JLR = 0;
 }
 if($tabJLR['totalEMPT']){
 	$moyEMPT_JLR = (int) ($tabJLR['ttpEMPT']/$tabJLR['totalEMPT']);
-	$total_division+=1;
+	$somme+=$tabJLR['ttpEMPT'];
+	$total_division+=$tabJLR['totalEMPT'];
 }else{
 	$moyEMPT_JLR = 0;
 }
 
 
 if($total_division){
- 	$score = (int) (($moyEMPT_JLR + $moyEMPT_PSA + $moyEMPT_TOY + $moyMPT_JLR + $moyMPT_PSA + $moyMPT_TOY + $moyPT_JLR + $moyPT_PSA + $moyPT_TOY )/$total_division);
+ 	$score = (int) ($somme/$total_division);
 }else{
   	$score =0;
 }

@@ -365,75 +365,98 @@ foreach ($projets as $key => $value) {
 }
 
 //TTP
+$somme=0;
+$somme_pt=0;
+$somme_mpt=0;
+$somme_empt=0;
 $total_division=0;
 $total_pt=0;
 $total_mpt=0;
 $total_empt=0;
 
 if($tabPSA['totalPT']){
-	$moyPT_PSA = (int) ($tabPSA['ttpPT']/$tabPSA['totalPT']);
-  $total_division+=1;
-  $total_pt+=1;
+  $moyPT_PSA = (int) ($tabPSA['ttpPT']/$tabPSA['totalPT']);
+  $somme+=$tabPSA['ttpPT'];
+  $total_division+=$tabPSA['totalPT'];
+  $somme_pt+=$tabPSA['ttpPT'];
+  $total_pt+=$tabPSA['totalPT'];
 }else{
   $moyPT_PSA = 0;
 }
 if($tabPSA['totalMPT']){
   $moyMPT_PSA = (int) ($tabPSA['ttpMPT']/$tabPSA['totalMPT']);
-  $total_mpt+=1;
-	$total_division+=1;
+  $somme+=$tabPSA['ttpMPT'];
+  $somme_mpt+=$tabPSA['ttpMPT'];
+  $total_mpt+=$tabPSA['totalMPT'];
+	$total_division+=$tabPSA['totalMPT'];
 }else{
   $moyMPT_PSA = 0;
 }
 if($tabPSA['totalEMPT']){
   $moyEMPT_PSA = (int) ($tabPSA['ttpEMPT']/$tabPSA['totalEMPT']);
-  $total_empt+=1;
-	$total_division+=1;
+  $somme+=$tabPSA['ttpEMPT'];
+  $somme_empt+=$tabPSA['ttpEMPT'];
+  $total_empt+=$tabPSA['totalEMPT'];
+	$total_division+=$tabPSA['totalEMPT'];
 }else{
   $moyEMPT_PSA = 0;
 }
 
 if($tabTOY['totalPT']){
   $moyPT_TOY = (int) ($tabTOY['ttpPT']/$tabTOY['totalPT']);
-  $total_pt+=1;
-	$total_division+=1;
+  $somme+=$tabTOY['ttpPT'];
+  $total_division+=$tabTOY['totalPT'];
+  $somme_pt+=$tabTOY['ttpPT'];
+  $total_pt+=$tabTOY['totalPT'];
 }else{
   $moyPT_TOY = 0;
 }
 if($tabTOY['totalMPT']){
   $moyMPT_TOY = (int) ($tabTOY['ttpMPT']/$tabTOY['totalMPT']);
-  $total_mpt+=1;
-	$total_division+=1;
+  $somme+=$tabTOY['ttpMPT'];
+  $somme_mpt+=$tabTOY['ttpMPT'];
+  $total_mpt+=$tabTOY['totalMPT'];
+	$total_division+=$tabTOY['totalMPT'];
 }else{
   $moyMPT_TOY = 0;
 }
 if($tabTOY['totalEMPT']){
   $moyEMPT_TOY = (int) ($tabTOY['ttpEMPT']/$tabTOY['totalEMPT']);
-  $total_empt+=1;
-	$total_division+=1;
+  $somme+=$tabTOY['ttpEMPT'];
+  $somme_empt+=$tabTOY['ttpEMPT'];
+  $total_empt+=$tabTOY['totalEMPT'];
+	$total_division+=$tabTOY['totalEMPT'];
 }else{
   $moyEMPT_TOY = 0;
 }
 
+//
 if($tabJLR['totalPT']){
   $moyPT_JLR = (int) ($tabJLR['ttpPT']/$tabJLR['totalPT']);
-  $total_pt+=1;
-	$total_division+=1;
+  $somme+=$tabJLR['ttpPT'];
+  $total_division+=$tabJLR['totalPT'];
+  $somme_pt+=$tabJLR['ttpPT'];
+  $total_pt+=$tabJLR['totalPT'];
 }else{
   $moyPT_JLR = 0;
 }
 if($tabJLR['totalMPT']){
   $moyMPT_JLR = (int) ($tabJLR['ttpMPT']/$tabJLR['totalMPT']);
-  $total_mpt+=1;
-	$total_division+=1;
+  $somme+=$tabJLR['ttpMPT'];
+  $somme_mpt+=$tabJLR['ttpMPT'];
+  $total_mpt+=$tabJLR['totalMPT'];
+	$total_division+=$tabJLR['totalMPT'];
 }else{
   $moyMPT_JLR = 0;
 }
 if($tabJLR['totalEMPT']){
   $moyEMPT_JLR = (int) ($tabJLR['ttpEMPT']/$tabJLR['totalEMPT']);
-  $total_empt+=1;
-	$total_division+=1;
+  $somme+=$tabJLR['ttpEMPT'];
+  $somme_empt+=$tabJLR['ttpEMPT'];
+  $total_empt+=$tabJLR['totalEMPT'];
+	$total_division+=$tabJLR['totalEMPT'];
 }else{
-	$moyEMPT_JLR = 0;
+  $moyEMPT_JLR = 0;
 }
 
 $sheet->setCellValue('AR17',$moyPT_PSA);
@@ -452,21 +475,21 @@ $sheet->setCellValue('BK21',$moyEMPT_TOY);
 if(! $total_pt){
   $sheet->setCellValue('P17',0);
 }else{
-  $sheet->setCellValue('P17',(int) (($moyPT_TOY+$moyPT_PSA +$moyPT_JLR)/$total_pt));
+  $sheet->setCellValue('P17',(int) ($somme_pt/$total_pt));
 }
 if(! $total_mpt){
   $sheet->setCellValue('P19',0);
 }else{
-  $sheet->setCellValue('P19',(int) (($moyMPT_TOY+$moyMPT_PSA +$moyMPT_JLR)/$total_mpt));
+  $sheet->setCellValue('P19',(int) ($somme_mpt/$total_mpt));
 }
 if(! $total_empt){
   $sheet->setCellValue('P21',0);
 }else{
-  $sheet->setCellValue('P21',(int) (($moyEMPT_TOY+$moyEMPT_PSA +$moyEMPT_JLR)/$total_empt));
+  $sheet->setCellValue('P21',(int) ($somme_empt/$total_empt));
 }
 
 if($total_division){
- 	$score = (int) (($moyEMPT_JLR + $moyEMPT_PSA + $moyEMPT_TOY + $moyMPT_JLR + $moyMPT_PSA + $moyMPT_TOY + $moyPT_JLR + $moyPT_PSA + $moyPT_TOY )/$total_division);
+ 	$score = (int) ($somme/$total_division);
 }else{
   	$score =0;
 }
