@@ -98,6 +98,8 @@ if(isset($_GET['recherche'])){
             <option value="logistique_alerte.date" <?php if($order == "logistique_alerte.date" ){echo 'selected="selected"';}?> >Date</option>
             <option value="couleur" <?php if($order == "couleur" ){echo 'selected="selected"';}?> >Couleur</option>
             <option value="logistique_e_kanban.ligne" <?php if($order ==  "logistique_e_kanban.ligne" ){echo 'selected="selected"';}?> >Ligne</option>
+            <option value="logistique_pieces.adresse" <?php if($order ==  "logistique_pieces.adresse" ){echo 'selected="selected"';}?> >Adresse</option>
+
         </select>
     </div>
     <button type="submit" class="btn btn-default">Rechercher</button>
@@ -120,7 +122,8 @@ if(isset($_GET['recherche'])){
                 logistique_pieces.*,
                 logistique_pieces.adresse as adresse,
                 logistique_e_kanban.ligne,
-                logistique_reponse_jaune.couverture_ligne as couverture_ligne
+                logistique_reponse_jaune.couverture_ligne as couverture_ligne,
+                logistique_reponse_jaune.prochaine_livraison as proch_date
                 FROM logistique_alerte
                 LEFT JOIN logistique_pieces on logistique_alerte.piece=logistique_pieces.id
                 LEFT JOIN logistique_e_kanban on logistique_e_kanban.piece=logistique_alerte.piece
@@ -153,7 +156,7 @@ if(isset($_GET['recherche'])){
                         }
                         ?></h4>
                     <?php
-                    if (strtotime($Data['date']) > time()) {
+                    if (strtotime($Data['proch_date']) > time()) {
                         ?>
                         <img src="ressources/date.png" style="height: 40px;">
                         <?php
